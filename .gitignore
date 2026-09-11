@@ -1,0 +1,51 @@
+# Secrets and local environment overrides
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Python environments, bytecode, build output, and tooling caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+*.egg-info/
+build/
+dist/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Node/Vite dependencies, output, and test artifacts
+node_modules/
+.vite/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Generated indexes, embeddings, and downloaded model caches
+/artifacts/
+.cache/
+
+# Local logs, editor settings, and OS files
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+
+# Keep dependency lockfiles, synthetic JSONL data, manual evaluation labels,
+# and measured reports versioned for reproducibility.
