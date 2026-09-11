@@ -1,0 +1,322 @@
+[
+  {
+    "id": "Q001",
+    "query": "What made a seaside holiday unaffordable?",
+    "expected_message_id": "MSG_000600",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Ishita explicitly rejects Goa because its total exceeds the cap. Earlier estimates discuss possible savings; this is the decisive cost-based rejection, not the later Manali booking plan. Seaside holiday maps to Goa and unaffordable maps to exceeding the cap."
+  },
+  {
+    "id": "Q002",
+    "query": "Who worried about feeling nauseous during consecutive coach rides?",
+    "expected_message_id": "MSG_000291",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Ananya asks about back-to-back overnight buses and states that she gets motion sickness. The message itself supplies the symptom and transport concern; its sender answers who. This is a semantic question without a named-person filter."
+  },
+  {
+    "id": "Q003",
+    "query": "What condition would force us to call off the Himalayan vacation?",
+    "expected_message_id": "MSG_000436",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Aditya explicitly says the plan will be cancelled if roads look unsafe. The preceding weather discussion explains the setting, but only this target states the cancellation condition. Call off maps to cancel, and Himalayan vacation identifies the mountain trip in context."
+  },
+  {
+    "id": "Q004",
+    "query": "What extra software would the panel's computer need for the phone app?",
+    "expected_message_id": "MSG_001154",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Ishita says Flutter would require emulator setup on the judging laptop. This directly answers the software-setup question. The later rejection of Flutter does not name the emulator and is therefore less specific. Phone app and panel's computer paraphrase the proposed mobile client and judging laptop."
+  },
+  {
+    "id": "Q005",
+    "query": "What accessibility improvement was requested for the success indicator?",
+    "expected_message_id": "MSG_001602",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Meera asks that approval be communicated with text rather than relying only on green. The preceding image contains status-card labels but not this accessibility request. Success indicator maps to approved colour; the requested change is explicit in this target."
+  },
+  {
+    "id": "Q006",
+    "query": "What restriction prevented the birthday gathering from using the dorm lounge?",
+    "expected_message_id": "MSG_003418",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Sneha reports that the hostel common room cannot admit outside students after 6 that day. This is the actual access restriction, unlike the later conclusion about avoiding a split group. Dorm lounge paraphrases hostel common room without using an artificial spelling change."
+  },
+  {
+    "id": "Q007",
+    "query": "Why was the outdoor picnic abandoned?",
+    "expected_message_id": "MSG_003426",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Ananya drops the lawn because rain and permission are uncertain. An earlier message raises monsoon risk provisionally; this target gives both reasons and the explicit rejection. Outdoor picnic maps to lawn, and abandoned maps to dropping."
+  },
+  {
+    "id": "Q008",
+    "query": "Why did the birthday girl prefer chatting over a game at the alley?",
+    "expected_message_id": "MSG_003330",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Meera says to skip bowling because she wants time to talk. The surrounding discussion identifies her as the birthday celebrant. This asks for her social preference, not the separate calculation that bowling would exceed the available food budget."
+  },
+  {
+    "id": "Q009",
+    "query": "How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?",
+    "expected_message_id": "MSG_000700",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Ishita specifies a 700 emergency buffer within the 8700 ceiling and says it is not for shopping. This uniquely gives the reserve amount and exclusion. Unforeseen expenses and souvenirs paraphrase emergency buffer and shopping."
+  },
+  {
+    "id": "Q010",
+    "query": "Why was the cheap coastal vacation clip misleading for people departing from our city?",
+    "expected_message_id": "MSG_000289",
+    "category": "semantic",
+    "zero_word_overlap": true,
+    "notes": "Meera points out that the reel starts from Mumbai whereas the group is in Indore. The immediately preceding message supplies the low advertised price, but the target explains why that price is misleading for this group's starting point."
+  },
+  {
+    "id": "Q011",
+    "query": "Where did we finally decide to go for the June trip, and what was the per-person limit?",
+    "expected_message_id": "MSG_000713",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Ishita's final decision gives Manali, June 10-15 and the Rs 8,700 cap. Earlier estimates and Rohan's short acceptance do not contain the complete final destination-and-limit answer."
+  },
+  {
+    "id": "Q012",
+    "query": "What backend and database did we finally choose for LostLoop?",
+    "expected_message_id": "MSG_001482",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Sneha's locked implementation note explicitly selects FastAPI on Python and SQLite. It supersedes MERN, Django/Postgres and Firebase proposals; an earlier mention of a Python service is not the final stack."
+  },
+  {
+    "id": "Q013",
+    "query": "What was the final birthday venue and budget, including cake and everyone's share?",
+    "expected_message_id": "MSG_003616",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Ishita consolidates Nukkad Cafe, July 25, Rs 2,900 and Rs 362.50 each. This is the agreed plan, not the later actual-expense message, which lacks the venue and arrangements."
+  },
+  {
+    "id": "Q014",
+    "query": "Why did Aarav originally lean towards MERN?",
+    "expected_message_id": "MSG_001291",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Aarav explicitly acknowledges that MERN was just familiarity and lacks a scope-based justification. His initial starter proposal offers context, but this later admission directly answers why. Primary category is semantic because the requested evidence is the rationale."
+  },
+  {
+    "id": "Q015",
+    "query": "Was outside cake allowed, and what decoration rule came with it?",
+    "expected_message_id": "MSG_003434",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Rohan replies yes to Kabir's outside-cake question, conditional on cleaning up, and prohibits wall decoration. The target contains the answer; the preceding question is necessary context but is not an acceptable replacement hit."
+  },
+  {
+    "id": "Q016",
+    "query": "What did the birthday actually cost once it was over, and was any buffer used?",
+    "expected_message_id": "MSG_003738",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Ishita's post-event accounting states actual total 2900, equal shares 362.50 and no buffer spent. The earlier plan has the same projected total but cannot answer whether any reserve was actually used."
+  },
+  {
+    "id": "Q017",
+    "query": "Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.",
+    "expected_message_id": "MSG_002058",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Aditya forwards the sure-shot-topic claim with an explicit unverified/not-official disclaimer on May 23. This targets the warning-bearing forwarded message itself, not a later reply disagreeing with it. May disambiguates identical Software Engineering forwards on April 8 and April 23. The main request is the warning-bearing content, with month as a secondary constraint."
+  },
+  {
+    "id": "Q018",
+    "query": "Find the voice note proposing QR stickers for lost items.",
+    "expected_message_id": "MSG_001155",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Rohan's voice-message placeholder describes the QR-sticker idea. The corpus contains no actual audio; retrieval should return this real placeholder record, not Meera's subsequent suggestion to postpone QR support."
+  },
+  {
+    "id": "Q019",
+    "query": "Did Nukkad Cafe charge separately for the room or just require a minimum spend?",
+    "expected_message_id": "MSG_003432",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Rohan's first concrete cafe quote states minimum spend 2400 and no room fee. Later package messages list inclusions but do not explicitly resolve the separate room-fee question."
+  },
+  {
+    "id": "Q020",
+    "query": "When was the cake pickup, and who would bring the candles?",
+    "expected_message_id": "MSG_003618",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Sneha states pickup at 6:15 and says she will bring Meera's candles. This asks about the event arrangement rather than filtering the chat by a date, so its primary category is semantic."
+  },
+  {
+    "id": "Q021",
+    "query": "What did Ananya ask for in Delhi to make the journey manageable?",
+    "expected_message_id": "MSG_000427",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ananya explicitly requests one rest stop in Delhi and rejects continuous travel. Her later route acceptance acknowledges that condition but is not the original request. Person match uses the actual sender Ananya Verma."
+  },
+  {
+    "id": "Q022",
+    "query": "What was Ishita's absolute spending limit when the Goa estimate first came in?",
+    "expected_message_id": "MSG_000287",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ishita states her absolute limit is 9000 after Rohan's initial Goa estimate. This is her personal maximum at that point, distinct from the group's later Rs 8,700 agreed trip cap."
+  },
+  {
+    "id": "Q023",
+    "query": "How did Aarav say he would track everyone's trip contributions?",
+    "expected_message_id": "MSG_000715",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Aarav commits to tracking the eight contributions in one sheet and keeping payments out of chat. The final decision assigns him collection responsibility, but only this message specifies his tracking method."
+  },
+  {
+    "id": "Q024",
+    "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+    "expected_message_id": "MSG_003930",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ananya's August 3 message is the draft volunteer orientation checklist PDF. It is a placeholder attachment, not a completed checklist; sender, activity and month distinguish it from other event PDFs."
+  },
+  {
+    "id": "Q025",
+    "query": "What reason did Kabir give for rejecting Firebase?",
+    "expected_message_id": "MSG_001383",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Kabir explicitly rejects Firebase because the demo must work offline. His earlier message proposing Firebase and Ananya's Wi-Fi concern are distractors with different speaker/decision roles."
+  },
+  {
+    "id": "Q026",
+    "query": "Why did Sneha want to drop the bigger Python framework?",
+    "expected_message_id": "MSG_001385",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Sneha says the large Python framework adds unused admin configuration and recommends dropping it. Context identifies the Django option. Her earlier note about custom screens is related, but this target states the explicit rejection and overhead."
+  },
+  {
+    "id": "Q027",
+    "query": "What name did Rohan suggest for our coding project?",
+    "expected_message_id": "MSG_001478",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Rohan proposes LostLoop and jokes about his coding life. Later acceptance and final stack messages repeat the name, but this is the actual naming suggestion by the requested person."
+  },
+  {
+    "id": "Q028",
+    "query": "Why did Meera insist we should not split the birthday group?",
+    "expected_message_id": "MSG_003431",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Meera says all eight are only together sometimes and asks not to split. Ishita's preceding message rejects splitting too, but does not state Meera's own social reason."
+  },
+  {
+    "id": "Q029",
+    "query": "Which bus was Aditya asking about on August 31?",
+    "expected_message_id": "MSG_004626",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Aditya asks who is taking the Bhawarkuan bus around 9:30 pm on August 31. The exact date disambiguates recurring bus conversations; his later location update does not name the route."
+  },
+  {
+    "id": "Q030",
+    "query": "What did Sneha say the cake cost, including any extra box charge?",
+    "expected_message_id": "MSG_003736",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Sneha confirms the cake was 500 with no extra box charge after the party. Ishita's earlier cake quote and total accounting are different speakers and do not answer the packaging-charge question."
+  },
+  {
+    "id": "Q031",
+    "query": "What decision did we make on March 28 about the trip destination and payments?",
+    "expected_message_id": "MSG_000713",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Filter message timestamps to March 28, 2026 in Asia/Kolkata. Ishita's final Manali decision includes the contribution amount and April 2 deadline. The chat date is March 28 even though the trip takes place in June. This deliberately shares a target with Q011 while testing a date constraint."
+  },
+  {
+    "id": "Q032",
+    "query": "What stack did we settle on in late April for LostLoop?",
+    "expected_message_id": "MSG_001482",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Late April means April 21-30, 2026. The April 27 locked stack is the final answer; April 24 rejected alternatives are nearby distractors. Same target as Q012, with an additional chat-time constraint."
+  },
+  {
+    "id": "Q033",
+    "query": "What was the final birthday arrangement we agreed in July?",
+    "expected_message_id": "MSG_003616",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Within July 2026, the July 21 consolidated plan is the agreement on venue, time and spending. The July 25 expenses are post-event reporting, not the agreement itself. Same target as Q013 with a calendar constraint."
+  },
+  {
+    "id": "Q034",
+    "query": "What update did Aarav give on April 2 about the trip deposits?",
+    "expected_message_id": "MSG_000846",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Aarav's April 2 update says all eight deposits were marked received. The target timestamp, sender and topic all match. The March 28 collection plan only sets a future deadline."
+  },
+  {
+    "id": "Q035",
+    "query": "At the start of May, had LostLoop been launched successfully from its README?",
+    "expected_message_id": "MSG_001598",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Start of May means May 1-7, 2026. Kabir's May 3 confirmation explicitly says LostLoop now launches from the README in a fresh folder; April's promises to write startup instructions are not completed verification."
+  },
+  {
+    "id": "Q036",
+    "query": "Find the first forwarded notice last month saying the semester timetable could still change.",
+    "expected_message_id": "MSG_003892",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Relative to 2026-09-01, last month is August 1-31. Ishita's August 1 provisional-timetable forward is the earliest forwarded notice matching this description. The preceding reply is not a forward; repeated later forwards must not replace the earliest one."
+  },
+  {
+    "id": "Q037",
+    "query": "Which room did the Software Engineering tutorial move to on August 2?",
+    "expected_message_id": "MSG_003922",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Rohan's August 2 notice explicitly moves the Software Engineering tutorial to B-204 on that date. This is a tutorial notice, not a provisional semester timetable or an unrelated room change."
+  },
+  {
+    "id": "Q038",
+    "query": "What network maintenance notice did Meera forward last month?",
+    "expected_message_id": "MSG_003999",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Last month resolves to August 2026. Meera forwards the dated August 6 network-maintenance warning. Her August 18 reminder mentions a notice but is not the forwarded warning itself; Rohan forwards the later notice."
+  },
+  {
+    "id": "Q039",
+    "query": "Who said they had reached home on June 2, and what food were they happy about?",
+    "expected_message_id": "MSG_002346",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Kabir's June 2 evening arrival update celebrates veg rolls. Exact chat date distinguishes it from Ishita's later arrival-and-food messages. Sender metadata answers who and the message itself names the food."
+  },
+  {
+    "id": "Q040",
+    "query": "Yesterday morning, how many MB was Aditya's oversized submission file?",
+    "expected_message_id": "MSG_004620",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Yesterday relative to September 1 is August 31, 2026; morning is 00:00-11:59:59 local time. Aditya's 08:04 message states 42 MB and too many screenshots, answering the preceding file-size question. The upload complaint and later success are context, not the requested size-bearing hit."
+  }
+]

@@ -1,3 +1,6 @@
 # Preserve canonical bytes and corpus hashes across Windows/Linux checkouts.
 backend/data/*.jsonl text eol=lf
 backend/data/corpus_metadata.json text eol=lf
+evaluation/*.json text eol=lf
+evaluation/*.md text eol=lf
+evaluation/*.py text eol=lf

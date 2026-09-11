@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "comparison": "query versus target message text only",
+  "normalization": "Unicode NFKC, casefold, expand negative contractions and common auxiliary suffixes, remove possessive apostrophe-s, tokenize Unicode letters/digits, remove the fixed function-word list",
+  "stopwords": [
+    "a", "an", "the", "and", "or", "but", "if", "because", "as", "than",
+    "of", "to", "for", "from", "in", "on", "at", "by", "with", "about", "into", "through", "per",
+    "is", "am", "are", "was", "were", "be", "been", "being",
+    "do", "does", "did", "have", "has", "had", "having",
+    "can", "could", "will", "would", "shall", "should", "might", "must",
+    "i", "me", "my", "mine", "we", "us", "our", "ours", "you", "your", "yours",
+    "he", "him", "his", "she", "her", "hers", "it", "its", "they", "them", "their", "theirs",
+    "this", "that", "these", "those", "there", "here",
+    "what", "which", "who", "whom", "whose", "where", "when", "why", "how",
+    "hai", "hain", "hu", "ho", "tha", "thi", "ka", "ki", "ke", "ko", "se", "mein",
+    "main", "hum", "ham", "tum", "aap", "mera", "meri", "mere", "mujhe", "hamara", "hamari",
+    "ye", "yeh", "woh", "vo", "wo", "aur", "ya", "toh", "bhi", "kya", "kyun", "kaise", "kis", "kisi"
+  ]
+}

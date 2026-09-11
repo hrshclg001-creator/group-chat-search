@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "status": "frozen",
+  "frozen_on": "2026-09-12",
+  "reference_date": "2026-09-01",
+  "retrieval_scored": false,
+  "query_count": 40,
+  "category_counts": {
+    "person": 10,
+    "semantic": 20,
+    "time": 10
+  },
+  "hard_query_count": 10,
+  "hard_query_ids": [
+    "Q001",
+    "Q002",
+    "Q003",
+    "Q004",
+    "Q005",
+    "Q006",
+    "Q007",
+    "Q008",
+    "Q009",
+    "Q010"
+  ],
+  "distinct_target_count": 37,
+  "sha256": {
+    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+    "evaluation/HARD_SUBSET_REVIEW.md": "60de4402b178b2c2ed5a4b0060f1ed4452086cfd4fc65f42d7b2b5f96537af59",
+    "evaluation/OVERLAP.md": "f3b05838be867b13a0f0e5831b220fb6bc9a0b45e65632c0541be973c866f5fd",
+    "evaluation/label_changes.md": "a3ed7243887149cbdf47959d928a7a0f2764a82c6c6627aa5ba825872985aa9a",
+    "evaluation/overlap.py": "8f23e59bce038c9f3835395601b9bb134447fbbe6cf360de92e822dce3edd848",
+    "evaluation/overlap_convention.json": "3ba89dc26e64b3f389b50d56f5d3dca2f647c40d04189a370a16e7a75eba85ca",
+    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb"
+  }
+}

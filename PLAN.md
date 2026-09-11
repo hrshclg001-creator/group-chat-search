@@ -1,11 +1,11 @@
 # Implementation plan
 
-Status: initial application scaffolding and Phase 2 synthetic corpus generation are implemented. The corpus contains 4,634 messages and passes validation and determinism checks. Phase 1 remains partial: corpus validation and generation configuration exist, but evaluation-query and search API contracts and model preparation remain future work. Retrieval, evaluation labels, and benchmark results have not been created. Later work requires subsequent authorization.
+Status: initial application scaffolding, Phase 2 synthetic corpus generation, and Phase 3 evaluation labels/freeze are implemented. The corpus contains 4,634 messages. The frozen evaluation set has 40 queries, including 10 manually reviewed zero-overlap cases. Phase 1 remains partial: corpus/query validation and generation configuration exist, but search API contracts and model preparation remain future work. Retrieval and benchmark results have not been created. Later work requires subsequent authorization.
 
 ## Architecture
 
 1. A deterministic Python generator writes a synthetic JSONL corpus and participant metadata using a fixed seed. Messages have stable IDs, participant IDs, timezone-aware timestamps, text, and optional thread/media/forward markers.
-2. A separate, manually authored JSONL evaluation set stores query ID, text, category, expected message ID, hard-subset membership, and a labelling rationale. Labels never enter the retrieval pipeline.
+2. A separate, manually authored JSON evaluation array at `evaluation/queries.json` stores query ID, text, category, expected message ID, hard-subset membership, and a labelling rationale. This follows the subsequently requested JSON format rather than the originally proposed JSONL. Labels never enter the retrieval pipeline.
 3. An indexing module validates the corpus, builds lexical TF-IDF features, and computes local `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` embeddings. Cache artifacts are keyed by corpus hash, model revision, and indexing configuration.
 4. Independent lexical and semantic baselines rank messages. Semantic ranking uses NumPy cosine similarity with documented normalization and stable tie-breaking. A hybrid ranker combines normalized signals with person/time metadata boosts or filters. Document ambiguous name and date handling.
 5. Context assembly adds a bounded window of nearby messages to each hit. It retains the actual matching message ID, text, author, timestamp, and score, with surrounding messages in chronological order. Context does not replace the selected hit or count as a correct hit during evaluation.
@@ -75,7 +75,7 @@ Acceptance: only the four requested files are created or updated; requirements, 
 
 ### Phase 1: Project foundations and data contracts
 
-Scaffolding, corpus validation, seed/timestamp conventions, and deterministic generation checks are implemented. Health and CORS tests and frontend checks accompany the scaffold; see README.md for commands and validation. Evaluation-query and search API schemas and model configuration remain unimplemented, so the full phase remains incomplete.
+Scaffolding, corpus and evaluation-query validation, seed/timestamp conventions, and deterministic generation checks are implemented. Health and CORS tests and frontend checks accompany the scaffold; see README.md for commands and validation. Search API schemas and model configuration remain unimplemented, so the full phase remains incomplete.
 
 Establish modular Python/FastAPI and React/Vite foundations with plain responsive CSS. Define participant, message, evaluation-query, search-request, and search-response schemas. Establish the fixed seed, timestamp conventions, configuration, dependency locking, model revision recording, and deterministic test fixtures.
 
@@ -90,6 +90,8 @@ Design exactly 8 realistic fictional participants and generate at least 4,000 me
 Acceptance: validators confirm message count, exactly 8 participating authors, unique IDs, valid references, chronology, and the documented approximate six-month span. Manual review verifies realism, all required text forms, and 3 sustained decision threads with conclusions. Regenerating twice with the same configuration produces identical corpus bytes. No real/private chat is used. Run generator and validator tests.
 
 ### Phase 3: Manual evaluation set and ground-truth freeze
+
+Completed: `evaluation/queries.json` contains 40 manually authored labels (20 semantic, 10 person, 10 time) referencing actual unchanged corpus messages. Q001-Q010 form the 10-case zero-overlap subset under the documented versioned convention; the authoring assistant reviewed their semantic connection and ambiguity in context. There are 37 distinct targets, with the three final decisions intentionally repeated under time constraints. `freeze_manifest.json` records corpus/query/convention/review hashes before retrieval or scoring, and `label_changes.md` records provenance and correction requirements. Validator passed with frozen integrity verified; 20 evaluation tests passed. No search engine or benchmark results were added.
 
 Manually write and label exactly 40 queries against the fixed corpus with expected message IDs and rationales. Cover semantic meaning, person-based, and time-based searches, assigning a primary category for reporting. Include at least 8 queries with zero meaningful word overlap with their targets. Before scoring, document token normalization, punctuation/emoji handling, and stopword treatment, including Hinglish; do not invent exclusions to force hard-subset membership. Review label correctness and ambiguity, manually review the hard subset, then freeze corpus/query hashes. Track subsequent legitimate corrections explicitly.
 

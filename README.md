@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the initial React/Vite and FastAPI scaffold, plus a deterministic synthetic chat generator and corpus validator. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Search, embeddings, indexing, evaluation queries, and benchmarks are not implemented. Phase 1's remaining API/evaluation data contracts remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the initial React/Vite and FastAPI scaffold, a deterministic synthetic chat generator and corpus validator, and a frozen set of **40 manually authored retrieval evaluation queries**. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Search, embeddings, indexing and benchmark scoring are not implemented. Search API contracts remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
@@ -13,7 +13,7 @@ backend/
   scripts/          Offline corpus generator, content, configuration and validator
   tests/            Corpus validation/determinism, health and CORS tests
   data/             Synthetic JSONL, corpus metadata and review notes
-evaluation/         Reserved for future evaluation code and labels
+evaluation/         Frozen query labels, overlap convention, validator and tests
 results/            Reserved for future measured results
 ```
 
@@ -74,12 +74,36 @@ The generator and validator use only the Python standard library; they need no n
 - Each row has `id`, `timestamp`, `sender` (full name), `text`, `message_type`, and `metadata` containing stable `participant_id`, `topic`, and `episode_id`. Decision messages also have `thread_id`. IDs run from `MSG_000001` to `MSG_004634` and are stable for this seed, content and configuration.
 - Types: `text`, `forwarded`, `url`, `image`, `pdf`, `voice`. Media are text placeholders, not actual attachments. Example-domain links are placeholders; no link is fetched during generation.
 - Composition: 552 complete daily conversations (2-4 per day, eight messages each), 216 hand-authored decision messages, and two boundary messages. Background conversations use 56 season-aware vignettes with shared details, changing speakers, wording variations and irregular reply intervals.
-- Metadata records participant profiles, counts, seed/configuration, interpreter version, SHA-256, and thread ranges, membership and conclusion IDs. Thread annotations support corpus review and must not become answer lookup rules in future retrieval. No evaluation labels exist yet.
+- Metadata records participant profiles, counts, seed/configuration, interpreter version, SHA-256, and thread ranges, membership and conclusion IDs. Thread annotations support corpus review and must not become answer lookup rules in future retrieval. Evaluation labels are stored separately under `evaluation/` and are never generator or retrieval inputs.
 - JSONL serialization is UTF-8 with LF endings and fixed key order. Tests generate both files independently twice and compare their bytes; they also compare the stored corpus with a fresh generation. Reproduction was verified on Python 3.9.10; other Python versions have not been tested. Changing content or the seed can change IDs and hashes. No embedding model is used, so no model revision applies in this phase.
 
 The three extended threads end in a Manali trip, a React/Vite + FastAPI + SQLite hackathon stack, and a July 25 birthday at Nukkad Cafe costing Rs 2,900. Each includes alternatives, interruptions and follow-up over six dates. See [corpus review notes](backend/data/CORPUS_REVIEW.md) for exact message ranges and conclusions.
 
 This is deliberately synthetic, template-based data: repeated background phrasing and simplified student routines remain limitations. The corpus is not evidence about real students, venues, prices or events, and no private chat was used.
+
+## Frozen retrieval evaluation queries
+
+[evaluation/queries.json](evaluation/queries.json) is a JSON array of exactly 40 manually composed query records: **20 semantic, 10 person and 10 time**. Each includes the requested ID, query text, actual target message ID, primary category, overlap flag and labelling rationale. Queries cover all three decision threads plus exam notices, class changes, volunteer material, travel and an upload problem. Person queries use the actual eight-participant corpus; no nonexistent example name was inserted.
+
+**10 queries (Q001-Q010) have zero meaningful word overlap** with their target text under the fixed [overlap convention](evaluation/OVERLAP.md). Their [manual review](evaluation/HARD_SUBSET_REVIEW.md) explains the semantic connection and nearby distractors. The authoring assistant reviewed the labels; they have not received independent human review. The token audit is exact lexical matching after documented normalization and function-word removal, not a semantic similarity score. Sender/time/context are excluded from the word-overlap calculation.
+
+Time conventions use the corpus reference date **2026-09-01** and Asia/Kolkata: “last month” is August 1-31; “yesterday” is August 31; “morning” is 00:00 through 11:59:59. For these labels, “late April” means April 21-30 and “start of May” means May 1-7. Chat timestamps determine date filtering; a June event mentioned in a March message is still a March chat message. These conventions are documented labels, not an implemented natural-language date parser.
+
+There are **37 distinct target IDs**: each of the three final decisions is tested once semantically and once with a time constraint. All ten hard cases are semantic queries from the decision threads, so the hard subset does not separately measure person/time retrieval. Some targets need nearby context to resolve pronouns, but the target itself carries the requested answer. A neighbor or summary alone must not count as a correct hit.
+
+Run validation from the repository root:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m evaluation.validate_queries
+.\backend\.venv\Scripts\python.exe -m evaluation.validate_queries --show-overlap
+.\backend\.venv\Scripts\python.exe -m pytest evaluation/tests -q
+```
+
+Validation enforces the exact count/schema, real target IDs, categories, at least eight hard labels, nonempty content and agreement of **every** overlap flag with the checker. Default validation also verifies the [freeze manifest](evaluation/freeze_manifest.json) against the unchanged corpus, corpus metadata, labels, convention and review artifacts. It never updates them. `--draft` is only for pre-freeze label review and skips integrity checks; it is not proof that a set is frozen.
+
+Version `1.0.0` was frozen before search implementation or scoring. [label_changes.md](evaluation/label_changes.md) records initial review and the correction procedure. Future legitimate corrections require visible history, versioned artifacts and rerunning affected comparisons; never rewrite expected answers to fit retrieved results. No retrieval engine reads these labels, and no benchmarks have been measured. Future scoring must report both Top-1 numerators and denominators (40 overall, 10 hard) and their signed percentage-point gap.
+
+Evaluation-phase checks: validator passed with `freeze_verified: true`; **20 evaluation tests passed** on Python 3.9.10. Corpus and metadata SHA-256 values remained unchanged. Backend/frontend implementation was unchanged, so their existing tests were not rerun in this phase.
 
 ## Checks
 
