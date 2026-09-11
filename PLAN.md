@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: initial application scaffolding authorized and implemented: React/Vite frontend, FastAPI health endpoint, local CORS, and connection status. Phase 1 is only partially implemented; data contracts and reproducibility configuration remain future work. Corpus, retrieval, evaluation labels, and benchmark results have not been created. Later work requires subsequent authorization.
+Status: initial application scaffolding and Phase 2 synthetic corpus generation are implemented. The corpus contains 4,634 messages and passes validation and determinism checks. Phase 1 remains partial: corpus validation and generation configuration exist, but evaluation-query and search API contracts and model preparation remain future work. Retrieval, evaluation labels, and benchmark results have not been created. Later work requires subsequent authorization.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ Status: initial application scaffolding authorized and implemented: React/Vite f
 
 ## Proposed folder structure
 
-This is a future layout. The initial scaffold uses `backend/requirements.txt`, `backend/scripts/`, `backend/data/`, and `results/` as subsequently requested; other modules below remain planned.
+This is a future architecture layout. Subsequent authorized tasks use `backend/requirements.txt`, `backend/scripts/`, `backend/data/messages.jsonl`, `backend/data/corpus_metadata.json`, and `results/`; other modules below remain planned. README.md documents the current implemented paths.
 
 ```text
 AGENTS.md
@@ -75,13 +75,15 @@ Acceptance: only the four requested files are created or updated; requirements, 
 
 ### Phase 1: Project foundations and data contracts
 
-Initial scaffolding only is implemented. Health and CORS tests and frontend checks accompany it; see README.md for commands and validation. Data schemas, seed/timestamp conventions, model configuration, and deterministic corpus fixtures are not implemented, so the full phase remains incomplete.
+Scaffolding, corpus validation, seed/timestamp conventions, and deterministic generation checks are implemented. Health and CORS tests and frontend checks accompany the scaffold; see README.md for commands and validation. Evaluation-query and search API schemas and model configuration remain unimplemented, so the full phase remains incomplete.
 
 Establish modular Python/FastAPI and React/Vite foundations with plain responsive CSS. Define participant, message, evaluation-query, search-request, and search-response schemas. Establish the fixed seed, timestamp conventions, configuration, dependency locking, model revision recording, and deterministic test fixtures.
 
 Acceptance: schema tests reject malformed records; frontend build and backend smoke checks pass; runtime configuration requires no secrets or external LLM API. Run relevant tests and document commands.
 
 ### Phase 2: Synthetic corpus
+
+Completed for the authorized dataset phase: 4,634 synthetic messages, exactly eight fictional participants, all 184 dates from March 1 through August 31, 2026, and fixed reference date September 1, 2026. Three hand-authored decision threads each have 72 messages across six dates, with recorded conclusion IDs and intervening chatter. Generator and validator passed; 32 backend tests passed, including independent byte-for-byte regeneration. Generated samples and all three authored threads were reviewed; scope and template limitations are recorded in `backend/data/CORPUS_REVIEW.md`. No retrieval or evaluation implementation was added.
 
 Design exactly 8 realistic fictional participants and generate at least 4,000 messages across approximately 6 months. Include coherent recurring topics, interruptions, realistic Hinglish/code-mixed language, typos, one-word replies, forwarded messages, media placeholders, emojis, and messy conversational text. Include at least 3 long decision threads with alternatives, discussion, and concrete conclusions. Record thread IDs, message ranges, and conclusion IDs for review. Persist JSONL and a manifest containing seed, date range, counts, generator version, and corpus hash.
 

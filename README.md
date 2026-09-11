@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Only the initial application scaffold is implemented: React with Vite and JavaScript, plain responsive CSS, a FastAPI health endpoint, and a frontend backend-connection indicator with a retry button. Search, dataset generation, data contracts, embeddings, indexing, and evaluation are not implemented. No benchmark results have been measured. This completes only the scaffolding portion of Phase 1. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the initial React/Vite and FastAPI scaffold, plus a deterministic synthetic chat generator and corpus validator. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Search, embeddings, indexing, evaluation queries, and benchmarks are not implemented. Phase 1's remaining API/evaluation data contracts remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
@@ -10,9 +10,9 @@ Only the initial application scaffold is implemented: React with Vite and JavaSc
 frontend/           React/Vite application and health-client tests
 backend/
   app/              FastAPI entry point, configuration, and API routes
-  scripts/          Reserved for future scripts
-  tests/            Health and CORS tests
-  data/             Reserved for future synthetic data
+  scripts/          Offline corpus generator, content, configuration and validator
+  tests/            Corpus validation/determinism, health and CORS tests
+  data/             Synthetic JSONL, corpus metadata and review notes
 evaluation/         Reserved for future evaluation code and labels
 results/            Reserved for future measured results
 ```
@@ -54,6 +54,33 @@ Open `http://127.0.0.1:5173`. The page calls `/api/health` on mount and displays
 
 Vite forwards `/api` to `http://127.0.0.1:8000`. Port 5173 is fixed; stop a conflicting process or update the Vite and backend origin settings together. FastAPI allows CORS from `http://localhost:5173` and `http://127.0.0.1:5173`, following the [FastAPI CORS configuration](https://fastapi.tiangolo.com/tutorial/cors/). These are local development settings. Production hosting and API routing are not configured in this phase; `npm.cmd run build` produces frontend assets only.
 
+## Generate and validate the synthetic chat
+
+The generated files are included in the repository. To reproduce them, from the repository root:
+
+```powershell
+cd backend
+.\.venv\Scripts\python.exe -m scripts.generate_data
+.\.venv\Scripts\python.exe -m scripts.validate_data
+.\.venv\Scripts\python.exe -m pytest
+```
+
+The generator and validator use only the Python standard library; they need no network, model, or additional packages. You can also run them with `py -3 -m scripts.generate_data` and `py -3 -m scripts.validate_data` from `backend`. Their default paths are resolved relative to the script package. `--output-dir PATH` on the generator and `--data-dir PATH` on the validator support separate reproduction folders.
+
+- Output: [messages.jsonl](backend/data/messages.jsonl) and [corpus_metadata.json](backend/data/corpus_metadata.json).
+- Fixed seed: `20260901`; generator version: `1.0.0`; reference runtime: Python `3.9.10`. The full tested backend dependency versions remain in `backend/requirements.lock.txt`.
+- Inclusive dates: `2026-03-01` through `2026-08-31` (184 dates). Timestamps are chronological ISO 8601 strings with the `+05:30` offset, corresponding to Asia/Kolkata.
+- Fixed reference date: `2026-09-01`, stored in the metadata for later relative-time interpretation. Relative-date search is not implemented yet.
+- Each row has `id`, `timestamp`, `sender` (full name), `text`, `message_type`, and `metadata` containing stable `participant_id`, `topic`, and `episode_id`. Decision messages also have `thread_id`. IDs run from `MSG_000001` to `MSG_004634` and are stable for this seed, content and configuration.
+- Types: `text`, `forwarded`, `url`, `image`, `pdf`, `voice`. Media are text placeholders, not actual attachments. Example-domain links are placeholders; no link is fetched during generation.
+- Composition: 552 complete daily conversations (2-4 per day, eight messages each), 216 hand-authored decision messages, and two boundary messages. Background conversations use 56 season-aware vignettes with shared details, changing speakers, wording variations and irregular reply intervals.
+- Metadata records participant profiles, counts, seed/configuration, interpreter version, SHA-256, and thread ranges, membership and conclusion IDs. Thread annotations support corpus review and must not become answer lookup rules in future retrieval. No evaluation labels exist yet.
+- JSONL serialization is UTF-8 with LF endings and fixed key order. Tests generate both files independently twice and compare their bytes; they also compare the stored corpus with a fresh generation. Reproduction was verified on Python 3.9.10; other Python versions have not been tested. Changing content or the seed can change IDs and hashes. No embedding model is used, so no model revision applies in this phase.
+
+The three extended threads end in a Manali trip, a React/Vite + FastAPI + SQLite hackathon stack, and a July 25 birthday at Nukkad Cafe costing Rs 2,900. Each includes alternatives, interruptions and follow-up over six dates. See [corpus review notes](backend/data/CORPUS_REVIEW.md) for exact message ranges and conclusions.
+
+This is deliberately synthetic, template-based data: repeated background phrasing and simplified student routines remain limitations. The corpus is not evidence about real students, venues, prices or events, and no private chat was used.
+
 ## Checks
 
 From the repository root:
@@ -73,7 +100,9 @@ Invoke-RestMethod http://127.0.0.1:8000/api/health
 Invoke-RestMethod http://127.0.0.1:5173/api/health
 ```
 
-Validation performed on Windows with Node.js 24.8.0, npm 11.6.0, and Python 3.9.10:
+Latest dataset-phase validation on Windows / Python 3.9.10: generator and standalone validator passed; **32 backend tests passed** (27 corpus tests plus the existing 5 health/CORS tests). Checks include minimum count, participants, date coverage, IDs, content varieties, all three long decisions, deterministic bytes, artifact consistency, and rejection of corrupted records/files. An initial generation attempt correctly failed because the literal one-word reply `ok` was missing; the content was corrected and generation and tests rerun successfully. No frontend code changed in this phase, so its checks were not rerun.
+
+Previous scaffold-phase validation used Node.js 24.8.0, npm 11.6.0, and Python 3.9.10:
 
 - Backend: 5 pytest tests passed (health response, both local CORS origins and preflights, rejection of an unlisted origin, and absence of a search route).
 - Frontend: 4 health-client tests passed (success, HTTP failure, unexpected payload, and connection failure).
