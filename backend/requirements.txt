@@ -1,0 +1,7 @@
+# Runtime dependencies (Python 3.9+).
+fastapi==0.115.12
+uvicorn==0.34.3
+
+# Test dependencies.
+httpx==0.28.1
+pytest==8.4.2

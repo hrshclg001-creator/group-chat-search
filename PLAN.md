@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: planning only. Application code, corpus, evaluation labels, and benchmark results have not been created. The implementation phases below require subsequent authorization.
+Status: initial application scaffolding authorized and implemented: React/Vite frontend, FastAPI health endpoint, local CORS, and connection status. Phase 1 is only partially implemented; data contracts and reproducibility configuration remain future work. Corpus, retrieval, evaluation labels, and benchmark results have not been created. Later work requires subsequent authorization.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ Status: planning only. Application code, corpus, evaluation labels, and benchmar
 
 ## Proposed folder structure
 
-This is a future layout, not a scaffolding instruction for the current task.
+This is a future layout. The initial scaffold uses `backend/requirements.txt`, `backend/scripts/`, `backend/data/`, and `results/` as subsequently requested; other modules below remain planned.
 
 ```text
 AGENTS.md
@@ -67,13 +67,15 @@ reports/                    # Measured results and reproducibility notes
 
 ## Phases and acceptance criteria
 
-### Phase 0: Planning documents (current task)
+### Phase 0: Planning documents (completed)
 
 Create only AGENTS.md, PLAN.md, a short README.md overview, and .gitignore. Preserve mandatory requirements and engineering rules without scaffolding or implementing the application.
 
 Acceptance: only the four requested files are created or updated; requirements, architecture, future folder structure, and acceptance criteria are documented.
 
 ### Phase 1: Project foundations and data contracts
+
+Initial scaffolding only is implemented. Health and CORS tests and frontend checks accompany it; see README.md for commands and validation. Data schemas, seed/timestamp conventions, model configuration, and deterministic corpus fixtures are not implemented, so the full phase remains incomplete.
 
 Establish modular Python/FastAPI and React/Vite foundations with plain responsive CSS. Define participant, message, evaluation-query, search-request, and search-response schemas. Establish the fixed seed, timestamp conventions, configuration, dependency locking, model revision recording, and deterministic test fixtures.
 
