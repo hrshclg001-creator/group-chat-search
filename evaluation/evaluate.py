@@ -1,4 +1,4 @@
-"""Run lexical, original-only semantic or contextual retrieval on frozen labels.
+"""Run lexical, semantic, contextual or hybrid retrieval on frozen labels.
 
 Usage from repository root: python evaluation/evaluate.py --method lexical
 """
@@ -50,6 +50,9 @@ def run_method(method='lexical'):
     elif method in ('semantic', 'contextual'):
         from backend.app.search.semantic import SemanticSearch
         searcher = SemanticSearch(messages, contextual=method == 'contextual')
+    elif method == 'hybrid':
+        from backend.app.search.hybrid import HybridSearch
+        searcher = HybridSearch(messages)
     else:
         raise ValueError(f'Unknown retrieval method: {method}')
     queries = json.loads(QUERY_PATH.read_text(encoding='utf-8'))
@@ -60,6 +63,8 @@ def run_method(method='lexical'):
     source_paths = sorted((ROOT / 'backend/app/search').glob('*.py')) + [
         Path(__file__), ROOT / 'evaluation/metrics.py', ROOT / 'evaluation/validate_queries.py',
     ]
+    if method == 'hybrid':
+        source_paths += sorted((ROOT / 'backend/app/query_understanding').glob('*.py'))
     return {
         'method': method, 'schema_version': '1.1.0',
         'measured_at_utc': datetime.now(timezone.utc).isoformat(timespec='seconds'),
@@ -69,7 +74,7 @@ def run_method(method='lexical'):
         'corpus_message_count': len(messages),
         'query_count': validation['query_count'],
         'hard_query_count': validation['hard_query_count'],
-        'reference_date': '2026-09-01',
+        'reference_date': json.loads(METADATA_PATH.read_text(encoding='utf-8'))['reference_date'],
         'freeze_verified': True,
         'freeze_version': json.loads(MANIFEST_PATH.read_text(encoding='utf-8'))['version'],
         'input_sha256': {str(path.relative_to(ROOT)).replace('\\', '/'): digest
@@ -80,15 +85,22 @@ def run_method(method='lexical'):
         'environment': {
             'python': platform.python_version(), 'platform': platform.platform(),
             'dependencies': {name: version(name) for name in (
+                ('scikit-learn', 'numpy', 'scipy', 'joblib', 'threadpoolctl', 'sentence-transformers',
+                 'transformers', 'torch', 'huggingface-hub') if method == 'hybrid' else
                 ('scikit-learn', 'numpy', 'scipy', 'joblib', 'threadpoolctl') if method == 'lexical' else
                 ('sentence-transformers', 'transformers', 'torch', 'numpy', 'huggingface-hub'))},
         },
-        'limitations': [
+        'limitations': ([
+            'Hybrid profile selection used these same 40 labels; this is not held-out generalization accuracy.',
+            'Rule-based sender/time interpretation can miss or misinterpret unsupported phrasing.',
+            'Only exact current target IDs receive credit, never answers found solely in neighboring context.',
+            'No external LLM, cross-encoder, query-specific answer rules or evaluation labels enter retrieval.',
+        ] if method == 'hybrid' else [
             'No explicit sender/time ranking; only original text or bounded chronological context supplies features.',
             'Context can match a neighboring fact; only the anchored current message ID receives credit.',
             'Top-1 requires the exact labelled message, including when repeated background messages look equivalent.',
             'Fixed untuned configurations; surrounding messages can contain unrelated interruptions.',
-        ],
+        ]),
         'queries': rows,
     }, {message.id: message for message in messages}
 
@@ -114,16 +126,16 @@ def print_report(report, messages):
         print(f'  Expected {expected.id} | {expected.sender} | {expected.timestamp} | {expected.text}')
         if row['retrieved_messages']:
             hit = row['retrieved_messages'][0]
-            score = hit.get('semantic_score', hit.get('lexical_score'))
+            score = hit.get('hybrid_score', hit.get('semantic_score', hit.get('lexical_score')))
             print(f"  Retrieved {hit['id']} | score={score:.6f} | {hit['sender']} | {hit['timestamp']} | {hit['text']}")
         else:
-            print('  Retrieved: no positive-scoring message')
+            print('  Retrieved: no eligible result')
         print(f"  Top 3: {', '.join(row['retrieved_ids']) or '(empty)'}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--method', required=True, choices=['lexical', 'semantic', 'contextual'])
+    parser.add_argument('--method', required=True, choices=['lexical', 'semantic', 'contextual', 'hybrid'])
     args = parser.parse_args()
     # Preserve emojis in redirected logs; avoid Windows console encoding crashes.
     if hasattr(sys.stdout, 'reconfigure'):

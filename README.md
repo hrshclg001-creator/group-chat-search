@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the React/Vite and FastAPI scaffold, synthetic corpus, **40 frozen evaluation queries**, lexical retrieval, local semantic retrieval with optional bounded conversation context, and a standalone deterministic person/time query parser. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. The parser is not connected to retrieval. Hybrid/person/time ranking and the search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the React/Vite and FastAPI scaffold, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. The search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
@@ -153,7 +153,7 @@ Measured lexical results on the frozen version 1.0.0 corpus and query set:
 
 The signed **overall minus hard Top-1 gap is +22.5 percentage points**. These are measured results, not targets. All 31 incorrect queries were printed with expected and retrieved messages; all 40 rankings are saved in the JSON. For example, Q015 retrieves the question about outside cake instead of the answer giving permission and decoration conditions. Q017 retrieves an identical exam forward from April instead of the labelled May message, although the correct ID is in its top three. Generic question words also produce unrelated matches when substantive query terms are absent. No settings or labels were changed after observing these results.
 
-This run used Python 3.9.10, scikit-learn 1.6.1, NumPy 2.0.2 and SciPy 1.13.1 on Windows; complete dependency versions and source/input hashes are in the result artifact. Tiny floating-point differences on other platforms are possible. The subsequent semantic/contextual comparison is below; hybrid retrieval remains future work.
+This run used Python 3.9.10, scikit-learn 1.6.1, NumPy 2.0.2 and SciPy 1.13.1 on Windows; complete dependency versions and source/input hashes are in the result artifact. Tiny floating-point differences on other platforms are possible. Subsequent semantic/contextual and hybrid comparisons are below.
 
 Lexical-phase checks: **51 backend tests and 25 evaluation tests passed** (76 total); `pip check` found no broken requirements. Tests cover typo recovery with zero word-feature matches, stable ties, empty/OOV queries, original result fields, exclusion of metadata from features, malformed corpus input, known metric rankings and denominators, label isolation and frozen integrity. The benchmark ran successfully through the exact `evaluation/evaluate.py --method lexical` entry point. Saved per-query rankings were independently checked against aggregate counts and source/input/lock hashes. The frontend was unchanged, so its tests were not rerun.
 
@@ -249,7 +249,7 @@ Rules fixed for this implementation:
 - English month names and three-letter abbreviations (also `sept`) use the reference year when no year is supplied, even for months after September. Bare `May` works by itself; within a sentence it needs a month cue such as `in May`, `May mein` or a day/year to avoid treating auxiliary `may` as a date.
 - Supported dates are ISO `YYYY-MM-DD`, `15 August 2026`, and `August 15, 2026`, with optional ordinals and optional year for named dates. Simple ranges include `2026-03-01 to 2026-03-10`, `between 1 June and 15 July 2026`, `1-15 August`, `August 1-15`, and `1 Aug se 15 Aug tak`. `through`, `until` and dash connectors are inclusive too. A single explicit year applies to both range endpoints; cross-year ranges require both years explicitly.
 - Compatible time expressions intersect. Conflicting intervals, invalid/reversed dates, or ambiguous numeric slash dates return null date bounds and warnings. Unsupported linguistic constructions (negation, event-relative dates, time of day, and fine-grained qualifiers such as `late April`) are not fully interpreted; a recognized month alone yields that whole month. This is a bounded rule grammar, not general language understanding. Consumers must review warnings before applying future filters.
-- Intent is `semantic`, `person_semantic`, `time_semantic` or `person_time_semantic`, based on resolved constraints. No intent or parsed constraint is currently consumed by retrieval.
+- Intent is `semantic`, `person_semantic`, `time_semantic` or `person_time_semantic`, based on resolved constraints. Hybrid retrieval now consumes these parsed constraints through the conservative sender/date interpretation described below; the three baselines remain unchanged.
 
 Actual CLI examples, all using reference date `2026-09-01` and timezone `Asia/Kolkata` (all warnings empty):
 
@@ -265,6 +265,77 @@ Actual CLI examples, all using reference date `2026-09-01` and timezone `Asia/Ko
 | Messages from Kabir between 1 June and 15 July 2026 | Kabir Khan | 2026-06-01 / 2026-07-15 | person_time_semantic |
 
 Parser-phase validation: **71 parser tests passed**, and the full suites passed with **138 backend tests plus 28 evaluation tests (166 total)**. Cases include English/Hinglish patterns, ambiguous aliases/dates, leap years, week/year boundaries, custom metadata and a wall-clock guard. Ten CLI examples ran successfully. Initial sandbox attempts to launch two Python commands could not access the installed runtime; authorized reruns passed. Retrieval code, frozen data/labels and benchmark artifacts are unchanged; no ranking evaluation or frontend checks were rerun for this parsing-only phase.
+
+## Hybrid retrieval and four-method comparison
+
+`backend/app/search/hybrid.py` combines the existing original-only semantic, contextual semantic and lexical indexes. One pinned local encoder is shared, and the existing embedding caches are reused. It scores every corpus message before applying constraints and selecting top K. Evaluation labels, expected IDs, notes, categories and thread/conclusion annotations never enter retrieval. Original raw query text supplies all similarity channels.
+
+`constraints.py` consumes the standalone parser and distinguishes explicit sender language (`what did NAME say`, `NAME ne`, `from NAME`, `NAME shared`) from a bare name mention. Clear single-sender requests **filter the current author**. A known name without a clear sender role gets a small bonus; names used as topics or recipients and ambiguous/multiple names get no sender preference. This conservative rule can miss implicit author intent, as the measured spending-limit example below shows.
+
+Resolved chat dates **exclude current messages outside the inclusive range**, using metadata reference date `2026-09-01` and Asia/Kolkata. Morning is 00:00-11:59:59; other day parts and month-part boundaries are visible in configuration. `late MONTH` uses days 21-end and `start of MONTH`/`early MONTH` uses days 1-7. Date expressions directly attached to event nouns, such as `the June trip`, are not assumed to be message timestamps; another explicit chat date in the same query still applies. These are general rules applied to every query, not benchmark-ID exceptions. Unsupported/ambiguous phrasing remains a limitation. On Windows without an IANA database, the corpus's modern Indian timestamps use explicit UTC+05:30, never the machine timezone.
+
+Person and date filters intersect. An empty intersection returns no hits without relaxing the request. Filters apply to the original current message; its bounded display context may include other authors or dates. Results preserve the actual target ID and original text and include individual semantic/contextual/lexical scores, person/date matches, metadata bonus, final hybrid score, context and an explanation of the applied constraints/weights. A neighboring answer is still wrong under exact-ID scoring.
+
+All weights, the four trial profiles and date-refinement boundaries live in [ranking_config.py](backend/app/search/ranking_config.py). Semantic cosine is clamped to [0,1], TF-IDF uses its existing nonnegative cosine score, and no query-specific min/max normalization is applied. The selected **balanced** profile uses:
+
+| Signal | No hard constraint | Clear author and/or date constraint |
+| --- | ---: | ---: |
+| Contextual semantic | 0.35 | 0.25 |
+| Original semantic | 0.35 | 0.45 |
+| Lexical TF-IDF | 0.20 | 0.20 |
+| Person bonus, when applicable | 0.05 | 0.05 |
+| Date bonus, when applicable | 0.05 | 0.05 |
+
+The constrained route transfers 0.10 from context to the original message to focus ranking within the eligible set. Bonuses are zero when absent, not redistributed. A hard-filter bonus is constant across eligible messages; the filter itself supplies the strong metadata influence. Scores are not calibrated probabilities or intended for comparisons across different queries.
+
+Four profiles were declared before this task's first hybrid scoring. Their base `(contextual, original, lexical)` weights were `(0.55, 0.20, 0.15)`, `(0.35, 0.35, 0.20)`, `(0.20, 0.55, 0.15)` and `(0.10, 0.65, 0.15)`; each used the same metadata policy, bonuses and constrained transfer. The measured selection rule was highest overall Top-1, then Recall@3, then declaration order. [hybrid_tuning.json](results/hybrid_tuning.json) retains all configurations, rankings and measurements:
+
+| Profile | Top-1 | Recall@3 | Hard Top-1 |
+| --- | ---: | ---: | ---: |
+| context_first (suggested starting mix) | 20/40 (50%) | 25/40 (62.5%) | 1/10 (10%) |
+| balanced (selected) | 21/40 (52.5%) | 25/40 (62.5%) | 1/10 (10%) |
+| original_first | 21/40 (52.5%) | 25/40 (62.5%) | 1/10 (10%) |
+| anchor_first | 20/40 (50%) | 24/40 (60%) | 1/10 (10%) |
+
+Balanced and original_first tied under both metrics; declaration order chose balanced. No category-specific weight selection or per-query answer rules were used. The four-profile comparison was rerun once with the final default to verify reproducibility and record current source hashes; rankings and aggregate results agreed. **These 40 queries are also the tuning set.** The results are development-set measurements, not an independent estimate of generalization; unchanged ground truth alone does not eliminate that limitation.
+
+Measured four-method comparison on the exact same frozen inputs:
+
+| Metric | Lexical | Semantic | Contextual | Hybrid |
+| --- | ---: | ---: | ---: | ---: |
+| Overall Top-1 | 9/40 (22.5%) | 13/40 (32.5%) | 4/40 (10%) | 21/40 (52.5%) |
+| Recall@3 | 16/40 (40%) | 16/40 (40%) | 12/40 (30%) | 25/40 (62.5%) |
+| Hard Top-1 | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 1/10 (10%) |
+| Semantic category | 3/20 (15%) | 6/20 (30%) | 1/20 (5%) | 7/20 (35%) |
+| Person category | 3/10 (30%) | 3/10 (30%) | 1/10 (10%) | 7/10 (70%) |
+| Time category | 3/10 (30%) | 4/10 (40%) | 2/10 (20%) | 7/10 (70%) |
+| Overall minus hard gap | +22.5 pp | +22.5 pp | 0 pp | +42.5 pp |
+
+Against original-only semantic retrieval, hybrid improves semantic-category accuracy by 5 percentage points, person by 40 and time by 30. Overall increases 20 points, but the hard subset stays at 1/10. The larger overall/hard gap reflects better performance on easier metadata-bearing queries, not improved difficult paraphrase understanding. Baseline artifacts are the preserved measured runs with their original configuration/source hashes; the comparison verifies identical input hashes and recomputes all metrics from saved ranks.
+
+There are still 19 Top-1 errors, all printed by the benchmark and retained in [hybrid.json](results/hybrid.json). Examples: Q001 misses the Hinglish/cost rejection despite a related trip match; Q012 and Q032 miss the actual final stack message; Q015 returns the cake-permission question instead of the answer (the answer is third); Q022's weak possessive-person bonus does not overcome another author's Goa estimate (the expected spending limit is second); Q038 returns Meera's later maintenance reminder instead of her forwarded notice (the notice is second). Filtering can find the right author/date while similarity still selects the wrong conversational role. We did not add rules targeting these failures after selecting the profile.
+
+After installing the locked dependencies and preparing the model as above, run from the repository root:
+
+```powershell
+.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method hybrid
+.\backend\.venv\Scripts\python.exe -m evaluation.compare --all
+# Optional reproduction of the declared tuning experiment; it never edits defaults:
+.\backend\.venv\Scripts\python.exe -m evaluation.tune_hybrid
+```
+
+With the environment's Python on PATH, the requested command is `python evaluation/evaluate.py --method hybrid`. The benchmark saves [results/hybrid.json](results/hybrid.json); the comparison saves [results/comparison.json](results/comparison.json), including all metrics, signed gaps, category changes, query gains/losses and report hashes. The earlier `python -m evaluation.compare` command still produces only the contextual comparison. No backend server or frontend is required. To use the engine directly from `backend`:
+
+```python
+from app.search.corpus import load_corpus
+from app.search.hybrid import HybridSearch
+
+searcher = HybridSearch(load_corpus())
+for hit in searcher.search("What did Ananya share last month?", top_k=3):
+    print(hit.to_dict())
+```
+
+Hybrid-phase checks: **all 166 backend tests and 30 evaluation tests passed (196 total)**, including 28 new hybrid tests for sender/date intersections, no-match behavior, UTC/India date boundaries, event vs chat dates, score explanations, ID alignment, ties and original-target context. The final hybrid benchmark and four-method comparison completed. Corpus, labels, metadata, parser and baseline retrieval/artifacts are unchanged. No frontend/API code changed, so frontend checks were not rerun. The tokenizer emits its packaged 128-token warning while context lengths are counted; the encoder explicitly uses the previously documented 256-token limit, and inference/tests completed successfully.
 
 ## Checks
 

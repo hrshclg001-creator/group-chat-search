@@ -1,6 +1,6 @@
 import pytest
 
-from evaluation.compare import compare_reports
+from evaluation.compare import compare_all, compare_reports
 from evaluation.metrics import summarize
 
 
@@ -25,3 +25,15 @@ def test_comparison_refuses_different_labels():
     second['input_sha256']['queries'] = 'changed'
     with pytest.raises(ValueError, match='different frozen inputs'):
         compare_reports(first, second)
+
+
+def test_four_way_comparison_keeps_all_metrics_and_gaps():
+    reports = {method: report(method == 'hybrid', method)
+               for method in ('lexical', 'semantic', 'contextual', 'hybrid')}
+    result = compare_all(reports)
+    assert set(result['metrics_by_method']) == set(reports)
+    assert result['metrics_by_method']['hybrid']['overall_minus_hard_percentage_points'] == 0
+    assert result['hybrid_vs_baselines']['semantic']['top1_delta_percentage_points'] == 100
+    reports.pop('lexical')
+    with pytest.raises(ValueError, match='Four reports'):
+        compare_all(reports)

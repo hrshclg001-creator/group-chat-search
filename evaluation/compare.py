@@ -1,9 +1,11 @@
 """Compare measured runs only when they use identical frozen inputs."""
 
+import argparse
 import json
 from pathlib import Path
 
 from .metrics import summarize
+from .validate_queries import sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,7 +39,41 @@ def compare_reports(baseline, candidate):
     }
 
 
+def compare_all(reports):
+    required = ('lexical', 'semantic', 'contextual', 'hybrid')
+    if set(reports) != set(required):
+        raise ValueError('Four reports required: lexical, semantic, contextual, hybrid')
+    for name, report in reports.items():
+        if report['method'] != name:
+            raise ValueError('Report method does not match its file')
+    return {
+        'input_sha256': reports['hybrid']['input_sha256'],
+        'metrics_by_method': {method: reports[method]['metrics'] for method in required},
+        'hybrid_vs_baselines': {method: compare_reports(reports[method], reports['hybrid'])
+                                for method in required[:-1]},
+        'limitations': 'Hybrid weights were selected on these same frozen queries; baseline configurations were untuned. No held-out accuracy is claimed.',
+    }
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--all', action='store_true', help='Compare all four methods, including hybrid')
+    args = parser.parse_args()
+    if args.all:
+        from .validate_queries import validate_files
+        validate_files()
+        paths = {method: ROOT / f'results/{method}.json' for method in ('lexical', 'semantic', 'contextual', 'hybrid')}
+        reports = {method: json.loads(path.read_text(encoding='utf-8')) for method, path in paths.items()}
+        comparison = compare_all(reports)
+        for path, digest in comparison['input_sha256'].items():
+            if sha256(ROOT / path) != digest:
+                raise ValueError('Report input hash differs from the frozen files on disk')
+        comparison['report_sha256'] = {str(path.relative_to(ROOT)).replace('\\', '/'): sha256(path) for path in paths.values()}
+        destination = ROOT / 'results/comparison.json'
+        destination.write_bytes((json.dumps(comparison, indent=2) + '\n').encode('utf-8'))
+        print(json.dumps(comparison['metrics_by_method'], indent=2))
+        print(f'Saved {destination}')
+        return
     reports = {method: json.loads((ROOT / f'results/{method}.json').read_text(encoding='utf-8'))
                for method in ('lexical', 'semantic', 'contextual')}
     contextual = reports['contextual']

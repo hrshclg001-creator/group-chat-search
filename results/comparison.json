@@ -1,0 +1,403 @@
+{
+  "input_sha256": {
+    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb",
+    "evaluation/freeze_manifest.json": "74123a2581007828375db97cec872d4a1d83e1135055620f4734257081dda5e9"
+  },
+  "metrics_by_method": {
+    "lexical": {
+      "top1_accuracy": {
+        "correct": 9,
+        "total": 40,
+        "value": 0.225,
+        "percent": 22.5
+      },
+      "recall_at_3": {
+        "correct": 16,
+        "total": 40,
+        "value": 0.4,
+        "percent": 40.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 0,
+        "total": 10,
+        "value": 0.0,
+        "percent": 0.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "semantic": {
+          "correct": 3,
+          "total": 20,
+          "value": 0.15,
+          "percent": 15.0
+        },
+        "time": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 22.5
+    },
+    "semantic": {
+      "top1_accuracy": {
+        "correct": 13,
+        "total": 40,
+        "value": 0.325,
+        "percent": 32.5
+      },
+      "recall_at_3": {
+        "correct": 16,
+        "total": 40,
+        "value": 0.4,
+        "percent": 40.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "semantic": {
+          "correct": 6,
+          "total": 20,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "time": {
+          "correct": 4,
+          "total": 10,
+          "value": 0.4,
+          "percent": 40.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 22.5
+    },
+    "contextual": {
+      "top1_accuracy": {
+        "correct": 4,
+        "total": 40,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "recall_at_3": {
+        "correct": 12,
+        "total": 40,
+        "value": 0.3,
+        "percent": 30.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 1,
+          "total": 10,
+          "value": 0.1,
+          "percent": 10.0
+        },
+        "semantic": {
+          "correct": 1,
+          "total": 20,
+          "value": 0.05,
+          "percent": 5.0
+        },
+        "time": {
+          "correct": 2,
+          "total": 10,
+          "value": 0.2,
+          "percent": 20.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 0.0
+    },
+    "hybrid": {
+      "top1_accuracy": {
+        "correct": 21,
+        "total": 40,
+        "value": 0.525,
+        "percent": 52.5
+      },
+      "recall_at_3": {
+        "correct": 25,
+        "total": 40,
+        "value": 0.625,
+        "percent": 62.5
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 7,
+          "total": 10,
+          "value": 0.7,
+          "percent": 70.0
+        },
+        "semantic": {
+          "correct": 7,
+          "total": 20,
+          "value": 0.35,
+          "percent": 35.0
+        },
+        "time": {
+          "correct": 7,
+          "total": 10,
+          "value": 0.7,
+          "percent": 70.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 42.5
+    }
+  },
+  "hybrid_vs_baselines": {
+    "lexical": {
+      "baseline_method": "lexical",
+      "candidate_method": "hybrid",
+      "top1_delta_percentage_points": 30.0,
+      "recall_at_3_delta_percentage_points": 22.5,
+      "hard_top1_delta_percentage_points": 10.0,
+      "category_changes": {
+        "person": {
+          "baseline": {
+            "correct": 3,
+            "total": 10,
+            "value": 0.3,
+            "percent": 30.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 40.0,
+          "direction": "improved"
+        },
+        "semantic": {
+          "baseline": {
+            "correct": 3,
+            "total": 20,
+            "value": 0.15,
+            "percent": 15.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 20,
+            "value": 0.35,
+            "percent": 35.0
+          },
+          "delta_percentage_points": 20.0,
+          "direction": "improved"
+        },
+        "time": {
+          "baseline": {
+            "correct": 3,
+            "total": 10,
+            "value": 0.3,
+            "percent": 30.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 40.0,
+          "direction": "improved"
+        }
+      },
+      "newly_correct_queries": [
+        "Q006",
+        "Q013",
+        "Q014",
+        "Q017",
+        "Q021",
+        "Q024",
+        "Q025",
+        "Q028",
+        "Q029",
+        "Q033",
+        "Q036",
+        "Q039",
+        "Q040"
+      ],
+      "newly_incorrect_queries": [
+        "Q023"
+      ]
+    },
+    "semantic": {
+      "baseline_method": "semantic",
+      "candidate_method": "hybrid",
+      "top1_delta_percentage_points": 20.0,
+      "recall_at_3_delta_percentage_points": 22.5,
+      "hard_top1_delta_percentage_points": 0.0,
+      "category_changes": {
+        "person": {
+          "baseline": {
+            "correct": 3,
+            "total": 10,
+            "value": 0.3,
+            "percent": 30.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 40.0,
+          "direction": "improved"
+        },
+        "semantic": {
+          "baseline": {
+            "correct": 6,
+            "total": 20,
+            "value": 0.3,
+            "percent": 30.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 20,
+            "value": 0.35,
+            "percent": 35.0
+          },
+          "delta_percentage_points": 5.0,
+          "direction": "improved"
+        },
+        "time": {
+          "baseline": {
+            "correct": 4,
+            "total": 10,
+            "value": 0.4,
+            "percent": 40.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 30.0,
+          "direction": "improved"
+        }
+      },
+      "newly_correct_queries": [
+        "Q017",
+        "Q021",
+        "Q024",
+        "Q028",
+        "Q029",
+        "Q033",
+        "Q039",
+        "Q040"
+      ],
+      "newly_incorrect_queries": []
+    },
+    "contextual": {
+      "baseline_method": "contextual",
+      "candidate_method": "hybrid",
+      "top1_delta_percentage_points": 42.5,
+      "recall_at_3_delta_percentage_points": 32.5,
+      "hard_top1_delta_percentage_points": 0.0,
+      "category_changes": {
+        "person": {
+          "baseline": {
+            "correct": 1,
+            "total": 10,
+            "value": 0.1,
+            "percent": 10.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 60.0,
+          "direction": "improved"
+        },
+        "semantic": {
+          "baseline": {
+            "correct": 1,
+            "total": 20,
+            "value": 0.05,
+            "percent": 5.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 20,
+            "value": 0.35,
+            "percent": 35.0
+          },
+          "delta_percentage_points": 30.0,
+          "direction": "improved"
+        },
+        "time": {
+          "baseline": {
+            "correct": 2,
+            "total": 10,
+            "value": 0.2,
+            "percent": 20.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 10,
+            "value": 0.7,
+            "percent": 70.0
+          },
+          "delta_percentage_points": 50.0,
+          "direction": "improved"
+        }
+      },
+      "newly_correct_queries": [
+        "Q013",
+        "Q014",
+        "Q017",
+        "Q018",
+        "Q019",
+        "Q020",
+        "Q021",
+        "Q025",
+        "Q026",
+        "Q028",
+        "Q029",
+        "Q030",
+        "Q033",
+        "Q034",
+        "Q036",
+        "Q039",
+        "Q040"
+      ],
+      "newly_incorrect_queries": []
+    }
+  },
+  "limitations": "Hybrid weights were selected on these same frozen queries; baseline configurations were untuned. No held-out accuracy is claimed.",
+  "report_sha256": {
+    "results/lexical.json": "d6bd4f262950974a47340c72ae877ffe59e573f1aa10c4beb854ac1f11e0570d",
+    "results/semantic.json": "06f089a1379a7e4cc48cfff8299c4cafff81a0ec5feacdd95ded5db334e34673",
+    "results/contextual.json": "004bc0cbd1c0f0a69920437bc5e25458553899ed12e3401986f341330dc75797",
+    "results/hybrid.json": "d16b4760296544a025295e8b0f3dbdb1e04ea88b298e7fa9edb65806cfe0b985"
+  }
+}
