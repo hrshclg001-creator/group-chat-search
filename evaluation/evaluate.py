@@ -1,4 +1,4 @@
-"""Run the lexical baseline against the frozen evaluation set.
+"""Run lexical, original-only semantic or contextual retrieval on frozen labels.
 
 Usage from repository root: python evaluation/evaluate.py --method lexical
 """
@@ -41,11 +41,17 @@ def evaluate_queries(searcher, queries):
     return rows
 
 
-def run_lexical():
+def run_method(method='lexical'):
     validation = validate_files()  # Includes all frozen hashes; no --draft bypass.
     before = {path: sha256(path) for path in (CORPUS_PATH, METADATA_PATH, QUERY_PATH, MANIFEST_PATH)}
     messages = load_corpus(CORPUS_PATH)
-    searcher = LexicalSearch(messages)
+    if method == 'lexical':
+        searcher = LexicalSearch(messages)
+    elif method in ('semantic', 'contextual'):
+        from backend.app.search.semantic import SemanticSearch
+        searcher = SemanticSearch(messages, contextual=method == 'contextual')
+    else:
+        raise ValueError(f'Unknown retrieval method: {method}')
     queries = json.loads(QUERY_PATH.read_text(encoding='utf-8'))
     rows = evaluate_queries(searcher, queries)
     if any(sha256(path) != digest for path, digest in before.items()):
@@ -55,7 +61,7 @@ def run_lexical():
         Path(__file__), ROOT / 'evaluation/metrics.py', ROOT / 'evaluation/validate_queries.py',
     ]
     return {
-        'method': 'lexical', 'schema_version': '1.0.0',
+        'method': method, 'schema_version': '1.1.0',
         'measured_at_utc': datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'metrics': summarize(rows),
         'configuration': searcher.configuration(),
@@ -73,16 +79,22 @@ def run_lexical():
         'requirements_lock_sha256': sha256(ROOT / 'backend/requirements.lock.txt'),
         'environment': {
             'python': platform.python_version(), 'platform': platform.platform(),
-            'dependencies': {name: version(name) for name in ('scikit-learn', 'numpy', 'scipy', 'joblib', 'threadpoolctl')},
+            'dependencies': {name: version(name) for name in (
+                ('scikit-learn', 'numpy', 'scipy', 'joblib', 'threadpoolctl') if method == 'lexical' else
+                ('sentence-transformers', 'transformers', 'torch', 'numpy', 'huggingface-hub'))},
         },
         'limitations': [
-            'Message text only: no sender/time ranking, context expansion, embeddings or synonym understanding.',
-            'Character overlap may give nonzero scores even for the frozen zero-word-overlap subset.',
+            'No explicit sender/time ranking; only original text or bounded chronological context supplies features.',
+            'Context can match a neighboring fact; only the anchored current message ID receives credit.',
             'Top-1 requires the exact labelled message, including when repeated background messages look equivalent.',
-            'One fixed untuned lexical configuration; semantic and hybrid baselines are not measured.',
+            'Fixed untuned configurations; surrounding messages can contain unrelated interruptions.',
         ],
         'queries': rows,
     }, {message.id: message for message in messages}
+
+
+def run_lexical():
+    return run_method('lexical')
 
 
 def print_report(report, messages):
@@ -102,7 +114,8 @@ def print_report(report, messages):
         print(f'  Expected {expected.id} | {expected.sender} | {expected.timestamp} | {expected.text}')
         if row['retrieved_messages']:
             hit = row['retrieved_messages'][0]
-            print(f"  Retrieved {hit['id']} | score={hit['lexical_score']:.6f} | {hit['sender']} | {hit['timestamp']} | {hit['text']}")
+            score = hit.get('semantic_score', hit.get('lexical_score'))
+            print(f"  Retrieved {hit['id']} | score={score:.6f} | {hit['sender']} | {hit['timestamp']} | {hit['text']}")
         else:
             print('  Retrieved: no positive-scoring message')
         print(f"  Top 3: {', '.join(row['retrieved_ids']) or '(empty)'}")
@@ -110,13 +123,13 @@ def print_report(report, messages):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--method', required=True, choices=['lexical'])
+    parser.add_argument('--method', required=True, choices=['lexical', 'semantic', 'contextual'])
     args = parser.parse_args()
     # Preserve emojis in redirected logs; avoid Windows console encoding crashes.
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
     try:
-        report, messages = run_lexical()
+        report, messages = run_method(args.method)
     except (ValueError, OSError) as exc:
         parser.exit(1, f'Benchmark failed: {exc}\n')
     destination = ROOT / 'results' / f'{args.method}.json'

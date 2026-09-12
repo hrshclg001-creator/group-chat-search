@@ -1,0 +1,3541 @@
+{
+  "method": "semantic",
+  "schema_version": "1.1.0",
+  "measured_at_utc": "2026-09-12T04:11:39+00:00",
+  "metrics": {
+    "top1_accuracy": {
+      "correct": 13,
+      "total": 40,
+      "value": 0.325,
+      "percent": 32.5
+    },
+    "recall_at_3": {
+      "correct": 16,
+      "total": 40,
+      "value": 0.4,
+      "percent": 40.0
+    },
+    "zero_word_overlap_top1_accuracy": {
+      "correct": 1,
+      "total": 10,
+      "value": 0.1,
+      "percent": 10.0
+    },
+    "top1_accuracy_by_category": {
+      "person": {
+        "correct": 3,
+        "total": 10,
+        "value": 0.3,
+        "percent": 30.0
+      },
+      "semantic": {
+        "correct": 6,
+        "total": 20,
+        "value": 0.3,
+        "percent": 30.0
+      },
+      "time": {
+        "correct": 4,
+        "total": 10,
+        "value": 0.4,
+        "percent": 40.0
+      }
+    },
+    "overall_minus_hard_percentage_points": 22.5
+  },
+  "configuration": {
+    "indexed_fields": [
+      "original_text"
+    ],
+    "representation": "original text only",
+    "window_per_side": 0,
+    "max_neighbor_distance_seconds": 1800,
+    "context_message_ids_include_current": true,
+    "context_order": "timestamp then message ID; no thread/episode labels used",
+    "token_budget_policy": "Trim longest neighbors first, then current only if it alone exceeds budget",
+    "records_with_truncated_embedding_input": 0,
+    "current_messages_truncated_for_embedding": 0,
+    "original_text_policy": "Always preserve and return exact current message text",
+    "score": "NumPy cosine of normalized query and document embeddings",
+    "tie_break": "message ID ascending for exactly equal scores",
+    "zero_score_policy": "Return top K cosine matches; blank query returns []",
+    "model": {
+      "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "model_file_sha256": {
+        "config.json": "6300193cb75e01cf80c96decef7187dfb33094d97cc1490b7ead6ff134476e4e",
+        "config_sentence_transformers.json": "b8c64b5cece00d8424b4896ea75b512b6008576088497609dfeb6bd63e6d36b8",
+        "modules.json": "8f4b264b80206c830bebbdcae377e137925650a433b689343a63bdc9b3145460",
+        "sentence_bert_config.json": "70f4448f31320443fe3557cacea5abf2dcc4915dda8c80646bec9f3bb0aa5a1f",
+        "1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+        "tokenizer.json": "2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8",
+        "tokenizer_config.json": "5036ea374ffedd706e3bef33e2e0d6953cb868ef8a490e76e32ba0faa37a6b9b",
+        "special_tokens_map.json": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d",
+        "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+        "model.safetensors": "eaa086f0ffee582aeb45b36e34cdd1fe2d6de2bef61f8a559a1bbc9bd955917b"
+      },
+      "max_sequence_length": 256,
+      "packaged_max_sequence_length": 128,
+      "batch_size": 32,
+      "device": "cpu",
+      "cpu_threads": 4,
+      "dtype": "float32",
+      "normalize_embeddings": true,
+      "dependencies": {
+        "sentence-transformers": "3.4.1",
+        "transformers": "4.48.3",
+        "torch": "2.6.0",
+        "numpy": "2.0.2",
+        "huggingface-hub": "0.28.1"
+      }
+    },
+    "embedding_cache_key": "217ebbb1353de7a69e6395068e04b474b6ab897c9be4dce084151e239616caa2",
+    "embedding_matrix_sha256": "6b79f1d126784a85d581e77577b2c6d5780c327dbdbc2079dabc18b354e92756",
+    "tuning": "One fixed contextual configuration, selected before scoring; no label-based tuning"
+  },
+  "evaluation_top_k": 3,
+  "corpus_message_count": 4634,
+  "query_count": 40,
+  "hard_query_count": 10,
+  "reference_date": "2026-09-01",
+  "freeze_verified": true,
+  "freeze_version": "1.0.0",
+  "input_sha256": {
+    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb",
+    "evaluation/freeze_manifest.json": "74123a2581007828375db97cec872d4a1d83e1135055620f4734257081dda5e9"
+  },
+  "source_sha256": {
+    "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
+    "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
+    "backend/app/search/corpus.py": "1dea27079bf5c0971e42d8780634472f51de1e58a549c66558d5482c9166c897",
+    "backend/app/search/embedding.py": "53e22e10e6ac84298065eeaf7ff09126e9335ffbdd8808ef0fe69f5a61c76818",
+    "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
+    "backend/app/search/model_config.py": "4701604455ababc259460c1419a7991b2f07019fa356071f91d6321ff2786b53",
+    "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
+    "evaluation/evaluate.py": "98091a06a49abca6b04a15d5653247cf42d76340f4a296c5c740c961e47666b5",
+    "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
+    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965"
+  },
+  "requirements_lock_sha256": "c8265a690c568925b4caea6d685396b857a6ffb371d08a0010b961b9a95a0c2d",
+  "environment": {
+    "python": "3.9.10",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "dependencies": {
+      "sentence-transformers": "3.4.1",
+      "transformers": "4.48.3",
+      "torch": "2.6.0",
+      "numpy": "2.0.2",
+      "huggingface-hub": "0.28.1"
+    }
+  },
+  "limitations": [
+    "No explicit sender/time ranking; only original text or bounded chronological context supplies features.",
+    "Context can match a neighboring fact; only the anchored current message ID receives credit.",
+    "Top-1 requires the exact labelled message, including when repeated background messages look equivalent.",
+    "Fixed untuned configurations; surrounding messages can contain unrelated interruptions."
+  ],
+  "queries": [
+    {
+      "id": "Q001",
+      "query": "What made a seaside holiday unaffordable?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000600",
+      "retrieved_ids": [
+        "MSG_000594",
+        "MSG_002901",
+        "MSG_000726"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000594",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-23T18:43:34+05:30",
+          "text": "Could postpone to December instead?",
+          "original_text": "Could postpone to December instead?",
+          "semantic_score": 0.4105056822299957,
+          "context_text": "Current message: Could postpone to December instead?",
+          "context_message_ids": [
+            "MSG_000594"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000594",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-03-23T18:43:34+05:30",
+              "text": "Could postpone to December instead?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Could postpone to December instead?",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002901",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-06-24T08:16:12+05:30",
+          "text": "good reminder. almost forgot umbrella also",
+          "original_text": "good reminder. almost forgot umbrella also",
+          "semantic_score": 0.4064229428768158,
+          "context_text": "Current message: good reminder. almost forgot umbrella also",
+          "context_message_ids": [
+            "MSG_002901"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002901",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-06-24T08:16:12+05:30",
+              "text": "good reminder. almost forgot umbrella also",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "good reminder. almost forgot umbrella also",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000726",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-29T12:03:00+05:30",
+          "text": "swades dekhne ka mood hai aaj raat",
+          "original_text": "swades dekhne ka mood hai aaj raat",
+          "semantic_score": 0.3928379416465759,
+          "context_text": "Current message: swades dekhne ka mood hai aaj raat",
+          "context_message_ids": [
+            "MSG_000726"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000726",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-29T12:03:00+05:30",
+              "text": "swades dekhne ka mood hai aaj raat",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "swades dekhne ka mood hai aaj raat",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q002",
+      "query": "Who worried about feeling nauseous during consecutive coach rides?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000291",
+      "retrieved_ids": [
+        "MSG_004303",
+        "MSG_000055",
+        "MSG_000871"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_004303",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-08-19T13:21:40+05:30",
+          "text": "ohhh yes. copied assumption from yesterday's exercise lol",
+          "original_text": "ohhh yes. copied assumption from yesterday's exercise lol",
+          "semantic_score": 0.4615013599395752,
+          "context_text": "Current message: ohhh yes. copied assumption from yesterday's exercise lol",
+          "context_message_ids": [
+            "MSG_004303"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004303",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-08-19T13:21:40+05:30",
+              "text": "ohhh yes. copied assumption from yesterday's exercise lol",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "ohhh yes. copied assumption from yesterday's exercise lol",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000055",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-02T21:13:25+05:30",
+          "text": "ohhh yes. copied assumption from yesterday's exercise",
+          "original_text": "ohhh yes. copied assumption from yesterday's exercise",
+          "semantic_score": 0.44803881645202637,
+          "context_text": "Current message: ohhh yes. copied assumption from yesterday's exercise",
+          "context_message_ids": [
+            "MSG_000055"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000055",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-03-02T21:13:25+05:30",
+              "text": "ohhh yes. copied assumption from yesterday's exercise",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "ohhh yes. copied assumption from yesterday's exercise",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000871",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-03T08:20:42+05:30",
+          "text": "ohhh yes. copied assumption from yesterday's exercise",
+          "original_text": "ohhh yes. copied assumption from yesterday's exercise",
+          "semantic_score": 0.44803881645202637,
+          "context_text": "Current message: ohhh yes. copied assumption from yesterday's exercise",
+          "context_message_ids": [
+            "MSG_000871"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000871",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-03T08:20:42+05:30",
+              "text": "ohhh yes. copied assumption from yesterday's exercise",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "ohhh yes. copied assumption from yesterday's exercise",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q003",
+      "query": "What condition would force us to call off the Himalayan vacation?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000436",
+      "retrieved_ids": [
+        "MSG_000852",
+        "MSG_000173",
+        "MSG_000427"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000852",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-02T19:33:35+05:30",
+          "text": "I saw another Goa deal but ignoring it. We already chose the hills",
+          "original_text": "I saw another Goa deal but ignoring it. We already chose the hills",
+          "semantic_score": 0.5286404490470886,
+          "context_text": "Current message: I saw another Goa deal but ignoring it. We already chose the hills",
+          "context_message_ids": [
+            "MSG_000852"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000852",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-04-02T19:33:35+05:30",
+              "text": "I saw another Goa deal but ignoring it. We already chose the hills",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "I saw another Goa deal but ignoring it. We already chose the hills",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000173",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-08T20:20:26+05:30",
+          "text": "Manali bhi option hai, mountains > sunburn",
+          "original_text": "Manali bhi option hai, mountains > sunburn",
+          "semantic_score": 0.4083437919616699,
+          "context_text": "Current message: Manali bhi option hai, mountains > sunburn",
+          "context_message_ids": [
+            "MSG_000173"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000173",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-08T20:20:26+05:30",
+              "text": "Manali bhi option hai, mountains > sunburn",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Manali bhi option hai, mountains > sunburn",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000427",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-03-17T21:20:06+05:30",
+          "text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "original_text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "semantic_score": 0.3994594216346741,
+          "context_text": "Current message: one rest stop in Delhi chahiye; continuous travel nahi",
+          "context_message_ids": [
+            "MSG_000427"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000427",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-03-17T21:20:06+05:30",
+              "text": "one rest stop in Delhi chahiye; continuous travel nahi",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q004",
+      "query": "What extra software would the panel's computer need for the phone app?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_001154",
+      "retrieved_ids": [
+        "MSG_001061",
+        "MSG_001286",
+        "MSG_001475"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001061",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-04-10T20:09:58+05:30",
+          "text": "Flutter app could look nice, camera upload simple",
+          "original_text": "Flutter app could look nice, camera upload simple",
+          "semantic_score": 0.478894978761673,
+          "context_text": "Current message: Flutter app could look nice, camera upload simple",
+          "context_message_ids": [
+            "MSG_001061"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001061",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-04-10T20:09:58+05:30",
+              "text": "Flutter app could look nice, camera upload simple",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Flutter app could look nice, camera upload simple",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001286",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-04-19T21:24:20+05:30",
+          "text": "Design update: responsive website is sufficient; mobile app dropped",
+          "original_text": "Design update: responsive website is sufficient; mobile app dropped",
+          "semantic_score": 0.4339017868041992,
+          "context_text": "Current message: Design update: responsive website is sufficient; mobile app dropped",
+          "context_message_ids": [
+            "MSG_001286"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001286",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-04-19T21:24:20+05:30",
+              "text": "Design update: responsive website is sufficient; mobile app dropped",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Design update: responsive website is sufficient; mobile app dropped",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001475",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-27T20:19:31+05:30",
+          "text": "Is there anything that still calls cloud services?",
+          "original_text": "Is there anything that still calls cloud services?",
+          "semantic_score": 0.421031653881073,
+          "context_text": "Current message: Is there anything that still calls cloud services?",
+          "context_message_ids": [
+            "MSG_001475"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001475",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-27T20:19:31+05:30",
+              "text": "Is there anything that still calls cloud services?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Is there anything that still calls cloud services?",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q005",
+      "query": "What accessibility improvement was requested for the success indicator?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_001602",
+      "retrieved_ids": [
+        "MSG_003222",
+        "MSG_003930",
+        "MSG_002529"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003222",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T21:07:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "original_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "semantic_score": 0.4103843569755554,
+          "context_text": "Current message: [PDF] draft volunteer orientation session checklist, still needs review",
+          "context_message_ids": [
+            "MSG_003222"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003222",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T21:07:00+05:30",
+              "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003930",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-03T08:03:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "original_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "semantic_score": 0.4103843569755554,
+          "context_text": "Current message: [PDF] draft volunteer orientation session checklist, still needs review",
+          "context_message_ids": [
+            "MSG_003930"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003930",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-08-03T08:03:00+05:30",
+              "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002529",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-09T08:16:47+05:30",
+          "text": "safe journey",
+          "original_text": "safe journey",
+          "semantic_score": 0.3898797631263733,
+          "context_text": "Current message: safe journey",
+          "context_message_ids": [
+            "MSG_002529"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002529",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-06-09T08:16:47+05:30",
+              "text": "safe journey",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "safe journey",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q006",
+      "query": "What restriction prevented the birthday gathering from using the dorm lounge?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003418",
+      "retrieved_ids": [
+        "MSG_003418",
+        "MSG_000748",
+        "MSG_000460"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003418",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-14T21:00:00+05:30",
+          "text": "Hostel common room can't allow outside students after 6 that day",
+          "original_text": "Hostel common room can't allow outside students after 6 that day",
+          "semantic_score": 0.6943644285202026,
+          "context_text": "Current message: Hostel common room can't allow outside students after 6 that day",
+          "context_message_ids": [
+            "MSG_003418"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003418",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-14T21:00:00+05:30",
+              "text": "Hostel common room can't allow outside students after 6 that day",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Hostel common room can't allow outside students after 6 that day",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000748",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-29T21:21:57+05:30",
+          "text": "MasterChef hostel edition 🙃",
+          "original_text": "MasterChef hostel edition 🙃",
+          "semantic_score": 0.5029881000518799,
+          "context_text": "Current message: MasterChef hostel edition 🙃",
+          "context_message_ids": [
+            "MSG_000748"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000748",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-29T21:21:57+05:30",
+              "text": "MasterChef hostel edition 🙃",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "MasterChef hostel edition 🙃",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000460",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-18T17:24:05+05:30",
+          "text": "masterChef hostel edition",
+          "original_text": "masterChef hostel edition",
+          "semantic_score": 0.4787018895149231,
+          "context_text": "Current message: masterChef hostel edition",
+          "context_message_ids": [
+            "MSG_000460"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000460",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-03-18T17:24:05+05:30",
+              "text": "masterChef hostel edition",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "masterChef hostel edition",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q007",
+      "query": "Why was the outdoor picnic abandoned?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003426",
+      "retrieved_ids": [
+        "MSG_003214",
+        "MSG_003424",
+        "MSG_002901"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003214",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-07-06T20:22:31+05:30",
+          "text": "college lawn picnic? practically free venue",
+          "original_text": "college lawn picnic? practically free venue",
+          "semantic_score": 0.6255218982696533,
+          "context_text": "Current message: college lawn picnic? practically free venue",
+          "context_message_ids": [
+            "MSG_003214"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003214",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-07-06T20:22:31+05:30",
+              "text": "college lawn picnic? practically free venue",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "college lawn picnic? practically free venue",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003424",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-07-14T21:07:45+05:30",
+          "text": "Lawn plus borrowed canopy?",
+          "original_text": "Lawn plus borrowed canopy?",
+          "semantic_score": 0.4860723912715912,
+          "context_text": "Current message: Lawn plus borrowed canopy?",
+          "context_message_ids": [
+            "MSG_003424"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003424",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-07-14T21:07:45+05:30",
+              "text": "Lawn plus borrowed canopy?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Lawn plus borrowed canopy?",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002901",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-06-24T08:16:12+05:30",
+          "text": "good reminder. almost forgot umbrella also",
+          "original_text": "good reminder. almost forgot umbrella also",
+          "semantic_score": 0.4624186158180237,
+          "context_text": "Current message: good reminder. almost forgot umbrella also",
+          "context_message_ids": [
+            "MSG_002901"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002901",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-06-24T08:16:12+05:30",
+              "text": "good reminder. almost forgot umbrella also",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "good reminder. almost forgot umbrella also",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q008",
+      "query": "Why did the birthday girl prefer chatting over a game at the alley?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003330",
+      "retrieved_ids": [
+        "MSG_003586",
+        "MSG_003210",
+        "MSG_000185"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003586",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-20T21:05:00+05:30",
+          "text": "Queen dekhne ka mood hai aaj raat",
+          "original_text": "Queen dekhne ka mood hai aaj raat",
+          "semantic_score": 0.401388943195343,
+          "context_text": "Current message: Queen dekhne ka mood hai aaj raat",
+          "context_message_ids": [
+            "MSG_003586"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003586",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-07-20T21:05:00+05:30",
+              "text": "Queen dekhne ka mood hai aaj raat",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Queen dekhne ka mood hai aaj raat",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003210",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:10:00+05:30",
+          "text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "original_text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "semantic_score": 0.3652036488056183,
+          "context_text": "Current message: My birthday is July 25. Small get-together? no surprise please 😂",
+          "context_message_ids": [
+            "MSG_003210"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003210",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T20:10:00+05:30",
+              "text": "My birthday is July 25. Small get-together? no surprise please 😂",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000185",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-03-08T21:12:44+05:30",
+          "text": "nope, only noticed after reaching the canteen yaar",
+          "original_text": "nope, only noticed after reaching the canteen yaar",
+          "semantic_score": 0.36400651931762695,
+          "context_text": "Current message: nope, only noticed after reaching the canteen yaar",
+          "context_message_ids": [
+            "MSG_000185"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000185",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-03-08T21:12:44+05:30",
+              "text": "nope, only noticed after reaching the canteen yaar",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "nope, only noticed after reaching the canteen yaar",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q009",
+      "query": "How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000700",
+      "retrieved_ids": [
+        "MSG_000856",
+        "MSG_003213",
+        "MSG_000172"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000856",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-04-02T19:49:04+05:30",
+          "text": "Budget unchanged. Any optional activity comes out of personal spending",
+          "original_text": "Budget unchanged. Any optional activity comes out of personal spending",
+          "semantic_score": 0.5202995538711548,
+          "context_text": "Current message: Budget unchanged. Any optional activity comes out of personal spending",
+          "context_message_ids": [
+            "MSG_000856"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000856",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-04-02T19:49:04+05:30",
+              "text": "Budget unchanged. Any optional activity comes out of personal spending",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Budget unchanged. Any optional activity comes out of personal spending",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003213",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:19:54+05:30",
+          "text": "3000 total including cake. Eight of us, nothing fancy",
+          "original_text": "3000 total including cake. Eight of us, nothing fancy",
+          "semantic_score": 0.4748592674732208,
+          "context_text": "Current message: 3000 total including cake. Eight of us, nothing fancy",
+          "context_message_ids": [
+            "MSG_003213"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003213",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T20:19:54+05:30",
+              "text": "3000 total including cake. Eight of us, nothing fancy",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "3000 total including cake. Eight of us, nothing fancy",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000172",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-08T20:16:56+05:30",
+          "text": "pehle total batao. sirf train ticket ko budget mat bolna",
+          "original_text": "pehle total batao. sirf train ticket ko budget mat bolna",
+          "semantic_score": 0.4285825192928314,
+          "context_text": "Current message: pehle total batao. sirf train ticket ko budget mat bolna",
+          "context_message_ids": [
+            "MSG_000172"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000172",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-03-08T20:16:56+05:30",
+              "text": "pehle total batao. sirf train ticket ko budget mat bolna",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "pehle total batao. sirf train ticket ko budget mat bolna",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q010",
+      "query": "Why was the cheap coastal vacation clip misleading for people departing from our city?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000289",
+      "retrieved_ids": [
+        "MSG_000857",
+        "MSG_000179",
+        "MSG_000854"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000857",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:53:19+05:30",
+          "text": "done. Next trip discussion only for packing or safety updates",
+          "original_text": "done. Next trip discussion only for packing or safety updates",
+          "semantic_score": 0.5010894536972046,
+          "context_text": "Current message: done. Next trip discussion only for packing or safety updates",
+          "context_message_ids": [
+            "MSG_000857"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000857",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-02T19:53:19+05:30",
+              "text": "done. Next trip discussion only for packing or safety updates",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "done. Next trip discussion only for packing or safety updates",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000179",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-08T20:40:58+05:30",
+          "text": "No booking yet. Compare both with food and local transport included.",
+          "original_text": "No booking yet. Compare both with food and local transport included.",
+          "semantic_score": 0.4757509231567383,
+          "context_text": "Current message: No booking yet. Compare both with food and local transport included.",
+          "context_message_ids": [
+            "MSG_000179"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000179",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-03-08T20:40:58+05:30",
+              "text": "No booking yet. Compare both with food and local transport included.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "No booking yet. Compare both with food and local transport included.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000854",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:42:42+05:30",
+          "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "original_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "semantic_score": 0.45002713799476624,
+          "context_text": "Current message: [PDF] June hill-trip itinerary revision 3, with refund notes",
+          "context_message_ids": [
+            "MSG_000854"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000854",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-02T19:42:42+05:30",
+              "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q011",
+      "query": "Where did we finally decide to go for the June trip, and what was the per-person limit?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000713",
+      "retrieved_ids": [
+        "MSG_000854",
+        "MSG_000857",
+        "MSG_000595"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000854",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:42:42+05:30",
+          "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "original_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "semantic_score": 0.5275619029998779,
+          "context_text": "Current message: [PDF] June hill-trip itinerary revision 3, with refund notes",
+          "context_message_ids": [
+            "MSG_000854"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000854",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-02T19:42:42+05:30",
+              "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000857",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:53:19+05:30",
+          "text": "done. Next trip discussion only for packing or safety updates",
+          "original_text": "done. Next trip discussion only for packing or safety updates",
+          "semantic_score": 0.4413772225379944,
+          "context_text": "Current message: done. Next trip discussion only for packing or safety updates",
+          "context_message_ids": [
+            "MSG_000857"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000857",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-02T19:53:19+05:30",
+              "text": "done. Next trip discussion only for packing or safety updates",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "done. Next trip discussion only for packing or safety updates",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000595",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-23T18:48:01+05:30",
+          "text": "then internships and everyone's separate dates. June overlap is rare",
+          "original_text": "then internships and everyone's separate dates. June overlap is rare",
+          "semantic_score": 0.4284176528453827,
+          "context_text": "Current message: then internships and everyone's separate dates. June overlap is rare",
+          "context_message_ids": [
+            "MSG_000595"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000595",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-23T18:48:01+05:30",
+              "text": "then internships and everyone's separate dates. June overlap is rare",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "then internships and everyone's separate dates. June overlap is rare",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q012",
+      "query": "What backend and database did we finally choose for LostLoop?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001482",
+      "retrieved_ids": [
+        "MSG_001290",
+        "MSG_001598",
+        "MSG_003853"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001290",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-19T21:38:26+05:30",
+          "text": "SQLite supports the tiny offline demo. Why a separate database server?",
+          "original_text": "SQLite supports the tiny offline demo. Why a separate database server?",
+          "semantic_score": 0.44490155577659607,
+          "context_text": "Current message: SQLite supports the tiny offline demo. Why a separate database server?",
+          "context_message_ids": [
+            "MSG_001290"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001290",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-19T21:38:26+05:30",
+              "text": "SQLite supports the tiny offline demo. Why a separate database server?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "SQLite supports the tiny offline demo. Why a separate database server?",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001598",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-05-03T18:40:00+05:30",
+          "text": "LostLoop now launches from the README on a fresh folder",
+          "original_text": "LostLoop now launches from the README on a fresh folder",
+          "semantic_score": 0.42903637886047363,
+          "context_text": "Current message: LostLoop now launches from the README on a fresh folder",
+          "context_message_ids": [
+            "MSG_001598"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001598",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-05-03T18:40:00+05:30",
+              "text": "LostLoop now launches from the README on a fresh folder",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "LostLoop now launches from the README on a fresh folder",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003853",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-30T13:07:56+05:30",
+          "text": "start with binary search, I got stuck there",
+          "original_text": "start with binary search, I got stuck there",
+          "semantic_score": 0.4109380841255188,
+          "context_text": "Current message: start with binary search, I got stuck there",
+          "context_message_ids": [
+            "MSG_003853"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003853",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-30T13:07:56+05:30",
+              "text": "start with binary search, I got stuck there",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "start with binary search, I got stuck there",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q013",
+      "query": "What was the final birthday venue and budget, including cake and everyone's share?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003616",
+      "retrieved_ids": [
+        "MSG_003616",
+        "MSG_003213",
+        "MSG_003618"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003616",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-21T20:47:27+05:30",
+          "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "original_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "semantic_score": 0.6919295787811279,
+          "context_text": "Current message: Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "context_message_ids": [
+            "MSG_003616"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003616",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-21T20:47:27+05:30",
+              "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003213",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:19:54+05:30",
+          "text": "3000 total including cake. Eight of us, nothing fancy",
+          "original_text": "3000 total including cake. Eight of us, nothing fancy",
+          "semantic_score": 0.5625126361846924,
+          "context_text": "Current message: 3000 total including cake. Eight of us, nothing fancy",
+          "context_message_ids": [
+            "MSG_003213"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003213",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T20:19:54+05:30",
+              "text": "3000 total including cake. Eight of us, nothing fancy",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "3000 total including cake. Eight of us, nothing fancy",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003618",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-21T20:53:11+05:30",
+          "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "original_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "semantic_score": 0.5501518249511719,
+          "context_text": "Current message: Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "context_message_ids": [
+            "MSG_003618"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003618",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-21T20:53:11+05:30",
+              "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q014",
+      "query": "Why did Aarav originally lean towards MERN?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001291",
+      "retrieved_ids": [
+        "MSG_001291",
+        "MSG_000212",
+        "MSG_001108"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001291",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-19T21:41:52+05:30",
+          "text": "For this scope I don't have a reason. MERN was just familiarity",
+          "original_text": "For this scope I don't have a reason. MERN was just familiarity",
+          "semantic_score": 0.5416467189788818,
+          "context_text": "Current message: For this scope I don't have a reason. MERN was just familiarity",
+          "context_message_ids": [
+            "MSG_001291"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001291",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-19T21:41:52+05:30",
+              "text": "For this scope I don't have a reason. MERN was just familiarity",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "For this scope I don't have a reason. MERN was just familiarity",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000212",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-09T21:23:23+05:30",
+          "text": "deep baat before chai",
+          "original_text": "deep baat before chai",
+          "semantic_score": 0.40759968757629395,
+          "context_text": "Current message: deep baat before chai",
+          "context_message_ids": [
+            "MSG_000212"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000212",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-09T21:23:23+05:30",
+              "text": "deep baat before chai",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "deep baat before chai",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001108",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-12T21:17:54+05:30",
+          "text": "deep baat before chai",
+          "original_text": "deep baat before chai",
+          "semantic_score": 0.40759968757629395,
+          "context_text": "Current message: deep baat before chai",
+          "context_message_ids": [
+            "MSG_001108"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001108",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-12T21:17:54+05:30",
+              "text": "deep baat before chai",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "deep baat before chai",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q015",
+      "query": "Was outside cake allowed, and what decoration rule came with it?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003434",
+      "retrieved_ids": [
+        "MSG_003433",
+        "MSG_003618",
+        "MSG_003327"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003433",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-14T21:24:18+05:30",
+          "text": "Cake allowed from outside?",
+          "original_text": "Cake allowed from outside?",
+          "semantic_score": 0.7558462619781494,
+          "context_text": "Current message: Cake allowed from outside?",
+          "context_message_ids": [
+            "MSG_003433"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003433",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-07-14T21:24:18+05:30",
+              "text": "Cake allowed from outside?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake allowed from outside?",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003618",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-21T20:53:11+05:30",
+          "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "original_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "semantic_score": 0.5332481861114502,
+          "context_text": "Current message: Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "context_message_ids": [
+            "MSG_003618"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003618",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-21T20:53:11+05:30",
+              "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003327",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-10T19:19:49+05:30",
+          "text": "5200 before cake. Rooftop rejected, way above 3000",
+          "original_text": "5200 before cake. Rooftop rejected, way above 3000",
+          "semantic_score": 0.5157302618026733,
+          "context_text": "Current message: 5200 before cake. Rooftop rejected, way above 3000",
+          "context_message_ids": [
+            "MSG_003327"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003327",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-10T19:19:49+05:30",
+              "text": "5200 before cake. Rooftop rejected, way above 3000",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "5200 before cake. Rooftop rejected, way above 3000",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q016",
+      "query": "What did the birthday actually cost once it was over, and was any buffer used?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003738",
+      "retrieved_ids": [
+        "MSG_003616",
+        "MSG_003326",
+        "MSG_003736"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003616",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-21T20:47:27+05:30",
+          "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "original_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "semantic_score": 0.5559043884277344,
+          "context_text": "Current message: Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "context_message_ids": [
+            "MSG_003616"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003616",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-21T20:47:27+05:30",
+              "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003326",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-10T19:15:00+05:30",
+          "text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "original_text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "semantic_score": 0.5165926814079285,
+          "context_text": "Current message: Sky Lantern quote is 650 per person, before birthday cake",
+          "context_message_ids": [
+            "MSG_003326"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003326",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-10T19:15:00+05:30",
+              "text": "Sky Lantern quote is 650 per person, before birthday cake",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003736",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-25T22:18:03+05:30",
+          "text": "Cake was 500 as quoted, no extra box charge",
+          "original_text": "Cake was 500 as quoted, no extra box charge",
+          "semantic_score": 0.4797455668449402,
+          "context_text": "Current message: Cake was 500 as quoted, no extra box charge",
+          "context_message_ids": [
+            "MSG_003736"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003736",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-25T22:18:03+05:30",
+              "text": "Cake was 500 as quoted, no extra box charge",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake was 500 as quoted, no extra box charge",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q017",
+      "query": "Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_002058",
+      "retrieved_ids": [
+        "MSG_001281",
+        "MSG_002079",
+        "MSG_000970"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001281",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-04-19T21:15:42+05:30",
+          "text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "original_text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "semantic_score": 0.6194380521774292,
+          "context_text": "Current message: [PDF] self-made Software Engineering revision checklist, no official predictions",
+          "context_message_ids": [
+            "MSG_001281"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001281",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-04-19T21:15:42+05:30",
+              "text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002079",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-05-24T08:13:29+05:30",
+          "text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "original_text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "semantic_score": 0.6194380521774292,
+          "context_text": "Current message: [PDF] self-made Software Engineering revision checklist, no official predictions",
+          "context_message_ids": [
+            "MSG_002079"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002079",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-05-24T08:13:29+05:30",
+              "text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] self-made Software Engineering revision checklist, no official predictions",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000970",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-08T08:05:00+05:30",
+          "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "original_text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "semantic_score": 0.6074509620666504,
+          "context_text": "Current message: Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "context_message_ids": [
+            "MSG_000970"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000970",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-04-08T08:05:00+05:30",
+              "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q018",
+      "query": "Find the voice note proposing QR stickers for lost items.",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001155",
+      "retrieved_ids": [
+        "MSG_001155",
+        "MSG_000612",
+        "MSG_000916"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001155",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-14T18:39:19+05:30",
+          "text": "[Voice message] rambling idea about a QR sticker on every lost item",
+          "original_text": "[Voice message] rambling idea about a QR sticker on every lost item",
+          "semantic_score": 0.8814096450805664,
+          "context_text": "Current message: [Voice message] rambling idea about a QR sticker on every lost item",
+          "context_message_ids": [
+            "MSG_001155"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001155",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-04-14T18:39:19+05:30",
+              "text": "[Voice message] rambling idea about a QR sticker on every lost item",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[Voice message] rambling idea about a QR sticker on every lost item",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000612",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-24T08:06:41+05:30",
+          "text": "[Voice message] humming three unrecognisable notes",
+          "original_text": "[Voice message] humming three unrecognisable notes",
+          "semantic_score": 0.5632293820381165,
+          "context_text": "Current message: [Voice message] humming three unrecognisable notes",
+          "context_message_ids": [
+            "MSG_000612"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000612",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-24T08:06:41+05:30",
+              "text": "[Voice message] humming three unrecognisable notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[Voice message] humming three unrecognisable notes",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000916",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-05T13:05:01+05:30",
+          "text": "[Voice message] humming three unrecognisable notes",
+          "original_text": "[Voice message] humming three unrecognisable notes",
+          "semantic_score": 0.5632293820381165,
+          "context_text": "Current message: [Voice message] humming three unrecognisable notes",
+          "context_message_ids": [
+            "MSG_000916"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000916",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-05T13:05:01+05:30",
+              "text": "[Voice message] humming three unrecognisable notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[Voice message] humming three unrecognisable notes",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q019",
+      "query": "Did Nukkad Cafe charge separately for the room or just require a minimum spend?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003432",
+      "retrieved_ids": [
+        "MSG_003432",
+        "MSG_003532",
+        "MSG_003737"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003432",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-14T21:21:39+05:30",
+          "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+          "original_text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+          "semantic_score": 0.7109183073043823,
+          "context_text": "Current message: Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+          "context_message_ids": [
+            "MSG_003432"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003432",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-14T21:21:39+05:30",
+              "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003532",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-18T19:07:20+05:30",
+          "text": "That breaks the cafe minimum package. Better keep current plan",
+          "original_text": "That breaks the cafe minimum package. Better keep current plan",
+          "semantic_score": 0.5730335116386414,
+          "context_text": "Current message: That breaks the cafe minimum package. Better keep current plan",
+          "context_message_ids": [
+            "MSG_003532"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003532",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-18T19:07:20+05:30",
+              "text": "That breaks the cafe minimum package. Better keep current plan",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "That breaks the cafe minimum package. Better keep current plan",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003737",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-25T22:22:10+05:30",
+          "text": "Cafe bill 2400, same as reservation. Kept the receipt",
+          "original_text": "Cafe bill 2400, same as reservation. Kept the receipt",
+          "semantic_score": 0.5522180795669556,
+          "context_text": "Current message: Cafe bill 2400, same as reservation. Kept the receipt",
+          "context_message_ids": [
+            "MSG_003737"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003737",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-25T22:22:10+05:30",
+              "text": "Cafe bill 2400, same as reservation. Kept the receipt",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cafe bill 2400, same as reservation. Kept the receipt",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q020",
+      "query": "When was the cake pickup, and who would bring the candles?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003618",
+      "retrieved_ids": [
+        "MSG_003618",
+        "MSG_003433",
+        "MSG_003326"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003618",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-21T20:53:11+05:30",
+          "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "original_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "semantic_score": 0.7547853589057922,
+          "context_text": "Current message: Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "context_message_ids": [
+            "MSG_003618"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003618",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-21T20:53:11+05:30",
+              "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003433",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-14T21:24:18+05:30",
+          "text": "Cake allowed from outside?",
+          "original_text": "Cake allowed from outside?",
+          "semantic_score": 0.5090413093566895,
+          "context_text": "Current message: Cake allowed from outside?",
+          "context_message_ids": [
+            "MSG_003433"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003433",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-07-14T21:24:18+05:30",
+              "text": "Cake allowed from outside?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake allowed from outside?",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003326",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-10T19:15:00+05:30",
+          "text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "original_text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "semantic_score": 0.48097100853919983,
+          "context_text": "Current message: Sky Lantern quote is 650 per person, before birthday cake",
+          "context_message_ids": [
+            "MSG_003326"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003326",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-10T19:15:00+05:30",
+              "text": "Sky Lantern quote is 650 per person, before birthday cake",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q021",
+      "query": "What did Ananya ask for in Delhi to make the journey manageable?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000427",
+      "retrieved_ids": [
+        "MSG_000290",
+        "MSG_000598",
+        "MSG_000427"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000290",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-12T19:34:02+05:30",
+          "text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
+          "original_text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
+          "semantic_score": 0.57201087474823,
+          "context_text": "Current message: Manali quote via Delhi approx 8200 including bus and shared rooms",
+          "context_message_ids": [
+            "MSG_000290"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000290",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-12T19:34:02+05:30",
+              "text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000598",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-03-23T18:57:51+05:30",
+          "text": "With Delhi rest stop I'm okay with that route",
+          "original_text": "With Delhi rest stop I'm okay with that route",
+          "semantic_score": 0.5180556774139404,
+          "context_text": "Current message: With Delhi rest stop I'm okay with that route",
+          "context_message_ids": [
+            "MSG_000598"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000598",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-03-23T18:57:51+05:30",
+              "text": "With Delhi rest stop I'm okay with that route",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "With Delhi rest stop I'm okay with that route",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000427",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-03-17T21:20:06+05:30",
+          "text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "original_text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "semantic_score": 0.5056097507476807,
+          "context_text": "Current message: one rest stop in Delhi chahiye; continuous travel nahi",
+          "context_message_ids": [
+            "MSG_000427"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000427",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-03-17T21:20:06+05:30",
+              "text": "one rest stop in Delhi chahiye; continuous travel nahi",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "one rest stop in Delhi chahiye; continuous travel nahi",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q022",
+      "query": "What was Ishita's absolute spending limit when the Goa estimate first came in?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000287",
+      "retrieved_ids": [
+        "MSG_000286",
+        "MSG_000713",
+        "MSG_002052"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000286",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-12T19:20:00+05:30",
+          "text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+          "original_text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+          "semantic_score": 0.566236674785614,
+          "context_text": "Current message: Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+          "context_message_ids": [
+            "MSG_000286"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000286",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-03-12T19:20:00+05:30",
+              "text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000713",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-28T21:13:19+05:30",
+          "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+          "original_text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+          "semantic_score": 0.5230982303619385,
+          "context_text": "Current message: Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+          "context_message_ids": [
+            "MSG_000713"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000713",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-03-28T21:13:19+05:30",
+              "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002052",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-05-22T21:07:36+05:30",
+          "text": "date toh aaj ka lag raha, 2026-05-22",
+          "original_text": "date toh aaj ka lag raha, 2026-05-22",
+          "semantic_score": 0.4988395571708679,
+          "context_text": "Current message: date toh aaj ka lag raha, 2026-05-22",
+          "context_message_ids": [
+            "MSG_002052"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002052",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-05-22T21:07:36+05:30",
+              "text": "date toh aaj ka lag raha, 2026-05-22",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "date toh aaj ka lag raha, 2026-05-22",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q023",
+      "query": "How did Aarav say he would track everyone's trip contributions?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000715",
+      "retrieved_ids": [
+        "MSG_000854",
+        "MSG_000846",
+        "MSG_002310"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000854",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:42:42+05:30",
+          "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "original_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "semantic_score": 0.4730626344680786,
+          "context_text": "Current message: [PDF] June hill-trip itinerary revision 3, with refund notes",
+          "context_message_ids": [
+            "MSG_000854"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000854",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-02T19:42:42+05:30",
+              "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000846",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:10:00+05:30",
+          "text": "Trip update: all eight deposits marked received in our plan",
+          "original_text": "Trip update: all eight deposits marked received in our plan",
+          "semantic_score": 0.46040651202201843,
+          "context_text": "Current message: Trip update: all eight deposits marked received in our plan",
+          "context_message_ids": [
+            "MSG_000846"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000846",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-02T19:10:00+05:30",
+              "text": "Trip update: all eight deposits marked received in our plan",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Trip update: all eight deposits marked received in our plan",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002310",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-06-01T13:12:42+05:30",
+          "text": "travel day ke screenshots offline save kar lena",
+          "original_text": "travel day ke screenshots offline save kar lena",
+          "semantic_score": 0.4079574942588806,
+          "context_text": "Current message: travel day ke screenshots offline save kar lena",
+          "context_message_ids": [
+            "MSG_002310"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002310",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-06-01T13:12:42+05:30",
+              "text": "travel day ke screenshots offline save kar lena",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "travel day ke screenshots offline save kar lena",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q024",
+      "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003930",
+      "retrieved_ids": [
+        "MSG_003222",
+        "MSG_003930",
+        "MSG_004130"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003222",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T21:07:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "original_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "semantic_score": 0.7673125267028809,
+          "context_text": "Current message: [PDF] draft volunteer orientation session checklist, still needs review",
+          "context_message_ids": [
+            "MSG_003222"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003222",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T21:07:00+05:30",
+              "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003930",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-03T08:03:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "original_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "semantic_score": 0.7673125267028809,
+          "context_text": "Current message: [PDF] draft volunteer orientation session checklist, still needs review",
+          "context_message_ids": [
+            "MSG_003930"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003930",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-08-03T08:03:00+05:30",
+              "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_004130",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-11T13:07:00+05:30",
+          "text": "volunteer orientation rehearsal aaj, the sports ground available?",
+          "original_text": "volunteer orientation rehearsal aaj, the sports ground available?",
+          "semantic_score": 0.49833425879478455,
+          "context_text": "Current message: volunteer orientation rehearsal aaj, the sports ground available?",
+          "context_message_ids": [
+            "MSG_004130"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004130",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-08-11T13:07:00+05:30",
+              "text": "volunteer orientation rehearsal aaj, the sports ground available?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "volunteer orientation rehearsal aaj, the sports ground available?",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q025",
+      "query": "What reason did Kabir give for rejecting Firebase?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001383",
+      "retrieved_ids": [
+        "MSG_001383",
+        "MSG_002303",
+        "MSG_002141"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001383",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-24T19:33:19+05:30",
+          "text": "Firebase rejected for demo because offline requirement is real",
+          "original_text": "Firebase rejected for demo because offline requirement is real",
+          "semantic_score": 0.423106849193573,
+          "context_text": "Current message: Firebase rejected for demo because offline requirement is real",
+          "context_message_ids": [
+            "MSG_001383"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001383",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-04-24T19:33:19+05:30",
+              "text": "Firebase rejected for demo because offline requirement is real",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Firebase rejected for demo because offline requirement is real",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002303",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-06-01T08:23:59+05:30",
+          "text": "ohhh yes. copied assumption from kal's exercise yaar",
+          "original_text": "ohhh yes. copied assumption from kal's exercise yaar",
+          "semantic_score": 0.4226487874984741,
+          "context_text": "Current message: ohhh yes. copied assumption from kal's exercise yaar",
+          "context_message_ids": [
+            "MSG_002303"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002303",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-06-01T08:23:59+05:30",
+              "text": "ohhh yes. copied assumption from kal's exercise yaar",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "ohhh yes. copied assumption from kal's exercise yaar",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002141",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-05-26T12:11:28+05:30",
+          "text": "same. one tiny example khud type karo",
+          "original_text": "same. one tiny example khud type karo",
+          "semantic_score": 0.4225112795829773,
+          "context_text": "Current message: same. one tiny example khud type karo",
+          "context_message_ids": [
+            "MSG_002141"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002141",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-05-26T12:11:28+05:30",
+              "text": "same. one tiny example khud type karo",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "same. one tiny example khud type karo",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q026",
+      "query": "Why did Sneha want to drop the bigger Python framework?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001385",
+      "retrieved_ids": [
+        "MSG_001385",
+        "MSG_001160",
+        "MSG_001280"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001385",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-24T19:39:58+05:30",
+          "text": "The big Python framework adds admin config we won't use. I'd drop it",
+          "original_text": "The big Python framework adds admin config we won't use. I'd drop it",
+          "semantic_score": 0.5805952548980713,
+          "context_text": "Current message: The big Python framework adds admin config we won't use. I'd drop it",
+          "context_message_ids": [
+            "MSG_001385"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001385",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-04-24T19:39:58+05:30",
+              "text": "The big Python framework adds admin config we won't use. I'd drop it",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "The big Python framework adds admin config we won't use. I'd drop it",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001160",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-14T18:54:35+05:30",
+          "text": "Compare with a Python API; Sneha and Kabir can maintain that",
+          "original_text": "Compare with a Python API; Sneha and Kabir can maintain that",
+          "semantic_score": 0.5511393547058105,
+          "context_text": "Current message: Compare with a Python API; Sneha and Kabir can maintain that",
+          "context_message_ids": [
+            "MSG_001160"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001160",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-14T18:54:35+05:30",
+              "text": "Compare with a Python API; Sneha and Kabir can maintain that",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Compare with a Python API; Sneha and Kabir can maintain that",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001280",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-19T21:14:23+05:30",
+          "text": "I tried a small Python service with typed request validation. Fewer moving parts",
+          "original_text": "I tried a small Python service with typed request validation. Fewer moving parts",
+          "semantic_score": 0.38282501697540283,
+          "context_text": "Current message: I tried a small Python service with typed request validation. Fewer moving parts",
+          "context_message_ids": [
+            "MSG_001280"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001280",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-04-19T21:14:23+05:30",
+              "text": "I tried a small Python service with typed request validation. Fewer moving parts",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "I tried a small Python service with typed request validation. Fewer moving parts",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q027",
+      "query": "What name did Rohan suggest for our coding project?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001478",
+      "retrieved_ids": [
+        "MSG_004538",
+        "MSG_001478",
+        "MSG_001458"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_004538",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-28T08:02:00+05:30",
+          "text": "first Software Engineering assignment and already confused about requirements review 😅",
+          "original_text": "first Software Engineering assignment and already confused about requirements review 😅",
+          "semantic_score": 0.38332706689834595,
+          "context_text": "Current message: first Software Engineering assignment and already confused about requirements review 😅",
+          "context_message_ids": [
+            "MSG_004538"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004538",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-08-28T08:02:00+05:30",
+              "text": "first Software Engineering assignment and already confused about requirements review 😅",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "first Software Engineering assignment and already confused about requirements review 😅",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001478",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-27T20:28:28+05:30",
+          "text": "call it LostLoop? sounds like my coding life",
+          "original_text": "call it LostLoop? sounds like my coding life",
+          "semantic_score": 0.3773536682128906,
+          "context_text": "Current message: call it LostLoop? sounds like my coding life",
+          "context_message_ids": [
+            "MSG_001478"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001478",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-04-27T20:28:28+05:30",
+              "text": "call it LostLoop? sounds like my coding life",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "call it LostLoop? sounds like my coding life",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001458",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-27T12:03:00+05:30",
+          "text": "git mein wrong branch pe commit hua. Did I lose the whole assignment?",
+          "original_text": "git mein wrong branch pe commit hua. Did I lose the whole assignment?",
+          "semantic_score": 0.3768497705459595,
+          "context_text": "Current message: git mein wrong branch pe commit hua. Did I lose the whole assignment?",
+          "context_message_ids": [
+            "MSG_001458"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001458",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-04-27T12:03:00+05:30",
+              "text": "git mein wrong branch pe commit hua. Did I lose the whole assignment?",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "git mein wrong branch pe commit hua. Did I lose the whole assignment?",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q028",
+      "query": "Why did Meera insist we should not split the birthday group?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003431",
+      "retrieved_ids": [
+        "MSG_003429",
+        "MSG_001652",
+        "MSG_003264"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003429",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-14T21:13:13+05:30",
+          "text": "Then common room also out unless we split group, which we won't",
+          "original_text": "Then common room also out unless we split group, which we won't",
+          "semantic_score": 0.5749987363815308,
+          "context_text": "Current message: Then common room also out unless we split group, which we won't",
+          "context_message_ids": [
+            "MSG_003429"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003429",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-14T21:13:13+05:30",
+              "text": "Then common room also out unless we split group, which we won't",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Then common room also out unless we split group, which we won't",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001652",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-05-05T08:14:55+05:30",
+          "text": "that's half of us, aa jao lol",
+          "original_text": "that's half of us, aa jao lol",
+          "semantic_score": 0.45719367265701294,
+          "context_text": "Current message: that's half of us, aa jao lol",
+          "context_message_ids": [
+            "MSG_001652"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001652",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-05-05T08:14:55+05:30",
+              "text": "that's half of us, aa jao lol",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "that's half of us, aa jao lol",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003264",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-08T12:14:59+05:30",
+          "text": "that's half of us, aa jao 😅",
+          "original_text": "that's half of us, aa jao 😅",
+          "semantic_score": 0.45496857166290283,
+          "context_text": "Current message: that's half of us, aa jao 😅",
+          "context_message_ids": [
+            "MSG_003264"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003264",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-07-08T12:14:59+05:30",
+              "text": "that's half of us, aa jao 😅",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "that's half of us, aa jao 😅",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q029",
+      "query": "Which bus was Aditya asking about on August 31?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_004626",
+      "retrieved_ids": [
+        "MSG_000954",
+        "MSG_000634",
+        "MSG_002834"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000954",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-07T13:01:00+05:30",
+          "text": "anybody taking the Palasia bus around 7 pm 🙃",
+          "original_text": "anybody taking the Palasia bus around 7 pm 🙃",
+          "semantic_score": 0.5983538031578064,
+          "context_text": "Current message: anybody taking the Palasia bus around 7 pm 🙃",
+          "context_message_ids": [
+            "MSG_000954"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000954",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-04-07T13:01:00+05:30",
+              "text": "anybody taking the Palasia bus around 7 pm 🙃",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "anybody taking the Palasia bus around 7 pm 🙃",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000634",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-25T13:04:00+05:30",
+          "text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "original_text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "semantic_score": 0.5909692049026489,
+          "context_text": "Current message: anyone taking the Vijay Nagar bus around 7 pm",
+          "context_message_ids": [
+            "MSG_000634"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000634",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-25T13:04:00+05:30",
+              "text": "anyone taking the Vijay Nagar bus around 7 pm",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002834",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-21T12:10:00+05:30",
+          "text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "original_text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "semantic_score": 0.5909692049026489,
+          "context_text": "Current message: anyone taking the Vijay Nagar bus around 7 pm",
+          "context_message_ids": [
+            "MSG_002834"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002834",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-06-21T12:10:00+05:30",
+              "text": "anyone taking the Vijay Nagar bus around 7 pm",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "anyone taking the Vijay Nagar bus around 7 pm",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q030",
+      "query": "What did Sneha say the cake cost, including any extra box charge?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003736",
+      "retrieved_ids": [
+        "MSG_003736",
+        "MSG_003616",
+        "MSG_003327"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003736",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-25T22:18:03+05:30",
+          "text": "Cake was 500 as quoted, no extra box charge",
+          "original_text": "Cake was 500 as quoted, no extra box charge",
+          "semantic_score": 0.6759182214736938,
+          "context_text": "Current message: Cake was 500 as quoted, no extra box charge",
+          "context_message_ids": [
+            "MSG_003736"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003736",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-25T22:18:03+05:30",
+              "text": "Cake was 500 as quoted, no extra box charge",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Cake was 500 as quoted, no extra box charge",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003616",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-21T20:47:27+05:30",
+          "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "original_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "semantic_score": 0.5691601037979126,
+          "context_text": "Current message: Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "context_message_ids": [
+            "MSG_003616"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003616",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-21T20:47:27+05:30",
+              "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003327",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-10T19:19:49+05:30",
+          "text": "5200 before cake. Rooftop rejected, way above 3000",
+          "original_text": "5200 before cake. Rooftop rejected, way above 3000",
+          "semantic_score": 0.5685142874717712,
+          "context_text": "Current message: 5200 before cake. Rooftop rejected, way above 3000",
+          "context_message_ids": [
+            "MSG_003327"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003327",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-07-10T19:19:49+05:30",
+              "text": "5200 before cake. Rooftop rejected, way above 3000",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "5200 before cake. Rooftop rejected, way above 3000",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q031",
+      "query": "What decision did we make on March 28 about the trip destination and payments?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000713",
+      "retrieved_ids": [
+        "MSG_000854",
+        "MSG_000846",
+        "MSG_000601"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000854",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:42:42+05:30",
+          "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "original_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "semantic_score": 0.5909923911094666,
+          "context_text": "Current message: [PDF] June hill-trip itinerary revision 3, with refund notes",
+          "context_message_ids": [
+            "MSG_000854"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000854",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-02T19:42:42+05:30",
+              "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000846",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:10:00+05:30",
+          "text": "Trip update: all eight deposits marked received in our plan",
+          "original_text": "Trip update: all eight deposits marked received in our plan",
+          "semantic_score": 0.5373970866203308,
+          "context_text": "Current message: Trip update: all eight deposits marked received in our plan",
+          "context_message_ids": [
+            "MSG_000846"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000846",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-02T19:10:00+05:30",
+              "text": "Trip update: all eight deposits marked received in our plan",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Trip update: all eight deposits marked received in our plan",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000601",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-23T19:05:40+05:30",
+          "text": "We have agreement on constraints; final dates and deposit still pending",
+          "original_text": "We have agreement on constraints; final dates and deposit still pending",
+          "semantic_score": 0.5348402261734009,
+          "context_text": "Current message: We have agreement on constraints; final dates and deposit still pending",
+          "context_message_ids": [
+            "MSG_000601"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000601",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-23T19:05:40+05:30",
+              "text": "We have agreement on constraints; final dates and deposit still pending",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "We have agreement on constraints; final dates and deposit still pending",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q032",
+      "query": "What stack did we settle on in late April for LostLoop?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001482",
+      "retrieved_ids": [
+        "MSG_001027",
+        "MSG_001403",
+        "MSG_003947"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001027",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-09T21:01:42+05:30",
+          "text": "there was another group there earlier",
+          "original_text": "there was another group there earlier",
+          "semantic_score": 0.47196710109710693,
+          "context_text": "Current message: there was another group there earlier",
+          "context_message_ids": [
+            "MSG_001027"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001027",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-04-09T21:01:42+05:30",
+              "text": "there was another group there earlier",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "there was another group there earlier",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001403",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-25T08:11:59+05:30",
+          "text": "there was another group there earlier",
+          "original_text": "there was another group there earlier",
+          "semantic_score": 0.47196710109710693,
+          "context_text": "Current message: there was another group there earlier",
+          "context_message_ids": [
+            "MSG_001403"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001403",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-04-25T08:11:59+05:30",
+              "text": "there was another group there earlier",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "there was another group there earlier",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003947",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-08-03T17:08:00+05:30",
+          "text": "there was another group there earlier",
+          "original_text": "there was another group there earlier",
+          "semantic_score": 0.47196710109710693,
+          "context_text": "Current message: there was another group there earlier",
+          "context_message_ids": [
+            "MSG_003947"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003947",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-08-03T17:08:00+05:30",
+              "text": "there was another group there earlier",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "there was another group there earlier",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q033",
+      "query": "What was the final birthday arrangement we agreed in July?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003616",
+      "retrieved_ids": [
+        "MSG_000601",
+        "MSG_003610",
+        "MSG_003210"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000601",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-23T19:05:40+05:30",
+          "text": "We have agreement on constraints; final dates and deposit still pending",
+          "original_text": "We have agreement on constraints; final dates and deposit still pending",
+          "semantic_score": 0.6340662240982056,
+          "context_text": "Current message: We have agreement on constraints; final dates and deposit still pending",
+          "context_message_ids": [
+            "MSG_000601"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000601",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-23T19:05:40+05:30",
+              "text": "We have agreement on constraints; final dates and deposit still pending",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "We have agreement on constraints; final dates and deposit still pending",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003610",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-21T20:30:00+05:30",
+          "text": "July 25 after 7 confirmed from my side",
+          "original_text": "July 25 after 7 confirmed from my side",
+          "semantic_score": 0.5647394061088562,
+          "context_text": "Current message: July 25 after 7 confirmed from my side",
+          "context_message_ids": [
+            "MSG_003610"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003610",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-07-21T20:30:00+05:30",
+              "text": "July 25 after 7 confirmed from my side",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "July 25 after 7 confirmed from my side",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003210",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:10:00+05:30",
+          "text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "original_text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "semantic_score": 0.5447056293487549,
+          "context_text": "Current message: My birthday is July 25. Small get-together? no surprise please 😂",
+          "context_message_ids": [
+            "MSG_003210"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003210",
+              "sender": "Meera Nair",
+              "timestamp": "2026-07-06T20:10:00+05:30",
+              "text": "My birthday is July 25. Small get-together? no surprise please 😂",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q034",
+      "query": "What update did Aarav give on April 2 about the trip deposits?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000846",
+      "retrieved_ids": [
+        "MSG_000846",
+        "MSG_000854",
+        "MSG_003610"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000846",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:10:00+05:30",
+          "text": "Trip update: all eight deposits marked received in our plan",
+          "original_text": "Trip update: all eight deposits marked received in our plan",
+          "semantic_score": 0.5871531963348389,
+          "context_text": "Current message: Trip update: all eight deposits marked received in our plan",
+          "context_message_ids": [
+            "MSG_000846"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000846",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-04-02T19:10:00+05:30",
+              "text": "Trip update: all eight deposits marked received in our plan",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Trip update: all eight deposits marked received in our plan",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000854",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:42:42+05:30",
+          "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "original_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "semantic_score": 0.5484843254089355,
+          "context_text": "Current message: [PDF] June hill-trip itinerary revision 3, with refund notes",
+          "context_message_ids": [
+            "MSG_000854"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000854",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-02T19:42:42+05:30",
+              "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003610",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-21T20:30:00+05:30",
+          "text": "July 25 after 7 confirmed from my side",
+          "original_text": "July 25 after 7 confirmed from my side",
+          "semantic_score": 0.5126470327377319,
+          "context_text": "Current message: July 25 after 7 confirmed from my side",
+          "context_message_ids": [
+            "MSG_003610"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003610",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-07-21T20:30:00+05:30",
+              "text": "July 25 after 7 confirmed from my side",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "July 25 after 7 confirmed from my side",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q035",
+      "query": "At the start of May, had LostLoop been launched successfully from its README?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001598",
+      "retrieved_ids": [
+        "MSG_001598",
+        "MSG_000108",
+        "MSG_003610"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001598",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-05-03T18:40:00+05:30",
+          "text": "LostLoop now launches from the README on a fresh folder",
+          "original_text": "LostLoop now launches from the README on a fresh folder",
+          "semantic_score": 0.6110217571258545,
+          "context_text": "Current message: LostLoop now launches from the README on a fresh folder",
+          "context_message_ids": [
+            "MSG_001598"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001598",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-05-03T18:40:00+05:30",
+              "text": "LostLoop now launches from the README on a fresh folder",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "LostLoop now launches from the README on a fresh folder",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000108",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-05T08:05:32+05:30",
+          "text": "date toh aaj ka lag raha, 2026-03-05",
+          "original_text": "date toh aaj ka lag raha, 2026-03-05",
+          "semantic_score": 0.40068763494491577,
+          "context_text": "Current message: date toh aaj ka lag raha, 2026-03-05",
+          "context_message_ids": [
+            "MSG_000108"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000108",
+              "sender": "Meera Nair",
+              "timestamp": "2026-03-05T08:05:32+05:30",
+              "text": "date toh aaj ka lag raha, 2026-03-05",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "date toh aaj ka lag raha, 2026-03-05",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003610",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-21T20:30:00+05:30",
+          "text": "July 25 after 7 confirmed from my side",
+          "original_text": "July 25 after 7 confirmed from my side",
+          "semantic_score": 0.3845610022544861,
+          "context_text": "Current message: July 25 after 7 confirmed from my side",
+          "context_message_ids": [
+            "MSG_003610"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003610",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-07-21T20:30:00+05:30",
+              "text": "July 25 after 7 confirmed from my side",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "July 25 after 7 confirmed from my side",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q036",
+      "query": "Find the first forwarded notice last month saying the semester timetable could still change.",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003892",
+      "retrieved_ids": [
+        "MSG_003892",
+        "MSG_004076",
+        "MSG_004364"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003892",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-08-01T08:13:50+05:30",
+          "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "original_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "semantic_score": 0.6497975587844849,
+          "context_text": "Current message: Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "context_message_ids": [
+            "MSG_003892"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003892",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-08-01T08:13:50+05:30",
+              "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_004076",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-09T17:14:19+05:30",
+          "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "original_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "semantic_score": 0.6497975587844849,
+          "context_text": "Current message: Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "context_message_ids": [
+            "MSG_004076"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004076",
+              "sender": "Kabir Khan",
+              "timestamp": "2026-08-09T17:14:19+05:30",
+              "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_004364",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-08-21T21:14:03+05:30",
+          "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "original_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "semantic_score": 0.6497975587844849,
+          "context_text": "Current message: Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "context_message_ids": [
+            "MSG_004364"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004364",
+              "sender": "Aarav Sharma",
+              "timestamp": "2026-08-21T21:14:03+05:30",
+              "text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Timetable is provisional; confirm changes on the department board before attending.",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q037",
+      "query": "Which room did the Software Engineering tutorial move to on August 2?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003922",
+      "retrieved_ids": [
+        "MSG_003922",
+        "MSG_000370",
+        "MSG_004610"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003922",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-08-02T21:10:00+05:30",
+          "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+          "original_text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+          "semantic_score": 0.6984798908233643,
+          "context_text": "Current message: Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+          "context_message_ids": [
+            "MSG_003922"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003922",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-08-02T21:10:00+05:30",
+              "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000370",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-15T21:01:00+05:30",
+          "text": "Forwarded: Operating Systems tutorial shifted to room B-204 on 2026-03-15. Please check the class noticeboard.",
+          "original_text": "Forwarded: Operating Systems tutorial shifted to room B-204 on 2026-03-15. Please check the class noticeboard.",
+          "semantic_score": 0.6186778545379639,
+          "context_text": "Current message: Forwarded: Operating Systems tutorial shifted to room B-204 on 2026-03-15. Please check the class noticeboard.",
+          "context_message_ids": [
+            "MSG_000370"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000370",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-03-15T21:01:00+05:30",
+              "text": "Forwarded: Operating Systems tutorial shifted to room B-204 on 2026-03-15. Please check the class noticeboard.",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "Forwarded: Operating Systems tutorial shifted to room B-204 on 2026-03-15. Please check the class noticeboard.",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_004610",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-30T21:01:00+05:30",
+          "text": "new semester timetable mein Software Engineering room C-203 hai? yaar",
+          "original_text": "new semester timetable mein Software Engineering room C-203 hai? yaar",
+          "semantic_score": 0.5883381366729736,
+          "context_text": "Current message: new semester timetable mein Software Engineering room C-203 hai? yaar",
+          "context_message_ids": [
+            "MSG_004610"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004610",
+              "sender": "Ananya Verma",
+              "timestamp": "2026-08-30T21:01:00+05:30",
+              "text": "new semester timetable mein Software Engineering room C-203 hai? yaar",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "new semester timetable mein Software Engineering room C-203 hai? yaar",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q038",
+      "query": "What network maintenance notice did Meera forward last month?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003999",
+      "retrieved_ids": [
+        "MSG_003829",
+        "MSG_000424",
+        "MSG_000769"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003829",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-29T08:17:04+05:30",
+          "text": "maintenance notice tha na 😅",
+          "original_text": "maintenance notice tha na 😅",
+          "semantic_score": 0.5803029537200928,
+          "context_text": "Current message: maintenance notice tha na 😅",
+          "context_message_ids": [
+            "MSG_003829"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003829",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-29T08:17:04+05:30",
+              "text": "maintenance notice tha na 😅",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "maintenance notice tha na 😅",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000424",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-17T21:16:17+05:30",
+          "text": "maintenance notice tha na",
+          "original_text": "maintenance notice tha na",
+          "semantic_score": 0.5750789642333984,
+          "context_text": "Current message: maintenance notice tha na",
+          "context_message_ids": [
+            "MSG_000424"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000424",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-03-17T21:16:17+05:30",
+              "text": "maintenance notice tha na",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "maintenance notice tha na",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_000769",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-30T17:12:51+05:30",
+          "text": "maintenance notice tha na",
+          "original_text": "maintenance notice tha na",
+          "semantic_score": 0.5750789642333984,
+          "context_text": "Current message: maintenance notice tha na",
+          "context_message_ids": [
+            "MSG_000769"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000769",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-03-30T17:12:51+05:30",
+              "text": "maintenance notice tha na",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "maintenance notice tha na",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q039",
+      "query": "Who said they had reached home on June 2, and what food were they happy about?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_002346",
+      "retrieved_ids": [
+        "MSG_003611",
+        "MSG_003585",
+        "MSG_002570"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003611",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-21T20:32:14+05:30",
+          "text": "same, back from home by afternoon",
+          "original_text": "same, back from home by afternoon",
+          "semantic_score": 0.5048662424087524,
+          "context_text": "Current message: same, back from home by afternoon",
+          "context_message_ids": [
+            "MSG_003611"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003611",
+              "sender": "Sneha Iyer",
+              "timestamp": "2026-07-21T20:32:14+05:30",
+              "text": "same, back from home by afternoon",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "same, back from home by afternoon",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_003585",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-20T17:20:38+05:30",
+          "text": "dinner has side quests again lol",
+          "original_text": "dinner has side quests again lol",
+          "semantic_score": 0.4774194359779358,
+          "context_text": "Current message: dinner has side quests again lol",
+          "context_message_ids": [
+            "MSG_003585"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_003585",
+              "sender": "Rohan Mehta",
+              "timestamp": "2026-07-20T17:20:38+05:30",
+              "text": "dinner has side quests again lol",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "dinner has side quests again lol",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_002570",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-10T21:03:00+05:30",
+          "text": "reached home, finally actual chole kulche",
+          "original_text": "reached home, finally actual chole kulche",
+          "semantic_score": 0.45613211393356323,
+          "context_text": "Current message: reached home, finally actual chole kulche",
+          "context_message_ids": [
+            "MSG_002570"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_002570",
+              "sender": "Ishita Patel",
+              "timestamp": "2026-06-10T21:03:00+05:30",
+              "text": "reached home, finally actual chole kulche",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "reached home, finally actual chole kulche",
+          "truncated_message_ids": []
+        }
+      ]
+    },
+    {
+      "id": "Q040",
+      "query": "Yesterday morning, how many MB was Aditya's oversized submission file?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_004620",
+      "retrieved_ids": [
+        "MSG_000907",
+        "MSG_001311",
+        "MSG_004027"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000907",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-04-05T08:11:22+05:30",
+          "text": "file size kitna hai 🙃",
+          "original_text": "file size kitna hai 🙃",
+          "semantic_score": 0.49708685278892517,
+          "context_text": "Current message: file size kitna hai 🙃",
+          "context_message_ids": [
+            "MSG_000907"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_000907",
+              "sender": "Aditya Joshi",
+              "timestamp": "2026-04-05T08:11:22+05:30",
+              "text": "file size kitna hai 🙃",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "file size kitna hai 🙃",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_001311",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-21T08:02:41+05:30",
+          "text": "file size kitna hai 🙃",
+          "original_text": "file size kitna hai 🙃",
+          "semantic_score": 0.49708685278892517,
+          "context_text": "Current message: file size kitna hai 🙃",
+          "context_message_ids": [
+            "MSG_001311"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_001311",
+              "sender": "Meera Nair",
+              "timestamp": "2026-04-21T08:02:41+05:30",
+              "text": "file size kitna hai 🙃",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "file size kitna hai 🙃",
+          "truncated_message_ids": []
+        },
+        {
+          "id": "MSG_004027",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-07T21:01:29+05:30",
+          "text": "file size kitna hai 😅",
+          "original_text": "file size kitna hai 😅",
+          "semantic_score": 0.468550443649292,
+          "context_text": "Current message: file size kitna hai 😅",
+          "context_message_ids": [
+            "MSG_004027"
+          ],
+          "context_messages": [
+            {
+              "id": "MSG_004027",
+              "sender": "Meera Nair",
+              "timestamp": "2026-08-07T21:01:29+05:30",
+              "text": "file size kitna hai 😅",
+              "is_current": true
+            }
+          ],
+          "embedding_text": "file size kitna hai 😅",
+          "truncated_message_ids": []
+        }
+      ]
+    }
+  ]
+}

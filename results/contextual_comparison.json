@@ -1,0 +1,158 @@
+{
+  "contextual_vs_lexical": {
+    "baseline_method": "lexical",
+    "candidate_method": "contextual",
+    "top1_delta_percentage_points": -12.5,
+    "recall_at_3_delta_percentage_points": -10.0,
+    "hard_top1_delta_percentage_points": 10.0,
+    "category_changes": {
+      "person": {
+        "baseline": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "candidate": {
+          "correct": 1,
+          "total": 10,
+          "value": 0.1,
+          "percent": 10.0
+        },
+        "delta_percentage_points": -20.0,
+        "direction": "worse"
+      },
+      "semantic": {
+        "baseline": {
+          "correct": 3,
+          "total": 20,
+          "value": 0.15,
+          "percent": 15.0
+        },
+        "candidate": {
+          "correct": 1,
+          "total": 20,
+          "value": 0.05,
+          "percent": 5.0
+        },
+        "delta_percentage_points": -10.0,
+        "direction": "worse"
+      },
+      "time": {
+        "baseline": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "candidate": {
+          "correct": 2,
+          "total": 10,
+          "value": 0.2,
+          "percent": 20.0
+        },
+        "delta_percentage_points": -10.0,
+        "direction": "worse"
+      }
+    },
+    "newly_correct_queries": [
+      "Q006",
+      "Q024"
+    ],
+    "newly_incorrect_queries": [
+      "Q018",
+      "Q019",
+      "Q020",
+      "Q023",
+      "Q026",
+      "Q030",
+      "Q034"
+    ]
+  },
+  "contextual_vs_original_only_semantic": {
+    "baseline_method": "semantic",
+    "candidate_method": "contextual",
+    "top1_delta_percentage_points": -22.5,
+    "recall_at_3_delta_percentage_points": -10.0,
+    "hard_top1_delta_percentage_points": 0.0,
+    "category_changes": {
+      "person": {
+        "baseline": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "candidate": {
+          "correct": 1,
+          "total": 10,
+          "value": 0.1,
+          "percent": 10.0
+        },
+        "delta_percentage_points": -20.0,
+        "direction": "worse"
+      },
+      "semantic": {
+        "baseline": {
+          "correct": 6,
+          "total": 20,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "candidate": {
+          "correct": 1,
+          "total": 20,
+          "value": 0.05,
+          "percent": 5.0
+        },
+        "delta_percentage_points": -25.0,
+        "direction": "worse"
+      },
+      "time": {
+        "baseline": {
+          "correct": 4,
+          "total": 10,
+          "value": 0.4,
+          "percent": 40.0
+        },
+        "candidate": {
+          "correct": 2,
+          "total": 10,
+          "value": 0.2,
+          "percent": 20.0
+        },
+        "delta_percentage_points": -20.0,
+        "direction": "worse"
+      }
+    },
+    "newly_correct_queries": [
+      "Q024"
+    ],
+    "newly_incorrect_queries": [
+      "Q013",
+      "Q014",
+      "Q018",
+      "Q019",
+      "Q020",
+      "Q025",
+      "Q026",
+      "Q030",
+      "Q034",
+      "Q036"
+    ]
+  },
+  "incorrect_top1_with_expected_only_in_context": [
+    "Q008",
+    "Q013",
+    "Q014",
+    "Q016",
+    "Q018",
+    "Q019",
+    "Q020",
+    "Q022",
+    "Q023",
+    "Q026",
+    "Q033"
+  ],
+  "note": "Neighbor-only matches remain incorrect; no credit or target changes are applied."
+}

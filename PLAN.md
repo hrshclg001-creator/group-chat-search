@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: scaffolding, corpus generation, frozen evaluation labels, and the first lexical retrieval baseline are implemented. The corpus contains 4,634 messages and the evaluation set has 40 queries, including 10 hard cases. The measured lexical run achieved Top-1 9/40, Recall@3 16/40 and hard Top-1 0/10; results are in `results/lexical.json`. Phase 1 remains partial; search API contracts and model preparation are future work. Semantic/hybrid retrieval, metadata ranking, context assembly and search UI/API are not implemented. Later work requires subsequent authorization.
+Status: scaffolding, corpus generation, frozen evaluation labels, lexical retrieval, local semantic retrieval and bounded contextual embeddings are implemented. The corpus contains 4,634 messages and the evaluation set has 40 queries, including 10 hard cases. Measured Top-1 is lexical 9/40, original-only semantic 13/40 and contextual 4/40; artifacts are under `results/`. Context reduced accuracy in every category without changing ground truth. Model preparation and embedding caches are implemented. Phases 1, 4 and 6 remain partial; search API contracts, hybrid/metadata ranking and the search UI/API remain future work. Later work requires subsequent authorization.
 
 ## Architecture
 
@@ -75,7 +75,7 @@ Acceptance: only the four requested files are created or updated; requirements, 
 
 ### Phase 1: Project foundations and data contracts
 
-Scaffolding, corpus and evaluation-query validation, seed/timestamp conventions, and deterministic generation checks are implemented. Health and CORS tests and frontend checks accompany the scaffold; see README.md for commands and validation. Search API schemas and model configuration remain unimplemented, so the full phase remains incomplete.
+Scaffolding, corpus and evaluation-query validation, seed/timestamp conventions, deterministic generation checks, and pinned local model configuration/preparation are implemented. Health and CORS tests and frontend checks accompany the scaffold; see README.md for commands and validation. Search API schemas remain unimplemented, so the full phase remains incomplete.
 
 Establish modular Python/FastAPI and React/Vite foundations with plain responsive CSS. Define participant, message, evaluation-query, search-request, and search-response schemas. Establish the fixed seed, timestamp conventions, configuration, dependency locking, model revision recording, and deterministic test fixtures.
 
@@ -99,7 +99,7 @@ Acceptance: exactly 40 manually labelled queries reference existing targets, all
 
 ### Phase 4: Retrieval and context
 
-Partially implemented: `backend/app/search/` loads original messages and combines word unigram/bigram TF-IDF with character 3-5-gram TF-IDF. Fixed 0.7/0.3 cosine weights, positive-score filtering and stable message-ID ties were selected before scoring. Returned hits contain actual ID, sender, timestamp, original text and lexical score. Relevant retrieval tests passed. Embeddings, metadata-aware/hybrid ranking, persistent index caching and surrounding-context assembly remain unimplemented; this full phase is not complete.
+Partially implemented: `backend/app/search/` provides lexical TF-IDF (fixed 0.7 word / 0.3 character cosine weights), original-only multilingual MiniLM embeddings, and contextual embeddings using up to two previous and two following messages within 30 minutes. Original target IDs and text remain intact, and neighbors never earn target credit. Local model revision/file hashes, normalized embeddings, stable ID ties, bounded token budgets, cache invalidation/checksums and offline model tests are implemented. Contextual results include the bounded text, message IDs and display messages. Metadata-aware/hybrid ranking remains unimplemented; this full phase is not complete.
 
 Implement TF-IDF and multilingual embedding baselines independently. Add NumPy cosine similarity, person/time handling, hybrid ranking, and bounded nearby-message context. Cache embeddings/indexes with invalidation checks and stable ranking tie-breaks. Document ranking weights and tuning provenance without feeding evaluation labels into retrieval or hand-coding answers.
 
@@ -113,7 +113,7 @@ Acceptance: end-to-end searches return the same hit IDs as direct retrieval, con
 
 ### Phase 6: Evaluation and honest analysis
 
-Lexical comparison leg only is measured: `python evaluation/evaluate.py --method lexical` validates frozen inputs and saves metrics, all query rankings/scores, configuration, environment and hashes to `results/lexical.json`. Top-1 is 9/40 (22.5%); Recall@3 is 16/40 (40%); hard Top-1 is 0/10 (0%); signed overall-minus-hard gap is +22.5 percentage points. Category Top-1 is semantic 3/20, person 3/10 and time 3/10. All 31 Top-1 errors were printed. No ground truth was changed and no post-result tuning was performed. 51 backend tests and 25 evaluation tests passed. Semantic and hybrid comparisons remain unmeasured, so Phase 6 is incomplete.
+Lexical, original-only semantic and contextual runs are measured against identical frozen inputs. `python evaluation/evaluate.py --method lexical|semantic|contextual` selects one method and records metrics, rankings, configuration, environment and hashes in its corresponding result file. Lexical Top-1 is 9/40 (22.5%), Recall@3 16/40 (40%), hard Top-1 0/10 (0%), gap +22.5 pp. Original-only semantic Top-1 is 13/40 (32.5%), Recall@3 16/40 (40%), hard Top-1 1/10 (10%), gap +22.5 pp. Contextual Top-1 is 4/40 (10%), Recall@3 12/40 (30%), hard Top-1 1/10 (10%), gap 0 pp. Contextual category accuracy fell from semantic 6/20 to 1/20, person 3/10 to 1/10 and time 4/10 to 2/10. `python -m evaluation.compare` verifies reports and records query-level gains/losses; 11 contextual errors contain the expected message only as a neighbor, receiving no credit. All errors were printed, no frozen data or labels changed, and no post-result tuning was performed. Latest checks: 67 backend tests (including four real-model short-reply cases), 28 evaluation tests, and `pip check` passed. Hybrid remains unimplemented/unmeasured, so Phase 6 is incomplete.
 
 Run lexical, semantic, and hybrid retrieval against the same frozen 40-query set and corpus. Report:
 
