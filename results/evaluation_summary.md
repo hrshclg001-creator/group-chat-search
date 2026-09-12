@@ -1,6 +1,6 @@
 # Retrieval evaluation
 
-Automatically generated at 2026-09-12T08:21:59+00:00.
+Automatically generated at 2026-09-12T08:31:46+00:00.
 
 All four methods were run on the same frozen 40 queries and 4,634 synthetic messages. Reference date: 2026-09-01. **Hard-10** means the complete zero-meaningful-word-overlap subset; it is not restricted to eight queries.
 

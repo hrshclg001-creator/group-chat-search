@@ -10,3 +10,9 @@ results/*.json text eol=lf
 results/*.csv text eol=lf
 results/*.md text eol=lf
 results/*.txt text eol=lf
+# Archived benchmark hashes must also survive Windows/Linux checkouts.
+results/**/*.json text eol=lf
+results/**/*.csv text eol=lf
+results/**/*.md text eol=lf
+results/**/*.txt text eol=lf
+results/**/*.patch text eol=lf

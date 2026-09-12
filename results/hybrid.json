@@ -1,7 +1,7 @@
 {
   "method": "hybrid",
   "schema_version": "1.1.0",
-  "measured_at_utc": "2026-09-12T08:21:59+00:00",
+  "measured_at_utc": "2026-09-12T08:31:46+00:00",
   "metrics": {
     "top1_accuracy": {
       "correct": 22,

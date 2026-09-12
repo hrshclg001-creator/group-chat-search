@@ -397,17 +397,17 @@
     }
   },
   "limitations": "Hybrid weights were selected on these same frozen queries; baseline configurations were untuned. No held-out accuracy is claimed.",
-  "generated_at_utc": "2026-09-12T08:21:59+00:00",
+  "generated_at_utc": "2026-09-12T08:31:46+00:00",
   "report_sha256": {
-    "results/lexical.json": "5f8656aebbc7a16336820f87239d1583b4c515424fcd43638e7a546ceb42ca6c",
-    "results/semantic.json": "f30f8cf116b004a69fb16fd8f58f196693c94a6b6557e79fb61d9e10b8861e27",
-    "results/contextual.json": "d4183af8518d65b808da1d67c8879eaa44ebec11c2f269633417a72fc196d971",
-    "results/hybrid.json": "8857aa26a30bbaa7cb8de8203743d6a007bb52f68b51cd599bfb8660145a6b2d"
+    "results/lexical.json": "08899e6806d6a3f70dcab2e0d90d1f0b236feddfebb7e3f3889351adc8c427dc",
+    "results/semantic.json": "3e5d20a83da93e0c59d08a9ffd18ef90aa134df9a15528067067ed301e516ce2",
+    "results/contextual.json": "48c19d01d246189b0f90d1299d6300d6b22f65e6c5ee6cce4d12dedb694df1dd",
+    "results/hybrid.json": "d373e2e19e1b64f36f22118656c036ff499c38c9b60a99d7487544c8d8a16f7f"
   },
   "artifact_sha256": {
     "results/comparison.csv": "9b912f473362312f6b42bf556659a62e08fa69d05f4fb9dbdfc8798b5416592f",
     "results/benchmark.png": "ab681888eb353c84d2484650e3d81fd57ed7738d71b06e9d1c9ac04aee7cab61",
-    "results/evaluation_summary.md": "dbbb6a1379886f80cd180d87dc859b7bbab1806d32e3174ed20ed416d3181e6e",
+    "results/evaluation_summary.md": "b1b908a5ef837088f8aaf04f914e293fbb3294e53c53f0d77fb0b68b8f729f0a",
     "results/failed_queries.txt": "bcef6104854792e18a311690f657aa54592847f0a7aa3d61450dba87131a0c65"
   },
   "reporting_environment": {

@@ -1,0 +1,225 @@
+{
+  "audited_at_utc": "2026-09-12T08:47:44+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.9.10",
+  "node": "24.8.0",
+  "npm": "11.6.0",
+  "corpus": {
+    "message_count": 4634,
+    "participant_count": 8,
+    "start": "2026-03-01",
+    "end": "2026-08-31",
+    "days": 184,
+    "reference_date": "2026-09-01",
+    "decision_threads": 3,
+    "messages_per_decision_thread": 72,
+    "single_token_messages": 396
+  },
+  "evaluation": {
+    "query_count": 40,
+    "category_counts": {
+      "person": 10,
+      "semantic": 20,
+      "time": 10
+    },
+    "hard_query_count": 10,
+    "distinct_target_count": 37,
+    "freeze_verified": true
+  },
+  "metrics": {
+    "lexical": {
+      "top1_accuracy": {
+        "correct": 9,
+        "total": 40,
+        "value": 0.225,
+        "percent": 22.5
+      },
+      "recall_at_3": {
+        "correct": 16,
+        "total": 40,
+        "value": 0.4,
+        "percent": 40.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 0,
+        "total": 10,
+        "value": 0.0,
+        "percent": 0.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "semantic": {
+          "correct": 3,
+          "total": 20,
+          "value": 0.15,
+          "percent": 15.0
+        },
+        "time": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 22.5
+    },
+    "semantic": {
+      "top1_accuracy": {
+        "correct": 13,
+        "total": 40,
+        "value": 0.325,
+        "percent": 32.5
+      },
+      "recall_at_3": {
+        "correct": 16,
+        "total": 40,
+        "value": 0.4,
+        "percent": 40.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 3,
+          "total": 10,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "semantic": {
+          "correct": 6,
+          "total": 20,
+          "value": 0.3,
+          "percent": 30.0
+        },
+        "time": {
+          "correct": 4,
+          "total": 10,
+          "value": 0.4,
+          "percent": 40.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 22.5
+    },
+    "contextual": {
+      "top1_accuracy": {
+        "correct": 4,
+        "total": 40,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "recall_at_3": {
+        "correct": 12,
+        "total": 40,
+        "value": 0.3,
+        "percent": 30.0
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 1,
+          "total": 10,
+          "value": 0.1,
+          "percent": 10.0
+        },
+        "semantic": {
+          "correct": 1,
+          "total": 20,
+          "value": 0.05,
+          "percent": 5.0
+        },
+        "time": {
+          "correct": 2,
+          "total": 10,
+          "value": 0.2,
+          "percent": 20.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 0.0
+    },
+    "hybrid": {
+      "top1_accuracy": {
+        "correct": 22,
+        "total": 40,
+        "value": 0.55,
+        "percent": 55.0
+      },
+      "recall_at_3": {
+        "correct": 25,
+        "total": 40,
+        "value": 0.625,
+        "percent": 62.5
+      },
+      "zero_word_overlap_top1_accuracy": {
+        "correct": 1,
+        "total": 10,
+        "value": 0.1,
+        "percent": 10.0
+      },
+      "top1_accuracy_by_category": {
+        "person": {
+          "correct": 7,
+          "total": 10,
+          "value": 0.7,
+          "percent": 70.0
+        },
+        "semantic": {
+          "correct": 7,
+          "total": 20,
+          "value": 0.35,
+          "percent": 35.0
+        },
+        "time": {
+          "correct": 8,
+          "total": 10,
+          "value": 0.8,
+          "percent": 80.0
+        }
+      },
+      "overall_minus_hard_percentage_points": 45.0
+    }
+  },
+  "checks": {
+    "backend_tests_passed": 206,
+    "evaluation_tests_passed": 40,
+    "frontend_tests_passed": 22,
+    "frontend_build_passed": true,
+    "clean_backend_tests_passed": 206,
+    "clean_frontend_tests_passed": 22,
+    "clean_frontend_build_passed": true,
+    "clean_locked_python_packages": 58,
+    "fresh_model_download_passed": true,
+    "fresh_indexing_all_rankings_and_scores_identical": true,
+    "fresh_corpus_and_metadata_byte_identical": true,
+    "published_and_archived_artifact_hashes_verified": true,
+    "real_model_asgi_api_passed": true,
+    "document_cache_unchanged_across_three_requests": true,
+    "browser_available": false
+  },
+  "limitations": [
+    "Windows/Python 3.9.10/Node 24.8.0 only; clean install used an isolated tracked-source copy and fresh dependencies, with package download caches allowed.",
+    "Browser visual/interaction verification unavailable.",
+    "Hybrid was tuned on the same 40 labels; no held-out accuracy claim.",
+    "Hard Top-1 is only 1/10; 18 overall hybrid failures remain.",
+    "Credential scans are heuristic; no exhaustive security certification."
+  ],
+  "input_sha256": {
+    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb",
+    "evaluation/freeze_manifest.json": "74123a2581007828375db97cec872d4a1d83e1135055620f4734257081dda5e9"
+  }
+}

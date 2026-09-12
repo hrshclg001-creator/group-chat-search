@@ -1,8 +1,8 @@
 # Search a Group Chat Properly
 
-A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
+A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The React and FastAPI application combines multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **22/40 (55%)**, measured on the same queries used for development. General tuning and all initial failures are documented in [tuning_notes.md](results/tuning_notes.md) and [failure_analysis.md](results/failure_analysis.md). Search results include the original matching message and up to three chronological neighbors per side. Browser visual/interaction verification and final clean-checkout delivery remain outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
+Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **22/40 (55%)**, measured on the same queries used for development. General tuning and all initial failures are documented in [tuning_notes.md](results/tuning_notes.md) and [failure_analysis.md](results/failure_analysis.md). Search results include the original matching message and up to three chronological neighbors per side. A fresh Windows installation, first model download, indexing and evaluation were verified in the [final audit](FINAL_AUDIT.md). Browser visual/interaction verification remains outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
 
 ## Structure
 
@@ -22,7 +22,7 @@ Empty directories contain only `.gitkeep` placeholders.
 ## Prerequisites
 
 - Node.js 20.19+ on the 20.x line, or 22.12+; npm. See the [Vite setup guide](https://vite.dev/guide/).
-- Python 3.9 or newer with pip and venv. The initial backend dependencies support the Python 3.9 runtime available on this machine.
+- Python 3.9 with pip and venv for the tested locked installation (verified with 3.9.10 on Windows). Other Python versions/platforms have not been clean-install tested; do not assume the pinned binary dependencies support every newer interpreter.
 - Internet access for the first dependency installation and semantic model preparation. Normal inference is local and requires no secrets or external LLM API. Lexical retrieval needs no model download.
 
 Commands below use Windows PowerShell, starting from the repository root. `npm.cmd` avoids PowerShell script execution-policy restrictions; on macOS/Linux use `npm`. There is no need to activate the Python environment.
@@ -31,12 +31,12 @@ Commands below use Windows PowerShell, starting from the repository root. `npm.c
 
 ```powershell
 cd backend
-py -3 -m venv .venv
+py -3.9 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-`requirements.txt` pins direct runtime and test dependencies. `requirements.lock.txt` records the full tested environment; use it for reproducible installation. On macOS/Linux create the environment with `python3 -m venv .venv` and replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`.
+`requirements.txt` pins direct runtime and test dependencies. `requirements.lock.txt` records the full tested environment; use it for reproducible installation. On macOS/Linux the equivalent environment command is `python3.9 -m venv .venv`; replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. These platform instructions have not been independently verified.
 
 Health: `GET http://127.0.0.1:8000/api/health` returns HTTP 200 and `{"status":"ok"}`. API docs: `http://127.0.0.1:8000/docs`.
 
@@ -89,7 +89,7 @@ This is deliberately synthetic, template-based data: repeated background phrasin
 
 **10 queries (Q001-Q010) have zero meaningful word overlap** with their target text under the fixed [overlap convention](evaluation/OVERLAP.md). Their [manual review](evaluation/HARD_SUBSET_REVIEW.md) explains the semantic connection and nearby distractors. The authoring assistant reviewed the labels; they have not received independent human review. The token audit is exact lexical matching after documented normalization and function-word removal, not a semantic similarity score. Sender/time/context are excluded from the word-overlap calculation.
 
-Time conventions use the corpus reference date **2026-09-01** and Asia/Kolkata: “last month” is August 1-31; “yesterday” is August 31; “morning” is 00:00 through 11:59:59. For these labels, “late April” means April 21-30 and “start of May” means May 1-7. Chat timestamps determine date filtering; a June event mentioned in a March message is still a March chat message. These conventions are documented labels, not an implemented natural-language date parser.
+Time conventions use the corpus reference date **2026-09-01** and Asia/Kolkata: “last month” is August 1-31; “yesterday” is August 31; “morning” is 00:00 through 11:59:59. For these labels, “late April” means April 21-30 and “start of May” means May 1-7. Chat timestamps determine date filtering; a June event mentioned in a March message is still a March chat message. These frozen label conventions are implemented by the deterministic parser and the hybrid constraint refinements described below.
 
 There are **37 distinct target IDs**: each of the three final decisions is tested once semantically and once with a time constraint. All ten hard cases are semantic queries from the decision threads, so the hard subset does not separately measure person/time retrieval. Some targets need nearby context to resolve pronouns, but the target itself carries the requested answer. A neighbor or summary alone must not count as a correct hit.
 
