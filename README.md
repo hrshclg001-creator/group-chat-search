@@ -87,7 +87,7 @@ React UI Display
 
 | Component             | Technology                           | Version                           |
 | --------------------- | ------------------------------------ | --------------------------------- |
-| **Backend**           | Python/FastAPI                       | 3.115.12 / 3.9+                   |
+| **Backend**           | Python 3.9+ / FastAPI                | FastAPI pinned in `backend/requirements.lock.txt` |
 | **Web server**        | Uvicorn                              | 0.34.3                            |
 | **Embeddings**        | sentence-transformers                | 3.4.1                             |
 | **Semantic model**    | Hugging Face Transformers            | 4.48.3                            |
@@ -183,7 +183,7 @@ Parsed constraints intersect:
 
 ### 5. Hybrid Ranking
 
-Combines normalized scores with learned weights (visible in [ranking_config.py](backend/app/search/ranking_config.py)):
+Combines normalized scores with manually tuned weights (visible in [ranking_config.py](backend/app/search/ranking_config.py)):
 
 | Signal                       | No constraint | With hard constraint |
 | ---------------------------- | ------------- | -------------------- |
@@ -310,13 +310,13 @@ A query has zero-word-overlap when both content-token sets are nonempty and thei
 Corpus message:
 
 ```
-Ishita Patel: "Goa's total is over 8700 budget. Nope not doable."
+Ishita Patel: "Goa rejected for this break because total exceeds our cap"
 ```
 
 Content tokens (after normalization):
 
 - Query: `{seaside, holiday, unaffordable}`
-- Message: `{goa, total, 8700, budget, nope, not, doable}`
+- Message: `{goa, rejected, break, total, exceeds, cap}`
 - Intersection: ∅ (empty)
 
 Despite zero lexical overlap, semantic retrieval should recognize _"seaside holiday"_ → _"Goa"_ and _"unaffordable"_ → _"over budget"_.
@@ -326,7 +326,7 @@ Despite zero lexical overlap, semantic retrieval should recognize _"seaside holi
 Corpus message:
 
 ```
-Ishita Patel: "We should keep 700 emergency buffer out of 8700 and not spend it on shopping."
+Ishita Patel: "8700 ceiling includes a 700 emergency buffer, not shopping"
 ```
 
 Semantic test: _"unforeseen expenses"_ ≈ _"emergency buffer"_, _"souvenirs"_ ≈ _"shopping"_.
@@ -386,8 +386,8 @@ The corpus is pre-generated at `backend/data/messages.jsonl`. Regeneration is op
 
 ```powershell
 cd backend
-.\.\venv\Scripts\python.exe -m scripts.generate_data
-.\.\venv\Scripts\python.exe -m scripts.validate_data
+.\.venv\Scripts\python.exe -m scripts.generate_data
+.\.venv\Scripts\python.exe -m scripts.validate_data
 cd ..
 ```
 
@@ -395,8 +395,8 @@ cd ..
 
 ```bash
 cd backend
-./.\venv/bin/python -m scripts.generate_data
-./.\venv/bin/python -m scripts.validate_data
+./.venv/bin/python -m scripts.generate_data
+./.venv/bin/python -m scripts.validate_data
 cd ..
 ```
 
@@ -410,8 +410,8 @@ Download the pinned sentence-transformers model and build both original and cont
 
 ```powershell
 cd backend
-.\.\venv\Scripts\python.exe -m scripts.prepare_model
-.\.\venv\Scripts\python.exe -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
+.\.venv\Scripts\python.exe -m scripts.prepare_model
+.\.venv\Scripts\python.exe -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
 cd ..
 ```
 
@@ -419,8 +419,8 @@ cd ..
 
 ```bash
 cd backend
-./.\venv/bin/python -m scripts.prepare_model
-./.\venv/bin/python -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
+./.venv/bin/python -m scripts.prepare_model
+./.venv/bin/python -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
 cd ..
 ```
 
@@ -432,14 +432,14 @@ Model files are cached in `.cache/models/` (ignored by `.gitignore`). Embeddings
 
 ```powershell
 cd backend
-.\.\venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 **Linux/macOS:**
 
 ```bash
 cd backend
-./.\venv/bin/python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+./.venv/bin/python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 Backend starts on `http://127.0.0.1:8000`. API documentation: `http://127.0.0.1:8000/docs`.
@@ -535,7 +535,7 @@ See [results/evaluation_summary.md](results/evaluation_summary.md) for the most 
 
 ```powershell
 cd backend
-.\.\venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m pytest -q
 cd ..
 ```
 
@@ -543,7 +543,7 @@ cd ..
 
 ```bash
 cd backend
-./.\venv/bin/python -m pytest -q
+./.venv/bin/python -m pytest -q
 cd ..
 ```
 
@@ -581,7 +581,7 @@ npm run build
 cd ..
 ```
 
-**Total tests passing:** 206 backend + 40 evaluation + 22 frontend = **268 tests** (verified in [FINAL_AUDIT.md](FINAL_AUDIT.md)).
+**Verified in the latest audit:** 246 Python backend/evaluation tests pass, and the frontend production build completes successfully. Run `npm test` in `frontend/` to verify the current frontend test count on your machine.
 
 Real-model tests (using the local sentence-transformers model) are run as part of the backend suite. Without the model prepared, they are skipped (not auto-downloaded).
 
@@ -718,7 +718,7 @@ We use `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` because:
 
 - **No external LLM API** required; inference runs on CPU
 - **Multilingual support** handles Hinglish transparently
-- **Reproducibility:** pinned model revision ensures bit-identical embeddings across runs
+- **Reproducibility:** the model revision is pinned so the embedding configuration is reproducible; small floating-point differences may still occur across platforms or library builds
 - **Speed:** 384-dimensional vectors enable fast NumPy cosine similarity search
 
 ### NumPy Cosine Search
@@ -726,7 +726,7 @@ We use `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` because:
 NumPy suffices for a 4,634-message corpus:
 
 - In-memory TF-IDF and embedding arrays fit in seconds of RAM
-- Cosine similarity is O(d) per query (d = embedding dimension)
+- Brute-force cosine search is O(N × d) per query, where N is the number of messages and d is the embedding dimension
 - Deterministic tie-breaking via ascending message ID ensures reproducibility
 - No vector database (Pinecone, Weaviate, etc.) complexity
 
@@ -737,7 +737,7 @@ At million-message scale, approximate nearest-neighbor search (HNSW, IVF) or a v
 Semantic embeddings alone miss 22 of 40 answers. Hybrid ranking improves performance by:
 
 - **Combining complementary signals:** Semantic scores capture meaning; lexical scores catch exact/near-exact matches; metadata constraints eliminate wrong speakers/dates
-- **Visible weights:** `ranking_config.py` documents all decisions; no opaque learned ranker
+- **Visible weights:** `ranking_config.py` documents all manually tuned ranking weights; no opaque learned ranker
 - **Metadata-aware routing:** When a hard constraint applies, weight shifts toward original-message similarity to prioritize direct text
 
 ### Deterministic Data & Reference Dates
