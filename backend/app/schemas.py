@@ -39,6 +39,7 @@ class InterpretedQuery(BaseModel):
     timezone: str
     warnings: List[str]
     explanations: List[str]
+    message_type: Optional[Literal['forwarded', 'pdf', 'image', 'voice', 'url']] = None
 
 
 class SearchResultResponse(BaseModel):

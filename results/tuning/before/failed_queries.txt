@@ -790,3 +790,10 @@ INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
   Retrieved MSG_001479 (rank 2) | hybrid_score=0.348453, semantic_score=0.412877, contextual_score=0.329321, lexical_score=0.151643, metadata_bonus=0.050000 | Meera Nair | 2026-04-27T20:30:46+05:30 | LostLoop works, please don't spend two hours on logo
   Retrieved MSG_001485 (rank 3) | hybrid_score=0.325140, semantic_score=0.393504, contextual_score=0.309409, lexical_score=0.103553, metadata_bonus=0.050000 | Ananya Verma | 2026-04-27T20:54:32+05:30 | Stack decision closed. Tomorrow we test the full claim journey
   Top 3: MSG_001403, MSG_001479, MSG_001485
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_004277 (rank 1) | hybrid_score=0.575770, semantic_score=0.575079, contextual_score=0.553791, lexical_score=0.392684, metadata_bonus=0.100000 | Meera Nair | 2026-08-18T08:11:20+05:30 | maintenance notice tha na
+  Retrieved MSG_003999 (rank 2) | hybrid_score=0.519690, semantic_score=0.514275, contextual_score=0.570718, lexical_score=0.227935, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_003996 (rank 3) | hybrid_score=0.379335, semantic_score=0.315707, contextual_score=0.535401, lexical_score=0.017083, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:04:33+05:30 | router light red near the main gate yaar
+  Top 3: MSG_004277, MSG_003999, MSG_003996

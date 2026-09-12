@@ -131,10 +131,10 @@
     },
     "hybrid": {
       "top1_accuracy": {
-        "correct": 22,
+        "correct": 21,
         "total": 40,
-        "value": 0.55,
-        "percent": 55.0
+        "value": 0.525,
+        "percent": 52.5
       },
       "recall_at_3": {
         "correct": 25,
@@ -162,20 +162,20 @@
           "percent": 35.0
         },
         "time": {
-          "correct": 8,
+          "correct": 7,
           "total": 10,
-          "value": 0.8,
-          "percent": 80.0
+          "value": 0.7,
+          "percent": 70.0
         }
       },
-      "overall_minus_hard_percentage_points": 45.0
+      "overall_minus_hard_percentage_points": 42.5
     }
   },
   "hybrid_vs_baselines": {
     "lexical": {
       "baseline_method": "lexical",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 32.5,
+      "top1_delta_percentage_points": 30.0,
       "recall_at_3_delta_percentage_points": 22.5,
       "hard_top1_delta_percentage_points": 10.0,
       "category_changes": {
@@ -219,12 +219,12 @@
             "percent": 30.0
           },
           "candidate": {
-            "correct": 8,
+            "correct": 7,
             "total": 10,
-            "value": 0.8,
-            "percent": 80.0
+            "value": 0.7,
+            "percent": 70.0
           },
-          "delta_percentage_points": 50.0,
+          "delta_percentage_points": 40.0,
           "direction": "improved"
         }
       },
@@ -240,7 +240,6 @@
         "Q029",
         "Q033",
         "Q036",
-        "Q038",
         "Q039",
         "Q040"
       ],
@@ -251,7 +250,7 @@
     "semantic": {
       "baseline_method": "semantic",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 22.5,
+      "top1_delta_percentage_points": 20.0,
       "recall_at_3_delta_percentage_points": 22.5,
       "hard_top1_delta_percentage_points": 0.0,
       "category_changes": {
@@ -295,12 +294,12 @@
             "percent": 40.0
           },
           "candidate": {
-            "correct": 8,
+            "correct": 7,
             "total": 10,
-            "value": 0.8,
-            "percent": 80.0
+            "value": 0.7,
+            "percent": 70.0
           },
-          "delta_percentage_points": 40.0,
+          "delta_percentage_points": 30.0,
           "direction": "improved"
         }
       },
@@ -311,7 +310,6 @@
         "Q028",
         "Q029",
         "Q033",
-        "Q038",
         "Q039",
         "Q040"
       ],
@@ -320,7 +318,7 @@
     "contextual": {
       "baseline_method": "contextual",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 45.0,
+      "top1_delta_percentage_points": 42.5,
       "recall_at_3_delta_percentage_points": 32.5,
       "hard_top1_delta_percentage_points": 0.0,
       "category_changes": {
@@ -364,12 +362,12 @@
             "percent": 20.0
           },
           "candidate": {
-            "correct": 8,
+            "correct": 7,
             "total": 10,
-            "value": 0.8,
-            "percent": 80.0
+            "value": 0.7,
+            "percent": 70.0
           },
-          "delta_percentage_points": 60.0,
+          "delta_percentage_points": 50.0,
           "direction": "improved"
         }
       },
@@ -389,7 +387,6 @@
         "Q033",
         "Q034",
         "Q036",
-        "Q038",
         "Q039",
         "Q040"
       ],
@@ -397,18 +394,18 @@
     }
   },
   "limitations": "Hybrid weights were selected on these same frozen queries; baseline configurations were untuned. No held-out accuracy is claimed.",
-  "generated_at_utc": "2026-09-12T08:21:59+00:00",
+  "generated_at_utc": "2026-09-12T07:53:47+00:00",
   "report_sha256": {
-    "results/lexical.json": "5f8656aebbc7a16336820f87239d1583b4c515424fcd43638e7a546ceb42ca6c",
-    "results/semantic.json": "f30f8cf116b004a69fb16fd8f58f196693c94a6b6557e79fb61d9e10b8861e27",
-    "results/contextual.json": "d4183af8518d65b808da1d67c8879eaa44ebec11c2f269633417a72fc196d971",
-    "results/hybrid.json": "8857aa26a30bbaa7cb8de8203743d6a007bb52f68b51cd599bfb8660145a6b2d"
+    "results/lexical.json": "a5057902193b637ddd939d169be673f256330aead3def6d2a654f7dfae4f04f2",
+    "results/semantic.json": "53afb603398dace207e455675a67a0d18066e0b35f2a866394a24760388fa761",
+    "results/contextual.json": "dc356eeaa2227839ca594376b238c86a229a046224ebd5a6ee7aca53d931b945",
+    "results/hybrid.json": "40b2568fe2e142c68423f1392272be366c3122a00771cd5ee62edec6b2a643fb"
   },
   "artifact_sha256": {
-    "results/comparison.csv": "9b912f473362312f6b42bf556659a62e08fa69d05f4fb9dbdfc8798b5416592f",
-    "results/benchmark.png": "ab681888eb353c84d2484650e3d81fd57ed7738d71b06e9d1c9ac04aee7cab61",
-    "results/evaluation_summary.md": "dbbb6a1379886f80cd180d87dc859b7bbab1806d32e3174ed20ed416d3181e6e",
-    "results/failed_queries.txt": "bcef6104854792e18a311690f657aa54592847f0a7aa3d61450dba87131a0c65"
+    "results/comparison.csv": "b9c62a185c9dcd6b17a69ef5d980a34a9092882c74837b6b449ba0263bbe2a19",
+    "results/benchmark.png": "063f4ed245ecdd5a939ee451eb86e8d98699ccaaf82020ccf8cc8ad436795f07",
+    "results/evaluation_summary.md": "e4b742e7691c99692bec3462a646d13a3c5e539b3939762545268d1de9915ce0",
+    "results/failed_queries.txt": "29f1d5dcf20817c0a461fbb08fad73809c1061888d9a717ce16f1ec5754a44b1"
   },
   "reporting_environment": {
     "python": "3.9.10",

@@ -1,0 +1,209 @@
+--- a/backend/app/query_understanding/dates.py
++++ b/backend/app/query_understanding/dates.py
+@@ -48,6 +48,11 @@
+ 
+ 
+ def parse_dates(text, reference_date):
++    start, end, warnings, _ = parse_date_spans(text, reference_date)
++    return start, end, warnings
++
++
++def parse_date_spans(text, reference_date):
+     """Return (start, end, warnings), with ISO strings or None.
+ 
+     Multiple compatible constraints intersect. Disjoint alternatives, reversed
+@@ -137,11 +142,11 @@
+         if any(available(match) for match in re.finditer(pattern, text)):
+             warnings.append(warning)
+     if warnings:
+-        return None, None, tuple(warnings)
++        return None, None, tuple(warnings), ()
+     if not intervals:
+-        return None, None, ()
++        return None, None, (), ()
+     start = max(interval[0] for interval in intervals)
+     end = min(interval[1] for interval in intervals)
+     if start > end:
+-        return None, None, ('Conflicting time constraints; no single date interval was selected.',)
+-    return start.isoformat(), end.isoformat(), ()
++        return None, None, ('Conflicting time constraints; no single date interval was selected.',), ()
++    return start.isoformat(), end.isoformat(), (), tuple(sorted(spans))
+--- a/backend/app/search/constraints.py
++++ b/backend/app/search/constraints.py
+@@ -8,6 +8,10 @@
+ from ..query_understanding.dates import ENDPOINT, MONTH, parse_dates
+ from ..query_understanding.parser import normalize
+ from .ranking_config import DAY_PARTS, MONTH_PARTS
++
++
++EVENT = r'(?:trip|holiday|vacation|birthday|party|exam|event|hackathon|journey)'
++EVENT_DATE = re.compile(rf'(?<!\w)(?:{ENDPOINT})\s+{EVENT}\b|\b{EVENT}\s+(?:in|on|for)\s+(?:{ENDPOINT})(?!\w)')
+ 
+ 
+ def corpus_timezone(name):
+@@ -72,9 +76,7 @@
+ 
+     # Strip only a date immediately attached to an event noun before deciding
+     # chat-time constraints. Other dates in the same query still apply.
+-    event = r'(?:trip|holiday|vacation|birthday|party|exam|event|hackathon|journey)'
+-    event_date = re.compile(rf'(?<!\w)(?:{ENDPOINT})\s+{event}\b|\b{event}\s+(?:in|on|for)\s+(?:{ENDPOINT})(?!\w)')
+-    chat_time_text = event_date.sub(' ', text)
++    chat_time_text = EVENT_DATE.sub(' ', text)
+     if chat_time_text != text:
+         reasons.append('Date attached to an event is not treated as the message timestamp.')
+     start, end, warnings = parse_dates(chat_time_text, parser.reference_date)
+--- a/backend/app/search/hybrid.py
++++ b/backend/app/search/hybrid.py
+@@ -11,6 +11,7 @@
+ from .model_config import EMBEDDING_CACHE
+ from .ranking_config import DAY_PARTS, DEFAULT_CONFIG, MONTH_PARTS
+ from .semantic import SemanticSearch
++from .query_text import similarity_query
+ 
+ 
+ @dataclass(frozen=True)
+@@ -22,6 +23,7 @@
+     person_match: np.ndarray
+     date_match: np.ndarray
+     eligible: np.ndarray
++    similarity_query: str = ''
+ 
+ 
+ @dataclass(frozen=True)
+@@ -71,11 +73,12 @@
+         if not query.strip():
+             return None
+         constraints = understand_constraints(self.parser, query)
+-        vector = normalize_vectors(self.encoder.encode([query]))[0]
++        content_query = similarity_query(self.parser, query, constraints)
++        vector = normalize_vectors(self.encoder.encode([content_query]))[0]
+         semantic = np.clip(self.semantic.matrix @ vector, 0, 1)
+         contextual = np.clip(self.contextual.matrix @ vector, 0, 1)
+         lexical = np.zeros(len(self.messages), dtype=np.float64)
+-        for hit in self.lexical.search(query, top_k=len(self.messages)):
++        for hit in self.lexical.search(content_query, top_k=len(self.messages)):
+             lexical[self.id_to_index[hit.id]] = hit.lexical_score
+         person_match = np.array([constraints.person_mode != 'none' and row.sender == constraints.person
+                                  for row in self.messages], dtype=bool)
+@@ -90,7 +93,7 @@
+             eligible &= person_match
+         if constraints.start_date:
+             eligible &= date_match
+-        return QuerySignals(constraints, semantic, contextual, lexical, person_match, date_match, eligible)
++        return QuerySignals(constraints, semantic, contextual, lexical, person_match, date_match, eligible, content_query)
+ 
+     def rank(self, signals, top_k=5, config=None):
+         if type(top_k) is not int or top_k < 1:
+@@ -105,6 +108,7 @@
+         candidates = np.flatnonzero(signals.eligible)
+         ranked = sorted(candidates, key=lambda i: (-float(scores[i]), self.messages[i].id))[:top_k]
+         details = {'profile': config.name, 'weights': weights,
++                   'similarity_query': signals.similarity_query,
+                    'constraints': signals.constraints.to_dict(),
+                    'eligible_message_count': int(signals.eligible.sum()),
+                    'excluded_message_count': int((~signals.eligible).sum())}
+@@ -132,7 +136,7 @@
+             'context_policy': 'Filter and credit the current message only; neighbors may have other authors/dates.',
+             'reference_date': self.parser.reference_date.isoformat(), 'timezone': self.parser.timezone,
+             'month_part_days_inclusive': MONTH_PARTS, 'day_part_hours_half_open': DAY_PARTS,
+-            'query_text_policy': 'Original raw query is used for all similarity channels.',
++            'query_text_policy': 'Remove unambiguous filtered sender and resolved chat-date spans from similarity text; preserve event dates and uncertain mentions. See results/tuning_notes.md.',
+             'tie_break': 'message ID ascending for exactly equal scores',
+             'candidate_policy': 'Score the entire corpus, then intersect hard constraints before top K.',
+             'tuning': 'Four general profiles measured on the same 40 queries; see results/hybrid_tuning.json. These are development-set metrics.',
+--- /dev/null
++++ b/backend/app/search/query_text.py
+@@ -0,0 +1,47 @@
++"""Separate confidently resolved metadata from text similarity, conservatively.
++
++No corpus topic dictionaries, query IDs, labels, or real-clock dependencies.
++Event dates and uncertain/ambiguous person mentions remain semantic content.
++"""
++
++import re
++
++from ..query_understanding.dates import parse_date_spans
++from ..query_understanding.parser import normalize
++from .constraints import EVENT_DATE
++
++
++def similarity_query(parser, query, constraints):
++    text = normalize(query).replace('\u2019', "'")
++    spans = []
++    if constraints.person_mode == 'filter':
++        aliases = [alias for alias, names in parser.aliases.items() if names == {constraints.person}]
++        pattern = '|'.join(re.escape(alias) for alias in sorted(aliases, key=len, reverse=True))
++        mentions = list(re.finditer(rf'(?<!\w)(?:{pattern})(?!\w)', text))
++        # A repeated name may also be the topic of the question. Keep it unless
++        # its single occurrence is already resolved as an explicit sender.
++        if len(mentions) == 1:
++            spans.append(mentions[0].span())
++    if constraints.start_date:
++        # Mask event phrases without changing offsets into the original query.
++        masked = EVENT_DATE.sub(lambda match: ' ' * len(match.group()), text)
++        _, _, warnings, date_spans = parse_date_spans(masked, parser.reference_date)
++        if not warnings:
++            for start, end in date_spans:
++                prefix = re.search(r'\b(?:(?:at\s+the\s+)?(?:early|start|mid|late)(?:\s+of)?\s+)?$', text[:start])
++                if prefix:
++                    start = prefix.start()
++                prep = re.search(r'\b(?:in|on|during|between|from|at)\s+$', text[:start])
++                if prep:
++                    start = prep.start()
++                spans.append((start, end))
++            if constraints.hour_range:
++                spans.extend(match.span() for match in re.finditer(r'\b(?:morning|afternoon|evening|night)\b', masked))
++    if not spans:
++        return query
++    chars = list(text)
++    for start, end in spans:
++        chars[start:end] = ' ' * (end - start)
++    rewritten = ' '.join(''.join(chars).split()).strip(' ,?')
++    # Metadata-only requests still need a nonempty encoder input.
++    return rewritten if re.search(r'\w', rewritten) else query
+--- /dev/null
++++ b/backend/tests/test_query_text.py
+@@ -0,0 +1,43 @@
++"""Metadata separation on independent English/Hinglish queries."""
++
++import pytest
++
++from app.query_understanding import QueryParser
++from app.query_understanding.dates import parse_date_spans
++from app.search.constraints import understand_constraints
++from app.search.query_text import similarity_query
++
++
++@pytest.fixture
++def parser():
++    return QueryParser({'reference_date': '2026-09-01', 'timezone': 'Asia/Kolkata',
++                        'participants': [{'name': 'Priya Sharma'}, {'name': 'Rahul Verma'}]})
++
++
++@pytest.mark.parametrize('query,expected', [
++    ('What did Priya say about the library?', 'what did say about the library'),
++    ('Rahul ne pichle mahine library pe kya bola?', 'ne library pe kya bola'),
++    ('Find messages in late February about books', 'find messages about books'),
++    ('Find messages from July 2 to July 5 about books', 'find messages about books'),
++    ('What was said on March 5 about the June trip?', 'what was said about the june trip'),
++    ('What did Priya say yesterday morning about books?', 'what did say about books'),
++    ('last month', 'last month'),
++    ('What about the July vacation?', 'What about the July vacation?'),
++    ("Priya's library fees", "Priya's library fees"),
++    ('What did Priya and Rahul say about books?', 'What did Priya and Rahul say about books?'),
++    ('What did Priya say about Priya?', 'What did Priya say about Priya?'),
++    ('messages on 07/08/2026 about books', 'messages on 07/08/2026 about books'),
++])
++def test_separates_only_resolved_metadata(parser, query, expected):
++    constraints = understand_constraints(parser, query)
++    original = constraints.to_dict()
++    assert similarity_query(parser, query, constraints) == expected
++    assert constraints.to_dict() == original
++
++
++def test_span_parser_ignores_auxiliary_may_and_invalid_dates(parser):
++    text = 'we may discuss books on august 9'
++    start, end, warnings, spans = parse_date_spans(text, parser.reference_date)
++    assert (start, end, warnings) == ('2026-08-09', '2026-08-09', ())
++    assert [text[a:b] for a, b in spans] == ['august 9']
++    assert parse_date_spans('february 30', parser.reference_date)[3] == ()

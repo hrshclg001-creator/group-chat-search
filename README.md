@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. Search results include the original matching message and up to three chronological neighbors per side. Browser visual/interaction verification and final clean-checkout delivery remain outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
+Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **22/40 (55%)**, measured on the same queries used for development. General tuning and all initial failures are documented in [tuning_notes.md](results/tuning_notes.md) and [failure_analysis.md](results/failure_analysis.md). Search results include the original matching message and up to three chronological neighbors per side. Browser visual/interaction verification and final clean-checkout delivery remain outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
 
 ## Structure
 
@@ -72,7 +72,7 @@ The generator and validator use only the Python standard library; they need no n
 - Output: [messages.jsonl](backend/data/messages.jsonl) and [corpus_metadata.json](backend/data/corpus_metadata.json).
 - Fixed seed: `20260901`; generator version: `1.0.0`; reference runtime: Python `3.9.10`. The full tested backend dependency versions remain in `backend/requirements.lock.txt`.
 - Inclusive dates: `2026-03-01` through `2026-08-31` (184 dates). Timestamps are chronological ISO 8601 strings with the `+05:30` offset, corresponding to Asia/Kolkata.
-- Fixed reference date: `2026-09-01`, stored in the metadata for later relative-time interpretation. Relative-date search is not implemented yet.
+- Fixed reference date: `2026-09-01`, stored in the metadata for later relative-time interpretation. The parser and hybrid filters use this fixed date for relative-time requests.
 - Each row has `id`, `timestamp`, `sender` (full name), `text`, `message_type`, and `metadata` containing stable `participant_id`, `topic`, and `episode_id`. Decision messages also have `thread_id`. IDs run from `MSG_000001` to `MSG_004634` and are stable for this seed, content and configuration.
 - Types: `text`, `forwarded`, `url`, `image`, `pdf`, `voice`. Media are text placeholders, not actual attachments. Example-domain links are placeholders; no link is fetched during generation.
 - Composition: 552 complete daily conversations (2-4 per day, eight messages each), 216 hand-authored decision messages, and two boundary messages. Background conversations use 56 season-aware vignettes with shared details, changing speakers, wording variations and irregular reply intervals.
@@ -276,11 +276,11 @@ Parser-phase validation: **71 parser tests passed**, and the full suites passed 
 
 Resolved chat dates **exclude current messages outside the inclusive range**, using metadata reference date `2026-09-01` and Asia/Kolkata. Morning is 00:00-11:59:59; other day parts and month-part boundaries are visible in configuration. `late MONTH` uses days 21-end and `start of MONTH`/`early MONTH` uses days 1-7. Date expressions directly attached to event nouns, such as `the June trip`, are not assumed to be message timestamps; another explicit chat date in the same query still applies. These are general rules applied to every query, not benchmark-ID exceptions. Unsupported/ambiguous phrasing remains a limitation. On Windows without an IANA database, the corpus's modern Indian timestamps use explicit UTC+05:30, never the machine timezone.
 
-Person and date filters intersect. An empty intersection returns no hits without relaxing the request. Filters apply to the original current message; its bounded display context may include other authors or dates. Results preserve the actual target ID and original text and include individual semantic/contextual/lexical scores, person/date matches, metadata bonus, final hybrid score, context and an explanation of the applied constraints/weights. A neighboring answer is still wrong under exact-ID scoring.
+Person, date and explicit message-type filters intersect. Clear requests for an actual forwarded item, PDF, image, voice message or URL use the current message's stored `message_type`; mentioning an attachment does not by itself trigger a type filter. Negated and alternative type requests are left unconstrained. The effective optional `message_type` is included in API query metadata. No topic/episode/thread annotations enter ranking. An empty intersection returns no hits without relaxing the request. Filters apply to the original current message; its bounded display context may include other authors or dates. Results preserve the actual target ID and original text and include individual semantic/contextual/lexical scores, person/date matches, metadata bonus, final hybrid score, context and an explanation of the applied constraints/weights. A neighboring answer is still wrong under exact-ID scoring.
 
 All weights, the four trial profiles and date-refinement boundaries live in [ranking_config.py](backend/app/search/ranking_config.py). Semantic cosine is clamped to [0,1], TF-IDF uses its existing nonnegative cosine score, and no query-specific min/max normalization is applied. The selected **balanced** profile uses:
 
-| Signal | No hard constraint | Clear author and/or date constraint |
+| Signal | No hard constraint | Clear author, date or message-type constraint |
 | --- | ---: | ---: |
 | Contextual semantic | 0.35 | 0.25 |
 | Original semantic | 0.35 | 0.45 |
@@ -301,21 +301,23 @@ Four profiles were declared before this task's first hybrid scoring. Their base 
 
 Balanced and original_first tied under both metrics; declaration order chose balanced. No category-specific weight selection or per-query answer rules were used. The four-profile comparison was rerun once with the final default to verify reproducibility and record current source hashes; rankings and aggregate results agreed. **These 40 queries are also the tuning set.** The results are development-set measurements, not an independent estimate of generalization; unchanged ground truth alone does not eliminate that limitation.
 
-Measured four-method comparison on the exact same frozen inputs:
+Latest measured four-method comparison on the exact same frozen inputs, after the general message-type improvement (the profile-selection table above is historical):
 
 | Metric | Lexical | Semantic | Contextual | Hybrid |
 | --- | ---: | ---: | ---: | ---: |
-| Overall Top-1 | 9/40 (22.5%) | 13/40 (32.5%) | 4/40 (10%) | 21/40 (52.5%) |
+| Overall Top-1 | 9/40 (22.5%) | 13/40 (32.5%) | 4/40 (10%) | 22/40 (55%) |
 | Recall@3 | 16/40 (40%) | 16/40 (40%) | 12/40 (30%) | 25/40 (62.5%) |
 | Hard Top-1 | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 1/10 (10%) |
 | Semantic category | 3/20 (15%) | 6/20 (30%) | 1/20 (5%) | 7/20 (35%) |
 | Person category | 3/10 (30%) | 3/10 (30%) | 1/10 (10%) | 7/10 (70%) |
-| Time category | 3/10 (30%) | 4/10 (40%) | 2/10 (20%) | 7/10 (70%) |
-| Overall minus hard gap | +22.5 pp | +22.5 pp | 0 pp | +42.5 pp |
+| Time category | 3/10 (30%) | 4/10 (40%) | 2/10 (20%) | 8/10 (80%) |
+| Overall minus hard gap | +22.5 pp | +22.5 pp | 0 pp | +45 pp |
 
-Against original-only semantic retrieval, hybrid improves semantic-category accuracy by 5 percentage points, person by 40 and time by 30. Overall increases 20 points, but the hard subset stays at 1/10. The larger overall/hard gap reflects better performance on easier metadata-bearing queries, not improved difficult paraphrase understanding. Baseline artifacts are the preserved measured runs with their original configuration/source hashes; the comparison verifies identical input hashes and recomputes all metrics from saved ranks.
+Against original-only semantic retrieval, hybrid improves semantic-category accuracy by 5 percentage points, person by 40 and time by 40. Overall increases 22.5 points, but the hard subset stays at 1/10. The larger overall/hard gap reflects better performance on easier metadata-bearing queries, not improved difficult paraphrase understanding. Baseline rankings remain unchanged, with refreshed run/source hashes; the comparison verifies identical input hashes and recomputes all metrics from saved ranks.
 
-There are still 19 Top-1 errors, all printed by the benchmark and retained in [hybrid.json](results/hybrid.json). Examples: Q001 misses the Hinglish/cost rejection despite a related trip match; Q012 and Q032 miss the actual final stack message; Q015 returns the cake-permission question instead of the answer (the answer is third); Q022's weak possessive-person bonus does not overcome another author's Goa estimate (the expected spending limit is second); Q038 returns Meera's later maintenance reminder instead of her forwarded notice (the notice is second). Filtering can find the right author/date while similarity still selects the wrong conversational role. We did not add rules targeting these failures after selecting the profile.
+There are still **18 Top-1 errors**, including nine hard queries. [failure_analysis.md](results/failure_analysis.md) lists all 19 initial errors with original expected/retrieved messages, scores, likely causes and recommendations. The general message-type constraint fixes Q038 without losing any previously correct Top-1 result. Q015 still selects the cake-permission question rather than its answer; Q022 still reflects uncertain possessive author intent; final-stack and difficult paraphrase errors remain. No expected IDs changed.
+
+[tuning_notes.md](results/tuning_notes.md) records both general experiments and complete evaluation after each change/revert. Removing resolved names/dates from similarity text was rejected (21/40 ? 20/40, hard 1/10 unchanged). Explicit current-message type constraints were retained (21/40 ? 22/40, hard 1/10 unchanged). Further optimization stopped to avoid fitting linguistic exceptions to these 40 queries. The raw query, weights, model and bounded context remain unchanged. All **206 backend tests and 40 evaluation tests passed (246 total)**; corpus/label integrity, archived/current artifact hashes and unchanged baseline rankings were verified. These are development-set measurements; the wider overall/hard gap is not better hard-semantic retrieval.
 
 After installing the locked dependencies and preparing the model as above, run from the repository root:
 
@@ -415,7 +417,7 @@ Generated files:
 - [failed_queries.txt](results/failed_queries.txt): complete diagnostics preserved even if terminal output is truncated.
 - The four method JSON files and [comparison.json](results/comparison.json): metrics, rankings, model/dependency configuration, frozen input/source hashes, reporting versions and generated-artifact hashes.
 
-The completed all-method run measured the same results as the earlier individual runs: lexical Top-1 **9/40 (22.5%)**, semantic **13/40 (32.5%)**, contextual **4/40 (10%)** and hybrid **21/40 (52.5%)**. Hard Top-1 was respectively **0/10, 1/10, 1/10 and 1/10**; signed gaps were **+22.5, +22.5, 0 and +42.5 percentage points**. Hybrid weights were previously selected on these same queries, so the generated summary and chart retain the development-set limitation. No accuracy gains are claimed from this reporting change.
+The initial reporting-phase all-method run measured the same results as the earlier individual runs (historical; latest scores are above and in the generated summary): lexical Top-1 **9/40 (22.5%)**, semantic **13/40 (32.5%)**, contextual **4/40 (10%)** and hybrid **21/40 (52.5%)**. Hard Top-1 was respectively **0/10, 1/10, 1/10 and 1/10**; signed gaps were **+22.5, +22.5, 0 and +42.5 percentage points**. Hybrid weights were previously selected on these same queries, so the generated summary and chart retain the development-set limitation. No accuracy gains are claimed from this reporting change.
 
 Reporting-phase checks: **40 evaluation tests and all 191 backend tests passed (231 total)**; `pip check` passed and the complete installed package set matched `requirements.lock.txt`. The exact `evaluation/evaluate.py --all` command completed. CSV/JSON metrics, source/artifact hashes, frozen-label integrity and all **113 method/query failure records** were verified; the chart was visually inspected for accurate labels and legibility. Matplotlib 3.9.4 and its dependencies are pinned for the Python 3.9 environment. Tests emitted upstream pyparsing deprecation warnings, and the benchmark retained the previously documented tokenizer length warning; neither caused a failure. Frontend code was unchanged, so its checks were not rerun.
 

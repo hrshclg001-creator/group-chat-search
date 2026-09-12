@@ -90,6 +90,8 @@ class HybridSearch:
             eligible &= person_match
         if constraints.start_date:
             eligible &= date_match
+        if constraints.message_type:
+            eligible &= np.array([row.message_type == constraints.message_type for row in self.messages], dtype=bool)
         return QuerySignals(constraints, semantic, contextual, lexical, person_match, date_match, eligible)
 
     def rank(self, signals, top_k=5, config=None):
@@ -127,7 +129,7 @@ class HybridSearch:
             'ranking': self.config.to_dict(),
             'routing': 'Hard author/date constraints shift context weight to the original message.',
             'normalization': 'Clamp embedding cosine to [0,1]; TF-IDF is already [0,1]; no per-query min/max rescaling.',
-            'metadata': 'Explicit sender and chat-date filters; uncertain person mention gets a bonus; topic names do not.',
+            'metadata': 'Explicit sender, chat-date and requested message-type filters; uncertain person mention gets a bonus; topic names do not.',
             'empty_filter_policy': 'Return [] without silently relaxing constraints.',
             'context_policy': 'Filter and credit the current message only; neighbors may have other authors/dates.',
             'reference_date': self.parser.reference_date.isoformat(), 'timezone': self.parser.timezone,
@@ -135,7 +137,7 @@ class HybridSearch:
             'query_text_policy': 'Original raw query is used for all similarity channels.',
             'tie_break': 'message ID ascending for exactly equal scores',
             'candidate_policy': 'Score the entire corpus, then intersect hard constraints before top K.',
-            'tuning': 'Four general profiles measured on the same 40 queries; see results/hybrid_tuning.json. These are development-set metrics.',
+            'tuning': 'Four general profiles measured on the same 40 queries; subsequent general constraint experiments are in results/tuning_notes.md. These are development-set metrics.',
             'semantic': self.semantic.configuration(), 'contextual': self.contextual.configuration(),
             'lexical': self.lexical.configuration(),
         }

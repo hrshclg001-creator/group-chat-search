@@ -21,7 +21,8 @@ def messages():
 def test_exact_match_preserves_original_fields_and_orders_scores(messages):
     searcher = LexicalSearch(messages)
     hit = searcher.search(messages[1].text, top_k=1)[0]
-    assert hit.to_dict() == {**messages[1].__dict__, 'lexical_score': pytest.approx(1.0)}
+    original = {key: getattr(messages[1], key) for key in ('id', 'sender', 'timestamp', 'text')}
+    assert hit.to_dict() == {**original, 'lexical_score': pytest.approx(1.0)}
     hits = searcher.search('canteen practice tournament', top_k=3)
     assert len(hits) == 3
     assert [hit.lexical_score for hit in hits] == sorted((hit.lexical_score for hit in hits), reverse=True)
@@ -117,9 +118,9 @@ def test_loader_rejects_malformed_inputs(tmp_path, kind, error):
         load_corpus(path)
 
 
-def test_real_corpus_loads_only_original_fields():
+def test_real_corpus_loads_original_fields_and_message_type():
     rows = load_corpus()
     assert len(rows) == 4634
     assert rows[0].id == 'MSG_000001'
     assert rows[-1].id == 'MSG_004634'
-    assert set(rows[0].__dict__) == {'id', 'sender', 'timestamp', 'text'}
+    assert set(rows[0].__dict__) == {'id', 'sender', 'timestamp', 'text', 'message_type'}

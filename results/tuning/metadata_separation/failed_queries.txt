@@ -742,6 +742,13 @@ INCORRECT Q012 [semantic] What backend and database did we finally choose for Lo
   Retrieved MSG_001600 (rank 3) | hybrid_score=0.320331, semantic_score=0.374247, contextual_score=0.439476, lexical_score=0.177641, metadata_bonus=0.000000 | Sneha Iyer | 2026-05-03T18:46:54+05:30 | Please don't add a second database over the weekend
   Top 3: MSG_001598, MSG_001290, MSG_001600
 
+INCORRECT Q014 [semantic] Why did Aarav originally lean towards MERN?
+  Expected MSG_001291 | Aarav Sharma | 2026-04-19T21:41:52+05:30 | For this scope I don't have a reason. MERN was just familiarity
+  Retrieved MSG_004535 (rank 1) | hybrid_score=0.329737, semantic_score=0.515391, contextual_score=0.181308, lexical_score=0.012422, metadata_bonus=0.050000 | Aarav Sharma | 2026-08-27T21:20:01+05:30 | oh same mistake meri bhi
+  Retrieved MSG_003007 (rank 2) | hybrid_score=0.326490, semantic_score=0.515391, contextual_score=0.168317, lexical_score=0.012422, metadata_bonus=0.050000 | Aarav Sharma | 2026-06-27T21:20:37+05:30 | oh same mistake meri bhi
+  Retrieved MSG_001597 (rank 3) | hybrid_score=0.270581, semantic_score=0.335593, contextual_score=0.278259, lexical_score=0.000000, metadata_bonus=0.050000 | Aarav Sharma | 2026-05-03T08:15:32+05:30 | nice, explain it kal if it still makes sense
+  Top 3: MSG_004535, MSG_003007, MSG_001597
+
 INCORRECT Q015 [semantic] Was outside cake allowed, and what decoration rule came with it?
   Expected MSG_003434 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
   Retrieved MSG_003433 (rank 1) | hybrid_score=0.489081, semantic_score=0.755846, contextual_score=0.386245, lexical_score=0.446746, metadata_bonus=0.000000 | Kabir Khan | 2026-07-14T21:24:18+05:30 | Cake allowed from outside?
@@ -765,28 +772,35 @@ INCORRECT Q022 [person] What was Ishita's absolute spending limit when the Goa e
 
 INCORRECT Q023 [person] How did Aarav say he would track everyone's trip contributions?
   Expected MSG_000715 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
-  Retrieved MSG_000846 (rank 1) | hybrid_score=0.358795, semantic_score=0.460407, contextual_score=0.355508, lexical_score=0.063676, metadata_bonus=0.050000 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
-  Retrieved MSG_000715 (rank 2) | hybrid_score=0.352362, semantic_score=0.388642, contextual_score=0.343315, lexical_score=0.208223, metadata_bonus=0.050000 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
-  Retrieved MSG_002562 (rank 3) | hybrid_score=0.325288, semantic_score=0.393651, contextual_score=0.382951, lexical_score=0.012036, metadata_bonus=0.050000 | Aarav Sharma | 2026-06-10T13:11:00+05:30 | local walk near home aaj, no big travel plan
-  Top 3: MSG_000846, MSG_000715, MSG_002562
-
-INCORRECT Q027 [person] What name did Rohan suggest for our coding project?
-  Expected MSG_001478 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
-  Retrieved MSG_000975 (rank 1) | hybrid_score=0.266466, semantic_score=0.361266, contextual_score=0.177618, lexical_score=0.047458, metadata_bonus=0.050000 | Rohan Mehta | 2026-04-08T08:16:34+05:30 | thanks for clarifying
-  Retrieved MSG_002234 (rank 2) | hybrid_score=0.261384, semantic_score=0.325651, contextual_score=0.217811, lexical_score=0.051940, metadata_bonus=0.050000 | Rohan Mehta | 2026-05-30T08:03:00+05:30 | git mein changes unstaged dikh rahe. Did I lose the whole assignment?
-  Retrieved MSG_002531 (rank 3) | hybrid_score=0.260849, semantic_score=0.328930, contextual_score=0.251319, lexical_score=0.000000, metadata_bonus=0.050000 | Rohan Mehta | 2026-06-09T12:09:07+05:30 | this is tbh nice, text thoda chota hai
-  Top 3: MSG_000975, MSG_002234, MSG_002531
+  Retrieved MSG_000846 (rank 1) | hybrid_score=0.337539, semantic_score=0.443812, contextual_score=0.297033, lexical_score=0.067829, metadata_bonus=0.050000 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_000715 (rank 2) | hybrid_score=0.320121, semantic_score=0.398063, contextual_score=0.183074, lexical_score=0.226122, metadata_bonus=0.050000 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000857 (rank 3) | hybrid_score=0.303605, semantic_score=0.368450, contextual_score=0.291561, lexical_score=0.074563, metadata_bonus=0.050000 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Top 3: MSG_000846, MSG_000715, MSG_000857
 
 INCORRECT Q031 [time] What decision did we make on March 28 about the trip destination and payments?
   Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
-  Retrieved MSG_000699 (rank 1) | hybrid_score=0.328106, semantic_score=0.421235, contextual_score=0.354200, lexical_score=0.000000, metadata_bonus=0.050000 | Ananya Verma | 2026-03-28T20:44:51+05:30 | Return June 15 morning works for me, checked family calendar
-  Retrieved MSG_000710 (rank 2) | hybrid_score=0.289123, semantic_score=0.400339, contextual_score=0.235062, lexical_score=0.001028, metadata_bonus=0.050000 | Aditya Joshi | 2026-03-28T21:09:37+05:30 | yes, bus charges separate terms; note added in itinerary
-  Retrieved MSG_000714 (rank 3) | hybrid_score=0.276937, semantic_score=0.322439, contextual_score=0.292720, lexical_score=0.043301, metadata_bonus=0.050000 | Sneha Iyer | 2026-03-28T21:16:00+05:30 | we can look after 9:30 pm
-  Top 3: MSG_000699, MSG_000710, MSG_000714
+  Retrieved MSG_000710 (rank 1) | hybrid_score=0.289648, semantic_score=0.419288, contextual_score=0.203003, lexical_score=0.001090, metadata_bonus=0.050000 | Aditya Joshi | 2026-03-28T21:09:37+05:30 | yes, bus charges separate terms; note added in itinerary
+  Retrieved MSG_000713 (rank 2) | hybrid_score=0.254602, semantic_score=0.290329, contextual_score=0.235596, lexical_score=0.075273, metadata_bonus=0.050000 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000699 (rank 3) | hybrid_score=0.247810, semantic_score=0.293559, contextual_score=0.262831, lexical_score=0.000000, metadata_bonus=0.050000 | Ananya Verma | 2026-03-28T20:44:51+05:30 | Return June 15 morning works for me, checked family calendar
+  Top 3: MSG_000710, MSG_000713, MSG_000699
 
 INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
   Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
-  Retrieved MSG_001403 (rank 1) | hybrid_score=0.351639, semantic_score=0.471967, contextual_score=0.357015, lexical_score=0.000000, metadata_bonus=0.050000 | Ananya Verma | 2026-04-25T08:11:59+05:30 | there was another group there earlier
-  Retrieved MSG_001479 (rank 2) | hybrid_score=0.348453, semantic_score=0.412877, contextual_score=0.329321, lexical_score=0.151643, metadata_bonus=0.050000 | Meera Nair | 2026-04-27T20:30:46+05:30 | LostLoop works, please don't spend two hours on logo
-  Retrieved MSG_001485 (rank 3) | hybrid_score=0.325140, semantic_score=0.393504, contextual_score=0.309409, lexical_score=0.103553, metadata_bonus=0.050000 | Ananya Verma | 2026-04-27T20:54:32+05:30 | Stack decision closed. Tomorrow we test the full claim journey
-  Top 3: MSG_001403, MSG_001479, MSG_001485
+  Retrieved MSG_001478 (rank 1) | hybrid_score=0.374791, semantic_score=0.455068, contextual_score=0.349731, lexical_score=0.162889, metadata_bonus=0.050000 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_001479 (rank 2) | hybrid_score=0.365252, semantic_score=0.417981, contextual_score=0.350196, lexical_score=0.198060, metadata_bonus=0.050000 | Meera Nair | 2026-04-27T20:30:46+05:30 | LostLoop works, please don't spend two hours on logo
+  Retrieved MSG_001482 (rank 3) | hybrid_score=0.352637, semantic_score=0.401025, contextual_score=0.357855, lexical_score=0.163561, metadata_bonus=0.050000 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Top 3: MSG_001478, MSG_001479, MSG_001482
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_004277 (rank 1) | hybrid_score=0.610902, semantic_score=0.617046, contextual_score=0.565977, lexical_score=0.458686, metadata_bonus=0.100000 | Meera Nair | 2026-08-18T08:11:20+05:30 | maintenance notice tha na
+  Retrieved MSG_003999 (rank 2) | hybrid_score=0.596882, semantic_score=0.624340, contextual_score=0.650189, lexical_score=0.266906, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_003996 (rank 3) | hybrid_score=0.341156, semantic_score=0.247129, contextual_score=0.503527, lexical_score=0.020330, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:04:33+05:30 | router light red near the main gate yaar
+  Top 3: MSG_004277, MSG_003999, MSG_003996
+
+INCORRECT Q040 [time] Yesterday morning, how many MB was Aditya's oversized submission file?
+  Expected MSG_004620 | Aditya Joshi | 2026-08-31T08:04:42+05:30 | 42 MB, screenshots bahut ho gaye
+  Retrieved MSG_004619 (rank 1) | hybrid_score=0.430480, semantic_score=0.512413, contextual_score=0.457480, lexical_score=0.177623, metadata_bonus=0.050000 | Ananya Verma | 2026-08-31T08:03:54+05:30 | file size kitna hai
+  Retrieved MSG_004620 (rank 2) | hybrid_score=0.426231, semantic_score=0.420676, contextual_score=0.468174, lexical_score=0.099417, metadata_bonus=0.100000 | Aditya Joshi | 2026-08-31T08:04:42+05:30 | 42 MB, screenshots bahut ho gaye
+  Retrieved MSG_004618 (rank 3) | hybrid_score=0.373551, semantic_score=0.269777, contextual_score=0.487605, lexical_score=0.151248, metadata_bonus=0.100000 | Aditya Joshi | 2026-08-31T08:01:00+05:30 | submission portal stack implementation upload nahi le raha 😅
+  Top 3: MSG_004619, MSG_004620, MSG_004618

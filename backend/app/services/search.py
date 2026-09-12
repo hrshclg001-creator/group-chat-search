@@ -58,7 +58,7 @@ class SearchService:
             start_date=constraints.start_date, end_date=constraints.end_date, hour_range=constraints.hour_range,
             intent=('person_' if person_active else '') + ('time_' if constraints.start_date else '') + 'semantic',
             reference_date=parsed['reference_date'], timezone=parsed['timezone'],
-            warnings=parsed['warnings'], explanations=list(constraints.reasons))
+            warnings=parsed['warnings'], explanations=list(constraints.reasons), message_type=constraints.message_type)
 
     def search(self, query, top_k):
         if self.engine is None:

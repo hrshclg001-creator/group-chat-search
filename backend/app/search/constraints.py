@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from ..query_understanding.dates import ENDPOINT, MONTH, parse_dates
 from ..query_understanding.parser import normalize
 from .ranking_config import DAY_PARTS, MONTH_PARTS
+from .message_types import requested_message_type
 
 
 def corpus_timezone(name):
@@ -32,10 +33,11 @@ class Constraints:
     end_date: object
     hour_range: object
     reasons: tuple
+    message_type: object = None
 
     @property
     def has_filter(self):
-        return self.person_mode == 'filter' or self.start_date is not None
+        return self.person_mode == 'filter' or self.start_date is not None or self.message_type is not None
 
     def to_dict(self):
         return asdict(self)
@@ -100,7 +102,10 @@ def understand_constraints(parser, query):
     reasons.extend(warnings)
     if warnings:
         start = end = hour_range = None
-    return Constraints(parsed.to_dict(), person, mode, start, end, hour_range, tuple(reasons))
+    message_type = requested_message_type(query)
+    if message_type:
+        reasons.append(f'Explicit {message_type} request: require the current message type, not a neighboring item or a mention.')
+    return Constraints(parsed.to_dict(), person, mode, start, end, hour_range, tuple(reasons), message_type)
 
 
 def local_message_time(message, tz):

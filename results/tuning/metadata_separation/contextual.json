@@ -1,7 +1,7 @@
 {
   "method": "contextual",
   "schema_version": "1.1.0",
-  "measured_at_utc": "2026-09-12T08:21:56+00:00",
+  "measured_at_utc": "2026-09-12T08:16:32+00:00",
   "metrics": {
     "top1_accuracy": {
       "correct": 4,
@@ -108,14 +108,14 @@
   },
   "source_sha256": {
     "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
-    "backend/app/search/constraints.py": "1eee8cd7b8b9d5fc40df487c5e64a96d5a98a2a960143957b87f44abc890a07e",
+    "backend/app/search/constraints.py": "f882440e448b1b516c3e311f543bc5d783c27cab5ecbc7f0be64733c01e4618d",
     "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
-    "backend/app/search/corpus.py": "bf9dc7dfa83787eaafe5feaf4793916075dc952d25353cbc98821edb9f15190d",
+    "backend/app/search/corpus.py": "1dea27079bf5c0971e42d8780634472f51de1e58a549c66558d5482c9166c897",
     "backend/app/search/embedding.py": "53e22e10e6ac84298065eeaf7ff09126e9335ffbdd8808ef0fe69f5a61c76818",
-    "backend/app/search/hybrid.py": "c2cdc85f491bca22b022dfec119b19815db138c4e4f45ba91c632f627133cb33",
+    "backend/app/search/hybrid.py": "5c6e1b6705966271c74cbb6f638a9112a742919a7cc51a22cb3abda2da17991c",
     "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
-    "backend/app/search/message_types.py": "018e6b9ac0d42eeae80832520b970bea5b5003358a5538f98025235469a48f70",
     "backend/app/search/model_config.py": "4701604455ababc259460c1419a7991b2f07019fa356071f91d6321ff2786b53",
+    "backend/app/search/query_text.py": "e72ba2b2ff39c48bfdf45cc31844db6856507ca90d07fa3a979a65ebc76d872a",
     "backend/app/search/ranking_config.py": "1f9a0ac8c0694c426f1058b1ca32b2a2342ee343f28576765aaf22212d7cced3",
     "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
     "evaluation/evaluate.py": "4ad9219c30d4bdee3e8b126c248c214071b8101f0f56023692e652f9b79a5067",
@@ -178,7 +178,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-17T21:33:00+05:30",
               "text": "5 pm. trip chat ke beech panic mat failao 😭",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -186,7 +185,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-17T21:36:14+05:30",
               "text": "I still prefer sea, but 10900 is a lot",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -194,7 +192,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-17T21:41:06+05:30",
               "text": "June mein rain contingency bhi sochna padega for either place",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -202,7 +199,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-17T21:45:40+05:30",
               "text": "If roads look unsafe we cancel, no heroic driving plan",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -210,7 +206,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-17T21:49:18+05:30",
               "text": "Agreed. Refundable room hold only, nobody pay yet",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -237,7 +232,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-17T21:36:14+05:30",
               "text": "I still prefer sea, but 10900 is a lot",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -245,7 +239,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-17T21:41:06+05:30",
               "text": "June mein rain contingency bhi sochna padega for either place",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -253,7 +246,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-17T21:45:40+05:30",
               "text": "If roads look unsafe we cancel, no heroic driving plan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -261,7 +253,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-17T21:49:18+05:30",
               "text": "Agreed. Refundable room hold only, nobody pay yet",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -289,7 +280,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-28T20:44:51+05:30",
               "text": "Return June 15 morning works for me, checked family calendar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -297,7 +287,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-28T20:47:26+05:30",
               "text": "8700 ceiling includes a 700 emergency buffer, not shopping",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -305,7 +294,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-28T20:51:28+05:30",
               "text": "do we need jackets in june or hoodie enough",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -313,7 +301,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-28T20:53:33+05:30",
               "text": "layers le jana. Weather packing list baad mein bhejungi",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -321,7 +308,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T20:56:16+05:30",
               "text": "[Image] my beach wallpaper has officially been betrayed",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -363,7 +349,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-11T13:07:00+05:30",
               "text": "volunteer orientation rehearsal aaj, the sports ground available?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -371,7 +356,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-11T13:08:20+05:30",
               "text": "there was another group there earlier",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -379,7 +363,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-11T13:09:50+05:30",
               "text": "ask the coordinator before moving their equipment",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -405,7 +388,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-19T13:21:40+05:30",
               "text": "ohhh yes. copied assumption from yesterday's exercise lol",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -413,7 +395,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-08-19T13:23:04+05:30",
               "text": "add that case before fixing, warna wapas aayega 😅",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -421,7 +402,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-19T13:25:49+05:30",
               "text": "done, thanks. almost laptop ko blame kar diya",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -449,7 +429,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-11T13:07:00+05:30",
               "text": "volunteer orientation rehearsal aaj, the sports ground available?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -457,7 +436,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-11T13:08:20+05:30",
               "text": "there was another group there earlier",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -465,7 +443,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-11T13:09:50+05:30",
               "text": "ask the coordinator before moving their equipment",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -473,7 +450,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-11T13:13:02+05:30",
               "text": "i'll check at 8:30 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -481,7 +457,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-11T13:15:35+05:30",
               "text": "thanks, meanwhile practise without speakers",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -525,7 +500,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-02T19:31:09+05:30",
               "text": "Delhi rest stop remains in the itinerary, not removing it to save 300",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -533,7 +507,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-02T19:33:35+05:30",
               "text": "I saw another Goa deal but ignoring it. We already chose the hills",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -541,7 +514,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-02T19:38:15+05:30",
               "text": "good. lets stop reopening the poll every time an ad appears",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -549,7 +521,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -557,7 +528,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -585,7 +555,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:27:06+05:30",
               "text": "with me, thought it was mine. sorryyy",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -593,7 +562,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-02T19:31:09+05:30",
               "text": "Delhi rest stop remains in the itinerary, not removing it to save 300",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -601,7 +569,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-02T19:33:35+05:30",
               "text": "I saw another Goa deal but ignoring it. We already chose the hills",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -609,7 +576,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-02T19:38:15+05:30",
               "text": "good. lets stop reopening the poll every time an ad appears",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -617,7 +583,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             }
           ],
@@ -645,7 +610,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-23T18:53:26+05:30",
               "text": "walk back, I'll keep dinner. My vote is hills within 9k",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -653,7 +617,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-23T18:57:51+05:30",
               "text": "With Delhi rest stop I'm okay with that route",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -661,7 +624,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-23T19:00:48+05:30",
               "text": "fine yaar sea next time. don't book without cancellation clause",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -669,7 +631,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-23T19:03:05+05:30",
               "text": "Goa rejected for this break because total exceeds our cap",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -677,7 +638,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-23T19:05:40+05:30",
               "text": "We have agreement on constraints; final dates and deposit still pending",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -720,7 +680,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-22T08:12:00+05:30",
               "text": "phone battery 5% and charger at home. incredible planning",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -728,7 +687,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-22T08:13:45+05:30",
               "text": "meet me near the library entrance, powerbank hai 🙃",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -736,7 +694,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-22T08:16:11+05:30",
               "text": "bring cable yourself, theirs is ancient",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -744,7 +701,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-22T08:16:45+05:30",
               "text": "type c hai mere paas",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -771,7 +727,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-01T12:07:00+05:30",
               "text": "phone battery 2% and charger at home. incredible planning",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -779,7 +734,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-01T12:08:05+05:30",
               "text": "meet me near the library entrance, powerbank hai",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -787,7 +741,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-01T12:11:13+05:30",
               "text": "bring cable yourself, theirs is ancient",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -795,7 +748,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-01T12:12:58+05:30",
               "text": "type c hai mere paas",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -821,7 +773,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-22T08:12:00+05:30",
               "text": "phone battery 5% and charger at home. incredible planning",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -829,7 +780,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-22T08:13:45+05:30",
               "text": "meet me near the library entrance, powerbank hai 🙃",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -837,7 +787,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-22T08:16:11+05:30",
               "text": "bring cable yourself, theirs is ancient",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -881,7 +830,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-06T20:44:46+05:30",
               "text": "Let's compare rooftop, bowling, hostel common room, and cafe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -889,7 +837,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-06T20:49:25+05:30",
               "text": "yes. I'm part of planning, don't hide the spreadsheet from me",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -897,7 +844,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-06T21:07:00+05:30",
               "text": "[PDF] draft volunteer orientation session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": true
             },
             {
@@ -905,7 +851,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-06T21:09:28+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -913,7 +858,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-06T21:10:55+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -939,7 +883,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-08-03T08:03:00+05:30",
               "text": "[PDF] draft volunteer orientation session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": true
             },
             {
@@ -947,7 +890,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-08-03T08:04:52+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -955,7 +897,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-08-03T08:07:28+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -981,7 +922,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-06-27T12:06:00+05:30",
               "text": "community volunteer orientation session this evening at the bus stop, anyone free?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -989,7 +929,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-06-27T12:07:38+05:30",
               "text": "beginner allowed? I'm genuinely terrible",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -997,7 +936,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-06-27T12:09:43+05:30",
               "text": "that's half of us, aa jao",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1039,7 +977,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-14T21:00:00+05:30",
               "text": "Hostel common room can't allow outside students after 6 that day",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1047,7 +984,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:03:00+05:30",
               "text": "internship practice task: deadlock example in JavaScript, little demo only",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1055,7 +991,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-14T21:03:41+05:30",
               "text": "real company data toh nahi use kar rahe?",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1083,7 +1018,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-10T19:32:32+05:30",
               "text": "Common room is free if warden approves visitors",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1091,7 +1025,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-10T19:36:05+05:30",
               "text": "Can day scholars enter after 7? rule was changed last semester",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1099,7 +1032,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-10T19:38:06+05:30",
               "text": "I'll ask, don't assume. Also canteen closes early on Saturdays",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1107,7 +1039,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-10T19:41:52+05:30",
               "text": "[Image] orange cat occupying my entire chair",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -1115,7 +1046,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-10T19:44:12+05:30",
               "text": "invite cat, budget unchanged",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1143,7 +1073,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-10T19:27:20+05:30",
               "text": "2560 leaves 440 for cake AND food for eight. impossible",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1151,7 +1080,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-10T19:29:49+05:30",
               "text": "Skip bowling too, I want time to talk anyway",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1159,7 +1087,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-10T19:32:32+05:30",
               "text": "Common room is free if warden approves visitors",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1167,7 +1094,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-10T19:36:05+05:30",
               "text": "Can day scholars enter after 7? rule was changed last semester",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1175,7 +1101,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-10T19:38:06+05:30",
               "text": "I'll ask, don't assume. Also canteen closes early on Saturdays",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1218,7 +1143,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-10T12:02:00+05:30",
               "text": "[PDF] draft badminton session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -1226,7 +1150,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-10T12:04:52+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1234,7 +1157,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-10T12:06:12+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1242,7 +1164,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-10T12:09:42+05:30",
               "text": "is the canteen accessible without stairs?",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1268,7 +1189,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-11T13:07:00+05:30",
               "text": "volunteer orientation rehearsal aaj, the sports ground available?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1276,7 +1196,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-11T13:08:20+05:30",
               "text": "there was another group there earlier",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1284,7 +1203,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-11T13:09:50+05:30",
               "text": "ask the coordinator before moving their equipment",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1310,7 +1228,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-09T21:00:00+05:30",
               "text": "badminton rehearsal aaj, the canteen available?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1318,7 +1235,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-09T21:01:42+05:30",
               "text": "there was another group there earlier",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1326,7 +1242,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-09T21:03:30+05:30",
               "text": "ask the coordinator before moving their equipment",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1370,7 +1285,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-10T19:15:00+05:30",
               "text": "Sky Lantern quote is 650 per person, before birthday cake",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1378,7 +1292,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-10T19:19:49+05:30",
               "text": "5200 before cake. Rooftop rejected, way above 3000",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1386,7 +1299,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-10T19:23:38+05:30",
               "text": "Bowling student slot 320 each, food separate",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1394,7 +1306,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-10T19:27:20+05:30",
               "text": "2560 leaves 440 for cake AND food for eight. impossible",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1402,7 +1313,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-10T19:29:49+05:30",
               "text": "Skip bowling too, I want time to talk anyway",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1430,7 +1340,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1438,7 +1347,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1446,7 +1354,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": true
             },
             {
@@ -1454,7 +1361,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1462,7 +1368,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1490,7 +1395,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -1498,7 +1402,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1506,7 +1409,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1514,7 +1416,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T21:06:00+05:30",
               "text": "good morning",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1522,7 +1423,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:08:55+05:30",
               "text": "it's 9:45 pm",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1564,7 +1464,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1572,7 +1471,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:49:04+05:30",
               "text": "Budget unchanged. Any optional activity comes out of personal spending",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1580,7 +1478,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:53:19+05:30",
               "text": "done. Next trip discussion only for packing or safety updates",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -1607,7 +1504,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -1615,7 +1511,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1623,7 +1518,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:49:04+05:30",
               "text": "Budget unchanged. Any optional activity comes out of personal spending",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1631,7 +1525,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:53:19+05:30",
               "text": "done. Next trip discussion only for packing or safety updates",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1659,7 +1552,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T22:18:03+05:30",
               "text": "Cake was 500 as quoted, no extra box charge",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1667,7 +1559,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-25T22:22:10+05:30",
               "text": "Cafe bill 2400, same as reservation. Kept the receipt",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1675,7 +1566,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-25T22:24:37+05:30",
               "text": "Actual total 2900, equal shares 362.50. No buffer spent",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1683,7 +1573,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-25T22:26:55+05:30",
               "text": "and not a single wet lawn chair, amazing",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1691,7 +1580,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-25T22:30:14+05:30",
               "text": "[Image] eight plates and one badly cut cake",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -1735,7 +1623,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-17T21:33:00+05:30",
               "text": "5 pm. trip chat ke beech panic mat failao 😭",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1743,7 +1630,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-17T21:36:14+05:30",
               "text": "I still prefer sea, but 10900 is a lot",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1751,7 +1637,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-17T21:41:06+05:30",
               "text": "June mein rain contingency bhi sochna padega for either place",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1759,7 +1644,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-17T21:45:40+05:30",
               "text": "If roads look unsafe we cancel, no heroic driving plan",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1767,7 +1651,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-17T21:49:18+05:30",
               "text": "Agreed. Refundable room hold only, nobody pay yet",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1793,7 +1676,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-06-18T21:05:00+05:30",
               "text": "local walk near home today, no big travel plan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1801,7 +1683,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-06-18T21:07:58+05:30",
               "text": "photos?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1809,7 +1690,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-06-18T21:10:56+05:30",
               "text": "[Image] quiet lane after evening rain",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -1835,7 +1715,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-06-26T21:11:00+05:30",
               "text": "local walk near home today, no big travel plan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1843,7 +1722,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-06-26T21:12:59+05:30",
               "text": "photos?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1851,7 +1729,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-06-26T21:16:25+05:30",
               "text": "[Image] quiet lane after evening rain",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -1894,7 +1771,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -1902,7 +1778,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1910,7 +1785,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:49:04+05:30",
               "text": "Budget unchanged. Any optional activity comes out of personal spending",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1918,7 +1792,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:53:19+05:30",
               "text": "done. Next trip discussion only for packing or safety updates",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -1946,7 +1819,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-23T18:41:05+05:30",
               "text": "shared cabs eat the saving. I'd rather not split the group daily",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1954,7 +1826,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-23T18:43:34+05:30",
               "text": "Could postpone to December instead?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1962,7 +1833,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-23T18:48:01+05:30",
               "text": "then internships and everyone's separate dates. June overlap is rare",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -1970,7 +1840,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-23T18:50:25+05:30",
               "text": "meri cycle ki chain phir utar gayi, wonderful timing",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -1978,7 +1847,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-23T18:53:26+05:30",
               "text": "walk back, I'll keep dinner. My vote is hills within 9k",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2006,7 +1874,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-23T18:38:09+05:30",
               "text": "Still 9900 in your sheet, plus two people can't ride",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2014,7 +1881,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-23T18:41:05+05:30",
               "text": "shared cabs eat the saving. I'd rather not split the group daily",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2022,7 +1888,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-23T18:43:34+05:30",
               "text": "Could postpone to December instead?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2030,7 +1895,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-23T18:48:01+05:30",
               "text": "then internships and everyone's separate dates. June overlap is rare",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2038,7 +1902,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-23T18:50:25+05:30",
               "text": "meri cycle ki chain phir utar gayi, wonderful timing",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2081,7 +1944,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-19T21:38:26+05:30",
               "text": "SQLite supports the tiny offline demo. Why a separate database server?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2089,7 +1951,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-19T21:41:52+05:30",
               "text": "For this scope I don't have a reason. MERN was just familiarity",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2097,7 +1958,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-19T21:46:30+05:30",
               "text": "We should write down the rejected options so we don't circle back",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2105,7 +1965,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-19T21:49:05+05:30",
               "text": "Yes, but pick after testing a clean laptop launch",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2131,7 +1990,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-05-03T18:40:00+05:30",
               "text": "LostLoop now launches from the README on a fresh folder",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2139,7 +1997,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-05-03T18:44:17+05:30",
               "text": "Someone asked why no Mongo. We already settled on a local SQL file",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2147,7 +2004,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-03T18:46:54+05:30",
               "text": "Please don't add a second database over the weekend",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2174,7 +2030,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-05-03T18:40:00+05:30",
               "text": "LostLoop now launches from the README on a fresh folder",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2182,7 +2037,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-05-03T18:44:17+05:30",
               "text": "Someone asked why no Mongo. We already settled on a local SQL file",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2190,7 +2044,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-03T18:46:54+05:30",
               "text": "Please don't add a second database over the weekend",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2198,7 +2051,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-05-03T18:49:18+05:30",
               "text": "[Image] final claim status card: pending, approved, declined",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -2242,7 +2094,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2250,7 +2101,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2258,7 +2108,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2266,7 +2115,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -2274,7 +2122,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2302,7 +2149,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-21T20:41:39+05:30",
               "text": "no rooftop rain roulette, good choice",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2310,7 +2156,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2318,7 +2163,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2326,7 +2170,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2334,7 +2177,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2362,7 +2204,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2370,7 +2211,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2378,7 +2218,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2386,7 +2225,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2394,7 +2232,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -2436,7 +2273,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-19T21:41:52+05:30",
               "text": "For this scope I don't have a reason. MERN was just familiarity",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2444,7 +2280,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-19T21:46:30+05:30",
               "text": "We should write down the rejected options so we don't circle back",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2452,7 +2287,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-19T21:49:05+05:30",
               "text": "Yes, but pick after testing a clean laptop launch",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -2478,7 +2312,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-01T08:23:59+05:30",
               "text": "ohhh yes. copied assumption from kal's exercise yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2486,7 +2319,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-06-01T08:26:44+05:30",
               "text": "add that case before fixing, warna wapas aayega",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2494,7 +2326,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-01T08:27:24+05:30",
               "text": "done, thanks. almost laptop ko blame kar diya",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -2520,7 +2351,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-26T08:22:47+05:30",
               "text": "ohhh yes. copied assumption from kal's exercise",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2528,7 +2358,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-26T08:24:05+05:30",
               "text": "add that case before fixing, warna wapas aayega",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2536,7 +2365,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-26T08:27:06+05:30",
               "text": "done, thnks. almost laptop ko blame kar diya",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -2580,7 +2408,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2588,7 +2415,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -2596,7 +2422,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2604,7 +2429,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2612,7 +2436,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T21:06:00+05:30",
               "text": "good morning",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2640,7 +2463,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2648,7 +2470,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2656,7 +2477,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": true
             },
             {
@@ -2664,7 +2484,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2672,7 +2491,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2700,7 +2518,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2708,7 +2525,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2716,7 +2532,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2724,7 +2539,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -2732,7 +2546,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2776,7 +2589,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-25T22:10:00+05:30",
               "text": "Home! thank you all, exactly the quiet birthday I wanted 🥹",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2784,7 +2596,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-25T22:13:55+05:30",
               "text": "Reached hostel, sending photos after charging",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2792,7 +2603,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T22:18:03+05:30",
               "text": "Cake was 500 as quoted, no extra box charge",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2800,7 +2610,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-25T22:22:10+05:30",
               "text": "Cafe bill 2400, same as reservation. Kept the receipt",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2808,7 +2617,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-25T22:24:37+05:30",
               "text": "Actual total 2900, equal shares 362.50. No buffer spent",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2836,7 +2644,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2844,7 +2651,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2852,7 +2658,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2860,7 +2665,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -2868,7 +2672,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -2896,7 +2699,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2904,7 +2706,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2912,7 +2713,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2920,7 +2720,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2928,7 +2727,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -2972,7 +2770,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-08T08:05:00+05:30",
               "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -2980,7 +2777,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-08T08:08:21+05:30",
               "text": "please dont rely on this",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -2988,7 +2784,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-08T08:09:17+05:30",
               "text": "half of it isn't even our syllabus",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -2996,7 +2791,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-08T08:11:41+05:30",
               "text": "use our tutor's class outline instead",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3004,7 +2798,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-08T08:14:21+05:30",
               "text": "agreed, sharing only to warn, not as actual answers",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3032,7 +2825,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-23T08:10:00+05:30",
               "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -3040,7 +2832,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-23T08:12:24+05:30",
               "text": "Please don't rely on this",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3048,7 +2839,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-23T08:14:15+05:30",
               "text": "half of it isn't even our syllabus",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3056,7 +2846,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-23T08:17:06+05:30",
               "text": "use the lab instructor's class outline instead",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3064,7 +2853,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-23T08:20:24+05:30",
               "text": "agreed, sharing only to warn, not as actual answers",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3090,7 +2878,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-23T08:10:00+05:30",
               "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
-              "message_type": "forwarded",
               "is_current": true
             },
             {
@@ -3098,7 +2885,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-23T08:12:24+05:30",
               "text": "Please don't rely on this",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3106,7 +2892,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-23T08:14:15+05:30",
               "text": "half of it isn't even our syllabus",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3150,7 +2935,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-14T18:39:19+05:30",
               "text": "[Voice message] rambling idea about a QR sticker on every lost item",
-              "message_type": "voice",
               "is_current": false
             },
             {
@@ -3158,7 +2942,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-14T18:41:43+05:30",
               "text": "QR as optional later. Core claim flow first please",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3166,7 +2949,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-14T18:44:45+05:30",
               "text": "Anyone coming for dosa? I ordered too much",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3174,7 +2956,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-14T18:47:45+05:30",
               "text": "save one. Local file db could solve the demo setup problem",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3182,7 +2963,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-14T18:50:35+05:30",
               "text": "Express still okay? I know the routing bits",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3210,7 +2990,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-04T08:15:41+05:30",
               "text": "black, has a small scratch on one side",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3218,7 +2997,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-04T08:17:29+05:30",
               "text": "mine maybe, I'll describe the sticker privately lol",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3226,7 +3004,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-04T08:20:35+05:30",
               "text": "do not leave it unattended there",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3234,7 +3011,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-04T08:21:35+05:30",
               "text": "handing it to the desk staff, ask them at 7 pm lol",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3242,7 +3018,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-04T08:23:54+05:30",
               "text": "thanks!",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3270,7 +3045,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-25T12:02:46+05:30",
               "text": "black, has a small scratch on one side 🙃",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3278,7 +3052,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T12:04:42+05:30",
               "text": "mine maybe, I'll describe the sticker privately",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3286,7 +3059,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-25T12:06:38+05:30",
               "text": "don't leave it unattended there lol",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3294,7 +3066,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-25T12:08:03+05:30",
               "text": "handing it to the desk staff, ask them at 5 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3302,7 +3073,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T12:10:35+05:30",
               "text": "thanks!",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3346,7 +3116,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:21:39+05:30",
               "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3354,7 +3123,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:24:18+05:30",
               "text": "Cake allowed from outside?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3362,7 +3130,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:26:41+05:30",
               "text": "Yes if we clean up; no decoration on walls",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3370,7 +3137,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-14T21:29:08+05:30",
               "text": "wifi went again, sending from mobile data. sorry if duplicate",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3378,7 +3144,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-14T21:33:41+05:30",
               "text": "Need tax included in 2400 and exact snack portions confirmed",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3406,7 +3171,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-14T21:16:55+05:30",
               "text": "Please don't split. We only get all eight together sometimes",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3414,7 +3178,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:21:39+05:30",
               "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3422,7 +3185,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:24:18+05:30",
               "text": "Cake allowed from outside?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3430,7 +3192,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:26:41+05:30",
               "text": "Yes if we clean up; no decoration on walls",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3438,7 +3199,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-14T21:29:08+05:30",
               "text": "wifi went again, sending from mobile data. sorry if duplicate",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3466,7 +3226,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:13:28+05:30",
               "text": "done, I'll clean it up after 9:45 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3474,7 +3233,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-14T21:16:55+05:30",
               "text": "Please don't split. We only get all eight together sometimes",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3482,7 +3240,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:21:39+05:30",
               "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3490,7 +3247,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:24:18+05:30",
               "text": "Cake allowed from outside?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3498,7 +3254,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:26:41+05:30",
               "text": "Yes if we clean up; no decoration on walls",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3542,7 +3297,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3550,7 +3304,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -3558,7 +3311,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3566,7 +3318,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3574,7 +3325,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T21:06:00+05:30",
               "text": "good morning",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3602,7 +3352,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3610,7 +3359,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3618,7 +3366,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": true
             },
             {
@@ -3626,7 +3373,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3634,7 +3380,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3662,7 +3407,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3670,7 +3414,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3678,7 +3421,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3686,7 +3428,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -3694,7 +3435,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3738,7 +3478,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:18:04+05:30",
               "text": "Ananya Sneha and me in room A, sorting the other five now",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3746,7 +3485,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-02T19:22:42+05:30",
               "text": "who took my blue notebook from lab",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3754,7 +3492,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:27:06+05:30",
               "text": "with me, thought it was mine. sorryyy",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3762,7 +3499,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-02T19:31:09+05:30",
               "text": "Delhi rest stop remains in the itinerary, not removing it to save 300",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3770,7 +3506,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-02T19:33:35+05:30",
               "text": "I saw another Goa deal but ignoring it. We already chose the hills",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3798,7 +3533,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:13:48+05:30",
               "text": "Please don't change the room allocation without checking with Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3806,7 +3540,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:18:04+05:30",
               "text": "Ananya Sneha and me in room A, sorting the other five now",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3814,7 +3547,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-02T19:22:42+05:30",
               "text": "who took my blue notebook from lab",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3822,7 +3554,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:27:06+05:30",
               "text": "with me, thought it was mine. sorryyy",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3830,7 +3561,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-04-02T19:31:09+05:30",
               "text": "Delhi rest stop remains in the itinerary, not removing it to save 300",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3858,7 +3588,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-23T18:53:26+05:30",
               "text": "walk back, I'll keep dinner. My vote is hills within 9k",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3866,7 +3595,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-23T18:57:51+05:30",
               "text": "With Delhi rest stop I'm okay with that route",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3874,7 +3602,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-23T19:00:48+05:30",
               "text": "fine yaar sea next time. don't book without cancellation clause",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3882,7 +3609,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-23T19:03:05+05:30",
               "text": "Goa rejected for this break because total exceeds our cap",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3890,7 +3616,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-23T19:05:40+05:30",
               "text": "We have agreement on constraints; final dates and deposit still pending",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3932,7 +3657,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-12T19:20:00+05:30",
               "text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -3940,7 +3664,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-12T19:24:43+05:30",
               "text": "10400 already, aur buffer? mera absolute limit 9000 hai",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3948,7 +3671,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-12T19:28:40+05:30",
               "text": "Goa waala reel bola 5k mein sab 😅",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -3976,7 +3698,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-28T21:13:19+05:30",
               "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3984,7 +3705,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-28T21:16:00+05:30",
               "text": "we can look after 9:30 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -3992,7 +3712,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4000,7 +3719,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4008,7 +3726,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:20:37+05:30",
               "text": "done, mountains it is 🏔️",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4035,7 +3752,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-12T19:20:00+05:30",
               "text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4043,7 +3759,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-12T19:24:43+05:30",
               "text": "10400 already, aur buffer? mera absolute limit 9000 hai",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4051,7 +3766,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-12T19:28:40+05:30",
               "text": "Goa waala reel bola 5k mein sab 😅",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4059,7 +3773,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-12T19:31:15+05:30",
               "text": "that reel starts from Mumbai, hum Indore mein hain",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4101,7 +3814,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4109,7 +3821,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4117,7 +3828,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:20:37+05:30",
               "text": "done, mountains it is 🏔️",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -4144,7 +3854,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-28T21:16:00+05:30",
               "text": "we can look after 9:30 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4152,7 +3861,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4160,7 +3868,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4168,7 +3875,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:20:37+05:30",
               "text": "done, mountains it is 🏔️",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4195,7 +3901,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -4203,7 +3908,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4211,7 +3915,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:49:04+05:30",
               "text": "Budget unchanged. Any optional activity comes out of personal spending",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4219,7 +3922,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:53:19+05:30",
               "text": "done. Next trip discussion only for packing or safety updates",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4261,7 +3963,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-08-03T08:03:00+05:30",
               "text": "[PDF] draft volunteer orientation session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": true
             },
             {
@@ -4269,7 +3970,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-08-03T08:04:52+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4277,7 +3977,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-08-03T08:07:28+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4305,7 +4004,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-06T20:44:46+05:30",
               "text": "Let's compare rooftop, bowling, hostel common room, and cafe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4313,7 +4011,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-06T20:49:25+05:30",
               "text": "yes. I'm part of planning, don't hide the spreadsheet from me",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4321,7 +4018,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-06T21:07:00+05:30",
               "text": "[PDF] draft volunteer orientation session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": true
             },
             {
@@ -4329,7 +4025,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-06T21:09:28+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4337,7 +4032,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-06T21:10:55+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4365,7 +4059,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-08-03T08:03:00+05:30",
               "text": "[PDF] draft volunteer orientation session checklist, still needs review",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -4373,7 +4066,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-08-03T08:04:52+05:30",
               "text": "extension board missing from list",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4381,7 +4073,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-08-03T08:07:28+05:30",
               "text": "and drinking water, every time we forget",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4389,7 +4080,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-03T08:10:18+05:30",
               "text": "is the bus stop accessible without stairs?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4397,7 +4087,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-08-03T08:12:02+05:30",
               "text": "there's a ramp through side entrance, will confirm it's open",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4439,7 +4128,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-05-22T08:14:39+05:30",
               "text": "ohhh yes. copied assumption from kal's exercise",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4447,7 +4135,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-05-22T08:15:57+05:30",
               "text": "add that case before fixing, warna wapas aayega",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4455,7 +4142,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-05-22T08:17:14+05:30",
               "text": "done, shukriya. almost laptop ko blame kar diya 😅",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -4481,7 +4167,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-26T08:22:47+05:30",
               "text": "ohhh yes. copied assumption from kal's exercise",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4489,7 +4174,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-26T08:24:05+05:30",
               "text": "add that case before fixing, warna wapas aayega",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4497,7 +4181,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-26T08:27:06+05:30",
               "text": "done, thnks. almost laptop ko blame kar diya",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -4523,7 +4206,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-01T08:23:59+05:30",
               "text": "ohhh yes. copied assumption from kal's exercise yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4531,7 +4213,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-06-01T08:26:44+05:30",
               "text": "add that case before fixing, warna wapas aayega",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4539,7 +4220,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-01T08:27:24+05:30",
               "text": "done, thanks. almost laptop ko blame kar diya",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -4583,7 +4263,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-24T19:39:58+05:30",
               "text": "The big Python framework adds admin config we won't use. I'd drop it",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4591,7 +4270,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-24T19:44:13+05:30",
               "text": "Any reason to keep Mongo now? claim approval is transactional",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4599,7 +4277,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-24T19:48:11+05:30",
               "text": "No. Let's use SQL tables and include a small seed fixture",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4607,7 +4284,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-24T19:51:28+05:30",
               "text": "[Image] three possible claim-form layouts, vote for readability pls",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -4615,7 +4291,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-04-24T19:54:00+05:30",
               "text": "middle one, first looks like railway form",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4643,7 +4318,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-24T19:35:38+05:30",
               "text": "Flutter rejected too, responsive web is enough for judges",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4651,7 +4325,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-24T19:39:58+05:30",
               "text": "The big Python framework adds admin config we won't use. I'd drop it",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4659,7 +4332,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-24T19:44:13+05:30",
               "text": "Any reason to keep Mongo now? claim approval is transactional",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4667,7 +4339,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-24T19:48:11+05:30",
               "text": "No. Let's use SQL tables and include a small seed fixture",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4675,7 +4346,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-24T19:51:28+05:30",
               "text": "[Image] three possible claim-form layouts, vote for readability pls",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -4703,7 +4373,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-24T19:33:19+05:30",
               "text": "Firebase rejected for demo because offline requirement is real",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4711,7 +4380,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-24T19:35:38+05:30",
               "text": "Flutter rejected too, responsive web is enough for judges",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4719,7 +4387,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-24T19:39:58+05:30",
               "text": "The big Python framework adds admin config we won't use. I'd drop it",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4727,7 +4394,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-24T19:44:13+05:30",
               "text": "Any reason to keep Mongo now? claim approval is transactional",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4735,7 +4401,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-24T19:48:11+05:30",
               "text": "No. Let's use SQL tables and include a small seed fixture",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4779,7 +4444,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-25T22:33:58+05:30",
               "text": "we did geometry all semester for THIS cutting 😭",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4787,7 +4451,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-25T22:38:50+05:30",
               "text": "The card is staying on my desk. Even Kabir's spelling",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4795,7 +4458,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-25T22:42:07+05:30",
               "text": "birhtday is a design choice",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4803,7 +4465,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T22:46:14+05:30",
               "text": "😂",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4811,7 +4472,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-25T22:50:08+05:30",
               "text": "Budget closed, receipt in shared folder. Thanks for keeping it simple",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4837,7 +4497,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-05-24T08:05:00+05:30",
               "text": "software Engineering revision start ki ya everyone pretending",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -4845,7 +4504,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-24T08:05:33+05:30",
               "text": "opened syllabus, closed it, progress",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4853,7 +4511,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-05-24T08:08:18+05:30",
               "text": "sequence diagram is my weak area",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4879,7 +4536,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-20T21:11:24+05:30",
               "text": "cat chooses box, human gets freedom",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4887,7 +4543,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-05-20T21:11:55+05:30",
               "text": "worked tbh",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4895,7 +4550,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-05-20T21:14:30+05:30",
               "text": "strong debugging skills",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -4939,7 +4593,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4947,7 +4600,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4955,7 +4607,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": true
             },
             {
@@ -4963,7 +4614,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -4971,7 +4621,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -4999,7 +4648,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-14T21:13:13+05:30",
               "text": "Then common room also out unless we split group, which we won't",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5007,7 +4655,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:13:28+05:30",
               "text": "done, I'll clean it up after 9:45 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5015,7 +4662,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-14T21:16:55+05:30",
               "text": "Please don't split. We only get all eight together sometimes",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5023,7 +4669,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-14T21:21:39+05:30",
               "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5031,7 +4676,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-14T21:24:18+05:30",
               "text": "Cake allowed from outside?",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5059,7 +4703,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5067,7 +4710,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -5075,7 +4717,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5083,7 +4724,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T21:04:02+05:30",
               "text": "Room reserved. No more venue polls",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5091,7 +4731,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T21:06:00+05:30",
               "text": "good morning",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5135,7 +4774,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-12T19:31:15+05:30",
               "text": "that reel starts from Mumbai, hum Indore mein hain",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5143,7 +4781,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-12T19:34:02+05:30",
               "text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5151,7 +4788,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-12T19:37:44+05:30",
               "text": "overnight buses do back to back honge? motion sickness hoti hai mujhe",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5159,7 +4795,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-12T19:42:28+05:30",
               "text": "[Image] mess ka aaj ka mysterious orange sabzi",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -5167,7 +4802,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-12T19:44:48+05:30",
               "text": "yeh food hai ya compiler warning 😂",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5195,7 +4829,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-12T19:28:40+05:30",
               "text": "Goa waala reel bola 5k mein sab 😅",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5203,7 +4836,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-12T19:31:15+05:30",
               "text": "that reel starts from Mumbai, hum Indore mein hain",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5211,7 +4843,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-12T19:34:02+05:30",
               "text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5219,7 +4850,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-12T19:37:44+05:30",
               "text": "overnight buses do back to back honge? motion sickness hoti hai mujhe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5227,7 +4857,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-12T19:42:28+05:30",
               "text": "[Image] mess ka aaj ka mysterious orange sabzi",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -5255,7 +4884,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-12T19:34:02+05:30",
               "text": "Manali quote via Delhi approx 8200 including bus and shared rooms",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5263,7 +4891,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-03-12T19:37:44+05:30",
               "text": "overnight buses do back to back honge? motion sickness hoti hai mujhe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5271,7 +4898,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-12T19:42:28+05:30",
               "text": "[Image] mess ka aaj ka mysterious orange sabzi",
-              "message_type": "image",
               "is_current": true
             },
             {
@@ -5279,7 +4905,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-12T19:44:48+05:30",
               "text": "yeh food hai ya compiler warning 😂",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5287,7 +4912,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-12T19:47:13+05:30",
               "text": "Goa train sleeper try karu toh 1200 bach sakta hai",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5331,7 +4955,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T20:38:43+05:30",
               "text": "yes all eight plates veg, confirmed in quote",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5339,7 +4962,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-21T20:41:39+05:30",
               "text": "no rooftop rain roulette, good choice",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5347,7 +4969,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5355,7 +4976,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5363,7 +4983,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5391,7 +5010,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:34:41+05:30",
               "text": "me too. vegetarian snacks only right?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5399,7 +5017,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T20:38:43+05:30",
               "text": "yes all eight plates veg, confirmed in quote",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5407,7 +5024,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-21T20:41:39+05:30",
               "text": "no rooftop rain roulette, good choice",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5415,7 +5031,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5423,7 +5038,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5451,7 +5065,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-25T22:18:03+05:30",
               "text": "Cake was 500 as quoted, no extra box charge",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5459,7 +5072,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-25T22:22:10+05:30",
               "text": "Cafe bill 2400, same as reservation. Kept the receipt",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5467,7 +5079,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-25T22:24:37+05:30",
               "text": "Actual total 2900, equal shares 362.50. No buffer spent",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5475,7 +5086,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-25T22:26:55+05:30",
               "text": "and not a single wet lawn chair, amazing",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5483,7 +5093,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-25T22:30:14+05:30",
               "text": "[Image] eight plates and one badly cut cake",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -5526,7 +5135,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:42:42+05:30",
               "text": "[PDF] June hill-trip itinerary revision 3, with refund notes",
-              "message_type": "pdf",
               "is_current": false
             },
             {
@@ -5534,7 +5142,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:45:55+05:30",
               "text": "downloaded",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5542,7 +5149,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:49:04+05:30",
               "text": "Budget unchanged. Any optional activity comes out of personal spending",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5550,7 +5156,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:53:19+05:30",
               "text": "done. Next trip discussion only for packing or safety updates",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5578,7 +5183,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-08T20:37:13+05:30",
               "text": "I can do those dates if return is by Monday morning",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5586,7 +5190,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-08T20:40:58+05:30",
               "text": "No booking yet. Compare both with food and local transport included.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5594,7 +5197,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-08T20:43:53+05:30",
               "text": "haan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5602,7 +5204,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-08T20:46:21+05:30",
               "text": "ok spreadsheet banaunga, abhi poll ko final mat samajhna",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5610,7 +5211,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-08T21:09:00+05:30",
               "text": "ordered veg momos, got somebody else's parcel",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5636,7 +5236,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:10:00+05:30",
               "text": "Trip update: all eight deposits marked received in our plan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5644,7 +5243,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:13:48+05:30",
               "text": "Please don't change the room allocation without checking with Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5652,7 +5250,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:18:04+05:30",
               "text": "Ananya Sneha and me in room A, sorting the other five now",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5696,7 +5293,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-02T08:08:58+05:30",
               "text": "under the same pile you said you checked yesterday?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5704,7 +5300,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-02T08:09:26+05:30",
               "text": "maybe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5712,7 +5307,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-02T08:10:39+05:30",
               "text": "congratulations to the search committee",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5720,7 +5314,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-02T08:12:22+05:30",
               "text": "I should clean mine, found a receipt from March",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5728,7 +5321,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-02T08:15:48+05:30",
               "text": "keep receipts till expenses settled, then sort",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5756,7 +5348,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-15T08:05:57+05:30",
               "text": "under the same pile you said you checked yesterday?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5764,7 +5355,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-15T08:07:41+05:30",
               "text": "maybe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5772,7 +5362,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-03-15T08:09:44+05:30",
               "text": "congratulations to the search committee",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5780,7 +5369,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-03-15T08:10:38+05:30",
               "text": "I should clean mine, found a receipt from March",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5788,7 +5376,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-03-15T08:12:38+05:30",
               "text": "keep receipts till expenses settled, then sort",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5816,7 +5403,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-06-12T08:09:56+05:30",
               "text": "under the same pile you said you checked yesterday?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5824,7 +5410,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-06-12T08:12:22+05:30",
               "text": "maybe",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5832,7 +5417,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-06-12T08:12:51+05:30",
               "text": "congratulations to the search committee",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5840,7 +5424,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-12T08:15:37+05:30",
               "text": "I should clean mine, found a receipt from March",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5848,7 +5431,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-06-12T08:18:41+05:30",
               "text": "keep receipts till expenses settled, then sort",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5892,7 +5474,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5900,7 +5481,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5908,7 +5488,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5916,7 +5495,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             },
             {
@@ -5924,7 +5502,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T21:01:11+05:30",
               "text": "actually cute yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -5952,7 +5529,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-21T20:41:39+05:30",
               "text": "no rooftop rain roulette, good choice",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5960,7 +5536,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5968,7 +5543,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -5976,7 +5550,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -5984,7 +5557,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6012,7 +5584,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-07-21T20:44:45+05:30",
               "text": "Can someone post one final message? too many prices above",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6020,7 +5591,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-07-21T20:47:27+05:30",
               "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6028,7 +5598,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-07-21T20:50:31+05:30",
               "text": "Perfect. I'm paying my share too, no arguments ❤️",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6036,7 +5605,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:53:11+05:30",
               "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6044,7 +5612,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:56:55+05:30",
               "text": "[Image] tragic attempt at a homemade birthday card",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -6088,7 +5655,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-28T21:13:19+05:30",
               "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6096,7 +5662,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-28T21:16:00+05:30",
               "text": "we can look after 9:30 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6104,7 +5669,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6112,7 +5676,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6120,7 +5683,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:20:37+05:30",
               "text": "done, mountains it is 🏔️",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6146,7 +5708,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:10:00+05:30",
               "text": "Trip update: all eight deposits marked received in our plan",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6154,7 +5715,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:13:48+05:30",
               "text": "Please don't change the room allocation without checking with Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6162,7 +5722,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:18:04+05:30",
               "text": "Ananya Sneha and me in room A, sorting the other five now",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6190,7 +5749,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-02T19:10:00+05:30",
               "text": "Trip update: all eight deposits marked received in our plan",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6198,7 +5756,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-04-02T19:13:48+05:30",
               "text": "Please don't change the room allocation without checking with Meera",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6206,7 +5763,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-04-02T19:18:04+05:30",
               "text": "Ananya Sneha and me in room A, sorting the other five now",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6214,7 +5770,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-02T19:22:42+05:30",
               "text": "who took my blue notebook from lab",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6222,7 +5777,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-02T19:27:06+05:30",
               "text": "with me, thought it was mine. sorryyy",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6264,7 +5818,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-05-03T18:40:00+05:30",
               "text": "LostLoop now launches from the README on a fresh folder",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6272,7 +5825,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-05-03T18:44:17+05:30",
               "text": "Someone asked why no Mongo. We already settled on a local SQL file",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6280,7 +5832,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-03T18:46:54+05:30",
               "text": "Please don't add a second database over the weekend",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6307,7 +5858,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-05-03T18:40:00+05:30",
               "text": "LostLoop now launches from the README on a fresh folder",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6315,7 +5865,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-05-03T18:44:17+05:30",
               "text": "Someone asked why no Mongo. We already settled on a local SQL file",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6323,7 +5872,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-05-03T18:46:54+05:30",
               "text": "Please don't add a second database over the weekend",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6331,7 +5879,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-05-03T18:49:18+05:30",
               "text": "[Image] final claim status card: pending, approved, declined",
-              "message_type": "image",
               "is_current": false
             }
           ],
@@ -6359,7 +5906,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-04-27T20:42:09+05:30",
               "text": "Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6367,7 +5913,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-04-27T20:46:41+05:30",
               "text": "Confirmed. Retiring the Express starter rather than mixing two servers",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6375,7 +5920,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-04-27T20:50:07+05:30",
               "text": "I'll write startup instructions so the judge can run it offline",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6383,7 +5927,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-27T20:54:32+05:30",
               "text": "Stack decision closed. Tomorrow we test the full claim journey",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6391,7 +5934,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-04-27T21:05:00+05:30",
               "text": "Anyone proofreading Operating Systems writeup at 10 pm?",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6435,7 +5977,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-28T08:03:59+05:30",
               "text": "read the example from tutorial first",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6443,7 +5984,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-28T08:05:56+05:30",
               "text": "we can discuss approach at 5 pm, then write individually",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6451,7 +5991,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-28T08:09:01+05:30",
               "text": "works. submission 2026-09-01 in my calendar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6459,7 +5998,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-08-28T08:12:26+05:30",
               "text": "verify date with actual notice too",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6467,7 +6005,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-28T08:15:54+05:30",
               "text": "yes our schedule changes a lot",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6495,7 +6032,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-19T21:04:05+05:30",
               "text": "read the example from tutorial first",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6503,7 +6039,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-08-19T21:06:04+05:30",
               "text": "we can discuss approach at 10 pm, then write individually",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6511,7 +6046,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-19T21:06:51+05:30",
               "text": "works. submission 2026-08-22 in my calendar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6519,7 +6053,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-19T21:07:27+05:30",
               "text": "verify date with actual notice too",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6527,7 +6060,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-19T21:09:31+05:30",
               "text": "yes our schedule changes a lot",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6555,7 +6087,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-05T21:06:10+05:30",
               "text": "read the example from tutorial first",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6563,7 +6094,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-05T21:06:42+05:30",
               "text": "we can discuss approach at 9:45 pm, then write individually",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6571,7 +6101,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-05T21:08:21+05:30",
               "text": "works. submission 2026-08-11 in my calendar yaar",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6579,7 +6108,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-05T21:10:33+05:30",
               "text": "verify date with actual notice too",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6587,7 +6115,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-08-05T21:11:45+05:30",
               "text": "yes our schedule changes a lot",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6629,7 +6156,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-02T21:10:00+05:30",
               "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
-              "message_type": "forwarded",
               "is_current": true
             },
             {
@@ -6637,7 +6163,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-02T21:11:54+05:30",
               "text": "old room pe khada hu main 😭",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6645,7 +6170,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-02T21:13:39+05:30",
               "text": "come one floor up, still five minutes left",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6672,7 +6196,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-02T21:10:00+05:30",
               "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -6680,7 +6203,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-02T21:11:54+05:30",
               "text": "old room pe khada hu main 😭",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6688,7 +6210,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-02T21:13:39+05:30",
               "text": "come one floor up, still five minutes left",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6696,7 +6217,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-02T21:14:52+05:30",
               "text": "is it tutorial or lab??",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6724,7 +6244,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-02T21:10:00+05:30",
               "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -6732,7 +6251,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-08-02T21:11:54+05:30",
               "text": "old room pe khada hu main 😭",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6740,7 +6258,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-08-02T21:13:39+05:30",
               "text": "come one floor up, still five minutes left",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6748,7 +6265,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-08-02T21:14:52+05:30",
               "text": "is it tutorial or lab??",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6756,7 +6272,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-08-02T21:17:38+05:30",
               "text": "tutorial. lab timing unchanged in this notice yaar",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6798,7 +6313,6 @@
               "sender": "Meera Nair",
               "timestamp": "2026-06-06T08:14:02+05:30",
               "text": "Forwarded: Campus network maintenance, 2026-06-06, service may be interrupted. Save work locally.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -6806,7 +6320,6 @@
               "sender": "Ananya Verma",
               "timestamp": "2026-06-06T08:17:21+05:30",
               "text": "classic, notice works only if internet works",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6814,7 +6327,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-06-06T08:19:59+05:30",
               "text": "😂",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -6840,7 +6352,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-06-24T12:14:03+05:30",
               "text": "Forwarded: Campus network maintenance, 2026-06-24, service may be interrupted. Save work locally.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -6848,7 +6359,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-06-24T12:16:04+05:30",
               "text": "classic, notice works only if internet works",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6856,7 +6366,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-06-24T12:17:36+05:30",
               "text": "😂",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -6882,7 +6391,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-06-16T08:14:43+05:30",
               "text": "Forwarded: Campus network maintenance, 2026-06-16, service may be interrupted. Save work locally.",
-              "message_type": "forwarded",
               "is_current": false
             },
             {
@@ -6890,7 +6398,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-06-16T08:18:05+05:30",
               "text": "classic, notice works only if internet works",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6898,7 +6405,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-06-16T08:21:10+05:30",
               "text": "😂",
-              "message_type": "text",
               "is_current": true
             }
           ],
@@ -6940,7 +6446,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T20:30:00+05:30",
               "text": "July 25 after 7 confirmed from my side",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6948,7 +6453,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:32:14+05:30",
               "text": "same, back from home by afternoon",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6956,7 +6460,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:34:41+05:30",
               "text": "me too. vegetarian snacks only right?",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -6983,7 +6486,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T20:30:00+05:30",
               "text": "July 25 after 7 confirmed from my side",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -6991,7 +6493,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:32:14+05:30",
               "text": "same, back from home by afternoon",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -6999,7 +6500,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:34:41+05:30",
               "text": "me too. vegetarian snacks only right?",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7007,7 +6507,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T20:38:43+05:30",
               "text": "yes all eight plates veg, confirmed in quote",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -7035,7 +6534,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-07-21T20:30:00+05:30",
               "text": "July 25 after 7 confirmed from my side",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7043,7 +6541,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-07-21T20:32:14+05:30",
               "text": "same, back from home by afternoon",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7051,7 +6548,6 @@
               "sender": "Kabir Khan",
               "timestamp": "2026-07-21T20:34:41+05:30",
               "text": "me too. vegetarian snacks only right?",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -7059,7 +6555,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-07-21T20:38:43+05:30",
               "text": "yes all eight plates veg, confirmed in quote",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7067,7 +6562,6 @@
               "sender": "Aditya Joshi",
               "timestamp": "2026-07-21T20:41:39+05:30",
               "text": "no rooftop rain roulette, good choice",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -7111,7 +6605,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:09:59+05:30",
               "text": "send just the error text, no tokens or private files",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7119,7 +6612,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:13:17+05:30",
               "text": "it's only my toy repo. https://example.com/practice/daily_20260328_2",
-              "message_type": "url",
               "is_current": false
             },
             {
@@ -7127,7 +6619,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-28T21:13:19+05:30",
               "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -7135,7 +6626,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-28T21:16:00+05:30",
               "text": "we can look after 9:30 pm",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7143,7 +6633,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -7171,7 +6660,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:13:17+05:30",
               "text": "it's only my toy repo. https://example.com/practice/daily_20260328_2",
-              "message_type": "url",
               "is_current": false
             },
             {
@@ -7179,7 +6667,6 @@
               "sender": "Ishita Patel",
               "timestamp": "2026-03-28T21:13:19+05:30",
               "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7187,7 +6674,6 @@
               "sender": "Sneha Iyer",
               "timestamp": "2026-03-28T21:16:00+05:30",
               "text": "we can look after 9:30 pm",
-              "message_type": "text",
               "is_current": true
             },
             {
@@ -7195,7 +6681,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7203,7 +6688,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": false
             }
           ],
@@ -7229,7 +6713,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:16:09+05:30",
               "text": "I'll track the eight contributions in one sheet. No payments posted here.",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7237,7 +6720,6 @@
               "sender": "Aarav Sharma",
               "timestamp": "2026-03-28T21:17:11+05:30",
               "text": "thanks, panic thoda kam hua",
-              "message_type": "text",
               "is_current": false
             },
             {
@@ -7245,7 +6727,6 @@
               "sender": "Rohan Mehta",
               "timestamp": "2026-03-28T21:20:37+05:30",
               "text": "done, mountains it is 🏔️",
-              "message_type": "text",
               "is_current": true
             }
           ],

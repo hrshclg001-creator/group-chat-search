@@ -15,6 +15,7 @@ class Message:
     sender: str
     timestamp: str
     text: str
+    message_type: str = 'text'
 
 
 def load_corpus(path=DEFAULT_CORPUS_PATH) -> List[Message]:
@@ -33,6 +34,9 @@ def load_corpus(path=DEFAULT_CORPUS_PATH) -> List[Message]:
                     raise ValueError(f"duplicate message ID {fields['id']}")
                 if datetime.fromisoformat(fields['timestamp']).utcoffset() is None:
                     raise ValueError('timestamp must be timezone-aware')
+                fields['message_type'] = record.get('message_type', 'text')
+                if fields['message_type'] not in ('text', 'forwarded', 'url', 'image', 'pdf', 'voice'):
+                    raise ValueError('unknown message type')
                 messages.append(Message(**fields))
                 seen.add(fields['id'])
             except (ValueError, KeyError, TypeError) as exc:
