@@ -4,3 +4,6 @@ backend/data/corpus_metadata.json text eol=lf
 evaluation/*.json text eol=lf
 evaluation/*.md text eol=lf
 evaluation/*.py text eol=lf
+backend/app/search/*.py text eol=lf
+backend/requirements*.txt text eol=lf
+results/*.json text eol=lf

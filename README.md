@@ -2,19 +2,19 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the initial React/Vite and FastAPI scaffold, a deterministic synthetic chat generator and corpus validator, and a frozen set of **40 manually authored retrieval evaluation queries**. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Search, embeddings, indexing and benchmark scoring are not implemented. Search API contracts remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the initial React/Vite and FastAPI scaffold, the synthetic corpus and its validator, **40 frozen evaluation queries**, and a local word/character TF-IDF lexical retrieval baseline with an evaluation runner. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Embeddings, hybrid/person/time ranking, surrounding-context assembly and the search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
 ```text
 frontend/           React/Vite application and health-client tests
 backend/
-  app/              FastAPI entry point, configuration, and API routes
+  app/              FastAPI scaffold and modular lexical retrieval in search/
   scripts/          Offline corpus generator, content, configuration and validator
   tests/            Corpus validation/determinism, health and CORS tests
   data/             Synthetic JSONL, corpus metadata and review notes
-evaluation/         Frozen query labels, overlap convention, validator and tests
-results/            Reserved for future measured results
+evaluation/         Frozen labels, validation, metrics, benchmark runner and tests
+results/            Measured lexical benchmark and per-query results
 ```
 
 Empty directories contain only `.gitkeep` placeholders.
@@ -101,9 +101,61 @@ Run validation from the repository root:
 
 Validation enforces the exact count/schema, real target IDs, categories, at least eight hard labels, nonempty content and agreement of **every** overlap flag with the checker. Default validation also verifies the [freeze manifest](evaluation/freeze_manifest.json) against the unchanged corpus, corpus metadata, labels, convention and review artifacts. It never updates them. `--draft` is only for pre-freeze label review and skips integrity checks; it is not proof that a set is frozen.
 
-Version `1.0.0` was frozen before search implementation or scoring. [label_changes.md](evaluation/label_changes.md) records initial review and the correction procedure. Future legitimate corrections require visible history, versioned artifacts and rerunning affected comparisons; never rewrite expected answers to fit retrieved results. No retrieval engine reads these labels, and no benchmarks have been measured. Future scoring must report both Top-1 numerators and denominators (40 overall, 10 hard) and their signed percentage-point gap.
+Version `1.0.0` was frozen before search implementation or scoring. [label_changes.md](evaluation/label_changes.md) records initial review and the correction procedure. Future legitimate corrections require visible history, versioned artifacts and rerunning affected comparisons; never rewrite expected answers to fit retrieved results. The retrieval module does not read labels; the evaluator supplies only query text and K to it. The initial freeze manifest's `retrieval_scored: false` records the state at freeze time and remains unchanged after later benchmark runs. Scoring reports both Top-1 numerators and denominators (40 overall, 10 hard) and their signed percentage-point gap.
 
 Evaluation-phase checks: validator passed with `freeze_verified: true`; **20 evaluation tests passed** on Python 3.9.10. Corpus and metadata SHA-256 values remained unchanged. Backend/frontend implementation was unchanged, so their existing tests were not rerun in this phase.
+
+## Lexical retrieval baseline
+
+The backend's `app/search/` package separates corpus loading from retrieval. Its [scikit-learn TF-IDF vectorizers](https://scikit-learn.org/1.6/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) use word unigrams/bigrams and character n-grams of length 3-5 within word boundaries (`char_wb`). Each channel uses L2 normalization, smoothed IDF and sublinear term frequency. The fixed lexical score is **0.7 × word cosine + 0.3 × character cosine**. These defaults were chosen before benchmark scoring and are not tuned against the evaluation set.
+
+Only original message `text` is indexed. Sender, timestamp, message IDs, thread/conclusion annotations, query categories, overlap flags and labelling notes are excluded from features. No embeddings, synonym expansion, stopword list or person/date parser is used. The evaluation overlap convention is used only to validate labels, not to preprocess retrieval queries.
+
+The index is built in memory on construction, without a downloaded model or persistent index cache. `search(query, top_k=5)` returns up to K positive-scoring `SearchResult` objects with `id`, `sender`, `timestamp`, original `text` and `lexical_score`; `.to_dict()` serializes one result. Blank or fully out-of-vocabulary queries return an empty list; invalid K values raise an error. Equal scores are ordered by message ID. Character features offer some typo tolerance, but do not provide semantic understanding.
+
+Example, in Python with `backend` as the working directory:
+
+```python
+from app.search import LexicalSearch
+
+searcher = LexicalSearch.from_jsonl()
+for hit in searcher.search("trip budjet", top_k=3):
+    print(hit.to_dict())
+```
+
+Install the updated locked dependencies and run the benchmark from the repository root:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
+.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method lexical
+```
+
+With that environment's Python on PATH, the equivalent command is:
+
+```text
+python evaluation/evaluate.py --method lexical
+```
+
+No running backend/frontend service is needed. The runner validates frozen labels and hashes before and after retrieval, prints aggregate metrics and every incorrect Top-1 query with expected/retrieved text and IDs, and saves [results/lexical.json](results/lexical.json). The JSON includes raw numerators/denominators, rates and percentages, per-category accuracy, the signed overall-minus-hard gap, all top-three messages/scores, configuration, dependency versions, and input/source hashes. Re-running the command overwrites this result file with the new measured run; its UTC measurement time changes.
+
+Top-1 requires the exact expected message ID. Recall@3 is the fraction of queries whose single expected target appears in the first three hits; a short/empty hit list still counts in the denominator. Surrounding context and alternate messages are not credited. Person/time queries are evaluated unchanged even though this baseline cannot interpret their metadata constraints. Zero-word-overlap queries can still have character n-gram or function-word overlap, so a nonzero lexical score does not contradict their hard labels.
+
+Measured lexical results on the frozen version 1.0.0 corpus and query set:
+
+| Metric | Correct / total | Result |
+| --- | ---: | ---: |
+| Overall Top-1 | 9 / 40 | 22.5% |
+| Recall@3 | 16 / 40 | 40.0% |
+| Hard zero-overlap Top-1 | 0 / 10 | 0.0% |
+| Semantic-category Top-1 | 3 / 20 | 15.0% |
+| Person-category Top-1 | 3 / 10 | 30.0% |
+| Time-category Top-1 | 3 / 10 | 30.0% |
+
+The signed **overall minus hard Top-1 gap is +22.5 percentage points**. These are measured results, not targets. All 31 incorrect queries were printed with expected and retrieved messages; all 40 rankings are saved in the JSON. For example, Q015 retrieves the question about outside cake instead of the answer giving permission and decoration conditions. Q017 retrieves an identical exam forward from April instead of the labelled May message, although the correct ID is in its top three. Generic question words also produce unrelated matches when substantive query terms are absent. No settings or labels were changed after observing these results.
+
+This run used Python 3.9.10, scikit-learn 1.6.1, NumPy 2.0.2 and SciPy 1.13.1 on Windows; complete dependency versions and source/input hashes are in the result artifact. Tiny floating-point differences on other platforms are possible. Only the lexical method is measured; the full three-method comparison remains future work.
+
+Lexical-phase checks: **51 backend tests and 25 evaluation tests passed** (76 total); `pip check` found no broken requirements. Tests cover typo recovery with zero word-feature matches, stable ties, empty/OOV queries, original result fields, exclusion of metadata from features, malformed corpus input, known metric rankings and denominators, label isolation and frozen integrity. The benchmark ran successfully through the exact `evaluation/evaluate.py --method lexical` entry point. Saved per-query rankings were independently checked against aggregate counts and source/input/lock hashes. The frontend was unchanged, so its tests were not rerun.
 
 ## Checks
 
@@ -112,7 +164,9 @@ From the repository root:
 ```powershell
 cd backend
 .\.venv\Scripts\python.exe -m pytest
-cd ../frontend
+cd ..
+.\backend\.venv\Scripts\python.exe -m pytest evaluation/tests -q
+cd frontend
 npm.cmd test
 npm.cmd run build
 ```

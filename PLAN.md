@@ -1,6 +1,6 @@
 # Implementation plan
 
-Status: initial application scaffolding, Phase 2 synthetic corpus generation, and Phase 3 evaluation labels/freeze are implemented. The corpus contains 4,634 messages. The frozen evaluation set has 40 queries, including 10 manually reviewed zero-overlap cases. Phase 1 remains partial: corpus/query validation and generation configuration exist, but search API contracts and model preparation remain future work. Retrieval and benchmark results have not been created. Later work requires subsequent authorization.
+Status: scaffolding, corpus generation, frozen evaluation labels, and the first lexical retrieval baseline are implemented. The corpus contains 4,634 messages and the evaluation set has 40 queries, including 10 hard cases. The measured lexical run achieved Top-1 9/40, Recall@3 16/40 and hard Top-1 0/10; results are in `results/lexical.json`. Phase 1 remains partial; search API contracts and model preparation are future work. Semantic/hybrid retrieval, metadata ranking, context assembly and search UI/API are not implemented. Later work requires subsequent authorization.
 
 ## Architecture
 
@@ -99,6 +99,8 @@ Acceptance: exactly 40 manually labelled queries reference existing targets, all
 
 ### Phase 4: Retrieval and context
 
+Partially implemented: `backend/app/search/` loads original messages and combines word unigram/bigram TF-IDF with character 3-5-gram TF-IDF. Fixed 0.7/0.3 cosine weights, positive-score filtering and stable message-ID ties were selected before scoring. Returned hits contain actual ID, sender, timestamp, original text and lexical score. Relevant retrieval tests passed. Embeddings, metadata-aware/hybrid ranking, persistent index caching and surrounding-context assembly remain unimplemented; this full phase is not complete.
+
 Implement TF-IDF and multilingual embedding baselines independently. Add NumPy cosine similarity, person/time handling, hybrid ranking, and bounded nearby-message context. Cache embeddings/indexes with invalidation checks and stable ranking tie-breaks. Document ranking weights and tuning provenance without feeding evaluation labels into retrieval or hand-coding answers.
 
 Acceptance: each mode returns actual corpus messages with correct IDs and useful chronological context. Tests cover scoring, stable ties, empty queries, person/time handling, context boundaries, and stale cache detection using deterministic fixtures. Confirm local embedding inference after model preparation. Run relevant retrieval tests.
@@ -110,6 +112,8 @@ Expose validated search requests through FastAPI and integrate the React interfa
 Acceptance: end-to-end searches return the same hit IDs as direct retrieval, context remains associated with its hit, invalid requests produce clear errors, and the interface works on narrow and wide screens. Run API/frontend tests, a frontend production build, and integration checks.
 
 ### Phase 6: Evaluation and honest analysis
+
+Lexical comparison leg only is measured: `python evaluation/evaluate.py --method lexical` validates frozen inputs and saves metrics, all query rankings/scores, configuration, environment and hashes to `results/lexical.json`. Top-1 is 9/40 (22.5%); Recall@3 is 16/40 (40%); hard Top-1 is 0/10 (0%); signed overall-minus-hard gap is +22.5 percentage points. Category Top-1 is semantic 3/20, person 3/10 and time 3/10. All 31 Top-1 errors were printed. No ground truth was changed and no post-result tuning was performed. 51 backend tests and 25 evaluation tests passed. Semantic and hybrid comparisons remain unmeasured, so Phase 6 is incomplete.
 
 Run lexical, semantic, and hybrid retrieval against the same frozen 40-query set and corpus. Report:
 

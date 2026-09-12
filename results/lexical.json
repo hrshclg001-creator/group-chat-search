@@ -1,0 +1,1607 @@
+{
+  "method": "lexical",
+  "schema_version": "1.0.0",
+  "measured_at_utc": "2026-09-11T21:27:41+00:00",
+  "metrics": {
+    "top1_accuracy": {
+      "correct": 9,
+      "total": 40,
+      "value": 0.225,
+      "percent": 22.5
+    },
+    "recall_at_3": {
+      "correct": 16,
+      "total": 40,
+      "value": 0.4,
+      "percent": 40.0
+    },
+    "zero_word_overlap_top1_accuracy": {
+      "correct": 0,
+      "total": 10,
+      "value": 0.0,
+      "percent": 0.0
+    },
+    "top1_accuracy_by_category": {
+      "person": {
+        "correct": 3,
+        "total": 10,
+        "value": 0.3,
+        "percent": 30.0
+      },
+      "semantic": {
+        "correct": 3,
+        "total": 20,
+        "value": 0.15,
+        "percent": 15.0
+      },
+      "time": {
+        "correct": 3,
+        "total": 10,
+        "value": 0.3,
+        "percent": 30.0
+      }
+    },
+    "overall_minus_hard_percentage_points": 22.5
+  },
+  "configuration": {
+    "indexed_fields": [
+      "text"
+    ],
+    "word": {
+      "analyzer": "word",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "token_pattern": "(?u)\\b\\w+\\b",
+      "weight": 0.7
+    },
+    "character": {
+      "analyzer": "char_wb",
+      "ngram_range": [
+        3,
+        5
+      ],
+      "weight": 0.3
+    },
+    "lowercase": true,
+    "strip_accents": "unicode",
+    "stop_words": null,
+    "norm": "l2",
+    "use_idf": true,
+    "smooth_idf": true,
+    "sublinear_tf": true,
+    "dtype": "float64",
+    "min_df": 1,
+    "max_df": 1.0,
+    "max_features": null,
+    "score": "0.7 * word_cosine + 0.3 * character_cosine",
+    "tie_break": "message ID ascending for exactly equal scores",
+    "zero_score_policy": "omit zero-score messages; empty/OOV query returns []",
+    "empty_channel_policy": "zero contribution; weights are not renormalized",
+    "tuning": "Fixed defaults chosen before scoring; no evaluation-driven tuning",
+    "word_vocabulary_size": 6977,
+    "character_vocabulary_size": 16302
+  },
+  "evaluation_top_k": 3,
+  "corpus_message_count": 4634,
+  "query_count": 40,
+  "hard_query_count": 10,
+  "reference_date": "2026-09-01",
+  "freeze_verified": true,
+  "freeze_version": "1.0.0",
+  "input_sha256": {
+    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb",
+    "evaluation/freeze_manifest.json": "74123a2581007828375db97cec872d4a1d83e1135055620f4734257081dda5e9"
+  },
+  "source_sha256": {
+    "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
+    "backend/app/search/corpus.py": "1dea27079bf5c0971e42d8780634472f51de1e58a549c66558d5482c9166c897",
+    "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
+    "evaluation/evaluate.py": "632ab389352a152568720bc62b3708e3e3b96d0948731037179c8fa84db85e8a",
+    "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
+    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965"
+  },
+  "requirements_lock_sha256": "5dbffb07cb375f761b52a9d13d849e87af222e7d400f0779284fbcd7dba6ab6d",
+  "environment": {
+    "python": "3.9.10",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "dependencies": {
+      "scikit-learn": "1.6.1",
+      "numpy": "2.0.2",
+      "scipy": "1.13.1",
+      "joblib": "1.5.3",
+      "threadpoolctl": "3.6.0"
+    }
+  },
+  "limitations": [
+    "Message text only: no sender/time ranking, context expansion, embeddings or synonym understanding.",
+    "Character overlap may give nonzero scores even for the frozen zero-word-overlap subset.",
+    "Top-1 requires the exact labelled message, including when repeated background messages look equivalent.",
+    "One fixed untuned lexical configuration; semantic and hybrid baselines are not measured."
+  ],
+  "queries": [
+    {
+      "id": "Q001",
+      "query": "What made a seaside holiday unaffordable?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000600",
+      "retrieved_ids": [
+        "MSG_000574",
+        "MSG_001642",
+        "MSG_002026"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000574",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-03-22T21:01:00+05:30",
+          "text": "made a tiny C++ tool for tracking my own reading",
+          "lexical_score": 0.27427131447090736
+        },
+        {
+          "id": "MSG_001642",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-05-04T21:00:00+05:30",
+          "text": "made a tiny C++ tool for tracking my own reading",
+          "lexical_score": 0.27427131447090736
+        },
+        {
+          "id": "MSG_002026",
+          "sender": "Meera Nair",
+          "timestamp": "2026-05-21T21:12:00+05:30",
+          "text": "made a tiny C++ tool for tracking my own reading",
+          "lexical_score": 0.27427131447090736
+        }
+      ]
+    },
+    {
+      "id": "Q002",
+      "query": "Who worried about feeling nauseous during consecutive coach rides?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000291",
+      "retrieved_ids": [
+        "MSG_000094",
+        "MSG_000786",
+        "MSG_001098"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000094",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-04T17:12:51+05:30",
+          "text": "agree. who handles intro?",
+          "lexical_score": 0.1706020861243515
+        },
+        {
+          "id": "MSG_000786",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-03-31T08:14:00+05:30",
+          "text": "agree. who handles intro?",
+          "lexical_score": 0.1706020861243515
+        },
+        {
+          "id": "MSG_001098",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-12T08:17:41+05:30",
+          "text": "agree. who handles intro?",
+          "lexical_score": 0.1706020861243515
+        }
+      ]
+    },
+    {
+      "id": "Q003",
+      "query": "What condition would force us to call off the Himalayan vacation?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000436",
+      "retrieved_ids": [
+        "MSG_001060",
+        "MSG_003180",
+        "MSG_003456"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001060",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-10T20:07:11+05:30",
+          "text": "Django and Postgres would give us admin quickly",
+          "lexical_score": 0.18046049636805078
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.15058575408330568
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.15058575408330568
+        }
+      ]
+    },
+    {
+      "id": "Q004",
+      "query": "What extra software would the panel's computer need for the phone app?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_001154",
+      "retrieved_ids": [
+        "MSG_003180",
+        "MSG_003456",
+        "MSG_003211"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1290339207446407
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1290339207446407
+        },
+        {
+          "id": "MSG_003211",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-06T20:14:36+05:30",
+          "text": "rooftop dinner at Sky Lantern would be nice",
+          "lexical_score": 0.1288343182155383
+        }
+      ]
+    },
+    {
+      "id": "Q005",
+      "query": "What accessibility improvement was requested for the success indicator?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_001602",
+      "retrieved_ids": [
+        "MSG_003180",
+        "MSG_003456",
+        "MSG_003680"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.20956529038897453
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.20956529038897453
+        },
+        {
+          "id": "MSG_003680",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-24T08:03:55+05:30",
+          "text": "add what you tried and what failed 🙃",
+          "lexical_score": 0.2093663961111491
+        }
+      ]
+    },
+    {
+      "id": "Q006",
+      "query": "What restriction prevented the birthday gathering from using the dorm lounge?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003418",
+      "retrieved_ids": [
+        "MSG_003734",
+        "MSG_003619",
+        "MSG_003180"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003734",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-25T22:10:00+05:30",
+          "text": "Home! thank you all, exactly the quiet birthday I wanted 🥹",
+          "lexical_score": 0.21036818889277709
+        },
+        {
+          "id": "MSG_003619",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-21T20:56:55+05:30",
+          "text": "[Image] tragic attempt at a homemade birthday card",
+          "lexical_score": 0.17411608197904238
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.167525703808281
+        }
+      ]
+    },
+    {
+      "id": "Q007",
+      "query": "Why was the outdoor picnic abandoned?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003426",
+      "retrieved_ids": [
+        "MSG_003214",
+        "MSG_000192",
+        "MSG_000520"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003214",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-07-06T20:22:31+05:30",
+          "text": "college lawn picnic? practically free venue",
+          "lexical_score": 0.2331322328804848
+        },
+        {
+          "id": "MSG_000192",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-09T08:08:03+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.21477597696495895
+        },
+        {
+          "id": "MSG_000520",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-20T21:14:04+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.21477597696495895
+        }
+      ]
+    },
+    {
+      "id": "Q008",
+      "query": "Why did the birthday girl prefer chatting over a game at the alley?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_003330",
+      "retrieved_ids": [
+        "MSG_003619",
+        "MSG_000201",
+        "MSG_000465"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003619",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-21T20:56:55+05:30",
+          "text": "[Image] tragic attempt at a homemade birthday card",
+          "lexical_score": 0.20269883167792987
+        },
+        {
+          "id": "MSG_000201",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-09T13:08:44+05:30",
+          "text": "none, dirty bus window did the editing",
+          "lexical_score": 0.1848009154634349
+        },
+        {
+          "id": "MSG_000465",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-03-18T21:17:17+05:30",
+          "text": "none, dirty bus window did the editing",
+          "lexical_score": 0.1848009154634349
+        }
+      ]
+    },
+    {
+      "id": "Q009",
+      "query": "How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000700",
+      "retrieved_ids": [
+        "MSG_001483",
+        "MSG_003621",
+        "MSG_000264"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001483",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-27T20:46:41+05:30",
+          "text": "Confirmed. Retiring the Express starter rather than mixing two servers",
+          "lexical_score": 0.2188466774185725
+        },
+        {
+          "id": "MSG_003621",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-21T21:04:02+05:30",
+          "text": "Room reserved. No more venue polls",
+          "lexical_score": 0.14683109140089623
+        },
+        {
+          "id": "MSG_000264",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-11T21:11:28+05:30",
+          "text": "colour combo reminds me of our lab notice board",
+          "lexical_score": 0.13544039393761897
+        }
+      ]
+    },
+    {
+      "id": "Q010",
+      "query": "Why was the cheap coastal vacation clip misleading for people departing from our city?",
+      "category": "semantic",
+      "zero_word_overlap": true,
+      "expected_message_id": "MSG_000289",
+      "retrieved_ids": [
+        "MSG_003212",
+        "MSG_000192",
+        "MSG_000520"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003212",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-06T20:17:42+05:30",
+          "text": "What is our TOTAL cap, before people send aesthetic reels",
+          "lexical_score": 0.18407513496439903
+        },
+        {
+          "id": "MSG_000192",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-09T08:08:03+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.1555158294668251
+        },
+        {
+          "id": "MSG_000520",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-20T21:14:04+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.1555158294668251
+        }
+      ]
+    },
+    {
+      "id": "Q011",
+      "query": "Where did we finally decide to go for the June trip, and what was the per-person limit?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000713",
+      "retrieved_ids": [
+        "MSG_003180",
+        "MSG_003456",
+        "MSG_003680"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.20969610265102628
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.20969610265102628
+        },
+        {
+          "id": "MSG_003680",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-07-24T08:03:55+05:30",
+          "text": "add what you tried and what failed 🙃",
+          "lexical_score": 0.20938242705293714
+        }
+      ]
+    },
+    {
+      "id": "Q012",
+      "query": "What backend and database did we finally choose for LostLoop?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001482",
+      "retrieved_ids": [
+        "MSG_001600",
+        "MSG_001161",
+        "MSG_001478"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001600",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-05-03T18:46:54+05:30",
+          "text": "Please don't add a second database over the weekend",
+          "lexical_score": 0.17764070067957766
+        },
+        {
+          "id": "MSG_001161",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-14T18:58:55+05:30",
+          "text": "I'll test uploads on both before we choose",
+          "lexical_score": 0.1673283444288197
+        },
+        {
+          "id": "MSG_001478",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-27T20:28:28+05:30",
+          "text": "call it LostLoop? sounds like my coding life",
+          "lexical_score": 0.15950655095234517
+        }
+      ]
+    },
+    {
+      "id": "Q013",
+      "query": "What was the final birthday venue and budget, including cake and everyone's share?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003616",
+      "retrieved_ids": [
+        "MSG_000595",
+        "MSG_003213",
+        "MSG_003326"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000595",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-23T18:48:01+05:30",
+          "text": "then internships and everyone's separate dates. June overlap is rare",
+          "lexical_score": 0.20149261406942887
+        },
+        {
+          "id": "MSG_003213",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:19:54+05:30",
+          "text": "3000 total including cake. Eight of us, nothing fancy",
+          "lexical_score": 0.2013792152750458
+        },
+        {
+          "id": "MSG_003326",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-10T19:15:00+05:30",
+          "text": "Sky Lantern quote is 650 per person, before birthday cake",
+          "lexical_score": 0.1439149768792649
+        }
+      ]
+    },
+    {
+      "id": "Q014",
+      "query": "Why did Aarav originally lean towards MERN?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001291",
+      "retrieved_ids": [
+        "MSG_000192",
+        "MSG_000520",
+        "MSG_001072"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000192",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-09T08:08:03+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.18893960890299613
+        },
+        {
+          "id": "MSG_000520",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-20T21:14:04+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.18893960890299613
+        },
+        {
+          "id": "MSG_001072",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-10T21:09:30+05:30",
+          "text": "why swap?",
+          "lexical_score": 0.18893960890299613
+        }
+      ]
+    },
+    {
+      "id": "Q015",
+      "query": "Was outside cake allowed, and what decoration rule came with it?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003434",
+      "retrieved_ids": [
+        "MSG_003433",
+        "MSG_003180",
+        "MSG_003456"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003433",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-07-14T21:24:18+05:30",
+          "text": "Cake allowed from outside?",
+          "lexical_score": 0.4467461375763835
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.21981223044831855
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.21981223044831855
+        }
+      ]
+    },
+    {
+      "id": "Q016",
+      "query": "What did the birthday actually cost once it was over, and was any buffer used?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003738",
+      "retrieved_ids": [
+        "MSG_000850",
+        "MSG_000334",
+        "MSG_000530"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000850",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-02T19:27:06+05:30",
+          "text": "with me, thought it was mine. sorryyy",
+          "lexical_score": 0.19483279309245116
+        },
+        {
+          "id": "MSG_000334",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-13T21:18:11+05:30",
+          "text": "and check PDF opens after export. mine was blank once",
+          "lexical_score": 0.1666631216995963
+        },
+        {
+          "id": "MSG_000530",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-21T08:19:11+05:30",
+          "text": "and check PDF opens after export. mine was blank once",
+          "lexical_score": 0.1666631216995963
+        }
+      ]
+    },
+    {
+      "id": "Q017",
+      "query": "Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_002058",
+      "retrieved_ids": [
+        "MSG_000970",
+        "MSG_001350",
+        "MSG_002058"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000970",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-08T08:05:00+05:30",
+          "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "lexical_score": 0.49376327247699525
+        },
+        {
+          "id": "MSG_001350",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-23T08:10:00+05:30",
+          "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "lexical_score": 0.49376327247699525
+        },
+        {
+          "id": "MSG_002058",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-05-23T08:10:00+05:30",
+          "text": "Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.",
+          "lexical_score": 0.49376327247699525
+        }
+      ]
+    },
+    {
+      "id": "Q018",
+      "query": "Find the voice note proposing QR stickers for lost items.",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001155",
+      "retrieved_ids": [
+        "MSG_001155",
+        "MSG_003153",
+        "MSG_003509"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001155",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-14T18:39:19+05:30",
+          "text": "[Voice message] rambling idea about a QR sticker on every lost item",
+          "lexical_score": 0.2761017744571754
+        },
+        {
+          "id": "MSG_003153",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-07-03T08:25:54+05:30",
+          "text": "saved several lost freshers today",
+          "lexical_score": 0.12961097810867306
+        },
+        {
+          "id": "MSG_003509",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-17T21:22:33+05:30",
+          "text": "saved several lost freshers today",
+          "lexical_score": 0.12961097810867306
+        }
+      ]
+    },
+    {
+      "id": "Q019",
+      "query": "Did Nukkad Cafe charge separately for the room or just require a minimum spend?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003432",
+      "retrieved_ids": [
+        "MSG_003432",
+        "MSG_003532",
+        "MSG_003616"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003432",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-14T21:21:39+05:30",
+          "text": "Nukkad Cafe side room asks minimum 2400 spend, no room fee",
+          "lexical_score": 0.46278980310961715
+        },
+        {
+          "id": "MSG_003532",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-18T19:07:20+05:30",
+          "text": "That breaks the cafe minimum package. Better keep current plan",
+          "lexical_score": 0.18638399866565916
+        },
+        {
+          "id": "MSG_003616",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-21T20:47:27+05:30",
+          "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "lexical_score": 0.17352631904094235
+        }
+      ]
+    },
+    {
+      "id": "Q020",
+      "query": "When was the cake pickup, and who would bring the candles?",
+      "category": "semantic",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003618",
+      "retrieved_ids": [
+        "MSG_003618",
+        "MSG_003528",
+        "MSG_003529"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003618",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-21T20:53:11+05:30",
+          "text": "Cake pickup at 6:15 noted. I will bring the candles from Meera",
+          "lexical_score": 0.46736836217111466
+        },
+        {
+          "id": "MSG_003528",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-07-18T18:53:30+05:30",
+          "text": "2900 total leaves 100. Candles? plates?",
+          "lexical_score": 0.14534573391400718
+        },
+        {
+          "id": "MSG_003529",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-18T18:56:32+05:30",
+          "text": "I have reusable plates and candles from home",
+          "lexical_score": 0.13421479127468894
+        }
+      ]
+    },
+    {
+      "id": "Q021",
+      "query": "What did Ananya ask for in Delhi to make the journey manageable?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000427",
+      "retrieved_ids": [
+        "MSG_002529",
+        "MSG_002905",
+        "MSG_002313"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_002529",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-09T08:16:47+05:30",
+          "text": "safe journey",
+          "lexical_score": 0.24955667040492852
+        },
+        {
+          "id": "MSG_002905",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-06-24T08:22:17+05:30",
+          "text": "safe journey",
+          "lexical_score": 0.24955667040492852
+        },
+        {
+          "id": "MSG_002313",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-01T13:19:32+05:30",
+          "text": "safe journey 🙃",
+          "lexical_score": 0.24865081577033385
+        }
+      ]
+    },
+    {
+      "id": "Q022",
+      "query": "What was Ishita's absolute spending limit when the Goa estimate first came in?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000287",
+      "retrieved_ids": [
+        "MSG_000286",
+        "MSG_000287",
+        "MSG_003180"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000286",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-12T19:20:00+05:30",
+          "text": "Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head",
+          "lexical_score": 0.20238880759410527
+        },
+        {
+          "id": "MSG_000287",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-12T19:24:43+05:30",
+          "text": "10400 already, aur buffer? mera absolute limit 9000 hai",
+          "lexical_score": 0.19376995838051136
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1094671210050871
+        }
+      ]
+    },
+    {
+      "id": "Q023",
+      "query": "How did Aarav say he would track everyone's trip contributions?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000715",
+      "retrieved_ids": [
+        "MSG_000715",
+        "MSG_000595",
+        "MSG_003211"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000715",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-28T21:16:09+05:30",
+          "text": "I'll track the eight contributions in one sheet. No payments posted here.",
+          "lexical_score": 0.20822322009446997
+        },
+        {
+          "id": "MSG_000595",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-23T18:48:01+05:30",
+          "text": "then internships and everyone's separate dates. June overlap is rare",
+          "lexical_score": 0.16062203798069274
+        },
+        {
+          "id": "MSG_003211",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-06T20:14:36+05:30",
+          "text": "rooftop dinner at Sky Lantern would be nice",
+          "lexical_score": 0.10583575106457238
+        }
+      ]
+    },
+    {
+      "id": "Q024",
+      "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003930",
+      "retrieved_ids": [
+        "MSG_003222",
+        "MSG_003930",
+        "MSG_003502"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003222",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T21:07:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "lexical_score": 0.39851312537168293
+        },
+        {
+          "id": "MSG_003930",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-03T08:03:00+05:30",
+          "text": "[PDF] draft volunteer orientation session checklist, still needs review",
+          "lexical_score": 0.39851312537168293
+        },
+        {
+          "id": "MSG_003502",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-07-17T21:07:00+05:30",
+          "text": "club wants volunteers for volunteer orientation session",
+          "lexical_score": 0.32996845707040867
+        }
+      ]
+    },
+    {
+      "id": "Q025",
+      "query": "What reason did Kabir give for rejecting Firebase?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001383",
+      "retrieved_ids": [
+        "MSG_001152",
+        "MSG_001383",
+        "MSG_003180"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001152",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-14T18:29:10+05:30",
+          "text": "Firebase? login and images done fast",
+          "lexical_score": 0.21260373986993253
+        },
+        {
+          "id": "MSG_001383",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-24T19:33:19+05:30",
+          "text": "Firebase rejected for demo because offline requirement is real",
+          "lexical_score": 0.20482703876026115
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1357846840580872
+        }
+      ]
+    },
+    {
+      "id": "Q026",
+      "query": "Why did Sneha want to drop the bigger Python framework?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001385",
+      "retrieved_ids": [
+        "MSG_001385",
+        "MSG_001160",
+        "MSG_003330"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001385",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-24T19:39:58+05:30",
+          "text": "The big Python framework adds admin config we won't use. I'd drop it",
+          "lexical_score": 0.35740626471118836
+        },
+        {
+          "id": "MSG_001160",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-14T18:54:35+05:30",
+          "text": "Compare with a Python API; Sneha and Kabir can maintain that",
+          "lexical_score": 0.1766711014162368
+        },
+        {
+          "id": "MSG_003330",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-10T19:29:49+05:30",
+          "text": "Skip bowling too, I want time to talk anyway",
+          "lexical_score": 0.1293890727154649
+        }
+      ]
+    },
+    {
+      "id": "Q027",
+      "query": "What name did Rohan suggest for our coding project?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001478",
+      "retrieved_ids": [
+        "MSG_000432",
+        "MSG_000019",
+        "MSG_000387"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000432",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-03-17T21:29:42+05:30",
+          "text": "wait project ka submission kal 11 hai ya 5",
+          "lexical_score": 0.15820370645847107
+        },
+        {
+          "id": "MSG_000019",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-01T21:08:51+05:30",
+          "text": "can you keep it forever for our batch 😂",
+          "lexical_score": 0.14489866296170703
+        },
+        {
+          "id": "MSG_000387",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-16T13:06:02+05:30",
+          "text": "can you keep it forever for our batch 😂",
+          "lexical_score": 0.14489866296170703
+        }
+      ]
+    },
+    {
+      "id": "Q028",
+      "query": "Why did Meera insist we should not split the birthday group?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003431",
+      "retrieved_ids": [
+        "MSG_000593",
+        "MSG_001292",
+        "MSG_003429"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000593",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-23T18:41:05+05:30",
+          "text": "shared cabs eat the saving. I'd rather not split the group daily",
+          "lexical_score": 0.2767157519452823
+        },
+        {
+          "id": "MSG_001292",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-04-19T21:46:30+05:30",
+          "text": "We should write down the rejected options so we don't circle back",
+          "lexical_score": 0.1789156786241385
+        },
+        {
+          "id": "MSG_003429",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-14T21:13:13+05:30",
+          "text": "Then common room also out unless we split group, which we won't",
+          "lexical_score": 0.16873212279743122
+        }
+      ]
+    },
+    {
+      "id": "Q029",
+      "query": "Which bus was Aditya asking about on August 31?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_004626",
+      "retrieved_ids": [
+        "MSG_000066",
+        "MSG_002714",
+        "MSG_002922"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000066",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-03T21:00:00+05:30",
+          "text": "[Voice message] telling a long story about getting on the wrong bus near the bus stop",
+          "lexical_score": 0.18568289688328424
+        },
+        {
+          "id": "MSG_002714",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-06-16T12:09:00+05:30",
+          "text": "[Voice message] telling a long story about getting on the wrong bus near the bus stop",
+          "lexical_score": 0.18568289688328424
+        },
+        {
+          "id": "MSG_002922",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-06-24T21:03:00+05:30",
+          "text": "[Voice message] telling a long story about getting on the wrong bus near the bus stop",
+          "lexical_score": 0.18568289688328424
+        }
+      ]
+    },
+    {
+      "id": "Q030",
+      "query": "What did Sneha say the cake cost, including any extra box charge?",
+      "category": "person",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003736",
+      "retrieved_ids": [
+        "MSG_003736",
+        "MSG_003213",
+        "MSG_000848"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003736",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-07-25T22:18:03+05:30",
+          "text": "Cake was 500 as quoted, no extra box charge",
+          "lexical_score": 0.3879181674347204
+        },
+        {
+          "id": "MSG_003213",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:19:54+05:30",
+          "text": "3000 total including cake. Eight of us, nothing fancy",
+          "lexical_score": 0.17654366002567584
+        },
+        {
+          "id": "MSG_000848",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-02T19:18:04+05:30",
+          "text": "Ananya Sneha and me in room A, sorting the other five now",
+          "lexical_score": 0.1186468450332748
+        }
+      ]
+    },
+    {
+      "id": "Q031",
+      "query": "What decision did we make on March 28 about the trip destination and payments?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000713",
+      "retrieved_ids": [
+        "MSG_001485",
+        "MSG_003180",
+        "MSG_003456"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001485",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-04-27T20:54:32+05:30",
+          "text": "Stack decision closed. Tomorrow we test the full claim journey",
+          "lexical_score": 0.15703548881749146
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1479028074367684
+        },
+        {
+          "id": "MSG_003456",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-15T21:10:11+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.1479028074367684
+        }
+      ]
+    },
+    {
+      "id": "Q032",
+      "query": "What stack did we settle on in late April for LostLoop?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001482",
+      "retrieved_ids": [
+        "MSG_001478",
+        "MSG_001479",
+        "MSG_001482"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001478",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-27T20:28:28+05:30",
+          "text": "call it LostLoop? sounds like my coding life",
+          "lexical_score": 0.1674181222290248
+        },
+        {
+          "id": "MSG_001479",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-27T20:30:46+05:30",
+          "text": "LostLoop works, please don't spend two hours on logo",
+          "lexical_score": 0.15164342696472533
+        },
+        {
+          "id": "MSG_001482",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-27T20:42:09+05:30",
+          "text": "Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.",
+          "lexical_score": 0.1494595435029736
+        }
+      ]
+    },
+    {
+      "id": "Q033",
+      "query": "What was the final birthday arrangement we agreed in July?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003616",
+      "retrieved_ids": [
+        "MSG_003210",
+        "MSG_003437",
+        "MSG_003616"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003210",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-06T20:10:00+05:30",
+          "text": "My birthday is July 25. Small get-together? no surprise please 😂",
+          "lexical_score": 0.1917870677166456
+        },
+        {
+          "id": "MSG_003437",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-14T21:38:41+05:30",
+          "text": "Sounds promising but hold off until the final quote",
+          "lexical_score": 0.15771214436679146
+        },
+        {
+          "id": "MSG_003616",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-07-21T20:47:27+05:30",
+          "text": "Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.",
+          "lexical_score": 0.1531284232881982
+        }
+      ]
+    },
+    {
+      "id": "Q034",
+      "query": "What update did Aarav give on April 2 about the trip deposits?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_000846",
+      "retrieved_ids": [
+        "MSG_000846",
+        "MSG_000713",
+        "MSG_003180"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000846",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-04-02T19:10:00+05:30",
+          "text": "Trip update: all eight deposits marked received in our plan",
+          "lexical_score": 0.2796026376740818
+        },
+        {
+          "id": "MSG_000713",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-28T21:13:19+05:30",
+          "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.",
+          "lexical_score": 0.19074811190026847
+        },
+        {
+          "id": "MSG_003180",
+          "sender": "Meera Nair",
+          "timestamp": "2026-07-04T21:12:54+05:30",
+          "text": "add what you tried and what failed",
+          "lexical_score": 0.11315839515983822
+        }
+      ]
+    },
+    {
+      "id": "Q035",
+      "query": "At the start of May, had LostLoop been launched successfully from its README?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_001598",
+      "retrieved_ids": [
+        "MSG_001598",
+        "MSG_001479",
+        "MSG_001478"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_001598",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-05-03T18:40:00+05:30",
+          "text": "LostLoop now launches from the README on a fresh folder",
+          "lexical_score": 0.3362582076995711
+        },
+        {
+          "id": "MSG_001479",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-27T20:30:46+05:30",
+          "text": "LostLoop works, please don't spend two hours on logo",
+          "lexical_score": 0.13372462425941872
+        },
+        {
+          "id": "MSG_001478",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-04-27T20:28:28+05:30",
+          "text": "call it LostLoop? sounds like my coding life",
+          "lexical_score": 0.12869511279092144
+        }
+      ]
+    },
+    {
+      "id": "Q036",
+      "query": "Find the first forwarded notice last month saying the semester timetable could still change.",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003892",
+      "retrieved_ids": [
+        "MSG_004074",
+        "MSG_004362",
+        "MSG_003890"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_004074",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-08-09T17:11:00+05:30",
+          "text": "new semester timetable mein Operating Systems room B-204 hai?",
+          "lexical_score": 0.23831295339281444
+        },
+        {
+          "id": "MSG_004362",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-21T21:09:00+05:30",
+          "text": "new semester timetable mein Computer Networks room C-102 hai? 😅",
+          "lexical_score": 0.23802333822338245
+        },
+        {
+          "id": "MSG_003890",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-01T08:10:00+05:30",
+          "text": "new semester timetable mein Data Structures room C-203 hai?",
+          "lexical_score": 0.236242036565118
+        }
+      ]
+    },
+    {
+      "id": "Q037",
+      "query": "Which room did the Software Engineering tutorial move to on August 2?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003922",
+      "retrieved_ids": [
+        "MSG_003922",
+        "MSG_004610",
+        "MSG_000874"
+      ],
+      "top1_correct": true,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_003922",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-08-02T21:10:00+05:30",
+          "text": "Forwarded: Software Engineering tutorial shifted to room B-204 on 2026-08-02. Please check the class noticeboard.",
+          "lexical_score": 0.36391790407433666
+        },
+        {
+          "id": "MSG_004610",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-30T21:01:00+05:30",
+          "text": "new semester timetable mein Software Engineering room C-203 hai? yaar",
+          "lexical_score": 0.2749666488956172
+        },
+        {
+          "id": "MSG_000874",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-04-03T21:10:00+05:30",
+          "text": "koi proofreading Software Engineering writeup at 9:30 pm?",
+          "lexical_score": 0.25568545116725433
+        }
+      ]
+    },
+    {
+      "id": "Q038",
+      "query": "What network maintenance notice did Meera forward last month?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_003999",
+      "retrieved_ids": [
+        "MSG_000424",
+        "MSG_000769",
+        "MSG_000989"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000424",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-17T21:16:17+05:30",
+          "text": "maintenance notice tha na",
+          "lexical_score": 0.3926835520967624
+        },
+        {
+          "id": "MSG_000769",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-30T17:12:51+05:30",
+          "text": "maintenance notice tha na",
+          "lexical_score": 0.3926835520967624
+        },
+        {
+          "id": "MSG_000989",
+          "sender": "Meera Nair",
+          "timestamp": "2026-04-08T17:07:32+05:30",
+          "text": "maintenance notice tha na",
+          "lexical_score": 0.3926835520967624
+        }
+      ]
+    },
+    {
+      "id": "Q039",
+      "query": "Who said they had reached home on June 2, and what food were they happy about?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_002346",
+      "retrieved_ids": [
+        "MSG_002874",
+        "MSG_002570",
+        "MSG_002346"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": true,
+      "retrieved_messages": [
+        {
+          "id": "MSG_002874",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-23T08:03:00+05:30",
+          "text": "reached home, finally actual veg momos",
+          "lexical_score": 0.2166354539520828
+        },
+        {
+          "id": "MSG_002570",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-10T21:03:00+05:30",
+          "text": "reached home, finally actual chole kulche",
+          "lexical_score": 0.20936000143754568
+        },
+        {
+          "id": "MSG_002346",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-06-02T21:01:00+05:30",
+          "text": "reached home, finally actual veg rolls yaar",
+          "lexical_score": 0.20142361318022536
+        }
+      ]
+    },
+    {
+      "id": "Q040",
+      "query": "Yesterday morning, how many MB was Aditya's oversized submission file?",
+      "category": "time",
+      "zero_word_overlap": false,
+      "expected_message_id": "MSG_004620",
+      "retrieved_ids": [
+        "MSG_000494",
+        "MSG_000690",
+        "MSG_002354"
+      ],
+      "top1_correct": false,
+      "recalled_at_3": false,
+      "retrieved_messages": [
+        {
+          "id": "MSG_000494",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-03-20T08:01:00+05:30",
+          "text": "good morning",
+          "lexical_score": 0.19466075256410614
+        },
+        {
+          "id": "MSG_000690",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-28T08:06:00+05:30",
+          "text": "good morning",
+          "lexical_score": 0.19466075256410614
+        },
+        {
+          "id": "MSG_002354",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-06-03T08:01:00+05:30",
+          "text": "good morning",
+          "lexical_score": 0.19466075256410614
+        }
+      ]
+    }
+  ]
+}
