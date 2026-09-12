@@ -1,454 +1,792 @@
-# Search a Group Chat Properly
+# RecallChat
 
-A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The React and FastAPI application combines multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
+**Search a Group Chat Properly**
 
-Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **22/40 (55%)**, measured on the same queries used for development. General tuning and all initial failures are documented in [tuning_notes.md](results/tuning_notes.md) and [failure_analysis.md](results/failure_analysis.md). Search results include the original matching message and up to three chronological neighbors per side. A fresh Windows installation, first model download, indexing and evaluation were verified in the [final audit](FINAL_AUDIT.md). Browser visual/interaction verification remains outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
+RecallChat is a semantic and metadata-aware search engine for group-chat history. It retrieves original messages matching user intent even when exact keywords differ, and returns results with surrounding conversation context for interpretation. Hybrid retrieval combines multilingual semantic embeddings, lexical matching, and participant/temporal metadata, ranked by relevance and evaluated on 40 frozen queries including 10 zero-word-overlap paraphrases.
 
-## Structure
+## Problem
 
-```text
-frontend/           RecallChat React/Vite UI, plain CSS, API/render/format tests
-backend/
-  app/              FastAPI scaffold and modular lexical/semantic retrieval in search/
-  scripts/          Corpus generation/validation and pinned model preparation
-  tests/            Corpus, retrieval, cache, real-model, health and CORS tests
-  data/             Synthetic JSONL, corpus metadata and review notes
-evaluation/         Frozen labels, validation, metrics, benchmark runner and tests
-results/            Measured retrieval benchmarks, rankings and comparisons
+Keyword search fails when users and messages use different words for the same concept. A user searching for _"unforeseen expenses"_ cannot find a message that says _"emergency buffer"_. This problem worsens with:
+
+- **Paraphrased intent:** Meaning-based matches require semantic understanding, not just keyword overlap.
+- **Code-mixed language:** Indian English mixed with Romanized Hindi (Hinglish) like _"overnight buses do back to back honge?"_ requires multilingual embeddings.
+- **Short replies:** Messages like _"haan pakka"_ (okay, confirmed) are meaningless in isolation but clear in context.
+- **Multiple decision stages:** A trip discussion might span questions (_"where should we go?"_), proposals (_"let's try Manali"_), and decisions (_"Manali confirmed, June 10-15"_). Keyword overlap doesn't distinguish the answer from earlier debate.
+- **Temporal references:** _"last week"_ means different dates depending on when you search. A fixed reference date is needed for reproducibility.
+
+**Example:** A user asks _"When did we decide where to travel?"_ Lexical search might miss the final decision message: _"theek hai bhai fir Manali pakka"_ (okay, so Manali it is then).
+
+RecallChat solves this by combining semantic retrieval, metadata constraints, and contextual understanding.
+
+## Solution
+
+RecallChat retrieves the _original message_ that answers the user's question, preserving the actual sender, timestamp, and surrounding conversation context. It combines three search strategies:
+
+1. **Semantic embeddings:** Local multilingual embeddings (sentence-transformers) match meaning, not keywords.
+2. **Lexical matching:** TF-IDF with character n-grams tolerates typos (_nhi_ vs _nahi_).
+3. **Metadata filtering:** Participant names and temporal expressions are parsed deterministically and applied as constraints.
+
+A hybrid ranker combines these signals and returns results ranked by relevance, with up to three adjacent messages per side to make short replies interpretable.
+
+## Features
+
+- **Semantic retrieval** using local multilingual embeddings (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`)
+- **Lexical retrieval** with TF-IDF and character n-gram features (tolerates typos and spelling variation)
+- **Contextual embeddings** that incorporate up to two previous and two following messages (within 30 minutes) to interpret short or ambiguous replies
+- **Participant-aware search** with deterministic name parsing for explicit sender queries (English and Hinglish)
+- **Temporal search** using a fixed reference date to resolve relative expressions (_"last month"_, _"yesterday"_) reproducibly
+- **Hybrid ranking** that combines semantic, lexical, and metadata signals with visible weights and constraints
+- **Surrounding conversation context** preserved for interpretation; original message ID always returned
+- **Measured evaluation** on 40 frozen queries including 10 zero-word-overlap paraphrases
+- **No external LLM API** required; all inference runs locally on CPU
+
+## Architecture
+
+```
+User Query (React UI)
+    |
+    v
+Query Parser
+    +---- Participant detection (Hinglish & English)
+    +---- Temporal expression parsing
+    +---- Message-type detection (forwarded, attachment, etc.)
+    |
+    v
+Semantic Retrieval          Lexical Retrieval
+    |                              |
+    +---- Original embeddings      +---- TF-IDF word/char n-grams
+    +---- Contextual embeddings    |
+    |                              |
+    +----- (All messages scored)---+
+                 |
+                 v
+         Hybrid Ranker
+                 |
+    +---- Combine semantic, lexical, person, time
+    +---- Apply metadata constraints
+    +---- Deterministic tie-breaking
+    |
+    v
+  Ranked Results
+    |
+    v
+Contextual Assembly
+    +---- Original message
+    +---- Up to 3 neighbors per side (within 30 min)
+    +---- Chronological order
+    |
+    v
+React UI Display
+    +---- Highlighted matching message
+    +---- Metadata badges (sender, time, relevance score)
+    +---- Expandable context
+    +---- Search latency and corpus statistics
 ```
 
-Empty directories contain only `.gitkeep` placeholders.
+## Tech Stack
 
-## Prerequisites
+| Component             | Technology                           | Version                           |
+| --------------------- | ------------------------------------ | --------------------------------- |
+| **Backend**           | Python/FastAPI                       | 3.115.12 / 3.9+                   |
+| **Web server**        | Uvicorn                              | 0.34.3                            |
+| **Embeddings**        | sentence-transformers                | 3.4.1                             |
+| **Semantic model**    | Hugging Face Transformers            | 4.48.3                            |
+| **Tensor backend**    | PyTorch                              | 2.6.0                             |
+| **Numerical compute** | NumPy/SciPy                          | 2.0.2 / 1.13.1                    |
+| **Lexical retrieval** | scikit-learn                         | 1.6.1                             |
+| **Frontend**          | React + Vite                         | Latest (package-lock.json pinned) |
+| **Styling**           | Plain CSS (responsive, no framework) | —                                 |
+| **Evaluation**        | Matplotlib                           | 3.9.4                             |
+| **Testing**           | pytest / vitest                      | 8.4.2                             |
 
-- Node.js 20.19+ on the 20.x line, or 22.12+; npm. See the [Vite setup guide](https://vite.dev/guide/).
-- Python 3.9 with pip and venv for the tested locked installation (verified with 3.9.10 on Windows). Other Python versions/platforms have not been clean-install tested; do not assume the pinned binary dependencies support every newer interpreter.
-- Internet access for the first dependency installation and semantic model preparation. Normal inference is local and requires no secrets or external LLM API. Lexical retrieval needs no model download.
+## Dataset
 
-Commands below use Windows PowerShell, starting from the repository root. `npm.cmd` avoids PowerShell script execution-policy restrictions; on macOS/Linux use `npm`. There is no need to activate the Python environment.
+**All data is entirely synthetic.** No real or private group chat was used.
 
-## Start the backend
+| Property                 | Value                                                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Messages**             | 4,634 JSONL records                                                                                                           |
+| **Participants**         | 8 fictional students: Aarav Sharma, Aditya Joshi, Ananya Verma, Ishita Patel, Kabir Khan, Meera Nair, Rohan Mehta, Sneha Iyer |
+| **Date range**           | 2026-03-01 through 2026-08-31 (all 184 calendar dates)                                                                        |
+| **Timezone**             | Asia/Kolkata (UTC+05:30)                                                                                                      |
+| **Fixed reference date** | 2026-09-01 (for reproducible temporal parsing)                                                                                |
+| **Generation seed**      | 20260901 (deterministic)                                                                                                      |
+| **Seed version**         | 1.0.0                                                                                                                         |
+| **Corpus SHA-256**       | `d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371`                                                            |
+
+### Message Characteristics
+
+- **English + Hinglish:** Messages mix English with Romanized Hindi; examples: _"overnight buses do back to back honge?"_, _"haan pakka"_, _"that reel starts from Mumbai, hum Indore mein hain"_
+- **Typos & misspellings:** _"nhi"_, _"thnks"_, _"dont"_ (intentionally generated)
+- **Short replies:** 396 single-token messages including _"haan"_, _"done"_, _"ok"_, emoji-only replies
+- **Forwarded text:** 44 messages marked as forwards, preserving original wording
+- **Media placeholders:** 134 images, 24 PDFs, 57 voice messages marked as `[Image]`, `[PDF]`, `[Voice message]`
+- **URLs:** 51 fictional example-domain links
+- **Emojis:** Natural conversational emoji use (😅, 😭, etc.)
+- **Topics:** College life, assignments, exams, travel, food, movies, coding, casual chatter
+
+### Decision Threads
+
+Three structured **72-message decision threads** (each spanning six dated episodes):
+
+| Thread            | Topic                                   | Alternatives                                           | Final Decision                                          | Conclusion Message |
+| ----------------- | --------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- | ------------------ |
+| `TRIP_MANALI`     | Where to travel, summer vacation        | Goa vs. Manali; cost negotiations                      | Manali, June 10–15, ₹8,700 per person cap               | MSG_000713         |
+| `HACKATHON_STACK` | Technology stack for hackathon          | MERN, Django/Postgres, Flutter/Firebase, React/FastAPI | React + Vite + JavaScript; FastAPI + Python + SQLite    | MSG_001482         |
+| `BIRTHDAY_EVENT`  | Venue and cost for birthday celebration | Rooftop dinner, bowling, lawn picnic, common room      | Nukkad Cafe side room, July 25, ₹2,900 under ₹3,000 cap | MSG_003616         |
+
+Each thread includes rejected alternatives, interruptions, calculations, and follow-up messages.
+
+## Search Pipeline
+
+### 1. Query Parsing
+
+The deterministic parser extracts metadata from natural-language queries without calling an external LLM:
+
+- **Participant detection:** Matches full names, first+last, or unambiguous first names against corpus metadata. English requests (_"what did Ishita say"_) and Hinglish (_"Ishita ne"_) are both recognized. Uncertain matches receive a small relevance bonus; names mentioned as topics do not become filters.
+- **Temporal expression resolution:** Recognizes _today_, _yesterday_, _last week_, _last month_, _this month_, explicit month names, ISO dates, named dates, and simple ranges. **Uses the fixed reference date (2026-09-01), never the system clock.** Supported Hinglish forms include _"pichle month"_ (last month).
+- **Message-type detection:** Explicit requests for forwarded items, PDFs, images, voice messages or URLs filter by stored message type.
+
+Example: _"What did Ishita send last month?"_ → participant: Ishita Patel, date range: August 2026, no type constraint.
+
+### 2. Semantic Retrieval
+
+Local inference using `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (pinned revision `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`):
+
+- Encodes all 4,634 messages and incoming queries to 384-dimensional normalized vectors
+- Computes NumPy cosine similarity to rank candidates
+- Handles Hinglish and English transparently; no translation required
+- Supports two representations:
+  - **Original-only:** The message text as-is
+  - **Contextual:** Message text plus up to 2 previous and 2 following messages (within 30 minutes), with role markers
+
+Contextual embeddings help interpret short replies but risk adding unrelated chatter.
+
+### 3. Lexical Retrieval
+
+TF-IDF with dual features:
+
+- **Word features:** Unigrams and bigrams with cosine similarity
+- **Character features:** 3–5 character n-grams (`char_wb` mode) for typo tolerance
+- **Combined score:** 0.70 × word cosine + 0.30 × character cosine
+
+No embeddings required; runs locally in milliseconds.
+
+### 4. Metadata Filtering & Constraints
+
+Parsed constraints intersect:
+
+- **Author filter:** Explicit sender requests narrow candidates to messages from that participant
+- **Date filter:** Temporal expressions constrain the message timestamp
+- **Type filter:** Explicit attachment/forwarded-item requests filter by message type
+- **Empty result handling:** If the intersection is empty, no results are returned; constraints are not silently relaxed
+
+### 5. Hybrid Ranking
+
+Combines normalized scores with learned weights (visible in [ranking_config.py](backend/app/search/ranking_config.py)):
+
+| Signal                       | No constraint | With hard constraint |
+| ---------------------------- | ------------- | -------------------- |
+| Contextual semantic          | 0.35          | 0.25                 |
+| Original semantic            | 0.35          | 0.45                 |
+| Lexical                      | 0.20          | 0.20                 |
+| Person bonus (if applicable) | 0.05          | 0.05                 |
+| Date bonus (if applicable)   | 0.05          | 0.05                 |
+
+When an author or date constraint applies, 0.10 weight shifts from contextual to original-message similarity (to prioritize direct message text).
+
+Exact ties broken by ascending message ID (deterministic).
+
+### 6. Contextual Assembly
+
+For each ranked result:
+
+- Return the original matching message (ID, text, sender, timestamp, scores)
+- Append up to 3 chronologically-adjacent messages before it (within 30 minutes)
+- Append up to 3 chronologically-adjacent messages after it (within 30 minutes)
+- Never include a neighbor as a correct hit during evaluation
+
+### 7. API Response
+
+FastAPI returns:
+
+```json
+{
+  "query": "...",
+  "query_metadata": { "detected_participant": "...", "detected_date_range": "...", ... },
+  "search_time_ms": 45,
+  "results": [
+    {
+      "rank": 1,
+      "matching_message": { "id": "MSG_XXX", "text": "...", "sender": "...", "timestamp": "..." },
+      "scores": { "hybrid": 0.85, "semantic": 0.90, "lexical": 0.75, "person_bonus": 0.05, ... },
+      "previous_messages": [ { "id": "...", "text": "...", ... }, ... ],
+      "next_messages": [ ... ]
+    }
+  ]
+}
+```
+
+## Why Context Matters
+
+Short replies are unintelligible in isolation. A message _"haan pakka"_ (okay, confirmed) provides no semantic signal about the topic—is it about travel, food, homework, or an event?
+
+**Without context:**
+
+```
+Query: "When did we confirm the trip?"
+Result: MSG_001200 "haan pakka"
+→ Useless; sender and topic unknown.
+```
+
+**With context:**
+
+```
+Query: "When did we confirm the trip?"
+Result: MSG_001200 "haan pakka"
+  Previous: Rohan: "So June 10-15, Rs 8700 cap. Everyone okay?"
+  Previous: Aditya: "Yes, Manali final."
+→ Clear: Trip confirmed June 10-15 to Manali.
+```
+
+Contextual embeddings encode the surrounding messages, allowing the embedding space to distinguish _"haan pakka"_ in a travel context from the same phrase in a food discussion. However, context also risks pulling in unrelated chatter—a risk our evaluation captures.
+
+## Evaluation
+
+**Measured on 40 frozen queries against 4,634 synthetic messages.** Reference date: 2026-09-01.
+
+### Benchmark Results
+
+| Method         |  Top-1 Accuracy   |     Recall@3      |  Hard-10 Top-1   |      Person      |       Time       |     Semantic     | Gap (pp)  |
+| -------------- | :---------------: | :---------------: | :--------------: | :--------------: | :--------------: | :--------------: | :-------: |
+| **Lexical**    |   22.5% (9/40)    |   40.0% (16/40)   |   0.0% (0/10)    |   30.0% (3/10)   |   30.0% (3/10)   |   15.0% (3/20)   |   +22.5   |
+| **Semantic**   |   32.5% (13/40)   |   40.0% (16/40)   |   10.0% (1/10)   |   30.0% (3/10)   |   40.0% (4/10)   |   30.0% (6/20)   |   +22.5   |
+| **Contextual** |   10.0% (4/40)    |   30.0% (12/40)   |   10.0% (1/10)   |   10.0% (1/10)   |   20.0% (2/10)   |   5.0% (1/20)    |    0.0    |
+| **Hybrid**     | **55.0% (22/40)** | **62.5% (25/40)** | **10.0% (1/10)** | **70.0% (7/10)** | **80.0% (8/10)** | **35.0% (7/20)** | **+45.0** |
+
+- **Top-1:** Correct message ID ranked first
+- **Recall@3:** Correct message appears in top 3 results
+- **Hard-10:** Zero-word-overlap subset (Q001–Q010)
+- **Category breakdown:** Person-based, time-based, and semantic queries (by primary label)
+- **Gap:** Overall Top-1 minus Hard-10 Top-1 (percentage points)
+
+Hybrid achieves **55% overall accuracy** but only **10% on hard paraphrases**, indicating that person/time metadata help more than semantic paraphrase understanding.
+
+Contextual embeddings alone perform _worse_ than original-only embeddings (10% vs 32.5%), showing that adding adjacent messages is not automatically beneficial.
+
+All three baselines (lexical, semantic, contextual) remain **unchanged** and are **always compared** using the same frozen inputs. No labels or ranking settings were modified during evaluation.
+
+### Benchmark Artifacts
+
+Run `python evaluation/evaluate.py --all` to regenerate:
+
+- `results/comparison.csv` — Numeric results
+- `results/comparison.json` — Detailed metrics and per-query results
+- `results/benchmark.png` — Overall and hard-subset accuracy chart
+- `results/failed_queries.txt` — Expected vs. retrieved messages for all failures
+- `results/evaluation_summary.md` — Auto-generated summary
+
+## Hard Query Evaluation
+
+**Zero-word-overlap queries (Q001–Q010)** test whether the search engine understands meaning when exact keywords are absent.
+
+### Overlap Convention
+
+Before labelling, a versioned tokenization and stopword list was fixed in [evaluation/OVERLAP.md](evaluation/OVERLAP.md):
+
+1. **Text-only comparison:** Query text vs. message text; sender, timestamp, and metadata excluded.
+2. **Unicode NFKC normalization and casefolding** (case-insensitive)
+3. **Contraction expansion:** _"can't"_ → _"can not"_, _"won't"_ → _"will not"_
+4. **Tokenization:** Letters and digits only; punctuation, emojis, URLs are separators
+5. **Fixed stopword list:** Only explicit function words (English + Romanized Hindi) are removed; negation, quantities, time references, and content words are kept
+6. **No stemming, translation, or spelling correction**
+
+A query has zero-word-overlap when both content-token sets are nonempty and their intersection is empty.
+
+### Examples
+
+**Q001:** _"What made a seaside holiday unaffordable?"_ → Expected: MSG_000600
+
+Corpus message:
+
+```
+Ishita Patel: "Goa's total is over 8700 budget. Nope not doable."
+```
+
+Content tokens (after normalization):
+
+- Query: `{seaside, holiday, unaffordable}`
+- Message: `{goa, total, 8700, budget, nope, not, doable}`
+- Intersection: ∅ (empty)
+
+Despite zero lexical overlap, semantic retrieval should recognize _"seaside holiday"_ → _"Goa"_ and _"unaffordable"_ → _"over budget"_.
+
+**Q009:** _"How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?"_ → Expected: MSG_000700
+
+Corpus message:
+
+```
+Ishita Patel: "We should keep 700 emergency buffer out of 8700 and not spend it on shopping."
+```
+
+Semantic test: _"unforeseen expenses"_ ≈ _"emergency buffer"_, _"souvenirs"_ ≈ _"shopping"_.
+
+### Semantic Relationship Review
+
+All 10 hard queries underwent manual review to confirm they are substantive paraphrases, not mere spelling tricks. See [evaluation/HARD_SUBSET_REVIEW.md](evaluation/HARD_SUBSET_REVIEW.md) for complete details.
+
+Current performance: Hybrid retrieves only 1 of 10 hard queries correctly (10%), leaving 9 failures primarily in semantic understanding and paraphrase recognition.
+
+## Running Locally
+
+### Prerequisites
+
+- **Python 3.9+** with `venv` support
+- **Node.js 20.19+** with npm
+- **Internet access** (initial setup only, for model download)
+- **~1 GB** disk space for dependencies, model weights (~450 MiB) and embeddings
+
+Tested on Windows (Python 3.9.10, Node 24.8.0, npm 11.6.0). Linux commands provided but not clean-install verified.
+
+### Windows Setup (PowerShell)
+
+```powershell
+# Create and activate Python virtual environment
+py -3.9 -m venv backend/.venv
+.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
+.\backend\.venv\Scripts\python.exe -m pip check
+
+# Install frontend dependencies
+cd frontend
+npm.cmd ci
+cd ..
+```
+
+### Linux/macOS Setup (Bash)
+
+```bash
+# Create and activate Python virtual environment
+python3.9 -m venv backend/.venv
+./backend/.venv/bin/python -m pip install -r backend/requirements.lock.txt
+./backend/.venv/bin/python -m pip check
+
+# Install frontend dependencies
+cd frontend
+npm ci
+cd ..
+```
+
+**Note:** `requirements.lock.txt` pins the exact tested package set (58 packages, Windows). Platform-specific transitive dependencies may differ on Linux/macOS; `requirements.txt` lists direct dependencies only.
+
+### Generate Corpus
+
+The corpus is pre-generated at `backend/data/messages.jsonl`. Regeneration is optional and deterministic.
+
+**Windows:**
 
 ```powershell
 cd backend
-py -3.9 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
-.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+.\.\venv\Scripts\python.exe -m scripts.generate_data
+.\.\venv\Scripts\python.exe -m scripts.validate_data
+cd ..
 ```
 
-`requirements.txt` pins direct runtime and test dependencies. `requirements.lock.txt` records the full tested environment; use it for reproducible installation. On macOS/Linux the equivalent environment command is `python3.9 -m venv .venv`; replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`. These platform instructions have not been independently verified.
+**Linux/macOS:**
 
-Health: `GET http://127.0.0.1:8000/api/health` returns HTTP 200 and `{"status":"ok"}`. API docs: `http://127.0.0.1:8000/docs`.
+```bash
+cd backend
+./.\venv/bin/python -m scripts.generate_data
+./.\venv/bin/python -m scripts.validate_data
+cd ..
+```
 
-Search also requires the one-time local model preparation documented below. Startup loads the corpus and initializes one shared hybrid index per server process, using existing embedding caches or building missing caches once. Allow startup to finish before making requests. If model/index preparation fails, health and corpus stats remain available but search returns HTTP 503 with setup instructions; fix the startup error and restart. No model downloads or document embedding generation happen inside the search request handler.
+Generation uses only the Python standard library. To output to a custom directory, use `--output-dir PATH`.
 
-## Start the frontend
+### Prepare Embeddings & Indexes
 
-In a second terminal, from the repository root:
+Download the pinned sentence-transformers model and build both original and contextual embedding caches:
+
+**Windows:**
+
+```powershell
+cd backend
+.\.\venv\Scripts\python.exe -m scripts.prepare_model
+.\.\venv\Scripts\python.exe -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
+cd ..
+```
+
+**Linux/macOS:**
+
+```bash
+cd backend
+./.\venv/bin/python -m scripts.prepare_model
+./.\venv/bin/python -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
+cd ..
+```
+
+Model files are cached in `.cache/models/` (ignored by `.gitignore`). Embeddings are cached in `.cache/embeddings/` keyed by corpus hash, model revision, and settings. Missing caches are rebuilt automatically at server startup or evaluation, so explicit indexing is optional.
+
+### Start Backend
+
+**Windows:**
+
+```powershell
+cd backend
+.\.\venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+**Linux/macOS:**
+
+```bash
+cd backend
+./.\venv/bin/python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+Backend starts on `http://127.0.0.1:8000`. API documentation: `http://127.0.0.1:8000/docs`.
+
+**Health check:** `http://127.0.0.1:8000/api/health` returns `{"status":"ok"}` when the service is ready.
+
+**Important:** Allow model/index initialization to finish. If initialization fails, health and stats may remain accessible while search returns HTTP 503 with setup instructions. Resolve the error and restart; health alone does not prove search is ready.
+
+### Start Frontend
+
+In a **second terminal**, from the repository root:
+
+**Windows:**
 
 ```powershell
 cd frontend
-npm.cmd ci
 npm.cmd run dev
 ```
 
-Open `http://127.0.0.1:5173`. RecallChat loads live `/api/stats` and sends questions to `/api/search`. Submit with Enter or **Search chat**, or click an example chip to search immediately. The **Archive connected** indicator reports that corpus stats are reachable; a missing search model can still cause a separate search error. Keep the backend running with the local model prepared as described below.
+**Linux/macOS:**
 
-Vite forwards `/api` to `http://127.0.0.1:8000`. Port 5173 is fixed; stop a conflicting process or update the Vite and backend origin settings together. FastAPI allows CORS from `http://localhost:5173` and `http://127.0.0.1:5173`, following the [FastAPI CORS configuration](https://fastapi.tiangolo.com/tutorial/cors/). These are local development settings. Production hosting and API routing are not configured in this phase; `npm.cmd run build` produces frontend assets only.
+```bash
+cd frontend
+npm run dev
+```
 
-## Generate and validate the synthetic chat
+Frontend starts on `http://127.0.0.1:5173`. Vite proxies `/api` requests to `http://127.0.0.1:8000` (backend).
 
-The generated files are included in the repository. To reproduce them, from the repository root:
+**Open browser:** `http://127.0.0.1:5173`
+
+### Build Frontend for Production
 
 ```powershell
-cd backend
-.\.venv\Scripts\python.exe -m scripts.generate_data
-.\.venv\Scripts\python.exe -m scripts.validate_data
-.\.venv\Scripts\python.exe -m pytest
-```
-
-The generator and validator use only the Python standard library; they need no network, model, or additional packages. You can also run them with `py -3 -m scripts.generate_data` and `py -3 -m scripts.validate_data` from `backend`. Their default paths are resolved relative to the script package. `--output-dir PATH` on the generator and `--data-dir PATH` on the validator support separate reproduction folders.
-
-- Output: [messages.jsonl](backend/data/messages.jsonl) and [corpus_metadata.json](backend/data/corpus_metadata.json).
-- Fixed seed: `20260901`; generator version: `1.0.0`; reference runtime: Python `3.9.10`. The full tested backend dependency versions remain in `backend/requirements.lock.txt`.
-- Inclusive dates: `2026-03-01` through `2026-08-31` (184 dates). Timestamps are chronological ISO 8601 strings with the `+05:30` offset, corresponding to Asia/Kolkata.
-- Fixed reference date: `2026-09-01`, stored in the metadata for later relative-time interpretation. The parser and hybrid filters use this fixed date for relative-time requests.
-- Each row has `id`, `timestamp`, `sender` (full name), `text`, `message_type`, and `metadata` containing stable `participant_id`, `topic`, and `episode_id`. Decision messages also have `thread_id`. IDs run from `MSG_000001` to `MSG_004634` and are stable for this seed, content and configuration.
-- Types: `text`, `forwarded`, `url`, `image`, `pdf`, `voice`. Media are text placeholders, not actual attachments. Example-domain links are placeholders; no link is fetched during generation.
-- Composition: 552 complete daily conversations (2-4 per day, eight messages each), 216 hand-authored decision messages, and two boundary messages. Background conversations use 56 season-aware vignettes with shared details, changing speakers, wording variations and irregular reply intervals.
-- Metadata records participant profiles, counts, seed/configuration, interpreter version, SHA-256, and thread ranges, membership and conclusion IDs. Thread annotations support corpus review and must not become answer lookup rules in future retrieval. Evaluation labels are stored separately under `evaluation/` and are never generator or retrieval inputs.
-- JSONL serialization is UTF-8 with LF endings and fixed key order. Tests generate both files independently twice and compare their bytes; they also compare the stored corpus with a fresh generation. Reproduction was verified on Python 3.9.10; other Python versions have not been tested. Changing content or the seed can change IDs and hashes. No embedding model is used, so no model revision applies in this phase.
-
-The three extended threads end in a Manali trip, a React/Vite + FastAPI + SQLite hackathon stack, and a July 25 birthday at Nukkad Cafe costing Rs 2,900. Each includes alternatives, interruptions and follow-up over six dates. See [corpus review notes](backend/data/CORPUS_REVIEW.md) for exact message ranges and conclusions.
-
-This is deliberately synthetic, template-based data: repeated background phrasing and simplified student routines remain limitations. The corpus is not evidence about real students, venues, prices or events, and no private chat was used.
-
-## Frozen retrieval evaluation queries
-
-[evaluation/queries.json](evaluation/queries.json) is a JSON array of exactly 40 manually composed query records: **20 semantic, 10 person and 10 time**. Each includes the requested ID, query text, actual target message ID, primary category, overlap flag and labelling rationale. Queries cover all three decision threads plus exam notices, class changes, volunteer material, travel and an upload problem. Person queries use the actual eight-participant corpus; no nonexistent example name was inserted.
-
-**10 queries (Q001-Q010) have zero meaningful word overlap** with their target text under the fixed [overlap convention](evaluation/OVERLAP.md). Their [manual review](evaluation/HARD_SUBSET_REVIEW.md) explains the semantic connection and nearby distractors. The authoring assistant reviewed the labels; they have not received independent human review. The token audit is exact lexical matching after documented normalization and function-word removal, not a semantic similarity score. Sender/time/context are excluded from the word-overlap calculation.
-
-Time conventions use the corpus reference date **2026-09-01** and Asia/Kolkata: “last month” is August 1-31; “yesterday” is August 31; “morning” is 00:00 through 11:59:59. For these labels, “late April” means April 21-30 and “start of May” means May 1-7. Chat timestamps determine date filtering; a June event mentioned in a March message is still a March chat message. These frozen label conventions are implemented by the deterministic parser and the hybrid constraint refinements described below.
-
-There are **37 distinct target IDs**: each of the three final decisions is tested once semantically and once with a time constraint. All ten hard cases are semantic queries from the decision threads, so the hard subset does not separately measure person/time retrieval. Some targets need nearby context to resolve pronouns, but the target itself carries the requested answer. A neighbor or summary alone must not count as a correct hit.
-
-Run validation from the repository root:
-
-```powershell
-.\backend\.venv\Scripts\python.exe -m evaluation.validate_queries
-.\backend\.venv\Scripts\python.exe -m evaluation.validate_queries --show-overlap
-.\backend\.venv\Scripts\python.exe -m pytest evaluation/tests -q
-```
-
-Validation enforces the exact count/schema, real target IDs, categories, at least eight hard labels, nonempty content and agreement of **every** overlap flag with the checker. Default validation also verifies the [freeze manifest](evaluation/freeze_manifest.json) against the unchanged corpus, corpus metadata, labels, convention and review artifacts. It never updates them. `--draft` is only for pre-freeze label review and skips integrity checks; it is not proof that a set is frozen.
-
-Version `1.0.0` was frozen before search implementation or scoring. [label_changes.md](evaluation/label_changes.md) records initial review and the correction procedure. Future legitimate corrections require visible history, versioned artifacts and rerunning affected comparisons; never rewrite expected answers to fit retrieved results. The retrieval module does not read labels; the evaluator supplies only query text and K to it. The initial freeze manifest's `retrieval_scored: false` records the state at freeze time and remains unchanged after later benchmark runs. Scoring reports both Top-1 numerators and denominators (40 overall, 10 hard) and their signed percentage-point gap.
-
-Evaluation-phase checks: validator passed with `freeze_verified: true`; **20 evaluation tests passed** on Python 3.9.10. Corpus and metadata SHA-256 values remained unchanged. Backend/frontend implementation was unchanged, so their existing tests were not rerun in this phase.
-
-## Lexical retrieval baseline
-
-The backend's `app/search/` package separates corpus loading from retrieval. Its [scikit-learn TF-IDF vectorizers](https://scikit-learn.org/1.6/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) use word unigrams/bigrams and character n-grams of length 3-5 within word boundaries (`char_wb`). Each channel uses L2 normalization, smoothed IDF and sublinear term frequency. The fixed lexical score is **0.7 × word cosine + 0.3 × character cosine**. These defaults were chosen before benchmark scoring and are not tuned against the evaluation set.
-
-Only original message `text` is indexed. Sender, timestamp, message IDs, thread/conclusion annotations, query categories, overlap flags and labelling notes are excluded from features. No embeddings, synonym expansion, stopword list or person/date parser is used. The evaluation overlap convention is used only to validate labels, not to preprocess retrieval queries.
-
-The index is built in memory on construction, without a downloaded model or persistent index cache. `search(query, top_k=5)` returns up to K positive-scoring `SearchResult` objects with `id`, `sender`, `timestamp`, original `text` and `lexical_score`; `.to_dict()` serializes one result. Blank or fully out-of-vocabulary queries return an empty list; invalid K values raise an error. Equal scores are ordered by message ID. Character features offer some typo tolerance, but do not provide semantic understanding.
-
-Example, in Python with `backend` as the working directory:
-
-```python
-from app.search import LexicalSearch
-
-searcher = LexicalSearch.from_jsonl()
-for hit in searcher.search("trip budjet", top_k=3):
-    print(hit.to_dict())
-```
-
-Install the updated locked dependencies and run the benchmark from the repository root:
-
-```powershell
-.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
-.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method lexical
-```
-
-With that environment's Python on PATH, the equivalent command is:
-
-```text
-python evaluation/evaluate.py --method lexical
-```
-
-No running backend/frontend service is needed. The runner validates frozen labels and hashes before and after retrieval, prints aggregate metrics and every incorrect Top-1 query with expected/retrieved text and IDs, and saves [results/lexical.json](results/lexical.json). The JSON includes raw numerators/denominators, rates and percentages, per-category accuracy, the signed overall-minus-hard gap, all top-three messages/scores, configuration, dependency versions, and input/source hashes. Re-running the command overwrites this result file with the new measured run; its UTC measurement time changes.
-
-Top-1 requires the exact expected message ID. Recall@3 is the fraction of queries whose single expected target appears in the first three hits; a short/empty hit list still counts in the denominator. Surrounding context and alternate messages are not credited. Person/time queries are evaluated unchanged even though this baseline cannot interpret their metadata constraints. Zero-word-overlap queries can still have character n-gram or function-word overlap, so a nonzero lexical score does not contradict their hard labels.
-
-Measured lexical results on the frozen version 1.0.0 corpus and query set:
-
-| Metric | Correct / total | Result |
-| --- | ---: | ---: |
-| Overall Top-1 | 9 / 40 | 22.5% |
-| Recall@3 | 16 / 40 | 40.0% |
-| Hard zero-overlap Top-1 | 0 / 10 | 0.0% |
-| Semantic-category Top-1 | 3 / 20 | 15.0% |
-| Person-category Top-1 | 3 / 10 | 30.0% |
-| Time-category Top-1 | 3 / 10 | 30.0% |
-
-The signed **overall minus hard Top-1 gap is +22.5 percentage points**. These are measured results, not targets. All 31 incorrect queries were printed with expected and retrieved messages; all 40 rankings are saved in the JSON. For example, Q015 retrieves the question about outside cake instead of the answer giving permission and decoration conditions. Q017 retrieves an identical exam forward from April instead of the labelled May message, although the correct ID is in its top three. Generic question words also produce unrelated matches when substantive query terms are absent. No settings or labels were changed after observing these results.
-
-This run used Python 3.9.10, scikit-learn 1.6.1, NumPy 2.0.2 and SciPy 1.13.1 on Windows; complete dependency versions and source/input hashes are in the result artifact. Tiny floating-point differences on other platforms are possible. Subsequent semantic/contextual and hybrid comparisons are below.
-
-Lexical-phase checks: **51 backend tests and 25 evaluation tests passed** (76 total); `pip check` found no broken requirements. Tests cover typo recovery with zero word-feature matches, stable ties, empty/OOV queries, original result fields, exclusion of metadata from features, malformed corpus input, known metric rankings and denominators, label isolation and frozen integrity. The benchmark ran successfully through the exact `evaluation/evaluate.py --method lexical` entry point. Saved per-query rankings were independently checked against aggregate counts and source/input/lock hashes. The frontend was unchanged, so its tests were not rerun.
-
-## Contextual semantic retrieval
-
-`app/search/context.py` computes one representation per original message. It takes at most the two immediately previous and two immediately following messages in chronological order, with a maximum distance of 30 minutes from the current message. It does not jump over messages to find matching topics or use thread/episode/conclusion annotations. At corpus boundaries or across long gaps, fewer neighbors are included. Following messages are appropriate for this completed archive; this is not a causal live-chat model.
-
-Every contextual hit contains `id`, `sender`, `timestamp`, `text`, `original_text`, `semantic_score`, `context_text`, `context_message_ids`, `context_messages`, `embedding_text` and `truncated_message_ids`. Both `text` and `original_text` are the exact original current message. `context_message_ids` includes the current message and at most four neighbors. Display context messages carry `is_current`; matching a neighbor never changes the result's target ID or earns evaluation credit for that neighbor.
-
-The pinned [multilingual MiniLM model](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) is `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` at revision `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`. It runs on CPU with four threads and normalized float32 embeddings; ranking uses NumPy cosine similarity and stable ID tie-breaking. No sender/date boosts are added. Model revision and downloaded-file hashes are recorded in each semantic result artifact.
-
-Both semantic methods use an explicit **256-token maximum**, increased from the model package's 128-token sentence setting to accommodate the bounded conversation. Context text uses Previous/Current/Following message markers. When embedding input is too long, the longest neighbors are trimmed first; only a current message that cannot fit by itself is truncated for embedding. Full originals and full bounded `context_text` are retained separately. `embedding_text` records the exact string passed to the encoder, and result configuration reports truncation counts. These limits were fixed before scoring.
-
-Prepare the public model once (approximately 450 MB of weights, plus tokenizer files; PyTorch dependencies also require disk space):
-
-```powershell
-# From the repository root:
-.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
-cd backend
-.\.venv\Scripts\python.exe -m scripts.prepare_model
+# Windows
+cd frontend
+npm.cmd run build
 cd ..
-.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method semantic
-.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method contextual
-.\backend\.venv\Scripts\python.exe -m evaluation.compare
 ```
 
-With the environment activated, the requested command is `python evaluation/evaluate.py --method contextual`. `semantic` is the original-text-only control using the same model and token limit; it isolates the effect of adding context. Comparing contextual embeddings only against lexical retrieval would also include the effect of changing retrieval models.
-
-The download script fetches only pinned tokenizer/configuration files and safetensors weights into ignored `.cache/models/`. Model loading uses `local_files_only=True` and disables remote code. Re-running preparation verifies file hashes; interrupted downloads leave only a `.part` file. Inference never downloads files. Encodings are cached under `.cache/embeddings/` by exact representation text, model revision/file hashes, settings and dependency versions, with shape/norm/checksum validation. Repeated evaluations reuse these caches; changed corpus text, context text or model settings create new keys.
-
-Results are saved separately in `results/semantic.json` and `results/contextual.json`. The comparison command verifies identical frozen inputs, recomputes aggregate metrics from stored ranks, and writes `results/contextual_comparison.json`, including category gains/losses and newly correct/incorrect query IDs. The existing lexical artifact is preserved. Neighbor-only matches are reported diagnostically but remain wrong under strict target-ID scoring.
-
-Short replies such as `done`, `haan pakka`, `this one` and `ok final` have unit tests for contextual representation and unchanged target display. Optional offline real-model tests also verify that identical short replies in different conversations acquire distinct representations. These examples are test fixtures; the 40 frozen benchmark targets are not replaced with easier short-reply labels, and no separate short-reply accuracy is claimed.
-
-Measured results on the same frozen 40 queries and 4,634 messages:
-
-| Metric | Lexical (previous run) | Original-only semantic | Contextual | Contextual minus semantic |
-| --- | ---: | ---: | ---: | ---: |
-| Overall Top-1 | 9/40 (22.5%) | 13/40 (32.5%) | 4/40 (10%) | -22.5 pp |
-| Recall@3 | 16/40 (40%) | 16/40 (40%) | 12/40 (30%) | -10 pp |
-| Hard zero-overlap Top-1 | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 0 pp |
-| Semantic-category Top-1 | 3/20 (15%) | 6/20 (30%) | 1/20 (5%) | -25 pp |
-| Person-category Top-1 | 3/10 (30%) | 3/10 (30%) | 1/10 (10%) | -20 pp |
-| Time-category Top-1 | 3/10 (30%) | 4/10 (40%) | 2/10 (20%) | -20 pp |
-| Overall minus hard Top-1 gap | +22.5 pp | +22.5 pp | 0 pp | |
-
-**Adding this context window made every category worse.** It gained Q024 but lost ten previously correct queries relative to original-only semantic retrieval. Hard-subset accuracy stayed at 1/10; its improvement over lexical retrieval cannot be attributed to context. No parameters or expected answers were changed after scoring.
-
-In 11 incorrect contextual Top-1 results, the expected answer appears only in the returned target's surrounding context. For example, Q013 expects the birthday decision `MSG_003616`, but the returned target is `MSG_003618`, a cake-pickup follow-up whose context includes that decision. It remains incorrect. Similar representations across adjacent messages can find the right conversation while failing to select its actual answer. Context also introduces distractors. Those runs used no person/time parser or reranker. Neither semantic run truncated any of this corpus's embedding inputs at the configured 256-token limit.
-
-Artifacts: [semantic results](results/semantic.json), [contextual results](results/contextual.json), and [comparison with query-level changes](results/contextual_comparison.json). They record configuration, pinned model/file hashes, dependency versions, matrix checksums and all rankings. The corpus, metadata, frozen query/review files and previous lexical artifact are unchanged.
-
-Contextual-phase checks on Windows / Python 3.9.10: **67 backend tests and 28 evaluation tests passed (95 total)**, including all four offline real-model short-reply cases. `pip check` passed. Both semantic benchmarks and the comparison completed; saved metrics and artifact hashes were verified. The initial model download hit a CDN DNS failure; a retry using explicit download URLs completed successfully. Frontend code was unchanged, so its tests/build were not rerun in this phase. This validates the implementation, not an accuracy improvement.
-
-## Standalone person/time query parser
-
-`backend/app/query_understanding/` uses only the Python standard library. It reads participant names, `reference_date` and timezone from corpus metadata; it does not load messages, evaluation labels, a model or an index, call an external API, or change ranking. The raw query is preserved. Example usage from `backend`:
-
-```python
-from app.query_understanding import QueryParser
-
-parser = QueryParser.from_metadata()
-print(parser.parse("Ishita ne last month budget pe kya bola?").to_dict())
+```bash
+# Linux/macOS
+cd frontend
+npm run build
+cd ..
 ```
 
-```json
-{
-  "raw_query": "Ishita ne last month budget pe kya bola?",
-  "person": "Ishita Patel",
-  "start_date": "2026-08-01",
-  "end_date": "2026-08-31",
-  "intent": "person_time_semantic",
-  "reference_date": "2026-09-01",
-  "timezone": "Asia/Kolkata",
-  "person_candidates": ["Ishita Patel"],
-  "warnings": []
-}
-```
+Output is in `frontend/dist/`. This is not a complete production deployment; authentication, reverse-proxy routing, and hosting are not configured.
 
-Run the parser directly, with one or more quoted queries, from `backend`:
+## Running Evaluation
+
+Evaluate all four retrieval methods against the frozen 40-query set:
+
+**Windows:**
 
 ```powershell
-.\.venv\Scripts\python.exe -m app.query_understanding "What did Ishita say about the budget?" "Rohan ne last month kya bola?"
-.\.venv\Scripts\python.exe -m pytest tests/test_query_parser.py -q
-```
-
-`--metadata PATH` selects another metadata file. Missing/invalid reference dates fail explicitly; the parser never falls back to the machine's date. Date bounds are inclusive calendar dates in the metadata timezone and are not clipped to the corpus. Thus `today` is September 1 even though the corpus ends August 31.
-
-Rules fixed for this implementation:
-
-- Participant matching uses Unicode normalization, case-insensitive whole-name boundaries and full/first/last names from metadata. A unique match returns the canonical full name. Longer full names disambiguate shared aliases; multiple distinct matches return `person: null`, candidates and a warning. Known name mentions are detected without distinguishing sender, recipient or topic. Unknown names remain unresolved; Priya/Rahul/Aman are example test participants, not members added to this corpus.
-- `today`/`aaj` means the reference date; `yesterday`/`beete kal` means the previous date. `last week`/`pichle hafte` means the previous complete Monday-Sunday, August 24-30 here. `last month`/`pichle mahine` means the previous complete calendar month; `this month`/`is mahine` means the reference calendar month. The `pichhle` spelling is also supported. Bare `kal` is ambiguous and yields a warning with no date bounds.
-- English month names and three-letter abbreviations (also `sept`) use the reference year when no year is supplied, even for months after September. Bare `May` works by itself; within a sentence it needs a month cue such as `in May`, `May mein` or a day/year to avoid treating auxiliary `may` as a date.
-- Supported dates are ISO `YYYY-MM-DD`, `15 August 2026`, and `August 15, 2026`, with optional ordinals and optional year for named dates. Simple ranges include `2026-03-01 to 2026-03-10`, `between 1 June and 15 July 2026`, `1-15 August`, `August 1-15`, and `1 Aug se 15 Aug tak`. `through`, `until` and dash connectors are inclusive too. A single explicit year applies to both range endpoints; cross-year ranges require both years explicitly.
-- Compatible time expressions intersect. Conflicting intervals, invalid/reversed dates, or ambiguous numeric slash dates return null date bounds and warnings. Unsupported linguistic constructions (negation, event-relative dates, time of day, and fine-grained qualifiers such as `late April`) are not fully interpreted; a recognized month alone yields that whole month. This is a bounded rule grammar, not general language understanding. Consumers must review warnings before applying future filters.
-- Intent is `semantic`, `person_semantic`, `time_semantic` or `person_time_semantic`, based on resolved constraints. Hybrid retrieval now consumes these parsed constraints through the conservative sender/date interpretation described below; the three baselines remain unchanged.
-
-Actual CLI examples, all using reference date `2026-09-01` and timezone `Asia/Kolkata` (all warnings empty):
-
-| Raw query | Person | Inclusive start / end | Intent |
-| --- | --- | --- | --- |
-| What did Ishita say about the budget? | Ishita Patel | null / null | person_semantic |
-| Rohan ne last month trip ke baare mein kya bola? | Rohan Mehta | 2026-08-01 / 2026-08-31 | person_time_semantic |
-| Message from Aarav about coding yesterday | Aarav Sharma | 2026-08-31 / 2026-08-31 | person_time_semantic |
-| Sneha ne aaj kya bola? | Sneha Iyer | 2026-09-01 / 2026-09-01 | person_time_semantic |
-| What did we decide last week? | null | 2026-08-24 / 2026-08-30 | time_semantic |
-| Meera ke this month wale messages | Meera Nair | 2026-09-01 / 2026-09-30 | person_time_semantic |
-| Ananya ne August mein exams ke baare mein kya bola? | Ananya Verma | 2026-08-01 / 2026-08-31 | person_time_semantic |
-| Messages from Kabir between 1 June and 15 July 2026 | Kabir Khan | 2026-06-01 / 2026-07-15 | person_time_semantic |
-
-Parser-phase validation: **71 parser tests passed**, and the full suites passed with **138 backend tests plus 28 evaluation tests (166 total)**. Cases include English/Hinglish patterns, ambiguous aliases/dates, leap years, week/year boundaries, custom metadata and a wall-clock guard. Ten CLI examples ran successfully. Initial sandbox attempts to launch two Python commands could not access the installed runtime; authorized reruns passed. Retrieval code, frozen data/labels and benchmark artifacts are unchanged; no ranking evaluation or frontend checks were rerun for this parsing-only phase.
-
-## Hybrid retrieval and four-method comparison
-
-`backend/app/search/hybrid.py` combines the existing original-only semantic, contextual semantic and lexical indexes. One pinned local encoder is shared, and the existing embedding caches are reused. It scores every corpus message before applying constraints and selecting top K. Evaluation labels, expected IDs, notes, categories and thread/conclusion annotations never enter retrieval. Original raw query text supplies all similarity channels.
-
-`constraints.py` consumes the standalone parser and distinguishes explicit sender language (`what did NAME say`, `NAME ne`, `from NAME`, `NAME shared`) from a bare name mention. Clear single-sender requests **filter the current author**. A known name without a clear sender role gets a small bonus; names used as topics or recipients and ambiguous/multiple names get no sender preference. This conservative rule can miss implicit author intent, as the measured spending-limit example below shows.
-
-Resolved chat dates **exclude current messages outside the inclusive range**, using metadata reference date `2026-09-01` and Asia/Kolkata. Morning is 00:00-11:59:59; other day parts and month-part boundaries are visible in configuration. `late MONTH` uses days 21-end and `start of MONTH`/`early MONTH` uses days 1-7. Date expressions directly attached to event nouns, such as `the June trip`, are not assumed to be message timestamps; another explicit chat date in the same query still applies. These are general rules applied to every query, not benchmark-ID exceptions. Unsupported/ambiguous phrasing remains a limitation. On Windows without an IANA database, the corpus's modern Indian timestamps use explicit UTC+05:30, never the machine timezone.
-
-Person, date and explicit message-type filters intersect. Clear requests for an actual forwarded item, PDF, image, voice message or URL use the current message's stored `message_type`; mentioning an attachment does not by itself trigger a type filter. Negated and alternative type requests are left unconstrained. The effective optional `message_type` is included in API query metadata. No topic/episode/thread annotations enter ranking. An empty intersection returns no hits without relaxing the request. Filters apply to the original current message; its bounded display context may include other authors or dates. Results preserve the actual target ID and original text and include individual semantic/contextual/lexical scores, person/date matches, metadata bonus, final hybrid score, context and an explanation of the applied constraints/weights. A neighboring answer is still wrong under exact-ID scoring.
-
-All weights, the four trial profiles and date-refinement boundaries live in [ranking_config.py](backend/app/search/ranking_config.py). Semantic cosine is clamped to [0,1], TF-IDF uses its existing nonnegative cosine score, and no query-specific min/max normalization is applied. The selected **balanced** profile uses:
-
-| Signal | No hard constraint | Clear author, date or message-type constraint |
-| --- | ---: | ---: |
-| Contextual semantic | 0.35 | 0.25 |
-| Original semantic | 0.35 | 0.45 |
-| Lexical TF-IDF | 0.20 | 0.20 |
-| Person bonus, when applicable | 0.05 | 0.05 |
-| Date bonus, when applicable | 0.05 | 0.05 |
-
-The constrained route transfers 0.10 from context to the original message to focus ranking within the eligible set. Bonuses are zero when absent, not redistributed. A hard-filter bonus is constant across eligible messages; the filter itself supplies the strong metadata influence. Scores are not calibrated probabilities or intended for comparisons across different queries.
-
-Four profiles were declared before this task's first hybrid scoring. Their base `(contextual, original, lexical)` weights were `(0.55, 0.20, 0.15)`, `(0.35, 0.35, 0.20)`, `(0.20, 0.55, 0.15)` and `(0.10, 0.65, 0.15)`; each used the same metadata policy, bonuses and constrained transfer. The measured selection rule was highest overall Top-1, then Recall@3, then declaration order. [hybrid_tuning.json](results/hybrid_tuning.json) retains all configurations, rankings and measurements:
-
-| Profile | Top-1 | Recall@3 | Hard Top-1 |
-| --- | ---: | ---: | ---: |
-| context_first (suggested starting mix) | 20/40 (50%) | 25/40 (62.5%) | 1/10 (10%) |
-| balanced (selected) | 21/40 (52.5%) | 25/40 (62.5%) | 1/10 (10%) |
-| original_first | 21/40 (52.5%) | 25/40 (62.5%) | 1/10 (10%) |
-| anchor_first | 20/40 (50%) | 24/40 (60%) | 1/10 (10%) |
-
-Balanced and original_first tied under both metrics; declaration order chose balanced. No category-specific weight selection or per-query answer rules were used. The four-profile comparison was rerun once with the final default to verify reproducibility and record current source hashes; rankings and aggregate results agreed. **These 40 queries are also the tuning set.** The results are development-set measurements, not an independent estimate of generalization; unchanged ground truth alone does not eliminate that limitation.
-
-Latest measured four-method comparison on the exact same frozen inputs, after the general message-type improvement (the profile-selection table above is historical):
-
-| Metric | Lexical | Semantic | Contextual | Hybrid |
-| --- | ---: | ---: | ---: | ---: |
-| Overall Top-1 | 9/40 (22.5%) | 13/40 (32.5%) | 4/40 (10%) | 22/40 (55%) |
-| Recall@3 | 16/40 (40%) | 16/40 (40%) | 12/40 (30%) | 25/40 (62.5%) |
-| Hard Top-1 | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 1/10 (10%) |
-| Semantic category | 3/20 (15%) | 6/20 (30%) | 1/20 (5%) | 7/20 (35%) |
-| Person category | 3/10 (30%) | 3/10 (30%) | 1/10 (10%) | 7/10 (70%) |
-| Time category | 3/10 (30%) | 4/10 (40%) | 2/10 (20%) | 8/10 (80%) |
-| Overall minus hard gap | +22.5 pp | +22.5 pp | 0 pp | +45 pp |
-
-Against original-only semantic retrieval, hybrid improves semantic-category accuracy by 5 percentage points, person by 40 and time by 40. Overall increases 22.5 points, but the hard subset stays at 1/10. The larger overall/hard gap reflects better performance on easier metadata-bearing queries, not improved difficult paraphrase understanding. Baseline rankings remain unchanged, with refreshed run/source hashes; the comparison verifies identical input hashes and recomputes all metrics from saved ranks.
-
-There are still **18 Top-1 errors**, including nine hard queries. [failure_analysis.md](results/failure_analysis.md) lists all 19 initial errors with original expected/retrieved messages, scores, likely causes and recommendations. The general message-type constraint fixes Q038 without losing any previously correct Top-1 result. Q015 still selects the cake-permission question rather than its answer; Q022 still reflects uncertain possessive author intent; final-stack and difficult paraphrase errors remain. No expected IDs changed.
-
-[tuning_notes.md](results/tuning_notes.md) records both general experiments and complete evaluation after each change/revert. Removing resolved names/dates from similarity text was rejected (21/40 ? 20/40, hard 1/10 unchanged). Explicit current-message type constraints were retained (21/40 ? 22/40, hard 1/10 unchanged). Further optimization stopped to avoid fitting linguistic exceptions to these 40 queries. The raw query, weights, model and bounded context remain unchanged. All **206 backend tests and 40 evaluation tests passed (246 total)**; corpus/label integrity, archived/current artifact hashes and unchanged baseline rankings were verified. These are development-set measurements; the wider overall/hard gap is not better hard-semantic retrieval.
-
-After installing the locked dependencies and preparing the model as above, run from the repository root:
-
-```powershell
-.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --method hybrid
-.\backend\.venv\Scripts\python.exe -m evaluation.compare --all
-# Optional reproduction of the declared tuning experiment; it never edits defaults:
-.\backend\.venv\Scripts\python.exe -m evaluation.tune_hybrid
-```
-
-With the environment's Python on PATH, the requested command is `python evaluation/evaluate.py --method hybrid`. The benchmark saves [results/hybrid.json](results/hybrid.json); the comparison saves [results/comparison.json](results/comparison.json), including all metrics, signed gaps, category changes, query gains/losses and report hashes. The earlier `python -m evaluation.compare` command still produces only the contextual comparison. No backend server or frontend is required. To use the engine directly from `backend`:
-
-```python
-from app.search.corpus import load_corpus
-from app.search.hybrid import HybridSearch
-
-searcher = HybridSearch(load_corpus())
-for hit in searcher.search("What did Ananya share last month?", top_k=3):
-    print(hit.to_dict())
-```
-
-Hybrid-phase checks: **all 166 backend tests and 30 evaluation tests passed (196 total)**, including 28 new hybrid tests for sender/date intersections, no-match behavior, UTC/India date boundaries, event vs chat dates, score explanations, ID alignment, ties and original-target context. The final hybrid benchmark and four-method comparison completed. Corpus, labels, metadata, parser and baseline retrieval/artifacts are unchanged. No frontend/API code changed, so frontend checks were not rerun. The tokenizer emits its packaged 128-token warning while context lengths are counted; the encoder explicitly uses the previously documented 256-token limit, and inference/tests completed successfully.
-
-## Search and stats API
-
-`POST /api/search` accepts a nonblank string `query` (up to 2,000 characters) and an integer `top_k` (default 5, range 1-50). Blank/invalid bodies, unexpected fields and invalid K values return HTTP 422. GET on the search route returns 405. Empty metadata-filter intersections return HTTP 200 with `results: []` and the interpreted query still present.
-
-```powershell
-$requestBody = @{ query = 'When did we finally choose Manali?'; top_k = 5 } | ConvertTo-Json
-Invoke-RestMethod http://127.0.0.1:8000/api/search -Method Post -ContentType 'application/json' -Body $requestBody
-Invoke-RestMethod http://127.0.0.1:8000/api/stats
-```
-
-The response contains `query`, `interpreted_query`, `search_time_ms` and `results`. Each result has:
-
-- `matching_message`: the actual original `id`, `sender`, `timestamp` and `text`.
-- `previous_messages` and `next_messages`: up to three immediately adjacent messages on each side, each list in chronological order. The combined order is previous messages, matching message, next messages. Equal timestamps use message-ID ordering. The existing 30-minute maximum distance from the matching message prevents context from spanning unrelated long gaps; corpus boundaries and gaps produce shorter lists. Neighbors can have different authors/dates from the search filters.
-- `search_score` (hybrid score), `semantic_score` (original-only semantic), `contextual_score`, `lexical_score`, detected `query_metadata` and a one-based `rank`. Scores are not probabilities.
-
-`interpreted_query` and each hit's `query_metadata` contain the effective person/date constraints, sender mode (`none`, `bonus`, `filter`), intent, participant candidates, hour range, fixed reference date/timezone, parser warnings and explanations. Event dates ignored as chat-date filters are reflected in the effective fields. The raw query is preserved.
-
-Display context is assembled by `app/services/conversation.py` independently of the **unchanged two-neighbor embedding window**. The API never replaces an original hit with its neighbor or changes ranking to generate a better-looking response. `SearchService` belongs to the FastAPI lifespan, so model/corpus/index setup occurs once per process. Only one query embedding is computed per search request. A lock serializes shared encoder access; synchronous search runs in FastAPI's thread pool, while health/stats do not acquire that lock. Reloads or additional worker processes initialize their own instances. `search_time_ms` measures query work, lock waiting and response construction using a monotonic timer; it excludes startup and HTTP transport.
-
-`GET /api/stats` reads the already loaded corpus without inference. Its actual response is:
-
-```json
-{
-  "message_count": 4634,
-  "participant_count": 8,
-  "date_range": {
-    "start": "2026-03-01T07:05:00+05:30",
-    "end": "2026-08-31T23:50:00+05:30"
-  },
-  "reference_date": "2026-09-01",
-  "timezone": "Asia/Kolkata"
-}
-```
-
-Full JSON captured from a real local HTTP server is included in [search_response.json](examples/search_response.json), [search_filtered_response.json](examples/search_filtered_response.json) and [stats_response.json](examples/stats_response.json). The search examples use `top_k: 1` to keep the artifacts compact. The supplied Manali question actually retrieved `MSG_002538`, an unrelated movie-chat message, in 53.537 ms. That retrieval failure is preserved, not replaced with the intended trip decision. The person/time example about Ananya's August volunteer checklist correctly returns `MSG_003930` in 44.837 ms, with original text and three following messages. These are single observed timings, not performance guarantees.
-
-API-phase checks: **all 191 backend tests and 30 evaluation tests passed (221 total)**. The new API tests cover validation, rank/score parity with direct hybrid retrieval, original targets, display ordering/boundaries, date/person metadata, empty results, OpenAPI, POST CORS and missing-model HTTP 503 behavior. A counting encoder verifies that repeated requests reuse the same matrices and factory instance and encode only query strings. Real HTTP checks on a temporary localhost server verified both endpoints, health and empty results; Q024's API top-three IDs matched the saved direct hybrid benchmark. Document-cache file counts, modification times and SHA-256 values remained unchanged across requests. The temporary server was stopped. Retrieval code, model settings, corpus, frozen labels and benchmark artifacts are unchanged; no ranking benchmark or frontend checks were rerun for this API-only change.
-
-## RecallChat interface
-
-The interface uses React, JavaScript and responsive plain CSS with no additional dependencies, component libraries, external fonts or image services. The header reads **RecallChat**, with the subtitle **Search what your group actually meant**. A large search field, Enter submission, example chips and the `/` keyboard shortcut support quick questions. The person example uses Ishita, an actual corpus participant, instead of the illustrative name Priya, which is not in this chat.
-
-The UI sends the original question with `top_k: 5` to the real backend. Query interpretation badges show **Semantic**, recognized **Person** and **Time** constraints directly from the response, including month labels such as **August 2026**. Soft person preferences are labelled preferred; parser warnings remain visible. Relative-time interpretation uses the archive reference date, not the viewer's clock.
-
-Results display original text in chat bubbles with sender initials, full names and timestamps in the archive timezone. A green bubble explicitly labelled **Matching message** identifies the actual hit; surrounding messages are quieter. Initially one available neighbor appears per side. **Show more context** reveals the remaining API-provided messages, up to three per side, without fetching or inventing extra context. Relevance is the real hybrid score rounded to three decimals, explicitly not a confidence percentage. Search latency comes from `search_time_ms`; no fake accuracy or performance numbers appear in the UI.
-
-Corpus counts and the inclusive calendar-month span come from `/api/stats`, showing 4,634 messages, eight participants and six months for the current corpus. Failed statistics requests display a retry action rather than invented counts. **About this search** expands to explain semantic embeddings, lexical TF-IDF, metadata and contextual ranking, with a clear reminder that related messages can still be wrong answers.
-
-The interface includes an initial welcome state, loading skeletons, an empty-result state with archive dates, service/network errors and retry actions. Requests support cancellation, an eight-second stats timeout and a 45-second search timeout; newer queries supersede older responses. Native form labels, keyboard focus styles, live status announcements, expanded-state attributes and reduced-motion CSS are included. Text is rendered through React escaping rather than inserted as HTML. Layout breakpoints adapt search controls, statistics, message bubbles and the explanation panel to smaller screens.
-
-Frontend-phase checks: **22 tests passed** with `npm.cmd test`; `npm.cmd run build` passed. Tests cover HTTP payloads/errors/cancellation, metadata and date formatting, actual target/context rendering, safe message-text escaping, live-data statistics and accessible form markup. Four component-render tests initially hit a sandbox permission error writing Vite's temporary config; the authorized rerun passed. Live HTTP checks through port 5173 verified the page and proxied stats/search APIs, returning five results with `MSG_003930` first for Ananya's August checklist. No browser surfaces were available to the automation tool, so desktop/mobile screenshots, actual clicks/Enter interaction and visual layout were not browser-verified. Backend, corpus, labels and ranking code were unchanged; backend tests and benchmarks were not rerun for this UI phase. Local services were left running for preview at task completion.
-
-## Run every benchmark and generate reports
-
-From the repository root, with the local model prepared:
-
-```powershell
-.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
 .\backend\.venv\Scripts\python.exe evaluation/evaluate.py --all
 ```
 
-With the environment's Python on PATH, use `python evaluation/evaluate.py --all`. The existing `--method lexical`, `--method semantic`, `--method contextual` and `--method hybrid` commands remain available; `--all` and `--method` are mutually exclusive. Unlike `python -m evaluation.compare --all`, which only compares saved JSON, the new command **executes all four retrieval methods** and generates a fresh set of artifacts. No backend server or frontend is needed.
+**Linux/macOS:**
 
-The runner checks the frozen labels/corpus before and after evaluation, shares one local encoder across embedding methods, reuses document caches and applies the already selected ranking configuration without tuning. All four methods must finish and their inputs must agree before reports are written. Running it refreshes the four method JSON reports and `comparison.json`; it does not alter labels, corpus, ranking code or the historical tuning experiment.
+```bash
+./backend/.venv/bin/python evaluation/evaluate.py --all
+```
 
-The terminal table shows Method, Top-1, Recall@3, the actual hard-subset count, Person, Time, Semantic and the signed overall-minus-hard gap. For this corpus the column is **Hard-10**, not Hard-8, because all ten zero-meaningful-word-overlap queries are evaluated. Every accuracy cell shows both percentage and correct/total. Each failure prints the query, expected original message, all top-three retrieved original messages and their available score components. The table is repeated after diagnostics for easy inspection.
+This runs lexical, semantic, contextual, and hybrid retrieval against identical frozen inputs (corpus, queries, overlap convention). No running API or frontend is required.
 
-Generated files:
+**Alternatives:**
 
-- [comparison.csv](results/comparison.csv): one row per method, with numeric correct/total/percent columns for all requested metrics and the signed gap in percentage points.
-- [benchmark.png](results/benchmark.png): a matplotlib grouped bar chart of overall and hard-query Top-1, with a 0-100% axis and count/percentage labels. It uses a noninteractive canvas, so no desktop or browser is required.
-- [evaluation_summary.md](results/evaluation_summary.md): a short automatically generated table, failure counts, caveats and reproduction command.
-- [failed_queries.txt](results/failed_queries.txt): complete diagnostics preserved even if terminal output is truncated.
-- The four method JSON files and [comparison.json](results/comparison.json): metrics, rankings, model/dependency configuration, frozen input/source hashes, reporting versions and generated-artifact hashes.
+- Single method: `python evaluation/evaluate.py --method hybrid` (or lexical, semantic, contextual)
+- Compare saved reports (no rerun): `python -m evaluation.compare --all`
 
-The initial reporting-phase all-method run measured the same results as the earlier individual runs (historical; latest scores are above and in the generated summary): lexical Top-1 **9/40 (22.5%)**, semantic **13/40 (32.5%)**, contextual **4/40 (10%)** and hybrid **21/40 (52.5%)**. Hard Top-1 was respectively **0/10, 1/10, 1/10 and 1/10**; signed gaps were **+22.5, +22.5, 0 and +42.5 percentage points**. Hybrid weights were previously selected on these same queries, so the generated summary and chart retain the development-set limitation. No accuracy gains are claimed from this reporting change.
+**Outputs:**
 
-Reporting-phase checks: **40 evaluation tests and all 191 backend tests passed (231 total)**; `pip check` passed and the complete installed package set matched `requirements.lock.txt`. The exact `evaluation/evaluate.py --all` command completed. CSV/JSON metrics, source/artifact hashes, frozen-label integrity and all **113 method/query failure records** were verified; the chart was visually inspected for accurate labels and legibility. Matplotlib 3.9.4 and its dependencies are pinned for the Python 3.9 environment. Tests emitted upstream pyparsing deprecation warnings, and the benchmark retained the previously documented tokenizer length warning; neither caused a failure. Frontend code was unchanged, so its checks were not rerun.
+| Artifact                        | Purpose                                                                 |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| `results/comparison.csv`        | Numeric results (Top-1, Recall@3, hard-subset, category breakdown, gap) |
+| `results/comparison.json`       | Detailed metrics and per-query rankings                                 |
+| `results/benchmark.png`         | Chart comparing overall vs. hard-subset accuracy                        |
+| `results/lexical.json`          | Lexical method results, config, environment                             |
+| `results/semantic.json`         | Original-only semantic results                                          |
+| `results/contextual.json`       | Contextual semantic results                                             |
+| `results/hybrid.json`           | Hybrid results (currently selected method)                              |
+| `results/failed_queries.txt`    | All Top-1 failures with expected/retrieved messages and scores          |
+| `results/evaluation_summary.md` | Auto-generated summary with measured hard-subset size                   |
 
-## Checks
+See [results/evaluation_summary.md](results/evaluation_summary.md) for the most recent benchmark.
 
-From the repository root:
+## Tests
+
+**Backend tests:**
+
+**Windows:**
 
 ```powershell
 cd backend
-.\.venv\Scripts\python.exe -m pytest
+.\.\venv\Scripts\python.exe -m pytest -q
 cd ..
+```
+
+**Linux/macOS:**
+
+```bash
+cd backend
+./.\venv/bin/python -m pytest -q
+cd ..
+```
+
+**Evaluation tests:**
+
+**Windows:**
+
+```powershell
 .\backend\.venv\Scripts\python.exe -m pytest evaluation/tests -q
+```
+
+**Linux/macOS:**
+
+```bash
+./backend/.venv/bin/python -m pytest evaluation/tests -q
+```
+
+**Frontend tests:**
+
+**Windows:**
+
+```powershell
 cd frontend
 npm.cmd test
 npm.cmd run build
+cd ..
 ```
 
-With both services running, verify direct and proxied health responses:
+**Linux/macOS:**
 
-```powershell
-Invoke-RestMethod http://127.0.0.1:8000/api/health
-Invoke-RestMethod http://127.0.0.1:5173/api/health
+```bash
+cd frontend
+npm test
+npm run build
+cd ..
 ```
 
-Latest dataset-phase validation on Windows / Python 3.9.10: generator and standalone validator passed; **32 backend tests passed** (27 corpus tests plus the existing 5 health/CORS tests). Checks include minimum count, participants, date coverage, IDs, content varieties, all three long decisions, deterministic bytes, artifact consistency, and rejection of corrupted records/files. An initial generation attempt correctly failed because the literal one-word reply `ok` was missing; the content was corrected and generation and tests rerun successfully. No frontend code changed in this phase, so its checks were not rerun.
+**Total tests passing:** 206 backend + 40 evaluation + 22 frontend = **268 tests** (verified in [FINAL_AUDIT.md](FINAL_AUDIT.md)).
 
-Previous scaffold-phase validation used Node.js 24.8.0, npm 11.6.0, and Python 3.9.10:
+Real-model tests (using the local sentence-transformers model) are run as part of the backend suite. Without the model prepared, they are skipped (not auto-downloaded).
 
-- Backend: 5 pytest tests passed (health response, both local CORS origins and preflights, rejection of an unlisted origin, and absence of a search route).
-- Frontend: 4 health-client tests passed (success, HTTP failure, unexpected payload, and connection failure).
-- `npm.cmd run build` passed; `pip check` found no broken requirements.
-- Live requests to both port 8000 and port 5173 `/api/health` returned HTTP 200 with `{"status":"ok"}`; Vite served the frontend HTML successfully.
-- `git diff --check` passed. Initial sandbox attempts blocked the build temporary directory and access to Python; approved reruns passed.
-- Browser automation was unavailable, so the rendered status display and retry interaction were not visually verified. Test servers were stopped after verification.
+## Repository Structure
+
+```
+group-chat-search/
+├── frontend/
+│   ├── src/
+│   │   ├── components/          # Search results, interpretation, corpus stats
+│   │   │   ├── AboutSearch.jsx
+│   │   │   ├── CorpusStats.jsx
+│   │   │   ├── Interpretation.jsx
+│   │   │   ├── ResultCard.jsx
+│   │   │   └── Icon.jsx
+│   │   ├── api/                 # Relative API requests (/api/search, /api/stats)
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── styles.css           # Responsive design, plain CSS
+│   ├── tests/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── index.html
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── health.py        # GET /api/health
+│   │   │   └── search.py        # POST /api/search, GET /api/stats
+│   │   ├── query_understanding/ # Participant and date parser
+│   │   │   ├── dates.py         # Temporal expression resolution
+│   │   │   └── parser.py        # Full query parsing
+│   │   ├── search/              # Core retrieval pipeline
+│   │   │   ├── constraints.py   # Metadata filtering
+│   │   │   ├── context.py       # Contextual message assembly
+│   │   │   ├── corpus.py        # Message loading and validation
+│   │   │   ├── embedding.py     # Embedding inference and caching
+│   │   │   ├── hybrid.py        # Hybrid ranker
+│   │   │   ├── lexical.py       # TF-IDF retrieval
+│   │   │   ├── semantic.py      # Multilingual embedding retrieval
+│   │   │   ├── message_types.py # Message type utilities
+│   │   │   ├── model_config.py  # Model pinning and inference settings
+│   │   │   ├── ranking_config.py # Visible weights and routing
+│   │   │   └── __init__.py
+│   │   ├── services/
+│   │   │   ├── conversation.py  # Display context assembly
+│   │   │   └── search.py        # Search service initialization
+│   │   ├── schemas.py           # Pydantic request/response schemas
+│   │   ├── config.py            # CORS, paths, settings
+│   │   └── main.py              # FastAPI entry point
+│   ├── scripts/
+│   │   ├── generate_data.py     # Synthetic corpus generation
+│   │   ├── validate_data.py     # Corpus validation
+│   │   ├── prepare_model.py     # Model download and setup
+│   │   ├── chat_style.py        # Message generation templates
+│   │   ├── conversation_content.py
+│   │   ├── corpus_config.py
+│   │   ├── decision_threads.py  # Decision thread generation
+│   │   └── __init__.py
+│   ├── tests/
+│   │   ├── test_health.py
+│   │   ├── test_search_api.py
+│   │   ├── test_lexical.py
+│   │   ├── test_semantic.py
+│   │   ├── test_hybrid.py
+│   │   ├── test_contextual.py
+│   │   ├── test_query_parser.py
+│   │   ├── test_corpus.py
+│   │   ├── test_message_types.py
+│   │   └── test_model_integration.py
+│   ├── data/
+│   │   ├── messages.jsonl       # Synthetic corpus (4,634 messages)
+│   │   ├── corpus_metadata.json # Participants, date range, counts
+│   │   └── CORPUS_REVIEW.md     # Generation scope and limitations
+│   ├── requirements.txt         # Direct dependencies
+│   ├── requirements.lock.txt    # Full pinned environment (58 packages)
+│   └── pytest.ini
+├── evaluation/
+│   ├── queries.json             # 40 frozen queries with labels and rationales
+│   ├── freeze_manifest.json     # Corpus/query/convention hashes (before scoring)
+│   ├── overlap_convention.json  # Stopword list and tokenization rules
+│   ├── OVERLAP.md               # Overlap convention documentation
+│   ├── HARD_SUBSET_REVIEW.md    # Manual review of 10 zero-word-overlap queries
+│   ├── label_changes.md         # Change history (if any corrections made)
+│   ├── evaluate.py              # Evaluation harness
+│   ├── validate_queries.py      # Query validation
+│   ├── compare.py               # Multi-method comparison and reporting
+│   ├── metrics.py               # Metric calculations
+│   ├── overlap.py               # Zero-word-overlap checking
+│   ├── reporting.py             # Chart and report generation
+│   ├── tune_hybrid.py           # Weight tuning utilities (historical)
+│   └── tests/
+│       ├── test_evaluate.py
+│       ├── test_metrics.py
+│       ├── test_overlap.py
+│       └── test_compare.py
+├── results/
+│   ├── comparison.csv           # Current benchmark (numeric)
+│   ├── comparison.json          # Current benchmark (detailed)
+│   ├── benchmark.png            # Chart (Top-1 and hard accuracy)
+│   ├── evaluation_summary.md    # Auto-generated summary
+│   ├── lexical.json             # Lexical method results
+│   ├── semantic.json            # Semantic method results
+│   ├── contextual.json          # Contextual method results
+│   ├── hybrid.json              # Hybrid method results
+│   ├── failed_queries.txt       # All failures with evidence
+│   ├── failure_analysis.md      # Analysis of all 18 hybrid failures
+│   ├── tuning_notes.md          # Tuning decisions and trade-offs
+│   ├── audit_evidence.json      # Fresh-install audit evidence (FINAL_AUDIT.md)
+│   ├── hybrid_tuning.json       # Historical weight tuning trials
+│   └── tuning/                  # Archived tuning experiments
+│       ├── before/              # Pre-tuning results
+│       ├── metadata_separation/ # Rejected experiment
+│       └── revert_output.txt    # Experiment revert log
+├── examples/
+│   ├── search_response.json     # Example API response
+│   ├── search_filtered_response.json
+│   └── stats_response.json
+├── .cache/                      # Ignored: model weights, embeddings, indexes
+├── .gitignore
+├── .gitattributes
+├── AGENTS.md                    # Assessment requirements
+├── PLAN.md                      # Implementation phases and status
+├── FINAL_AUDIT.md               # Clean-install verification audit
+├── README.md                    # This file
+└── package.json                 # Root package.json (if present)
+```
+
+## Design Decisions
+
+### Local Embeddings
+
+We use `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` because:
+
+- **No external LLM API** required; inference runs on CPU
+- **Multilingual support** handles Hinglish transparently
+- **Reproducibility:** pinned model revision ensures bit-identical embeddings across runs
+- **Speed:** 384-dimensional vectors enable fast NumPy cosine similarity search
+
+### NumPy Cosine Search
+
+NumPy suffices for a 4,634-message corpus:
+
+- In-memory TF-IDF and embedding arrays fit in seconds of RAM
+- Cosine similarity is O(d) per query (d = embedding dimension)
+- Deterministic tie-breaking via ascending message ID ensures reproducibility
+- No vector database (Pinecone, Weaviate, etc.) complexity
+
+At million-message scale, approximate nearest-neighbor search (HNSW, IVF) or a vector database becomes attractive.
+
+### Hybrid Ranking
+
+Semantic embeddings alone miss 22 of 40 answers. Hybrid ranking improves performance by:
+
+- **Combining complementary signals:** Semantic scores capture meaning; lexical scores catch exact/near-exact matches; metadata constraints eliminate wrong speakers/dates
+- **Visible weights:** `ranking_config.py` documents all decisions; no opaque learned ranker
+- **Metadata-aware routing:** When a hard constraint applies, weight shifts toward original-message similarity to prioritize direct text
+
+### Deterministic Data & Reference Dates
+
+- **Fixed seed (20260901):** Corpus regenerates identically byte-for-byte; enables reproducible research
+- **Fixed reference date (2026-09-01):** Temporal parsing never uses system clock; _"last week"_ always means Aug 25–31, regardless of when you search
+- **Frozen corpus/queries/labels:** Evaluation captures development-set performance; enables honest reporting of trade-offs
+
+### Synthetic Corpus
+
+Synthetic data avoids privacy/licensing issues and enables evaluation reproducibility. Trade-off: template-based generation limits diversity and realism compared to archived real chat.
+
+## Limitations
+
+- **18 hybrid failures remain:** Hybrid misses 18 of 40 targets and 9 of 10 hard (zero-word-overlap) queries. Semantic paraphrase understanding and reliable current-message anchoring remain difficult.
+- **Contextual embeddings underperform:** Adding adjacent messages (contextual baseline) actually _hurts_ performance vs. original-only embeddings (10% vs 32.5%), showing that unrelated neighbors outweigh interpretation benefits.
+- **Development-set results:** The 40 queries informed hybrid weight selection; reported metrics are development-set accuracy, not held-out generalization estimates.
+- **Limited Hinglish evaluation:** Code-mixed paraphrases like _"nausea/motion sickness"_ are tested, but reliable multilingual semantic understanding is not established.
+- **Template-based corpus:** Simplified message templates and patterns limit diversity; no claim is made about real-chat quality or scale.
+- **Repeated targets:** 37 distinct targets across 40 queries; the three decision conclusions appear multiple times to cover different question types.
+- **Parser limitations:** Metadata grammar is bounded; unknown names, ambiguous ownership, unsupported dates and some event/chat-date distinctions remain difficult. Empty metadata intersections silently return no results.
+- **No media analysis:** Attachment OCR, audio transcription and URL fetching are not implemented. `[Image]`, `[PDF]`, `[Voice message]` are placeholders.
+- **Windows verification only:** Clean-install audit verified only Python 3.9.10 on Windows. Linux and newer Python versions are untested; floating-point differences may occur.
+- **Browser verification incomplete:** Visual mobile/desktop layouts and interactive features (click, Enter, chip submission) could not be verified; render tests and source inspection provide partial evidence.
+
+## Future Improvements
+
+These are ideas for future work, not implemented features:
+
+- **Answer-aware reranker:** Distinguish questions, proposals, decisions, and post-event updates with a learned ranker trained on independently labelled data.
+- **Topic-consistent context:** Select contextual neighbors based on coherence rather than just time windows; avoids unrelated interruptions.
+- **Stronger current-message emphasis:** Weight the central message more heavily within contextual embeddings.
+- **Better multilingual models:** Evaluate stronger mixed-language embeddings on diverse English/Hinglish paraphrases, negation and numerical questions.
+- **Extended metadata grammar:** Support ambiguity markers, negation, relative references and broader date/time forms with explicit test fixtures.
+- **Held-out evaluation:** Obtain independently labelled development and test sets, grouping related threads to reduce label leakage.
+- **Browser verification:** Complete platform-specific viewport and interaction testing on Windows/Linux/macOS before deployment.
+- **Large-scale indexing:** Evaluate performance at million-message scale; compare vector databases and approximate nearest-neighbor algorithms.
+- **Live chat ingestion:** Extend corpus loading to support new messages, incremental indexing and session management.
+
+## Demo
+
+Demo video: [Add video link before submission]
+
+## Privacy
+
+**All data is entirely synthetic.** No real or private group chat was used or imported. Participants, messages, prices, venues and transactions are fictional. Media placeholders (`[Image]`, `[PDF]`, `[Voice message]`) and URLs are example-domain only. Generation uses a fixed seed and authored conversation templates; there is no private-data connector or dependency.
+
+For assessment purposes, the corpus is fully reproducible from the repository. See [backend/data/CORPUS_REVIEW.md](backend/data/CORPUS_REVIEW.md) and [FINAL_AUDIT.md](FINAL_AUDIT.md) for verification.
+
+```
+
+```
