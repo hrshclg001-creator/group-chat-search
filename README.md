@@ -2,12 +2,12 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the React/Vite scaffold, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. Search results include the original matching message and up to three chronological neighbors per side. The frontend search interface remains future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the RecallChat React/Vite search interface, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. Search results include the original matching message and up to three chronological neighbors per side. Browser visual/interaction verification and final clean-checkout delivery remain outstanding. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for remaining work.
 
 ## Structure
 
 ```text
-frontend/           React/Vite application and health-client tests
+frontend/           RecallChat React/Vite UI, plain CSS, API/render/format tests
 backend/
   app/              FastAPI scaffold and modular lexical/semantic retrieval in search/
   scripts/          Corpus generation/validation and pinned model preparation
@@ -52,7 +52,7 @@ npm.cmd ci
 npm.cmd run dev
 ```
 
-Open `http://127.0.0.1:5173`. The page calls `/api/health` on mount and displays `Backend connected` when the backend responds successfully. Failures or a five-second timeout display a disconnected message; use **Check again** after starting the backend.
+Open `http://127.0.0.1:5173`. RecallChat loads live `/api/stats` and sends questions to `/api/search`. Submit with Enter or **Search chat**, or click an example chip to search immediately. The **Archive connected** indicator reports that corpus stats are reachable; a missing search model can still cause a separate search error. Keep the backend running with the local model prepared as described below.
 
 Vite forwards `/api` to `http://127.0.0.1:8000`. Port 5173 is fixed; stop a conflicting process or update the Vite and backend origin settings together. FastAPI allows CORS from `http://localhost:5173` and `http://127.0.0.1:5173`, following the [FastAPI CORS configuration](https://fastapi.tiangolo.com/tutorial/cors/). These are local development settings. Production hosting and API routing are not configured in this phase; `npm.cmd run build` produces frontend assets only.
 
@@ -377,6 +377,20 @@ Display context is assembled by `app/services/conversation.py` independently of 
 Full JSON captured from a real local HTTP server is included in [search_response.json](examples/search_response.json), [search_filtered_response.json](examples/search_filtered_response.json) and [stats_response.json](examples/stats_response.json). The search examples use `top_k: 1` to keep the artifacts compact. The supplied Manali question actually retrieved `MSG_002538`, an unrelated movie-chat message, in 53.537 ms. That retrieval failure is preserved, not replaced with the intended trip decision. The person/time example about Ananya's August volunteer checklist correctly returns `MSG_003930` in 44.837 ms, with original text and three following messages. These are single observed timings, not performance guarantees.
 
 API-phase checks: **all 191 backend tests and 30 evaluation tests passed (221 total)**. The new API tests cover validation, rank/score parity with direct hybrid retrieval, original targets, display ordering/boundaries, date/person metadata, empty results, OpenAPI, POST CORS and missing-model HTTP 503 behavior. A counting encoder verifies that repeated requests reuse the same matrices and factory instance and encode only query strings. Real HTTP checks on a temporary localhost server verified both endpoints, health and empty results; Q024's API top-three IDs matched the saved direct hybrid benchmark. Document-cache file counts, modification times and SHA-256 values remained unchanged across requests. The temporary server was stopped. Retrieval code, model settings, corpus, frozen labels and benchmark artifacts are unchanged; no ranking benchmark or frontend checks were rerun for this API-only change.
+
+## RecallChat interface
+
+The interface uses React, JavaScript and responsive plain CSS with no additional dependencies, component libraries, external fonts or image services. The header reads **RecallChat**, with the subtitle **Search what your group actually meant**. A large search field, Enter submission, example chips and the `/` keyboard shortcut support quick questions. The person example uses Ishita, an actual corpus participant, instead of the illustrative name Priya, which is not in this chat.
+
+The UI sends the original question with `top_k: 5` to the real backend. Query interpretation badges show **Semantic**, recognized **Person** and **Time** constraints directly from the response, including month labels such as **August 2026**. Soft person preferences are labelled preferred; parser warnings remain visible. Relative-time interpretation uses the archive reference date, not the viewer's clock.
+
+Results display original text in chat bubbles with sender initials, full names and timestamps in the archive timezone. A green bubble explicitly labelled **Matching message** identifies the actual hit; surrounding messages are quieter. Initially one available neighbor appears per side. **Show more context** reveals the remaining API-provided messages, up to three per side, without fetching or inventing extra context. Relevance is the real hybrid score rounded to three decimals, explicitly not a confidence percentage. Search latency comes from `search_time_ms`; no fake accuracy or performance numbers appear in the UI.
+
+Corpus counts and the inclusive calendar-month span come from `/api/stats`, showing 4,634 messages, eight participants and six months for the current corpus. Failed statistics requests display a retry action rather than invented counts. **About this search** expands to explain semantic embeddings, lexical TF-IDF, metadata and contextual ranking, with a clear reminder that related messages can still be wrong answers.
+
+The interface includes an initial welcome state, loading skeletons, an empty-result state with archive dates, service/network errors and retry actions. Requests support cancellation, an eight-second stats timeout and a 45-second search timeout; newer queries supersede older responses. Native form labels, keyboard focus styles, live status announcements, expanded-state attributes and reduced-motion CSS are included. Text is rendered through React escaping rather than inserted as HTML. Layout breakpoints adapt search controls, statistics, message bubbles and the explanation panel to smaller screens.
+
+Frontend-phase checks: **22 tests passed** with `npm.cmd test`; `npm.cmd run build` passed. Tests cover HTTP payloads/errors/cancellation, metadata and date formatting, actual target/context rendering, safe message-text escaping, live-data statistics and accessible form markup. Four component-render tests initially hit a sandbox permission error writing Vite's temporary config; the authorized rerun passed. Live HTTP checks through port 5173 verified the page and proxied stats/search APIs, returning five results with `MSG_003930` first for Ananya's August checklist. No browser surfaces were available to the automation tool, so desktop/mobile screenshots, actual clicks/Enter interaction and visual layout were not browser-verified. Backend, corpus, labels and ranking code were unchanged; backend tests and benchmarks were not rerun for this UI phase. Local services were left running for preview at task completion.
 
 ## Checks
 
