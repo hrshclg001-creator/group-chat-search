@@ -1,0 +1,799 @@
+
+=== LEXICAL FAILED QUERIES ===
+
+INCORRECT Q001 [semantic] What made a seaside holiday unaffordable?
+  Expected MSG_000600 | Ishita Patel | 2026-03-23T19:03:05+05:30 | Goa rejected for this break because total exceeds our cap
+  Retrieved MSG_000574 (rank 1) | lexical_score=0.274271 | Sneha Iyer | 2026-03-22T21:01:00+05:30 | made a tiny C++ tool for tracking my own reading
+  Retrieved MSG_001642 (rank 2) | lexical_score=0.274271 | Ishita Patel | 2026-05-04T21:00:00+05:30 | made a tiny C++ tool for tracking my own reading
+  Retrieved MSG_002026 (rank 3) | lexical_score=0.274271 | Meera Nair | 2026-05-21T21:12:00+05:30 | made a tiny C++ tool for tracking my own reading
+  Top 3: MSG_000574, MSG_001642, MSG_002026
+
+INCORRECT Q002 [semantic] Who worried about feeling nauseous during consecutive coach rides?
+  Expected MSG_000291 | Ananya Verma | 2026-03-12T19:37:44+05:30 | overnight buses do back to back honge? motion sickness hoti hai mujhe
+  Retrieved MSG_000094 (rank 1) | lexical_score=0.170602 | Ishita Patel | 2026-03-04T17:12:51+05:30 | agree. who handles intro?
+  Retrieved MSG_000786 (rank 2) | lexical_score=0.170602 | Sneha Iyer | 2026-03-31T08:14:00+05:30 | agree. who handles intro?
+  Retrieved MSG_001098 (rank 3) | lexical_score=0.170602 | Ananya Verma | 2026-04-12T08:17:41+05:30 | agree. who handles intro?
+  Top 3: MSG_000094, MSG_000786, MSG_001098
+
+INCORRECT Q003 [semantic] What condition would force us to call off the Himalayan vacation?
+  Expected MSG_000436 | Aditya Joshi | 2026-03-17T21:45:40+05:30 | If roads look unsafe we cancel, no heroic driving plan
+  Retrieved MSG_001060 (rank 1) | lexical_score=0.180460 | Sneha Iyer | 2026-04-10T20:07:11+05:30 | Django and Postgres would give us admin quickly
+  Retrieved MSG_003180 (rank 2) | lexical_score=0.150586 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 3) | lexical_score=0.150586 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Top 3: MSG_001060, MSG_003180, MSG_003456
+
+INCORRECT Q004 [semantic] What extra software would the panel's computer need for the phone app?
+  Expected MSG_001154 | Ishita Patel | 2026-04-14T18:36:48+05:30 | Flutter would mean emulator setup on judging laptop
+  Retrieved MSG_003180 (rank 1) | lexical_score=0.129034 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 2) | lexical_score=0.129034 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Retrieved MSG_003211 (rank 3) | lexical_score=0.128834 | Rohan Mehta | 2026-07-06T20:14:36+05:30 | rooftop dinner at Sky Lantern would be nice
+  Top 3: MSG_003180, MSG_003456, MSG_003211
+
+INCORRECT Q005 [semantic] What accessibility improvement was requested for the success indicator?
+  Expected MSG_001602 | Meera Nair | 2026-05-03T18:51:28+05:30 | approved colour needs text also, don't rely only on green
+  Retrieved MSG_003180 (rank 1) | lexical_score=0.209565 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 2) | lexical_score=0.209565 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Retrieved MSG_003680 (rank 3) | lexical_score=0.209366 | Aarav Sharma | 2026-07-24T08:03:55+05:30 | add what you tried and what failed 🙃
+  Top 3: MSG_003180, MSG_003456, MSG_003680
+
+INCORRECT Q006 [semantic] What restriction prevented the birthday gathering from using the dorm lounge?
+  Expected MSG_003418 | Sneha Iyer | 2026-07-14T21:00:00+05:30 | Hostel common room can't allow outside students after 6 that day
+  Retrieved MSG_003734 (rank 1) | lexical_score=0.210368 | Meera Nair | 2026-07-25T22:10:00+05:30 | Home! thank you all, exactly the quiet birthday I wanted 🥹
+  Retrieved MSG_003619 (rank 2) | lexical_score=0.174116 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003180 (rank 3) | lexical_score=0.167526 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Top 3: MSG_003734, MSG_003619, MSG_003180
+
+INCORRECT Q007 [semantic] Why was the outdoor picnic abandoned?
+  Expected MSG_003426 | Ananya Verma | 2026-07-14T21:10:16+05:30 | Rain and permission both uncertain. Dropping lawn
+  Retrieved MSG_003214 (rank 1) | lexical_score=0.233132 | Aditya Joshi | 2026-07-06T20:22:31+05:30 | college lawn picnic? practically free venue
+  Retrieved MSG_000192 (rank 2) | lexical_score=0.214776 | Aditya Joshi | 2026-03-09T08:08:03+05:30 | why swap?
+  Retrieved MSG_000520 (rank 3) | lexical_score=0.214776 | Meera Nair | 2026-03-20T21:14:04+05:30 | why swap?
+  Top 3: MSG_003214, MSG_000192, MSG_000520
+
+INCORRECT Q008 [semantic] Why did the birthday girl prefer chatting over a game at the alley?
+  Expected MSG_003330 | Meera Nair | 2026-07-10T19:29:49+05:30 | Skip bowling too, I want time to talk anyway
+  Retrieved MSG_003619 (rank 1) | lexical_score=0.202699 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_000201 (rank 2) | lexical_score=0.184801 | Aditya Joshi | 2026-03-09T13:08:44+05:30 | none, dirty bus window did the editing
+  Retrieved MSG_000465 (rank 3) | lexical_score=0.184801 | Ananya Verma | 2026-03-18T21:17:17+05:30 | none, dirty bus window did the editing
+  Top 3: MSG_003619, MSG_000201, MSG_000465
+
+INCORRECT Q009 [semantic] How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?
+  Expected MSG_000700 | Ishita Patel | 2026-03-28T20:47:26+05:30 | 8700 ceiling includes a 700 emergency buffer, not shopping
+  Retrieved MSG_001483 (rank 1) | lexical_score=0.218847 | Aarav Sharma | 2026-04-27T20:46:41+05:30 | Confirmed. Retiring the Express starter rather than mixing two servers
+  Retrieved MSG_003621 (rank 2) | lexical_score=0.146831 | Rohan Mehta | 2026-07-21T21:04:02+05:30 | Room reserved. No more venue polls
+  Retrieved MSG_000264 (rank 3) | lexical_score=0.135440 | Meera Nair | 2026-03-11T21:11:28+05:30 | colour combo reminds me of our lab notice board
+  Top 3: MSG_001483, MSG_003621, MSG_000264
+
+INCORRECT Q010 [semantic] Why was the cheap coastal vacation clip misleading for people departing from our city?
+  Expected MSG_000289 | Meera Nair | 2026-03-12T19:31:15+05:30 | that reel starts from Mumbai, hum Indore mein hain
+  Retrieved MSG_003212 (rank 1) | lexical_score=0.184075 | Ishita Patel | 2026-07-06T20:17:42+05:30 | What is our TOTAL cap, before people send aesthetic reels
+  Retrieved MSG_000192 (rank 2) | lexical_score=0.155516 | Aditya Joshi | 2026-03-09T08:08:03+05:30 | why swap?
+  Retrieved MSG_000520 (rank 3) | lexical_score=0.155516 | Meera Nair | 2026-03-20T21:14:04+05:30 | why swap?
+  Top 3: MSG_003212, MSG_000192, MSG_000520
+
+INCORRECT Q011 [semantic] Where did we finally decide to go for the June trip, and what was the per-person limit?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_003180 (rank 1) | lexical_score=0.209696 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 2) | lexical_score=0.209696 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Retrieved MSG_003680 (rank 3) | lexical_score=0.209382 | Aarav Sharma | 2026-07-24T08:03:55+05:30 | add what you tried and what failed 🙃
+  Top 3: MSG_003180, MSG_003456, MSG_003680
+
+INCORRECT Q012 [semantic] What backend and database did we finally choose for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001600 (rank 1) | lexical_score=0.177641 | Sneha Iyer | 2026-05-03T18:46:54+05:30 | Please don't add a second database over the weekend
+  Retrieved MSG_001161 (rank 2) | lexical_score=0.167328 | Kabir Khan | 2026-04-14T18:58:55+05:30 | I'll test uploads on both before we choose
+  Retrieved MSG_001478 (rank 3) | lexical_score=0.159507 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Top 3: MSG_001600, MSG_001161, MSG_001478
+
+INCORRECT Q013 [semantic] What was the final birthday venue and budget, including cake and everyone's share?
+  Expected MSG_003616 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_000595 (rank 1) | lexical_score=0.201493 | Aditya Joshi | 2026-03-23T18:48:01+05:30 | then internships and everyone's separate dates. June overlap is rare
+  Retrieved MSG_003213 (rank 2) | lexical_score=0.201379 | Meera Nair | 2026-07-06T20:19:54+05:30 | 3000 total including cake. Eight of us, nothing fancy
+  Retrieved MSG_003326 (rank 3) | lexical_score=0.143915 | Rohan Mehta | 2026-07-10T19:15:00+05:30 | Sky Lantern quote is 650 per person, before birthday cake
+  Top 3: MSG_000595, MSG_003213, MSG_003326
+
+INCORRECT Q014 [semantic] Why did Aarav originally lean towards MERN?
+  Expected MSG_001291 | Aarav Sharma | 2026-04-19T21:41:52+05:30 | For this scope I don't have a reason. MERN was just familiarity
+  Retrieved MSG_000192 (rank 1) | lexical_score=0.188940 | Aditya Joshi | 2026-03-09T08:08:03+05:30 | why swap?
+  Retrieved MSG_000520 (rank 2) | lexical_score=0.188940 | Meera Nair | 2026-03-20T21:14:04+05:30 | why swap?
+  Retrieved MSG_001072 (rank 3) | lexical_score=0.188940 | Kabir Khan | 2026-04-10T21:09:30+05:30 | why swap?
+  Top 3: MSG_000192, MSG_000520, MSG_001072
+
+INCORRECT Q015 [semantic] Was outside cake allowed, and what decoration rule came with it?
+  Expected MSG_003434 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Retrieved MSG_003433 (rank 1) | lexical_score=0.446746 | Kabir Khan | 2026-07-14T21:24:18+05:30 | Cake allowed from outside?
+  Retrieved MSG_003180 (rank 2) | lexical_score=0.219812 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 3) | lexical_score=0.219812 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Top 3: MSG_003433, MSG_003180, MSG_003456
+
+INCORRECT Q016 [semantic] What did the birthday actually cost once it was over, and was any buffer used?
+  Expected MSG_003738 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Retrieved MSG_000850 (rank 1) | lexical_score=0.194833 | Ananya Verma | 2026-04-02T19:27:06+05:30 | with me, thought it was mine. sorryyy
+  Retrieved MSG_000334 (rank 2) | lexical_score=0.166663 | Aarav Sharma | 2026-03-13T21:18:11+05:30 | and check PDF opens after export. mine was blank once
+  Retrieved MSG_000530 (rank 3) | lexical_score=0.166663 | Meera Nair | 2026-03-21T08:19:11+05:30 | and check PDF opens after export. mine was blank once
+  Top 3: MSG_000850, MSG_000334, MSG_000530
+
+INCORRECT Q017 [semantic] Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.
+  Expected MSG_002058 | Aditya Joshi | 2026-05-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Retrieved MSG_000970 (rank 1) | lexical_score=0.493763 | Sneha Iyer | 2026-04-08T08:05:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Retrieved MSG_001350 (rank 2) | lexical_score=0.493763 | Sneha Iyer | 2026-04-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Retrieved MSG_002058 (rank 3) | lexical_score=0.493763 | Aditya Joshi | 2026-05-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Top 3: MSG_000970, MSG_001350, MSG_002058
+
+INCORRECT Q021 [person] What did Ananya ask for in Delhi to make the journey manageable?
+  Expected MSG_000427 | Ananya Verma | 2026-03-17T21:20:06+05:30 | one rest stop in Delhi chahiye; continuous travel nahi
+  Retrieved MSG_002529 (rank 1) | lexical_score=0.249557 | Ishita Patel | 2026-06-09T08:16:47+05:30 | safe journey
+  Retrieved MSG_002905 (rank 2) | lexical_score=0.249557 | Aarav Sharma | 2026-06-24T08:22:17+05:30 | safe journey
+  Retrieved MSG_002313 (rank 3) | lexical_score=0.248651 | Ishita Patel | 2026-06-01T13:19:32+05:30 | safe journey 🙃
+  Top 3: MSG_002529, MSG_002905, MSG_002313
+
+INCORRECT Q022 [person] What was Ishita's absolute spending limit when the Goa estimate first came in?
+  Expected MSG_000287 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_000286 (rank 1) | lexical_score=0.202389 | Rohan Mehta | 2026-03-12T19:20:00+05:30 | Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head
+  Retrieved MSG_000287 (rank 2) | lexical_score=0.193770 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_003180 (rank 3) | lexical_score=0.109467 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Top 3: MSG_000286, MSG_000287, MSG_003180
+
+INCORRECT Q024 [person] Find the volunteer orientation checklist PDF that Ananya shared in August.
+  Expected MSG_003930 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003222 (rank 1) | lexical_score=0.398513 | Meera Nair | 2026-07-06T21:07:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003930 (rank 2) | lexical_score=0.398513 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003502 (rank 3) | lexical_score=0.329968 | Rohan Mehta | 2026-07-17T21:07:00+05:30 | club wants volunteers for volunteer orientation session
+  Top 3: MSG_003222, MSG_003930, MSG_003502
+
+INCORRECT Q025 [person] What reason did Kabir give for rejecting Firebase?
+  Expected MSG_001383 | Kabir Khan | 2026-04-24T19:33:19+05:30 | Firebase rejected for demo because offline requirement is real
+  Retrieved MSG_001152 (rank 1) | lexical_score=0.212604 | Kabir Khan | 2026-04-14T18:29:10+05:30 | Firebase? login and images done fast
+  Retrieved MSG_001383 (rank 2) | lexical_score=0.204827 | Kabir Khan | 2026-04-24T19:33:19+05:30 | Firebase rejected for demo because offline requirement is real
+  Retrieved MSG_003180 (rank 3) | lexical_score=0.135785 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Top 3: MSG_001152, MSG_001383, MSG_003180
+
+INCORRECT Q027 [person] What name did Rohan suggest for our coding project?
+  Expected MSG_001478 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_000432 (rank 1) | lexical_score=0.158204 | Kabir Khan | 2026-03-17T21:29:42+05:30 | wait project ka submission kal 11 hai ya 5
+  Retrieved MSG_000019 (rank 2) | lexical_score=0.144899 | Aarav Sharma | 2026-03-01T21:08:51+05:30 | can you keep it forever for our batch 😂
+  Retrieved MSG_000387 (rank 3) | lexical_score=0.144899 | Rohan Mehta | 2026-03-16T13:06:02+05:30 | can you keep it forever for our batch 😂
+  Top 3: MSG_000432, MSG_000019, MSG_000387
+
+INCORRECT Q028 [person] Why did Meera insist we should not split the birthday group?
+  Expected MSG_003431 | Meera Nair | 2026-07-14T21:16:55+05:30 | Please don't split. We only get all eight together sometimes
+  Retrieved MSG_000593 (rank 1) | lexical_score=0.276716 | Meera Nair | 2026-03-23T18:41:05+05:30 | shared cabs eat the saving. I'd rather not split the group daily
+  Retrieved MSG_001292 (rank 2) | lexical_score=0.178916 | Kabir Khan | 2026-04-19T21:46:30+05:30 | We should write down the rejected options so we don't circle back
+  Retrieved MSG_003429 (rank 3) | lexical_score=0.168732 | Ishita Patel | 2026-07-14T21:13:13+05:30 | Then common room also out unless we split group, which we won't
+  Top 3: MSG_000593, MSG_001292, MSG_003429
+
+INCORRECT Q029 [person] Which bus was Aditya asking about on August 31?
+  Expected MSG_004626 | Aditya Joshi | 2026-08-31T21:10:00+05:30 | anyone taking the Bhawarkuan bus around 9:30 pm
+  Retrieved MSG_000066 (rank 1) | lexical_score=0.185683 | Aditya Joshi | 2026-03-03T21:00:00+05:30 | [Voice message] telling a long story about getting on the wrong bus near the bus stop
+  Retrieved MSG_002714 (rank 2) | lexical_score=0.185683 | Ananya Verma | 2026-06-16T12:09:00+05:30 | [Voice message] telling a long story about getting on the wrong bus near the bus stop
+  Retrieved MSG_002922 (rank 3) | lexical_score=0.185683 | Aarav Sharma | 2026-06-24T21:03:00+05:30 | [Voice message] telling a long story about getting on the wrong bus near the bus stop
+  Top 3: MSG_000066, MSG_002714, MSG_002922
+
+INCORRECT Q031 [time] What decision did we make on March 28 about the trip destination and payments?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_001485 (rank 1) | lexical_score=0.157035 | Ananya Verma | 2026-04-27T20:54:32+05:30 | Stack decision closed. Tomorrow we test the full claim journey
+  Retrieved MSG_003180 (rank 2) | lexical_score=0.147903 | Meera Nair | 2026-07-04T21:12:54+05:30 | add what you tried and what failed
+  Retrieved MSG_003456 (rank 3) | lexical_score=0.147903 | Ishita Patel | 2026-07-15T21:10:11+05:30 | add what you tried and what failed
+  Top 3: MSG_001485, MSG_003180, MSG_003456
+
+INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001478 (rank 1) | lexical_score=0.167418 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_001479 (rank 2) | lexical_score=0.151643 | Meera Nair | 2026-04-27T20:30:46+05:30 | LostLoop works, please don't spend two hours on logo
+  Retrieved MSG_001482 (rank 3) | lexical_score=0.149460 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Top 3: MSG_001478, MSG_001479, MSG_001482
+
+INCORRECT Q033 [time] What was the final birthday arrangement we agreed in July?
+  Expected MSG_003616 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003210 (rank 1) | lexical_score=0.191787 | Meera Nair | 2026-07-06T20:10:00+05:30 | My birthday is July 25. Small get-together? no surprise please 😂
+  Retrieved MSG_003437 (rank 2) | lexical_score=0.157712 | Meera Nair | 2026-07-14T21:38:41+05:30 | Sounds promising but hold off until the final quote
+  Retrieved MSG_003616 (rank 3) | lexical_score=0.153128 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Top 3: MSG_003210, MSG_003437, MSG_003616
+
+INCORRECT Q036 [time] Find the first forwarded notice last month saying the semester timetable could still change.
+  Expected MSG_003892 | Ishita Patel | 2026-08-01T08:13:50+05:30 | Forwarded: Timetable is provisional; confirm changes on the department board before attending.
+  Retrieved MSG_004074 (rank 1) | lexical_score=0.238313 | Aditya Joshi | 2026-08-09T17:11:00+05:30 | new semester timetable mein Operating Systems room B-204 hai?
+  Retrieved MSG_004362 (rank 2) | lexical_score=0.238023 | Ananya Verma | 2026-08-21T21:09:00+05:30 | new semester timetable mein Computer Networks room C-102 hai? 😅
+  Retrieved MSG_003890 (rank 3) | lexical_score=0.236242 | Meera Nair | 2026-08-01T08:10:00+05:30 | new semester timetable mein Data Structures room C-203 hai?
+  Top 3: MSG_004074, MSG_004362, MSG_003890
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_000424 (rank 1) | lexical_score=0.392684 | Aditya Joshi | 2026-03-17T21:16:17+05:30 | maintenance notice tha na
+  Retrieved MSG_000769 (rank 2) | lexical_score=0.392684 | Rohan Mehta | 2026-03-30T17:12:51+05:30 | maintenance notice tha na
+  Retrieved MSG_000989 (rank 3) | lexical_score=0.392684 | Meera Nair | 2026-04-08T17:07:32+05:30 | maintenance notice tha na
+  Top 3: MSG_000424, MSG_000769, MSG_000989
+
+INCORRECT Q039 [time] Who said they had reached home on June 2, and what food were they happy about?
+  Expected MSG_002346 | Kabir Khan | 2026-06-02T21:01:00+05:30 | reached home, finally actual veg rolls yaar
+  Retrieved MSG_002874 (rank 1) | lexical_score=0.216635 | Ishita Patel | 2026-06-23T08:03:00+05:30 | reached home, finally actual veg momos
+  Retrieved MSG_002570 (rank 2) | lexical_score=0.209360 | Ishita Patel | 2026-06-10T21:03:00+05:30 | reached home, finally actual chole kulche
+  Retrieved MSG_002346 (rank 3) | lexical_score=0.201424 | Kabir Khan | 2026-06-02T21:01:00+05:30 | reached home, finally actual veg rolls yaar
+  Top 3: MSG_002874, MSG_002570, MSG_002346
+
+INCORRECT Q040 [time] Yesterday morning, how many MB was Aditya's oversized submission file?
+  Expected MSG_004620 | Aditya Joshi | 2026-08-31T08:04:42+05:30 | 42 MB, screenshots bahut ho gaye
+  Retrieved MSG_000494 (rank 1) | lexical_score=0.194661 | Aditya Joshi | 2026-03-20T08:01:00+05:30 | good morning
+  Retrieved MSG_000690 (rank 2) | lexical_score=0.194661 | Aarav Sharma | 2026-03-28T08:06:00+05:30 | good morning
+  Retrieved MSG_002354 (rank 3) | lexical_score=0.194661 | Aarav Sharma | 2026-06-03T08:01:00+05:30 | good morning
+  Top 3: MSG_000494, MSG_000690, MSG_002354
+
+=== SEMANTIC FAILED QUERIES ===
+
+INCORRECT Q001 [semantic] What made a seaside holiday unaffordable?
+  Expected MSG_000600 | Ishita Patel | 2026-03-23T19:03:05+05:30 | Goa rejected for this break because total exceeds our cap
+  Retrieved MSG_000594 (rank 1) | semantic_score=0.410506 | Aarav Sharma | 2026-03-23T18:43:34+05:30 | Could postpone to December instead?
+  Retrieved MSG_002901 (rank 2) | semantic_score=0.406423 | Kabir Khan | 2026-06-24T08:16:12+05:30 | good reminder. almost forgot umbrella also
+  Retrieved MSG_000726 (rank 3) | semantic_score=0.392838 | Aditya Joshi | 2026-03-29T12:03:00+05:30 | swades dekhne ka mood hai aaj raat
+  Top 3: MSG_000594, MSG_002901, MSG_000726
+
+INCORRECT Q002 [semantic] Who worried about feeling nauseous during consecutive coach rides?
+  Expected MSG_000291 | Ananya Verma | 2026-03-12T19:37:44+05:30 | overnight buses do back to back honge? motion sickness hoti hai mujhe
+  Retrieved MSG_004303 (rank 1) | semantic_score=0.461501 | Ishita Patel | 2026-08-19T13:21:40+05:30 | ohhh yes. copied assumption from yesterday's exercise lol
+  Retrieved MSG_000055 (rank 2) | semantic_score=0.448039 | Rohan Mehta | 2026-03-02T21:13:25+05:30 | ohhh yes. copied assumption from yesterday's exercise
+  Retrieved MSG_000871 (rank 3) | semantic_score=0.448039 | Ananya Verma | 2026-04-03T08:20:42+05:30 | ohhh yes. copied assumption from yesterday's exercise
+  Top 3: MSG_004303, MSG_000055, MSG_000871
+
+INCORRECT Q003 [semantic] What condition would force us to call off the Himalayan vacation?
+  Expected MSG_000436 | Aditya Joshi | 2026-03-17T21:45:40+05:30 | If roads look unsafe we cancel, no heroic driving plan
+  Retrieved MSG_000852 (rank 1) | semantic_score=0.528640 | Rohan Mehta | 2026-04-02T19:33:35+05:30 | I saw another Goa deal but ignoring it. We already chose the hills
+  Retrieved MSG_000173 (rank 2) | semantic_score=0.408344 | Aditya Joshi | 2026-03-08T20:20:26+05:30 | Manali bhi option hai, mountains > sunburn
+  Retrieved MSG_000427 (rank 3) | semantic_score=0.399459 | Ananya Verma | 2026-03-17T21:20:06+05:30 | one rest stop in Delhi chahiye; continuous travel nahi
+  Top 3: MSG_000852, MSG_000173, MSG_000427
+
+INCORRECT Q004 [semantic] What extra software would the panel's computer need for the phone app?
+  Expected MSG_001154 | Ishita Patel | 2026-04-14T18:36:48+05:30 | Flutter would mean emulator setup on judging laptop
+  Retrieved MSG_001061 (rank 1) | semantic_score=0.478895 | Ishita Patel | 2026-04-10T20:09:58+05:30 | Flutter app could look nice, camera upload simple
+  Retrieved MSG_001286 (rank 2) | semantic_score=0.433902 | Ishita Patel | 2026-04-19T21:24:20+05:30 | Design update: responsive website is sufficient; mobile app dropped
+  Retrieved MSG_001475 (rank 3) | semantic_score=0.421032 | Ananya Verma | 2026-04-27T20:19:31+05:30 | Is there anything that still calls cloud services?
+  Top 3: MSG_001061, MSG_001286, MSG_001475
+
+INCORRECT Q005 [semantic] What accessibility improvement was requested for the success indicator?
+  Expected MSG_001602 | Meera Nair | 2026-05-03T18:51:28+05:30 | approved colour needs text also, don't rely only on green
+  Retrieved MSG_003222 (rank 1) | semantic_score=0.410384 | Meera Nair | 2026-07-06T21:07:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003930 (rank 2) | semantic_score=0.410384 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_002529 (rank 3) | semantic_score=0.389880 | Ishita Patel | 2026-06-09T08:16:47+05:30 | safe journey
+  Top 3: MSG_003222, MSG_003930, MSG_002529
+
+INCORRECT Q007 [semantic] Why was the outdoor picnic abandoned?
+  Expected MSG_003426 | Ananya Verma | 2026-07-14T21:10:16+05:30 | Rain and permission both uncertain. Dropping lawn
+  Retrieved MSG_003214 (rank 1) | semantic_score=0.625522 | Aditya Joshi | 2026-07-06T20:22:31+05:30 | college lawn picnic? practically free venue
+  Retrieved MSG_003424 (rank 2) | semantic_score=0.486072 | Aditya Joshi | 2026-07-14T21:07:45+05:30 | Lawn plus borrowed canopy?
+  Retrieved MSG_002901 (rank 3) | semantic_score=0.462419 | Kabir Khan | 2026-06-24T08:16:12+05:30 | good reminder. almost forgot umbrella also
+  Top 3: MSG_003214, MSG_003424, MSG_002901
+
+INCORRECT Q008 [semantic] Why did the birthday girl prefer chatting over a game at the alley?
+  Expected MSG_003330 | Meera Nair | 2026-07-10T19:29:49+05:30 | Skip bowling too, I want time to talk anyway
+  Retrieved MSG_003586 (rank 1) | semantic_score=0.401389 | Kabir Khan | 2026-07-20T21:05:00+05:30 | Queen dekhne ka mood hai aaj raat
+  Retrieved MSG_003210 (rank 2) | semantic_score=0.365204 | Meera Nair | 2026-07-06T20:10:00+05:30 | My birthday is July 25. Small get-together? no surprise please 😂
+  Retrieved MSG_000185 (rank 3) | semantic_score=0.364007 | Sneha Iyer | 2026-03-08T21:12:44+05:30 | nope, only noticed after reaching the canteen yaar
+  Top 3: MSG_003586, MSG_003210, MSG_000185
+
+INCORRECT Q009 [semantic] How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?
+  Expected MSG_000700 | Ishita Patel | 2026-03-28T20:47:26+05:30 | 8700 ceiling includes a 700 emergency buffer, not shopping
+  Retrieved MSG_000856 (rank 1) | semantic_score=0.520300 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Retrieved MSG_003213 (rank 2) | semantic_score=0.474859 | Meera Nair | 2026-07-06T20:19:54+05:30 | 3000 total including cake. Eight of us, nothing fancy
+  Retrieved MSG_000172 (rank 3) | semantic_score=0.428583 | Ishita Patel | 2026-03-08T20:16:56+05:30 | pehle total batao. sirf train ticket ko budget mat bolna
+  Top 3: MSG_000856, MSG_003213, MSG_000172
+
+INCORRECT Q010 [semantic] Why was the cheap coastal vacation clip misleading for people departing from our city?
+  Expected MSG_000289 | Meera Nair | 2026-03-12T19:31:15+05:30 | that reel starts from Mumbai, hum Indore mein hain
+  Retrieved MSG_000857 (rank 1) | semantic_score=0.501089 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Retrieved MSG_000179 (rank 2) | semantic_score=0.475751 | Ishita Patel | 2026-03-08T20:40:58+05:30 | No booking yet. Compare both with food and local transport included.
+  Retrieved MSG_000854 (rank 3) | semantic_score=0.450027 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Top 3: MSG_000857, MSG_000179, MSG_000854
+
+INCORRECT Q011 [semantic] Where did we finally decide to go for the June trip, and what was the per-person limit?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000854 (rank 1) | semantic_score=0.527562 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Retrieved MSG_000857 (rank 2) | semantic_score=0.441377 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Retrieved MSG_000595 (rank 3) | semantic_score=0.428418 | Aditya Joshi | 2026-03-23T18:48:01+05:30 | then internships and everyone's separate dates. June overlap is rare
+  Top 3: MSG_000854, MSG_000857, MSG_000595
+
+INCORRECT Q012 [semantic] What backend and database did we finally choose for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001290 (rank 1) | semantic_score=0.444902 | Ananya Verma | 2026-04-19T21:38:26+05:30 | SQLite supports the tiny offline demo. Why a separate database server?
+  Retrieved MSG_001598 (rank 2) | semantic_score=0.429036 | Kabir Khan | 2026-05-03T18:40:00+05:30 | LostLoop now launches from the README on a fresh folder
+  Retrieved MSG_003853 (rank 3) | semantic_score=0.410938 | Rohan Mehta | 2026-07-30T13:07:56+05:30 | start with binary search, I got stuck there
+  Top 3: MSG_001290, MSG_001598, MSG_003853
+
+INCORRECT Q015 [semantic] Was outside cake allowed, and what decoration rule came with it?
+  Expected MSG_003434 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Retrieved MSG_003433 (rank 1) | semantic_score=0.755846 | Kabir Khan | 2026-07-14T21:24:18+05:30 | Cake allowed from outside?
+  Retrieved MSG_003618 (rank 2) | semantic_score=0.533248 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003327 (rank 3) | semantic_score=0.515730 | Ishita Patel | 2026-07-10T19:19:49+05:30 | 5200 before cake. Rooftop rejected, way above 3000
+  Top 3: MSG_003433, MSG_003618, MSG_003327
+
+INCORRECT Q016 [semantic] What did the birthday actually cost once it was over, and was any buffer used?
+  Expected MSG_003738 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Retrieved MSG_003616 (rank 1) | semantic_score=0.555904 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003326 (rank 2) | semantic_score=0.516593 | Rohan Mehta | 2026-07-10T19:15:00+05:30 | Sky Lantern quote is 650 per person, before birthday cake
+  Retrieved MSG_003736 (rank 3) | semantic_score=0.479746 | Sneha Iyer | 2026-07-25T22:18:03+05:30 | Cake was 500 as quoted, no extra box charge
+  Top 3: MSG_003616, MSG_003326, MSG_003736
+
+INCORRECT Q017 [semantic] Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.
+  Expected MSG_002058 | Aditya Joshi | 2026-05-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Retrieved MSG_001281 (rank 1) | semantic_score=0.619438 | Ishita Patel | 2026-04-19T21:15:42+05:30 | [PDF] self-made Software Engineering revision checklist, no official predictions
+  Retrieved MSG_002079 (rank 2) | semantic_score=0.619438 | Sneha Iyer | 2026-05-24T08:13:29+05:30 | [PDF] self-made Software Engineering revision checklist, no official predictions
+  Retrieved MSG_000970 (rank 3) | semantic_score=0.607451 | Sneha Iyer | 2026-04-08T08:05:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Top 3: MSG_001281, MSG_002079, MSG_000970
+
+INCORRECT Q021 [person] What did Ananya ask for in Delhi to make the journey manageable?
+  Expected MSG_000427 | Ananya Verma | 2026-03-17T21:20:06+05:30 | one rest stop in Delhi chahiye; continuous travel nahi
+  Retrieved MSG_000290 (rank 1) | semantic_score=0.572011 | Aditya Joshi | 2026-03-12T19:34:02+05:30 | Manali quote via Delhi approx 8200 including bus and shared rooms
+  Retrieved MSG_000598 (rank 2) | semantic_score=0.518056 | Ananya Verma | 2026-03-23T18:57:51+05:30 | With Delhi rest stop I'm okay with that route
+  Retrieved MSG_000427 (rank 3) | semantic_score=0.505610 | Ananya Verma | 2026-03-17T21:20:06+05:30 | one rest stop in Delhi chahiye; continuous travel nahi
+  Top 3: MSG_000290, MSG_000598, MSG_000427
+
+INCORRECT Q022 [person] What was Ishita's absolute spending limit when the Goa estimate first came in?
+  Expected MSG_000287 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_000286 (rank 1) | semantic_score=0.566237 | Rohan Mehta | 2026-03-12T19:20:00+05:30 | Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head
+  Retrieved MSG_000713 (rank 2) | semantic_score=0.523098 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_002052 (rank 3) | semantic_score=0.498840 | Kabir Khan | 2026-05-22T21:07:36+05:30 | date toh aaj ka lag raha, 2026-05-22
+  Top 3: MSG_000286, MSG_000713, MSG_002052
+
+INCORRECT Q023 [person] How did Aarav say he would track everyone's trip contributions?
+  Expected MSG_000715 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000854 (rank 1) | semantic_score=0.473063 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Retrieved MSG_000846 (rank 2) | semantic_score=0.460407 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_002310 (rank 3) | semantic_score=0.407957 | Rohan Mehta | 2026-06-01T13:12:42+05:30 | travel day ke screenshots offline save kar lena
+  Top 3: MSG_000854, MSG_000846, MSG_002310
+
+INCORRECT Q024 [person] Find the volunteer orientation checklist PDF that Ananya shared in August.
+  Expected MSG_003930 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003222 (rank 1) | semantic_score=0.767313 | Meera Nair | 2026-07-06T21:07:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003930 (rank 2) | semantic_score=0.767313 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_004130 (rank 3) | semantic_score=0.498334 | Kabir Khan | 2026-08-11T13:07:00+05:30 | volunteer orientation rehearsal aaj, the sports ground available?
+  Top 3: MSG_003222, MSG_003930, MSG_004130
+
+INCORRECT Q027 [person] What name did Rohan suggest for our coding project?
+  Expected MSG_001478 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_004538 (rank 1) | semantic_score=0.383327 | Kabir Khan | 2026-08-28T08:02:00+05:30 | first Software Engineering assignment and already confused about requirements review 😅
+  Retrieved MSG_001478 (rank 2) | semantic_score=0.377354 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_001458 (rank 3) | semantic_score=0.376850 | Sneha Iyer | 2026-04-27T12:03:00+05:30 | git mein wrong branch pe commit hua. Did I lose the whole assignment?
+  Top 3: MSG_004538, MSG_001478, MSG_001458
+
+INCORRECT Q028 [person] Why did Meera insist we should not split the birthday group?
+  Expected MSG_003431 | Meera Nair | 2026-07-14T21:16:55+05:30 | Please don't split. We only get all eight together sometimes
+  Retrieved MSG_003429 (rank 1) | semantic_score=0.574999 | Ishita Patel | 2026-07-14T21:13:13+05:30 | Then common room also out unless we split group, which we won't
+  Retrieved MSG_001652 (rank 2) | semantic_score=0.457194 | Sneha Iyer | 2026-05-05T08:14:55+05:30 | that's half of us, aa jao lol
+  Retrieved MSG_003264 (rank 3) | semantic_score=0.454969 | Aarav Sharma | 2026-07-08T12:14:59+05:30 | that's half of us, aa jao 😅
+  Top 3: MSG_003429, MSG_001652, MSG_003264
+
+INCORRECT Q029 [person] Which bus was Aditya asking about on August 31?
+  Expected MSG_004626 | Aditya Joshi | 2026-08-31T21:10:00+05:30 | anyone taking the Bhawarkuan bus around 9:30 pm
+  Retrieved MSG_000954 (rank 1) | semantic_score=0.598354 | Sneha Iyer | 2026-04-07T13:01:00+05:30 | anybody taking the Palasia bus around 7 pm 🙃
+  Retrieved MSG_000634 (rank 2) | semantic_score=0.590969 | Aditya Joshi | 2026-03-25T13:04:00+05:30 | anyone taking the Vijay Nagar bus around 7 pm
+  Retrieved MSG_002834 (rank 3) | semantic_score=0.590969 | Ishita Patel | 2026-06-21T12:10:00+05:30 | anyone taking the Vijay Nagar bus around 7 pm
+  Top 3: MSG_000954, MSG_000634, MSG_002834
+
+INCORRECT Q031 [time] What decision did we make on March 28 about the trip destination and payments?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000854 (rank 1) | semantic_score=0.590992 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Retrieved MSG_000846 (rank 2) | semantic_score=0.537397 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_000601 (rank 3) | semantic_score=0.534840 | Meera Nair | 2026-03-23T19:05:40+05:30 | We have agreement on constraints; final dates and deposit still pending
+  Top 3: MSG_000854, MSG_000846, MSG_000601
+
+INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001027 (rank 1) | semantic_score=0.471967 | Kabir Khan | 2026-04-09T21:01:42+05:30 | there was another group there earlier
+  Retrieved MSG_001403 (rank 2) | semantic_score=0.471967 | Ananya Verma | 2026-04-25T08:11:59+05:30 | there was another group there earlier
+  Retrieved MSG_003947 (rank 3) | semantic_score=0.471967 | Aditya Joshi | 2026-08-03T17:08:00+05:30 | there was another group there earlier
+  Top 3: MSG_001027, MSG_001403, MSG_003947
+
+INCORRECT Q033 [time] What was the final birthday arrangement we agreed in July?
+  Expected MSG_003616 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_000601 (rank 1) | semantic_score=0.634066 | Meera Nair | 2026-03-23T19:05:40+05:30 | We have agreement on constraints; final dates and deposit still pending
+  Retrieved MSG_003610 (rank 2) | semantic_score=0.564739 | Aarav Sharma | 2026-07-21T20:30:00+05:30 | July 25 after 7 confirmed from my side
+  Retrieved MSG_003210 (rank 3) | semantic_score=0.544706 | Meera Nair | 2026-07-06T20:10:00+05:30 | My birthday is July 25. Small get-together? no surprise please 😂
+  Top 3: MSG_000601, MSG_003610, MSG_003210
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_003829 (rank 1) | semantic_score=0.580303 | Sneha Iyer | 2026-07-29T08:17:04+05:30 | maintenance notice tha na 😅
+  Retrieved MSG_000424 (rank 2) | semantic_score=0.575079 | Aditya Joshi | 2026-03-17T21:16:17+05:30 | maintenance notice tha na
+  Retrieved MSG_000769 (rank 3) | semantic_score=0.575079 | Rohan Mehta | 2026-03-30T17:12:51+05:30 | maintenance notice tha na
+  Top 3: MSG_003829, MSG_000424, MSG_000769
+
+INCORRECT Q039 [time] Who said they had reached home on June 2, and what food were they happy about?
+  Expected MSG_002346 | Kabir Khan | 2026-06-02T21:01:00+05:30 | reached home, finally actual veg rolls yaar
+  Retrieved MSG_003611 (rank 1) | semantic_score=0.504866 | Sneha Iyer | 2026-07-21T20:32:14+05:30 | same, back from home by afternoon
+  Retrieved MSG_003585 (rank 2) | semantic_score=0.477419 | Rohan Mehta | 2026-07-20T17:20:38+05:30 | dinner has side quests again lol
+  Retrieved MSG_002570 (rank 3) | semantic_score=0.456132 | Ishita Patel | 2026-06-10T21:03:00+05:30 | reached home, finally actual chole kulche
+  Top 3: MSG_003611, MSG_003585, MSG_002570
+
+INCORRECT Q040 [time] Yesterday morning, how many MB was Aditya's oversized submission file?
+  Expected MSG_004620 | Aditya Joshi | 2026-08-31T08:04:42+05:30 | 42 MB, screenshots bahut ho gaye
+  Retrieved MSG_000907 (rank 1) | semantic_score=0.497087 | Aditya Joshi | 2026-04-05T08:11:22+05:30 | file size kitna hai 🙃
+  Retrieved MSG_001311 (rank 2) | semantic_score=0.497087 | Meera Nair | 2026-04-21T08:02:41+05:30 | file size kitna hai 🙃
+  Retrieved MSG_004027 (rank 3) | semantic_score=0.468550 | Meera Nair | 2026-08-07T21:01:29+05:30 | file size kitna hai 😅
+  Top 3: MSG_000907, MSG_001311, MSG_004027
+
+=== CONTEXTUAL FAILED QUERIES ===
+
+INCORRECT Q001 [semantic] What made a seaside holiday unaffordable?
+  Expected MSG_000600 | Ishita Patel | 2026-03-23T19:03:05+05:30 | Goa rejected for this break because total exceeds our cap
+  Retrieved MSG_000435 (rank 1) | semantic_score=0.374658 | Meera Nair | 2026-03-17T21:41:06+05:30 | June mein rain contingency bhi sochna padega for either place
+  Retrieved MSG_000436 (rank 2) | semantic_score=0.374235 | Aditya Joshi | 2026-03-17T21:45:40+05:30 | If roads look unsafe we cancel, no heroic driving plan
+  Retrieved MSG_000701 (rank 3) | semantic_score=0.354645 | Kabir Khan | 2026-03-28T20:51:28+05:30 | do we need jackets in june or hoodie enough
+  Top 3: MSG_000435, MSG_000436, MSG_000701
+
+INCORRECT Q002 [semantic] Who worried about feeling nauseous during consecutive coach rides?
+  Expected MSG_000291 | Ananya Verma | 2026-03-12T19:37:44+05:30 | overnight buses do back to back honge? motion sickness hoti hai mujhe
+  Retrieved MSG_004130 (rank 1) | semantic_score=0.379538 | Kabir Khan | 2026-08-11T13:07:00+05:30 | volunteer orientation rehearsal aaj, the sports ground available?
+  Retrieved MSG_004305 (rank 2) | semantic_score=0.372491 | Ishita Patel | 2026-08-19T13:25:49+05:30 | done, thanks. almost laptop ko blame kar diya
+  Retrieved MSG_004132 (rank 3) | semantic_score=0.370119 | Aarav Sharma | 2026-08-11T13:09:50+05:30 | ask the coordinator before moving their equipment
+  Top 3: MSG_004130, MSG_004305, MSG_004132
+
+INCORRECT Q003 [semantic] What condition would force us to call off the Himalayan vacation?
+  Expected MSG_000436 | Aditya Joshi | 2026-03-17T21:45:40+05:30 | If roads look unsafe we cancel, no heroic driving plan
+  Retrieved MSG_000853 (rank 1) | semantic_score=0.487139 | Sneha Iyer | 2026-04-02T19:38:15+05:30 | good. lets stop reopening the poll every time an ad appears
+  Retrieved MSG_000852 (rank 2) | semantic_score=0.476018 | Rohan Mehta | 2026-04-02T19:33:35+05:30 | I saw another Goa deal but ignoring it. We already chose the hills
+  Retrieved MSG_000599 (rank 3) | semantic_score=0.468565 | Rohan Mehta | 2026-03-23T19:00:48+05:30 | fine yaar sea next time. don't book without cancellation clause
+  Top 3: MSG_000853, MSG_000852, MSG_000599
+
+INCORRECT Q004 [semantic] What extra software would the panel's computer need for the phone app?
+  Expected MSG_001154 | Ishita Patel | 2026-04-14T18:36:48+05:30 | Flutter would mean emulator setup on judging laptop
+  Retrieved MSG_001327 (rank 1) | semantic_score=0.338563 | Ananya Verma | 2026-04-22T08:13:45+05:30 | meet me near the library entrance, powerbank hai 🙃
+  Retrieved MSG_003099 (rank 2) | semantic_score=0.331235 | Rohan Mehta | 2026-07-01T12:08:05+05:30 | meet me near the library entrance, powerbank hai
+  Retrieved MSG_001326 (rank 3) | semantic_score=0.328768 | Ishita Patel | 2026-04-22T08:12:00+05:30 | phone battery 5% and charger at home. incredible planning
+  Top 3: MSG_001327, MSG_003099, MSG_001326
+
+INCORRECT Q005 [semantic] What accessibility improvement was requested for the success indicator?
+  Expected MSG_001602 | Meera Nair | 2026-05-03T18:51:28+05:30 | approved colour needs text also, don't rely only on green
+  Retrieved MSG_003222 (rank 1) | semantic_score=0.420314 | Meera Nair | 2026-07-06T21:07:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003930 (rank 2) | semantic_score=0.389154 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_002986 (rank 3) | semantic_score=0.388307 | Meera Nair | 2026-06-27T12:06:00+05:30 | community volunteer orientation session this evening at the bus stop, anyone free?
+  Top 3: MSG_003222, MSG_003930, MSG_002986
+
+INCORRECT Q007 [semantic] Why was the outdoor picnic abandoned?
+  Expected MSG_003426 | Ananya Verma | 2026-07-14T21:10:16+05:30 | Rain and permission both uncertain. Dropping lawn
+  Retrieved MSG_001043 (rank 1) | semantic_score=0.388583 | Sneha Iyer | 2026-04-10T12:04:52+05:30 | extension board missing from list
+  Retrieved MSG_004130 (rank 2) | semantic_score=0.380771 | Kabir Khan | 2026-08-11T13:07:00+05:30 | volunteer orientation rehearsal aaj, the sports ground available?
+  Retrieved MSG_001026 (rank 3) | semantic_score=0.374264 | Ishita Patel | 2026-04-09T21:00:00+05:30 | badminton rehearsal aaj, the canteen available?
+  Top 3: MSG_001043, MSG_004130, MSG_001026
+
+INCORRECT Q008 [semantic] Why did the birthday girl prefer chatting over a game at the alley?
+  Expected MSG_003330 | Meera Nair | 2026-07-10T19:29:49+05:30 | Skip bowling too, I want time to talk anyway
+  Retrieved MSG_003328 (rank 1) | semantic_score=0.306590 | Kabir Khan | 2026-07-10T19:23:38+05:30 | Bowling student slot 320 each, food separate
+  Retrieved MSG_003619 (rank 2) | semantic_score=0.300183 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003621 (rank 3) | semantic_score=0.299991 | Rohan Mehta | 2026-07-21T21:04:02+05:30 | Room reserved. No more venue polls
+  Top 3: MSG_003328, MSG_003619, MSG_003621
+
+INCORRECT Q009 [semantic] How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?
+  Expected MSG_000700 | Ishita Patel | 2026-03-28T20:47:26+05:30 | 8700 ceiling includes a 700 emergency buffer, not shopping
+  Retrieved MSG_000857 (rank 1) | semantic_score=0.457814 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Retrieved MSG_000856 (rank 2) | semantic_score=0.425140 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Retrieved MSG_003738 (rank 3) | semantic_score=0.415378 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Top 3: MSG_000857, MSG_000856, MSG_003738
+
+INCORRECT Q010 [semantic] Why was the cheap coastal vacation clip misleading for people departing from our city?
+  Expected MSG_000289 | Meera Nair | 2026-03-12T19:31:15+05:30 | that reel starts from Mumbai, hum Indore mein hain
+  Retrieved MSG_000435 (rank 1) | semantic_score=0.496375 | Meera Nair | 2026-03-17T21:41:06+05:30 | June mein rain contingency bhi sochna padega for either place
+  Retrieved MSG_002778 (rank 2) | semantic_score=0.469606 | Rohan Mehta | 2026-06-18T21:05:00+05:30 | local walk near home today, no big travel plan
+  Retrieved MSG_002970 (rank 3) | semantic_score=0.469606 | Meera Nair | 2026-06-26T21:11:00+05:30 | local walk near home today, no big travel plan
+  Top 3: MSG_000435, MSG_002778, MSG_002970
+
+INCORRECT Q011 [semantic] Where did we finally decide to go for the June trip, and what was the per-person limit?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000856 (rank 1) | semantic_score=0.431757 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Retrieved MSG_000595 (rank 2) | semantic_score=0.382106 | Aditya Joshi | 2026-03-23T18:48:01+05:30 | then internships and everyone's separate dates. June overlap is rare
+  Retrieved MSG_000594 (rank 3) | semantic_score=0.371002 | Aarav Sharma | 2026-03-23T18:43:34+05:30 | Could postpone to December instead?
+  Top 3: MSG_000856, MSG_000595, MSG_000594
+
+INCORRECT Q012 [semantic] What backend and database did we finally choose for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001292 (rank 1) | semantic_score=0.501311 | Kabir Khan | 2026-04-19T21:46:30+05:30 | We should write down the rejected options so we don't circle back
+  Retrieved MSG_001598 (rank 2) | semantic_score=0.497469 | Kabir Khan | 2026-05-03T18:40:00+05:30 | LostLoop now launches from the README on a fresh folder
+  Retrieved MSG_001599 (rank 3) | semantic_score=0.485081 | Aarav Sharma | 2026-05-03T18:44:17+05:30 | Someone asked why no Mongo. We already settled on a local SQL file
+  Top 3: MSG_001292, MSG_001598, MSG_001599
+
+INCORRECT Q013 [semantic] What was the final birthday venue and budget, including cake and everyone's share?
+  Expected MSG_003616 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003618 (rank 1) | semantic_score=0.683502 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003616 (rank 2) | semantic_score=0.669298 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003617 (rank 3) | semantic_score=0.648155 | Meera Nair | 2026-07-21T20:50:31+05:30 | Perfect. I'm paying my share too, no arguments ❤️
+  Top 3: MSG_003618, MSG_003616, MSG_003617
+
+INCORRECT Q014 [semantic] Why did Aarav originally lean towards MERN?
+  Expected MSG_001291 | Aarav Sharma | 2026-04-19T21:41:52+05:30 | For this scope I don't have a reason. MERN was just familiarity
+  Retrieved MSG_001293 (rank 1) | semantic_score=0.346541 | Sneha Iyer | 2026-04-19T21:49:05+05:30 | Yes, but pick after testing a clean laptop launch
+  Retrieved MSG_002305 (rank 2) | semantic_score=0.306485 | Sneha Iyer | 2026-06-01T08:27:24+05:30 | done, thanks. almost laptop ko blame kar diya
+  Retrieved MSG_000657 (rank 3) | semantic_score=0.301090 | Rohan Mehta | 2026-03-26T08:27:06+05:30 | done, thnks. almost laptop ko blame kar diya
+  Top 3: MSG_001293, MSG_002305, MSG_000657
+
+INCORRECT Q015 [semantic] Was outside cake allowed, and what decoration rule came with it?
+  Expected MSG_003434 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Retrieved MSG_003620 (rank 1) | semantic_score=0.480093 | Aarav Sharma | 2026-07-21T21:01:11+05:30 | actually cute yaar
+  Retrieved MSG_003619 (rank 2) | semantic_score=0.478771 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003618 (rank 3) | semantic_score=0.470734 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Top 3: MSG_003620, MSG_003619, MSG_003618
+
+INCORRECT Q016 [semantic] What did the birthday actually cost once it was over, and was any buffer used?
+  Expected MSG_003738 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Retrieved MSG_003736 (rank 1) | semantic_score=0.571024 | Sneha Iyer | 2026-07-25T22:18:03+05:30 | Cake was 500 as quoted, no extra box charge
+  Retrieved MSG_003618 (rank 2) | semantic_score=0.570221 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003617 (rank 3) | semantic_score=0.552881 | Meera Nair | 2026-07-21T20:50:31+05:30 | Perfect. I'm paying my share too, no arguments ❤️
+  Top 3: MSG_003736, MSG_003618, MSG_003617
+
+INCORRECT Q017 [semantic] Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.
+  Expected MSG_002058 | Aditya Joshi | 2026-05-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Retrieved MSG_000972 (rank 1) | semantic_score=0.604913 | Ananya Verma | 2026-04-08T08:09:17+05:30 | half of it isn't even our syllabus
+  Retrieved MSG_001352 (rank 2) | semantic_score=0.603426 | Ishita Patel | 2026-04-23T08:14:15+05:30 | half of it isn't even our syllabus
+  Retrieved MSG_001350 (rank 3) | semantic_score=0.593444 | Sneha Iyer | 2026-04-23T08:10:00+05:30 | Forwarded: Someone claims these are sure-shot exam topics for Software Engineering. Unverified forward, not an official paper.
+  Top 3: MSG_000972, MSG_001352, MSG_001350
+
+INCORRECT Q018 [semantic] Find the voice note proposing QR stickers for lost items.
+  Expected MSG_001155 | Rohan Mehta | 2026-04-14T18:39:19+05:30 | [Voice message] rambling idea about a QR sticker on every lost item
+  Retrieved MSG_001157 (rank 1) | semantic_score=0.565246 | Aditya Joshi | 2026-04-14T18:44:45+05:30 | Anyone coming for dosa? I ordered too much
+  Retrieved MSG_003966 (rank 2) | semantic_score=0.517030 | Kabir Khan | 2026-08-04T08:20:35+05:30 | do not leave it unattended there
+  Retrieved MSG_003714 (rank 3) | semantic_score=0.515273 | Rohan Mehta | 2026-07-25T12:06:38+05:30 | don't leave it unattended there lol
+  Top 3: MSG_001157, MSG_003966, MSG_003714
+
+INCORRECT Q019 [semantic] Did Nukkad Cafe charge separately for the room or just require a minimum spend?
+  Expected MSG_003432 | Rohan Mehta | 2026-07-14T21:21:39+05:30 | Nukkad Cafe side room asks minimum 2400 spend, no room fee
+  Retrieved MSG_003434 (rank 1) | semantic_score=0.653988 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Retrieved MSG_003433 (rank 2) | semantic_score=0.592836 | Kabir Khan | 2026-07-14T21:24:18+05:30 | Cake allowed from outside?
+  Retrieved MSG_003432 (rank 3) | semantic_score=0.552662 | Rohan Mehta | 2026-07-14T21:21:39+05:30 | Nukkad Cafe side room asks minimum 2400 spend, no room fee
+  Top 3: MSG_003434, MSG_003433, MSG_003432
+
+INCORRECT Q020 [semantic] When was the cake pickup, and who would bring the candles?
+  Expected MSG_003618 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003620 (rank 1) | semantic_score=0.572002 | Aarav Sharma | 2026-07-21T21:01:11+05:30 | actually cute yaar
+  Retrieved MSG_003619 (rank 2) | semantic_score=0.541474 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003618 (rank 3) | semantic_score=0.473529 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Top 3: MSG_003620, MSG_003619, MSG_003618
+
+INCORRECT Q021 [person] What did Ananya ask for in Delhi to make the journey manageable?
+  Expected MSG_000427 | Ananya Verma | 2026-03-17T21:20:06+05:30 | one rest stop in Delhi chahiye; continuous travel nahi
+  Retrieved MSG_000850 (rank 1) | semantic_score=0.563450 | Ananya Verma | 2026-04-02T19:27:06+05:30 | with me, thought it was mine. sorryyy
+  Retrieved MSG_000849 (rank 2) | semantic_score=0.522403 | Kabir Khan | 2026-04-02T19:22:42+05:30 | who took my blue notebook from lab
+  Retrieved MSG_000599 (rank 3) | semantic_score=0.510233 | Rohan Mehta | 2026-03-23T19:00:48+05:30 | fine yaar sea next time. don't book without cancellation clause
+  Top 3: MSG_000850, MSG_000849, MSG_000599
+
+INCORRECT Q022 [person] What was Ishita's absolute spending limit when the Goa estimate first came in?
+  Expected MSG_000287 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_000286 (rank 1) | semantic_score=0.570978 | Rohan Mehta | 2026-03-12T19:20:00+05:30 | Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head
+  Retrieved MSG_000715 (rank 2) | semantic_score=0.539141 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000287 (rank 3) | semantic_score=0.525276 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Top 3: MSG_000286, MSG_000715, MSG_000287
+
+INCORRECT Q023 [person] How did Aarav say he would track everyone's trip contributions?
+  Expected MSG_000715 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000717 (rank 1) | semantic_score=0.446242 | Rohan Mehta | 2026-03-28T21:20:37+05:30 | done, mountains it is 🏔️
+  Retrieved MSG_000716 (rank 2) | semantic_score=0.398055 | Aarav Sharma | 2026-03-28T21:17:11+05:30 | thanks, panic thoda kam hua
+  Retrieved MSG_000856 (rank 3) | semantic_score=0.390297 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Top 3: MSG_000717, MSG_000716, MSG_000856
+
+INCORRECT Q025 [person] What reason did Kabir give for rejecting Firebase?
+  Expected MSG_001383 | Kabir Khan | 2026-04-24T19:33:19+05:30 | Firebase rejected for demo because offline requirement is real
+  Retrieved MSG_002041 (rank 1) | semantic_score=0.391114 | Rohan Mehta | 2026-05-22T08:17:14+05:30 | done, shukriya. almost laptop ko blame kar diya 😅
+  Retrieved MSG_000657 (rank 2) | semantic_score=0.381955 | Rohan Mehta | 2026-03-26T08:27:06+05:30 | done, thnks. almost laptop ko blame kar diya
+  Retrieved MSG_002305 (rank 3) | semantic_score=0.372455 | Sneha Iyer | 2026-06-01T08:27:24+05:30 | done, thanks. almost laptop ko blame kar diya
+  Top 3: MSG_002041, MSG_000657, MSG_002305
+
+INCORRECT Q026 [person] Why did Sneha want to drop the bigger Python framework?
+  Expected MSG_001385 | Sneha Iyer | 2026-04-24T19:39:58+05:30 | The big Python framework adds admin config we won't use. I'd drop it
+  Retrieved MSG_001387 (rank 1) | semantic_score=0.410583 | Aarav Sharma | 2026-04-24T19:48:11+05:30 | No. Let's use SQL tables and include a small seed fixture
+  Retrieved MSG_001386 (rank 2) | semantic_score=0.399788 | Ananya Verma | 2026-04-24T19:44:13+05:30 | Any reason to keep Mongo now? claim approval is transactional
+  Retrieved MSG_001385 (rank 3) | semantic_score=0.394439 | Sneha Iyer | 2026-04-24T19:39:58+05:30 | The big Python framework adds admin config we won't use. I'd drop it
+  Top 3: MSG_001387, MSG_001386, MSG_001385
+
+INCORRECT Q027 [person] What name did Rohan suggest for our coding project?
+  Expected MSG_001478 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_003743 (rank 1) | semantic_score=0.328524 | Kabir Khan | 2026-07-25T22:42:07+05:30 | birhtday is a design choice
+  Retrieved MSG_002074 (rank 2) | semantic_score=0.323665 | Kabir Khan | 2026-05-24T08:05:00+05:30 | software Engineering revision start ki ya everyone pretending
+  Retrieved MSG_002017 (rank 3) | semantic_score=0.323590 | Rohan Mehta | 2026-05-20T21:14:30+05:30 | strong debugging skills
+  Top 3: MSG_003743, MSG_002074, MSG_002017
+
+INCORRECT Q028 [person] Why did Meera insist we should not split the birthday group?
+  Expected MSG_003431 | Meera Nair | 2026-07-14T21:16:55+05:30 | Please don't split. We only get all eight together sometimes
+  Retrieved MSG_003619 (rank 1) | semantic_score=0.476982 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003431 (rank 2) | semantic_score=0.455532 | Meera Nair | 2026-07-14T21:16:55+05:30 | Please don't split. We only get all eight together sometimes
+  Retrieved MSG_003620 (rank 3) | semantic_score=0.440063 | Aarav Sharma | 2026-07-21T21:01:11+05:30 | actually cute yaar
+  Top 3: MSG_003619, MSG_003431, MSG_003620
+
+INCORRECT Q029 [person] Which bus was Aditya asking about on August 31?
+  Expected MSG_004626 | Aditya Joshi | 2026-08-31T21:10:00+05:30 | anyone taking the Bhawarkuan bus around 9:30 pm
+  Retrieved MSG_000291 (rank 1) | semantic_score=0.515642 | Ananya Verma | 2026-03-12T19:37:44+05:30 | overnight buses do back to back honge? motion sickness hoti hai mujhe
+  Retrieved MSG_000290 (rank 2) | semantic_score=0.506166 | Aditya Joshi | 2026-03-12T19:34:02+05:30 | Manali quote via Delhi approx 8200 including bus and shared rooms
+  Retrieved MSG_000292 (rank 3) | semantic_score=0.504836 | Sneha Iyer | 2026-03-12T19:42:28+05:30 | [Image] mess ka aaj ka mysterious orange sabzi
+  Top 3: MSG_000291, MSG_000290, MSG_000292
+
+INCORRECT Q030 [person] What did Sneha say the cake cost, including any extra box charge?
+  Expected MSG_003736 | Sneha Iyer | 2026-07-25T22:18:03+05:30 | Cake was 500 as quoted, no extra box charge
+  Retrieved MSG_003615 (rank 1) | semantic_score=0.639629 | Ananya Verma | 2026-07-21T20:44:45+05:30 | Can someone post one final message? too many prices above
+  Retrieved MSG_003614 (rank 2) | semantic_score=0.607814 | Aditya Joshi | 2026-07-21T20:41:39+05:30 | no rooftop rain roulette, good choice
+  Retrieved MSG_003738 (rank 3) | semantic_score=0.597870 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Top 3: MSG_003615, MSG_003614, MSG_003738
+
+INCORRECT Q031 [time] What decision did we make on March 28 about the trip destination and payments?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000856 (rank 1) | semantic_score=0.552181 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Retrieved MSG_000180 (rank 2) | semantic_score=0.481644 | Aditya Joshi | 2026-03-08T20:43:53+05:30 | haan
+  Retrieved MSG_000846 (rank 3) | semantic_score=0.470873 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Top 3: MSG_000856, MSG_000180, MSG_000846
+
+INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_000029 (rank 1) | semantic_score=0.450570 | Ishita Patel | 2026-03-02T08:10:39+05:30 | congratulations to the search committee
+  Retrieved MSG_000357 (rank 2) | semantic_score=0.450570 | Aditya Joshi | 2026-03-15T08:09:44+05:30 | congratulations to the search committee
+  Retrieved MSG_002605 (rank 3) | semantic_score=0.450570 | Ishita Patel | 2026-06-12T08:12:51+05:30 | congratulations to the search committee
+  Top 3: MSG_000029, MSG_000357, MSG_002605
+
+INCORRECT Q033 [time] What was the final birthday arrangement we agreed in July?
+  Expected MSG_003616 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003618 (rank 1) | semantic_score=0.562260 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003616 (rank 2) | semantic_score=0.533961 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003617 (rank 3) | semantic_score=0.508100 | Meera Nair | 2026-07-21T20:50:31+05:30 | Perfect. I'm paying my share too, no arguments ❤️
+  Top 3: MSG_003618, MSG_003616, MSG_003617
+
+INCORRECT Q034 [time] What update did Aarav give on April 2 about the trip deposits?
+  Expected MSG_000846 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_000715 (rank 1) | semantic_score=0.526088 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000846 (rank 2) | semantic_score=0.522515 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_000848 (rank 3) | semantic_score=0.522136 | Meera Nair | 2026-04-02T19:18:04+05:30 | Ananya Sneha and me in room A, sorting the other five now
+  Top 3: MSG_000715, MSG_000846, MSG_000848
+
+INCORRECT Q036 [time] Find the first forwarded notice last month saying the semester timetable could still change.
+  Expected MSG_003892 | Ishita Patel | 2026-08-01T08:13:50+05:30 | Forwarded: Timetable is provisional; confirm changes on the department board before attending.
+  Retrieved MSG_004542 (rank 1) | semantic_score=0.691182 | Kabir Khan | 2026-08-28T08:09:01+05:30 | works. submission 2026-09-01 in my calendar
+  Retrieved MSG_004310 (rank 2) | semantic_score=0.687515 | Aditya Joshi | 2026-08-19T21:06:51+05:30 | works. submission 2026-08-22 in my calendar
+  Retrieved MSG_003990 (rank 3) | semantic_score=0.680879 | Aarav Sharma | 2026-08-05T21:08:21+05:30 | works. submission 2026-08-11 in my calendar yaar
+  Top 3: MSG_004542, MSG_004310, MSG_003990
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_002457 (rank 1) | semantic_score=0.595547 | Ishita Patel | 2026-06-06T08:19:59+05:30 | 😂
+  Retrieved MSG_002913 (rank 2) | semantic_score=0.593540 | Aditya Joshi | 2026-06-24T12:17:36+05:30 | 😂
+  Retrieved MSG_002713 (rank 3) | semantic_score=0.591354 | Rohan Mehta | 2026-06-16T08:21:10+05:30 | 😂
+  Top 3: MSG_002457, MSG_002913, MSG_002713
+
+INCORRECT Q039 [time] Who said they had reached home on June 2, and what food were they happy about?
+  Expected MSG_002346 | Kabir Khan | 2026-06-02T21:01:00+05:30 | reached home, finally actual veg rolls yaar
+  Retrieved MSG_003610 (rank 1) | semantic_score=0.541056 | Aarav Sharma | 2026-07-21T20:30:00+05:30 | July 25 after 7 confirmed from my side
+  Retrieved MSG_003611 (rank 2) | semantic_score=0.515129 | Sneha Iyer | 2026-07-21T20:32:14+05:30 | same, back from home by afternoon
+  Retrieved MSG_003612 (rank 3) | semantic_score=0.513784 | Kabir Khan | 2026-07-21T20:34:41+05:30 | me too. vegetarian snacks only right?
+  Top 3: MSG_003610, MSG_003611, MSG_003612
+
+INCORRECT Q040 [time] Yesterday morning, how many MB was Aditya's oversized submission file?
+  Expected MSG_004620 | Aditya Joshi | 2026-08-31T08:04:42+05:30 | 42 MB, screenshots bahut ho gaye
+  Retrieved MSG_000713 (rank 1) | semantic_score=0.484335 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000714 (rank 2) | semantic_score=0.477551 | Sneha Iyer | 2026-03-28T21:16:00+05:30 | we can look after 9:30 pm
+  Retrieved MSG_000717 (rank 3) | semantic_score=0.473632 | Rohan Mehta | 2026-03-28T21:20:37+05:30 | done, mountains it is 🏔️
+  Top 3: MSG_000713, MSG_000714, MSG_000717
+
+=== HYBRID FAILED QUERIES ===
+
+INCORRECT Q001 [semantic] What made a seaside holiday unaffordable?
+  Expected MSG_000600 | Ishita Patel | 2026-03-23T19:03:05+05:30 | Goa rejected for this break because total exceeds our cap
+  Retrieved MSG_000594 (rank 1) | hybrid_score=0.236930, semantic_score=0.410506, contextual_score=0.266437, lexical_score=0.000000, metadata_bonus=0.000000 | Aarav Sharma | 2026-03-23T18:43:34+05:30 | Could postpone to December instead?
+  Retrieved MSG_000171 (rank 2) | hybrid_score=0.233207, semantic_score=0.339239, contextual_score=0.327066, lexical_score=0.000000, metadata_bonus=0.000000 | Aarav Sharma | 2026-03-08T20:14:00+05:30 | beach sounds good but kitna kharcha aayega from Indore
+  Retrieved MSG_000434 (rank 3) | hybrid_score=0.216528, semantic_score=0.259792, contextual_score=0.333103, lexical_score=0.045075, metadata_bonus=0.000000 | Rohan Mehta | 2026-03-17T21:36:14+05:30 | I still prefer sea, but 10900 is a lot
+  Top 3: MSG_000594, MSG_000171, MSG_000434
+
+INCORRECT Q002 [semantic] Who worried about feeling nauseous during consecutive coach rides?
+  Expected MSG_000291 | Ananya Verma | 2026-03-12T19:37:44+05:30 | overnight buses do back to back honge? motion sickness hoti hai mujhe
+  Retrieved MSG_003767 (rank 1) | hybrid_score=0.268570, semantic_score=0.448039, contextual_score=0.315863, lexical_score=0.006024, metadata_bonus=0.000000 | Meera Nair | 2026-07-26T17:18:47+05:30 | ohhh yes. copied assumption from yesterday's exercise
+  Retrieved MSG_003119 (rank 2) | hybrid_score=0.265385, semantic_score=0.448039, contextual_score=0.306763, lexical_score=0.006024, metadata_bonus=0.000000 | Sneha Iyer | 2026-07-01T21:17:44+05:30 | ohhh yes. copied assumption from yesterday's exercise
+  Retrieved MSG_004559 (rank 3) | hybrid_score=0.264988, semantic_score=0.448039, contextual_score=0.305629, lexical_score=0.006024, metadata_bonus=0.000000 | Rohan Mehta | 2026-08-28T17:14:04+05:30 | ohhh yes. copied assumption from yesterday's exercise
+  Top 3: MSG_003767, MSG_003119, MSG_004559
+
+INCORRECT Q003 [semantic] What condition would force us to call off the Himalayan vacation?
+  Expected MSG_000436 | Aditya Joshi | 2026-03-17T21:45:40+05:30 | If roads look unsafe we cancel, no heroic driving plan
+  Retrieved MSG_000852 (rank 1) | hybrid_score=0.354933, semantic_score=0.528640, contextual_score=0.476018, lexical_score=0.016515, metadata_bonus=0.000000 | Rohan Mehta | 2026-04-02T19:33:35+05:30 | I saw another Goa deal but ignoring it. We already chose the hills
+  Retrieved MSG_000854 (rank 2) | hybrid_score=0.279611, semantic_score=0.391330, contextual_score=0.403538, lexical_score=0.007034, metadata_bonus=0.000000 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Retrieved MSG_000599 (rank 3) | hybrid_score=0.278553, semantic_score=0.319828, contextual_score=0.468565, lexical_score=0.013074, metadata_bonus=0.000000 | Rohan Mehta | 2026-03-23T19:00:48+05:30 | fine yaar sea next time. don't book without cancellation clause
+  Top 3: MSG_000852, MSG_000854, MSG_000599
+
+INCORRECT Q004 [semantic] What extra software would the panel's computer need for the phone app?
+  Expected MSG_001154 | Ishita Patel | 2026-04-14T18:36:48+05:30 | Flutter would mean emulator setup on judging laptop
+  Retrieved MSG_001061 (rank 1) | hybrid_score=0.267432, semantic_score=0.478895, contextual_score=0.222222, lexical_score=0.110203, metadata_bonus=0.000000 | Ishita Patel | 2026-04-10T20:09:58+05:30 | Flutter app could look nice, camera upload simple
+  Retrieved MSG_001094 (rank 2) | hybrid_score=0.266970, semantic_score=0.384821, contextual_score=0.315720, lexical_score=0.108904, metadata_bonus=0.000000 | Ananya Verma | 2026-04-12T08:09:00+05:30 | Software Engineering group presentation slides kitni honi chahiye
+  Retrieved MSG_001286 (rank 3) | hybrid_score=0.263224, semantic_score=0.433902, contextual_score=0.274756, lexical_score=0.075968, metadata_bonus=0.000000 | Ishita Patel | 2026-04-19T21:24:20+05:30 | Design update: responsive website is sufficient; mobile app dropped
+  Top 3: MSG_001061, MSG_001094, MSG_001286
+
+INCORRECT Q005 [semantic] What accessibility improvement was requested for the success indicator?
+  Expected MSG_001602 | Meera Nair | 2026-05-03T18:51:28+05:30 | approved colour needs text also, don't rely only on green
+  Retrieved MSG_003222 (rank 1) | hybrid_score=0.292003, semantic_score=0.410384, contextual_score=0.420314, lexical_score=0.006294, metadata_bonus=0.000000 | Meera Nair | 2026-07-06T21:07:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_003930 (rank 2) | hybrid_score=0.281097, semantic_score=0.410384, contextual_score=0.389154, lexical_score=0.006294, metadata_bonus=0.000000 | Ananya Verma | 2026-08-03T08:03:00+05:30 | [PDF] draft volunteer orientation session checklist, still needs review
+  Retrieved MSG_002986 (rank 3) | hybrid_score=0.276718, semantic_score=0.382396, contextual_score=0.388307, lexical_score=0.034859, metadata_bonus=0.000000 | Meera Nair | 2026-06-27T12:06:00+05:30 | community volunteer orientation session this evening at the bus stop, anyone free?
+  Top 3: MSG_003222, MSG_003930, MSG_002986
+
+INCORRECT Q007 [semantic] Why was the outdoor picnic abandoned?
+  Expected MSG_003426 | Ananya Verma | 2026-07-14T21:10:16+05:30 | Rain and permission both uncertain. Dropping lawn
+  Retrieved MSG_003214 (rank 1) | hybrid_score=0.366977, semantic_score=0.625522, contextual_score=0.289765, lexical_score=0.233132, metadata_bonus=0.000000 | Aditya Joshi | 2026-07-06T20:22:31+05:30 | college lawn picnic? practically free venue
+  Retrieved MSG_001045 (rank 2) | hybrid_score=0.280227, semantic_score=0.448299, contextual_score=0.334146, lexical_score=0.031856, metadata_bonus=0.000000 | Meera Nair | 2026-04-10T12:09:42+05:30 | is the canteen accessible without stairs?
+  Retrieved MSG_003424 (rank 3) | hybrid_score=0.273740, semantic_score=0.486072, contextual_score=0.296043, lexical_score=0.000000, metadata_bonus=0.000000 | Aditya Joshi | 2026-07-14T21:07:45+05:30 | Lawn plus borrowed canopy?
+  Top 3: MSG_003214, MSG_001045, MSG_003424
+
+INCORRECT Q008 [semantic] Why did the birthday girl prefer chatting over a game at the alley?
+  Expected MSG_003330 | Meera Nair | 2026-07-10T19:29:49+05:30 | Skip bowling too, I want time to talk anyway
+  Retrieved MSG_003619 (rank 1) | hybrid_score=0.254718, semantic_score=0.311755, contextual_score=0.300183, lexical_score=0.202699, metadata_bonus=0.000000 | Kabir Khan | 2026-07-21T20:56:55+05:30 | [Image] tragic attempt at a homemade birthday card
+  Retrieved MSG_003210 (rank 2) | hybrid_score=0.251391, semantic_score=0.365204, contextual_score=0.279014, lexical_score=0.129576, metadata_bonus=0.000000 | Meera Nair | 2026-07-06T20:10:00+05:30 | My birthday is July 25. Small get-together? no surprise please 😂
+  Retrieved MSG_003734 (rank 3) | hybrid_score=0.238949, semantic_score=0.303483, contextual_score=0.279106, lexical_score=0.175218, metadata_bonus=0.000000 | Meera Nair | 2026-07-25T22:10:00+05:30 | Home! thank you all, exactly the quiet birthday I wanted 🥹
+  Top 3: MSG_003619, MSG_003210, MSG_003734
+
+INCORRECT Q009 [semantic] How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?
+  Expected MSG_000700 | Ishita Patel | 2026-03-28T20:47:26+05:30 | 8700 ceiling includes a 700 emergency buffer, not shopping
+  Retrieved MSG_000856 (rank 1) | hybrid_score=0.337092, semantic_score=0.520300, contextual_score=0.425140, lexical_score=0.030941, metadata_bonus=0.000000 | Ishita Patel | 2026-04-02T19:49:04+05:30 | Budget unchanged. Any optional activity comes out of personal spending
+  Retrieved MSG_003737 (rank 2) | hybrid_score=0.295305, semantic_score=0.414365, contextual_score=0.412686, lexical_score=0.029187, metadata_bonus=0.000000 | Rohan Mehta | 2026-07-25T22:22:10+05:30 | Cafe bill 2400, same as reservation. Kept the receipt
+  Retrieved MSG_003213 (rank 3) | hybrid_score=0.294076, semantic_score=0.474859, contextual_score=0.348507, lexical_score=0.029487, metadata_bonus=0.000000 | Meera Nair | 2026-07-06T20:19:54+05:30 | 3000 total including cake. Eight of us, nothing fancy
+  Top 3: MSG_000856, MSG_003737, MSG_003213
+
+INCORRECT Q010 [semantic] Why was the cheap coastal vacation clip misleading for people departing from our city?
+  Expected MSG_000289 | Meera Nair | 2026-03-12T19:31:15+05:30 | that reel starts from Mumbai, hum Indore mein hain
+  Retrieved MSG_002778 (rank 1) | hybrid_score=0.315113, semantic_score=0.429381, contextual_score=0.469606, lexical_score=0.002337, metadata_bonus=0.000000 | Rohan Mehta | 2026-06-18T21:05:00+05:30 | local walk near home today, no big travel plan
+  Retrieved MSG_002970 (rank 2) | hybrid_score=0.315113, semantic_score=0.429381, contextual_score=0.469606, lexical_score=0.002337, metadata_bonus=0.000000 | Meera Nair | 2026-06-26T21:11:00+05:30 | local walk near home today, no big travel plan
+  Retrieved MSG_000857 (rank 3) | hybrid_score=0.301772, semantic_score=0.501089, contextual_score=0.343697, lexical_score=0.030482, metadata_bonus=0.000000 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Top 3: MSG_002778, MSG_002970, MSG_000857
+
+INCORRECT Q011 [semantic] Where did we finally decide to go for the June trip, and what was the per-person limit?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000854 (rank 1) | hybrid_score=0.311831, semantic_score=0.527562, contextual_score=0.299993, lexical_score=0.110932, metadata_bonus=0.000000 | Meera Nair | 2026-04-02T19:42:42+05:30 | [PDF] June hill-trip itinerary revision 3, with refund notes
+  Retrieved MSG_000595 (rank 2) | hybrid_score=0.299702, semantic_score=0.428418, contextual_score=0.382106, lexical_score=0.080091, metadata_bonus=0.000000 | Aditya Joshi | 2026-03-23T18:48:01+05:30 | then internships and everyone's separate dates. June overlap is rare
+  Retrieved MSG_000857 (rank 3) | hybrid_score=0.268793, semantic_score=0.441377, contextual_score=0.284449, lexical_score=0.073770, metadata_bonus=0.000000 | Aarav Sharma | 2026-04-02T19:53:19+05:30 | done. Next trip discussion only for packing or safety updates
+  Top 3: MSG_000854, MSG_000595, MSG_000857
+
+INCORRECT Q012 [semantic] What backend and database did we finally choose for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001598 (rank 1) | hybrid_score=0.347862, semantic_score=0.429036, contextual_score=0.497469, lexical_score=0.117924, metadata_bonus=0.000000 | Kabir Khan | 2026-05-03T18:40:00+05:30 | LostLoop now launches from the README on a fresh folder
+  Retrieved MSG_001290 (rank 2) | hybrid_score=0.321352, semantic_score=0.444902, contextual_score=0.403170, lexical_score=0.122637, metadata_bonus=0.000000 | Ananya Verma | 2026-04-19T21:38:26+05:30 | SQLite supports the tiny offline demo. Why a separate database server?
+  Retrieved MSG_001600 (rank 3) | hybrid_score=0.320331, semantic_score=0.374247, contextual_score=0.439476, lexical_score=0.177641, metadata_bonus=0.000000 | Sneha Iyer | 2026-05-03T18:46:54+05:30 | Please don't add a second database over the weekend
+  Top 3: MSG_001598, MSG_001290, MSG_001600
+
+INCORRECT Q015 [semantic] Was outside cake allowed, and what decoration rule came with it?
+  Expected MSG_003434 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Retrieved MSG_003433 (rank 1) | hybrid_score=0.489081, semantic_score=0.755846, contextual_score=0.386245, lexical_score=0.446746, metadata_bonus=0.000000 | Kabir Khan | 2026-07-14T21:24:18+05:30 | Cake allowed from outside?
+  Retrieved MSG_003618 (rank 2) | hybrid_score=0.364942, semantic_score=0.533248, contextual_score=0.470734, lexical_score=0.067739, metadata_bonus=0.000000 | Sneha Iyer | 2026-07-21T20:53:11+05:30 | Cake pickup at 6:15 noted. I will bring the candles from Meera
+  Retrieved MSG_003434 (rank 3) | hybrid_score=0.341901, semantic_score=0.455635, contextual_score=0.420728, lexical_score=0.175871, metadata_bonus=0.000000 | Rohan Mehta | 2026-07-14T21:26:41+05:30 | Yes if we clean up; no decoration on walls
+  Top 3: MSG_003433, MSG_003618, MSG_003434
+
+INCORRECT Q016 [semantic] What did the birthday actually cost once it was over, and was any buffer used?
+  Expected MSG_003738 | Ishita Patel | 2026-07-25T22:24:37+05:30 | Actual total 2900, equal shares 362.50. No buffer spent
+  Retrieved MSG_003616 (rank 1) | hybrid_score=0.394262, semantic_score=0.555904, contextual_score=0.536105, lexical_score=0.060291, metadata_bonus=0.000000 | Ishita Patel | 2026-07-21T20:47:27+05:30 | Final birthday plan: July 25, 7-9 pm, Nukkad Cafe side room for all eight. Rs 2,400 snacks/drinks + Rs 500 chocolate cake = Rs 2,900 total, capped at Rs 3,000. Split Rs 362.50 each. No decorations purchase. Rohan reserves the room; Sneha collects the cake.
+  Retrieved MSG_003736 (rank 2) | hybrid_score=0.384838, semantic_score=0.479746, contextual_score=0.571024, lexical_score=0.085345, metadata_bonus=0.000000 | Sneha Iyer | 2026-07-25T22:18:03+05:30 | Cake was 500 as quoted, no extra box charge
+  Retrieved MSG_003326 (rank 3) | hybrid_score=0.382992, semantic_score=0.516593, contextual_score=0.510398, lexical_score=0.117725, metadata_bonus=0.000000 | Rohan Mehta | 2026-07-10T19:15:00+05:30 | Sky Lantern quote is 650 per person, before birthday cake
+  Top 3: MSG_003616, MSG_003736, MSG_003326
+
+INCORRECT Q022 [person] What was Ishita's absolute spending limit when the Goa estimate first came in?
+  Expected MSG_000287 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_000286 (rank 1) | hybrid_score=0.438503, semantic_score=0.566237, contextual_score=0.570978, lexical_score=0.202389, metadata_bonus=0.000000 | Rohan Mehta | 2026-03-12T19:20:00+05:30 | Goa estimate: travel 4200, stay 2800, food 1800, local 1600 per head
+  Retrieved MSG_000287 (rank 2) | hybrid_score=0.395537, semantic_score=0.351246, contextual_score=0.525276, lexical_score=0.193770, metadata_bonus=0.050000 | Ishita Patel | 2026-03-12T19:24:43+05:30 | 10400 already, aur buffer? mera absolute limit 9000 hai
+  Retrieved MSG_000713 (rank 3) | hybrid_score=0.387754, semantic_score=0.523098, contextual_score=0.422661, lexical_score=0.033693, metadata_bonus=0.050000 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Top 3: MSG_000286, MSG_000287, MSG_000713
+
+INCORRECT Q023 [person] How did Aarav say he would track everyone's trip contributions?
+  Expected MSG_000715 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_000846 (rank 1) | hybrid_score=0.358795, semantic_score=0.460407, contextual_score=0.355508, lexical_score=0.063676, metadata_bonus=0.050000 | Aarav Sharma | 2026-04-02T19:10:00+05:30 | Trip update: all eight deposits marked received in our plan
+  Retrieved MSG_000715 (rank 2) | hybrid_score=0.352362, semantic_score=0.388642, contextual_score=0.343315, lexical_score=0.208223, metadata_bonus=0.050000 | Aarav Sharma | 2026-03-28T21:16:09+05:30 | I'll track the eight contributions in one sheet. No payments posted here.
+  Retrieved MSG_002562 (rank 3) | hybrid_score=0.325288, semantic_score=0.393651, contextual_score=0.382951, lexical_score=0.012036, metadata_bonus=0.050000 | Aarav Sharma | 2026-06-10T13:11:00+05:30 | local walk near home aaj, no big travel plan
+  Top 3: MSG_000846, MSG_000715, MSG_002562
+
+INCORRECT Q027 [person] What name did Rohan suggest for our coding project?
+  Expected MSG_001478 | Rohan Mehta | 2026-04-27T20:28:28+05:30 | call it LostLoop? sounds like my coding life
+  Retrieved MSG_000975 (rank 1) | hybrid_score=0.266466, semantic_score=0.361266, contextual_score=0.177618, lexical_score=0.047458, metadata_bonus=0.050000 | Rohan Mehta | 2026-04-08T08:16:34+05:30 | thanks for clarifying
+  Retrieved MSG_002234 (rank 2) | hybrid_score=0.261384, semantic_score=0.325651, contextual_score=0.217811, lexical_score=0.051940, metadata_bonus=0.050000 | Rohan Mehta | 2026-05-30T08:03:00+05:30 | git mein changes unstaged dikh rahe. Did I lose the whole assignment?
+  Retrieved MSG_002531 (rank 3) | hybrid_score=0.260849, semantic_score=0.328930, contextual_score=0.251319, lexical_score=0.000000, metadata_bonus=0.050000 | Rohan Mehta | 2026-06-09T12:09:07+05:30 | this is tbh nice, text thoda chota hai
+  Top 3: MSG_000975, MSG_002234, MSG_002531
+
+INCORRECT Q031 [time] What decision did we make on March 28 about the trip destination and payments?
+  Expected MSG_000713 | Ishita Patel | 2026-03-28T21:13:19+05:30 | Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2.
+  Retrieved MSG_000699 (rank 1) | hybrid_score=0.328106, semantic_score=0.421235, contextual_score=0.354200, lexical_score=0.000000, metadata_bonus=0.050000 | Ananya Verma | 2026-03-28T20:44:51+05:30 | Return June 15 morning works for me, checked family calendar
+  Retrieved MSG_000710 (rank 2) | hybrid_score=0.289123, semantic_score=0.400339, contextual_score=0.235062, lexical_score=0.001028, metadata_bonus=0.050000 | Aditya Joshi | 2026-03-28T21:09:37+05:30 | yes, bus charges separate terms; note added in itinerary
+  Retrieved MSG_000714 (rank 3) | hybrid_score=0.276937, semantic_score=0.322439, contextual_score=0.292720, lexical_score=0.043301, metadata_bonus=0.050000 | Sneha Iyer | 2026-03-28T21:16:00+05:30 | we can look after 9:30 pm
+  Top 3: MSG_000699, MSG_000710, MSG_000714
+
+INCORRECT Q032 [time] What stack did we settle on in late April for LostLoop?
+  Expected MSG_001482 | Sneha Iyer | 2026-04-27T20:42:09+05:30 | Locked for LostLoop: React with Vite in JavaScript, FastAPI on Python, and SQLite for storage. Plain CSS, local image files, no cloud dependency. Aarav handles UI; Kabir and I handle API and schema.
+  Retrieved MSG_001403 (rank 1) | hybrid_score=0.351639, semantic_score=0.471967, contextual_score=0.357015, lexical_score=0.000000, metadata_bonus=0.050000 | Ananya Verma | 2026-04-25T08:11:59+05:30 | there was another group there earlier
+  Retrieved MSG_001479 (rank 2) | hybrid_score=0.348453, semantic_score=0.412877, contextual_score=0.329321, lexical_score=0.151643, metadata_bonus=0.050000 | Meera Nair | 2026-04-27T20:30:46+05:30 | LostLoop works, please don't spend two hours on logo
+  Retrieved MSG_001485 (rank 3) | hybrid_score=0.325140, semantic_score=0.393504, contextual_score=0.309409, lexical_score=0.103553, metadata_bonus=0.050000 | Ananya Verma | 2026-04-27T20:54:32+05:30 | Stack decision closed. Tomorrow we test the full claim journey
+  Top 3: MSG_001403, MSG_001479, MSG_001485
+
+INCORRECT Q038 [time] What network maintenance notice did Meera forward last month?
+  Expected MSG_003999 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_004277 (rank 1) | hybrid_score=0.575770, semantic_score=0.575079, contextual_score=0.553791, lexical_score=0.392684, metadata_bonus=0.100000 | Meera Nair | 2026-08-18T08:11:20+05:30 | maintenance notice tha na
+  Retrieved MSG_003999 (rank 2) | hybrid_score=0.519690, semantic_score=0.514275, contextual_score=0.570718, lexical_score=0.227935, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:10:07+05:30 | Forwarded: Campus network maintenance, 2026-08-06, service may be interrupted. Save work locally.
+  Retrieved MSG_003996 (rank 3) | hybrid_score=0.379335, semantic_score=0.315707, contextual_score=0.535401, lexical_score=0.017083, metadata_bonus=0.100000 | Meera Nair | 2026-08-06T08:04:33+05:30 | router light red near the main gate yaar
+  Top 3: MSG_004277, MSG_003999, MSG_003996

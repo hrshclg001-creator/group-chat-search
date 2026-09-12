@@ -7,3 +7,6 @@ evaluation/*.py text eol=lf
 backend/app/search/*.py text eol=lf
 backend/requirements*.txt text eol=lf
 results/*.json text eol=lf
+results/*.csv text eol=lf
+results/*.md text eol=lf
+results/*.txt text eol=lf

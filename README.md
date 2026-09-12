@@ -392,6 +392,33 @@ The interface includes an initial welcome state, loading skeletons, an empty-res
 
 Frontend-phase checks: **22 tests passed** with `npm.cmd test`; `npm.cmd run build` passed. Tests cover HTTP payloads/errors/cancellation, metadata and date formatting, actual target/context rendering, safe message-text escaping, live-data statistics and accessible form markup. Four component-render tests initially hit a sandbox permission error writing Vite's temporary config; the authorized rerun passed. Live HTTP checks through port 5173 verified the page and proxied stats/search APIs, returning five results with `MSG_003930` first for Ananya's August checklist. No browser surfaces were available to the automation tool, so desktop/mobile screenshots, actual clicks/Enter interaction and visual layout were not browser-verified. Backend, corpus, labels and ranking code were unchanged; backend tests and benchmarks were not rerun for this UI phase. Local services were left running for preview at task completion.
 
+## Run every benchmark and generate reports
+
+From the repository root, with the local model prepared:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
+.\backend\.venv\Scripts\python.exe evaluation/evaluate.py --all
+```
+
+With the environment's Python on PATH, use `python evaluation/evaluate.py --all`. The existing `--method lexical`, `--method semantic`, `--method contextual` and `--method hybrid` commands remain available; `--all` and `--method` are mutually exclusive. Unlike `python -m evaluation.compare --all`, which only compares saved JSON, the new command **executes all four retrieval methods** and generates a fresh set of artifacts. No backend server or frontend is needed.
+
+The runner checks the frozen labels/corpus before and after evaluation, shares one local encoder across embedding methods, reuses document caches and applies the already selected ranking configuration without tuning. All four methods must finish and their inputs must agree before reports are written. Running it refreshes the four method JSON reports and `comparison.json`; it does not alter labels, corpus, ranking code or the historical tuning experiment.
+
+The terminal table shows Method, Top-1, Recall@3, the actual hard-subset count, Person, Time, Semantic and the signed overall-minus-hard gap. For this corpus the column is **Hard-10**, not Hard-8, because all ten zero-meaningful-word-overlap queries are evaluated. Every accuracy cell shows both percentage and correct/total. Each failure prints the query, expected original message, all top-three retrieved original messages and their available score components. The table is repeated after diagnostics for easy inspection.
+
+Generated files:
+
+- [comparison.csv](results/comparison.csv): one row per method, with numeric correct/total/percent columns for all requested metrics and the signed gap in percentage points.
+- [benchmark.png](results/benchmark.png): a matplotlib grouped bar chart of overall and hard-query Top-1, with a 0-100% axis and count/percentage labels. It uses a noninteractive canvas, so no desktop or browser is required.
+- [evaluation_summary.md](results/evaluation_summary.md): a short automatically generated table, failure counts, caveats and reproduction command.
+- [failed_queries.txt](results/failed_queries.txt): complete diagnostics preserved even if terminal output is truncated.
+- The four method JSON files and [comparison.json](results/comparison.json): metrics, rankings, model/dependency configuration, frozen input/source hashes, reporting versions and generated-artifact hashes.
+
+The completed all-method run measured the same results as the earlier individual runs: lexical Top-1 **9/40 (22.5%)**, semantic **13/40 (32.5%)**, contextual **4/40 (10%)** and hybrid **21/40 (52.5%)**. Hard Top-1 was respectively **0/10, 1/10, 1/10 and 1/10**; signed gaps were **+22.5, +22.5, 0 and +42.5 percentage points**. Hybrid weights were previously selected on these same queries, so the generated summary and chart retain the development-set limitation. No accuracy gains are claimed from this reporting change.
+
+Reporting-phase checks: **40 evaluation tests and all 191 backend tests passed (231 total)**; `pip check` passed and the complete installed package set matched `requirements.lock.txt`. The exact `evaluation/evaluate.py --all` command completed. CSV/JSON metrics, source/artifact hashes, frozen-label integrity and all **113 method/query failure records** were verified; the chart was visually inspected for accurate labels and legibility. Matplotlib 3.9.4 and its dependencies are pinned for the Python 3.9 environment. Tests emitted upstream pyparsing deprecation warnings, and the benchmark retained the previously documented tokenizer length warning; neither caused a failure. Frontend code was unchanged, so its checks were not rerun.
+
 ## Checks
 
 From the repository root:

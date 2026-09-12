@@ -1,0 +1,5 @@
+method,top1_correct,top1_total,top1_percent,recall_at_3_correct,recall_at_3_total,recall_at_3_percent,hard_top1_correct,hard_top1_total,hard_top1_percent,person_top1_correct,person_top1_total,person_top1_percent,time_top1_correct,time_top1_total,time_top1_percent,semantic_top1_correct,semantic_top1_total,semantic_top1_percent,overall_minus_hard_percentage_points
+lexical,9,40,22.5,16,40,40.0,0,10,0.0,3,10,30.0,3,10,30.0,3,20,15.0,22.5
+semantic,13,40,32.5,16,40,40.0,1,10,10.0,3,10,30.0,4,10,40.0,6,20,30.0,22.5
+contextual,4,40,10.0,12,40,30.0,1,10,10.0,1,10,10.0,2,10,20.0,1,20,5.0,0.0
+hybrid,21,40,52.5,25,40,62.5,1,10,10.0,7,10,70.0,7,10,70.0,7,20,35.0,42.5

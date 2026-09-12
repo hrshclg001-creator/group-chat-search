@@ -1,7 +1,7 @@
 {
   "method": "contextual",
   "schema_version": "1.1.0",
-  "measured_at_utc": "2026-09-12T04:13:14+00:00",
+  "measured_at_utc": "2026-09-12T07:53:44+00:00",
   "metrics": {
     "top1_accuracy": {
       "correct": 4,
@@ -108,17 +108,22 @@
   },
   "source_sha256": {
     "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
+    "backend/app/search/constraints.py": "026b9b61a642c32d4afc125d24f462b4defe459c5b502eb8b6fde334cef5b0f7",
     "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
     "backend/app/search/corpus.py": "1dea27079bf5c0971e42d8780634472f51de1e58a549c66558d5482c9166c897",
     "backend/app/search/embedding.py": "53e22e10e6ac84298065eeaf7ff09126e9335ffbdd8808ef0fe69f5a61c76818",
+    "backend/app/search/hybrid.py": "fc559c0f95f797f27733928f5945915f79c36d0a94b468de5df31e611ff541d4",
     "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
     "backend/app/search/model_config.py": "4701604455ababc259460c1419a7991b2f07019fa356071f91d6321ff2786b53",
+    "backend/app/search/ranking_config.py": "1f9a0ac8c0694c426f1058b1ca32b2a2342ee343f28576765aaf22212d7cced3",
     "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
-    "evaluation/evaluate.py": "98091a06a49abca6b04a15d5653247cf42d76340f4a296c5c740c961e47666b5",
+    "evaluation/evaluate.py": "4ad9219c30d4bdee3e8b126c248c214071b8101f0f56023692e652f9b79a5067",
     "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
-    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965"
+    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965",
+    "evaluation/reporting.py": "6168beced2727070d68f92715f6433bb86b2e391af4cb806a027fb58dee0b77a",
+    "evaluation/compare.py": "4daea433d762fb9c05e28ded0223a8d64cdd9dcb350e952fc8f95e3c3ed9cf10"
   },
-  "requirements_lock_sha256": "c8265a690c568925b4caea6d685396b857a6ffb371d08a0010b961b9a95a0c2d",
+  "requirements_lock_sha256": "7c7ae6c0071433ab672672f647e8440d2d8a0cfe09486befd9ba3ef7cf7305b0",
   "environment": {
     "python": "3.9.10",
     "platform": "Windows-10-10.0.26200-SP0",

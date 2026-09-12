@@ -1,6 +1,7 @@
 """Run lexical, semantic, contextual or hybrid retrieval on frozen labels.
 
-Usage from repository root: python evaluation/evaluate.py --method lexical
+Usage from repository root: python evaluation/evaluate.py --all
+Or: python evaluation/evaluate.py --method lexical
 """
 
 import argparse
@@ -18,6 +19,7 @@ if __package__ in (None, ''):
 
 from backend.app.search import LexicalSearch, load_corpus
 from evaluation.metrics import summarize
+from evaluation.reporting import METHODS, failure_lines, terminal_table, write_comparison_artifacts
 from evaluation.validate_queries import (
     CORPUS_PATH, MANIFEST_PATH, METADATA_PATH, QUERY_PATH, sha256, validate_files,
 )
@@ -41,7 +43,7 @@ def evaluate_queries(searcher, queries):
     return rows
 
 
-def run_method(method='lexical'):
+def run_method(method='lexical', encoder=None):
     validation = validate_files()  # Includes all frozen hashes; no --draft bypass.
     before = {path: sha256(path) for path in (CORPUS_PATH, METADATA_PATH, QUERY_PATH, MANIFEST_PATH)}
     messages = load_corpus(CORPUS_PATH)
@@ -49,10 +51,10 @@ def run_method(method='lexical'):
         searcher = LexicalSearch(messages)
     elif method in ('semantic', 'contextual'):
         from backend.app.search.semantic import SemanticSearch
-        searcher = SemanticSearch(messages, contextual=method == 'contextual')
+        searcher = SemanticSearch(messages, contextual=method == 'contextual', encoder=encoder)
     elif method == 'hybrid':
         from backend.app.search.hybrid import HybridSearch
-        searcher = HybridSearch(messages)
+        searcher = HybridSearch(messages, encoder=encoder)
     else:
         raise ValueError(f'Unknown retrieval method: {method}')
     queries = json.loads(QUERY_PATH.read_text(encoding='utf-8'))
@@ -62,6 +64,7 @@ def run_method(method='lexical'):
     validate_files()
     source_paths = sorted((ROOT / 'backend/app/search').glob('*.py')) + [
         Path(__file__), ROOT / 'evaluation/metrics.py', ROOT / 'evaluation/validate_queries.py',
+        ROOT / 'evaluation/reporting.py', ROOT / 'evaluation/compare.py',
     ]
     if method == 'hybrid':
         source_paths += sorted((ROOT / 'backend/app/query_understanding').glob('*.py'))
@@ -118,31 +121,51 @@ def print_report(report, messages):
     print(f"Overall minus hard: {metrics['overall_minus_hard_percentage_points']:+.2f} percentage points")
     for category, item in metrics['top1_accuracy_by_category'].items():
         print(f"{category} Top-1: {item['correct']}/{item['total']} ({item['percent']:.2f}%)")
-    for row in report['queries']:
-        if row['top1_correct']:
-            continue
-        expected = messages[row['expected_message_id']]
-        print(f"\nINCORRECT {row['id']} [{row['category']}] {row['query']}")
-        print(f'  Expected {expected.id} | {expected.sender} | {expected.timestamp} | {expected.text}')
-        if row['retrieved_messages']:
-            hit = row['retrieved_messages'][0]
-            score = hit.get('hybrid_score', hit.get('semantic_score', hit.get('lexical_score')))
-            print(f"  Retrieved {hit['id']} | score={score:.6f} | {hit['sender']} | {hit['timestamp']} | {hit['text']}")
-        else:
-            print('  Retrieved: no eligible result')
-        print(f"  Top 3: {', '.join(row['retrieved_ids']) or '(empty)'}")
+    print('\n'.join(failure_lines(report, messages)))
+
+
+def run_all(directory=ROOT / 'results'):
+    validate_files()
+    reports = {}
+    encoder = None
+    for index, method in enumerate(METHODS, 1):
+        print(f'[{index}/{len(METHODS)}] Evaluating {method}...', flush=True)
+        if method != 'lexical' and encoder is None:
+            from backend.app.search.embedding import LocalEncoder
+            encoder = LocalEncoder()
+        report, messages = run_method(method, encoder=encoder)
+        reports[method] = report
+    validate_files()
+    # Cross-method validation prevents mixing inputs even if files changed
+    # between individual method runs. No weight tuning happens here.
+    write_comparison_artifacts(reports, messages, directory)
+    print('\n' + terminal_table(reports))
+    print('\nHard-N is the full zero-word-overlap subset. Cells show percent (correct/total).')
+    print('Gap = overall Top-1 minus hard Top-1, in percentage points.')
+    for method in METHODS:
+        print(f'\n=== {method.upper()} FAILED QUERIES ===')
+        print('\n'.join(failure_lines(reports[method], messages)))
+    # Repeat the compact table after diagnostics so it remains easy to find.
+    print('\n' + terminal_table(reports))
+    print(f'\nSaved all measured reports, comparison.csv, benchmark.png, failed_queries.txt and evaluation_summary.md to {directory}')
+    return reports
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--method', required=True, choices=['lexical', 'semantic', 'contextual', 'hybrid'])
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument('--method', choices=METHODS)
+    selection.add_argument('--all', action='store_true', help='Run all four methods and generate comparison artifacts')
     args = parser.parse_args()
     # Preserve emojis in redirected logs; avoid Windows console encoding crashes.
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
     try:
+        if args.all:
+            run_all()
+            return
         report, messages = run_method(args.method)
-    except (ValueError, OSError) as exc:
+    except (ValueError, OSError, ImportError) as exc:
         parser.exit(1, f'Benchmark failed: {exc}\n')
     destination = ROOT / 'results' / f'{args.method}.json'
     destination.parent.mkdir(parents=True, exist_ok=True)
