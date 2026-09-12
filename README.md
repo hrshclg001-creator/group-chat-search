@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the React/Vite and FastAPI scaffold, synthetic corpus, **40 frozen evaluation queries**, lexical retrieval, and local semantic retrieval with optional bounded conversation context. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid/person/time ranking and the search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the React/Vite and FastAPI scaffold, synthetic corpus, **40 frozen evaluation queries**, lexical retrieval, local semantic retrieval with optional bounded conversation context, and a standalone deterministic person/time query parser. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. The parser is not connected to retrieval. Hybrid/person/time ranking and the search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
@@ -202,11 +202,69 @@ Measured results on the same frozen 40 queries and 4,634 messages:
 
 **Adding this context window made every category worse.** It gained Q024 but lost ten previously correct queries relative to original-only semantic retrieval. Hard-subset accuracy stayed at 1/10; its improvement over lexical retrieval cannot be attributed to context. No parameters or expected answers were changed after scoring.
 
-In 11 incorrect contextual Top-1 results, the expected answer appears only in the returned target's surrounding context. For example, Q013 expects the birthday decision `MSG_003616`, but the returned target is `MSG_003618`, a cake-pickup follow-up whose context includes that decision. It remains incorrect. Similar representations across adjacent messages can find the right conversation while failing to select its actual answer. Context also introduces distractors, and no person/time parser or reranker is implemented. Neither semantic run truncated any of this corpus's embedding inputs at the configured 256-token limit.
+In 11 incorrect contextual Top-1 results, the expected answer appears only in the returned target's surrounding context. For example, Q013 expects the birthday decision `MSG_003616`, but the returned target is `MSG_003618`, a cake-pickup follow-up whose context includes that decision. It remains incorrect. Similar representations across adjacent messages can find the right conversation while failing to select its actual answer. Context also introduces distractors. Those runs used no person/time parser or reranker. Neither semantic run truncated any of this corpus's embedding inputs at the configured 256-token limit.
 
 Artifacts: [semantic results](results/semantic.json), [contextual results](results/contextual.json), and [comparison with query-level changes](results/contextual_comparison.json). They record configuration, pinned model/file hashes, dependency versions, matrix checksums and all rankings. The corpus, metadata, frozen query/review files and previous lexical artifact are unchanged.
 
 Contextual-phase checks on Windows / Python 3.9.10: **67 backend tests and 28 evaluation tests passed (95 total)**, including all four offline real-model short-reply cases. `pip check` passed. Both semantic benchmarks and the comparison completed; saved metrics and artifact hashes were verified. The initial model download hit a CDN DNS failure; a retry using explicit download URLs completed successfully. Frontend code was unchanged, so its tests/build were not rerun in this phase. This validates the implementation, not an accuracy improvement.
+
+## Standalone person/time query parser
+
+`backend/app/query_understanding/` uses only the Python standard library. It reads participant names, `reference_date` and timezone from corpus metadata; it does not load messages, evaluation labels, a model or an index, call an external API, or change ranking. The raw query is preserved. Example usage from `backend`:
+
+```python
+from app.query_understanding import QueryParser
+
+parser = QueryParser.from_metadata()
+print(parser.parse("Ishita ne last month budget pe kya bola?").to_dict())
+```
+
+```json
+{
+  "raw_query": "Ishita ne last month budget pe kya bola?",
+  "person": "Ishita Patel",
+  "start_date": "2026-08-01",
+  "end_date": "2026-08-31",
+  "intent": "person_time_semantic",
+  "reference_date": "2026-09-01",
+  "timezone": "Asia/Kolkata",
+  "person_candidates": ["Ishita Patel"],
+  "warnings": []
+}
+```
+
+Run the parser directly, with one or more quoted queries, from `backend`:
+
+```powershell
+.\.venv\Scripts\python.exe -m app.query_understanding "What did Ishita say about the budget?" "Rohan ne last month kya bola?"
+.\.venv\Scripts\python.exe -m pytest tests/test_query_parser.py -q
+```
+
+`--metadata PATH` selects another metadata file. Missing/invalid reference dates fail explicitly; the parser never falls back to the machine's date. Date bounds are inclusive calendar dates in the metadata timezone and are not clipped to the corpus. Thus `today` is September 1 even though the corpus ends August 31.
+
+Rules fixed for this implementation:
+
+- Participant matching uses Unicode normalization, case-insensitive whole-name boundaries and full/first/last names from metadata. A unique match returns the canonical full name. Longer full names disambiguate shared aliases; multiple distinct matches return `person: null`, candidates and a warning. Known name mentions are detected without distinguishing sender, recipient or topic. Unknown names remain unresolved; Priya/Rahul/Aman are example test participants, not members added to this corpus.
+- `today`/`aaj` means the reference date; `yesterday`/`beete kal` means the previous date. `last week`/`pichle hafte` means the previous complete Monday-Sunday, August 24-30 here. `last month`/`pichle mahine` means the previous complete calendar month; `this month`/`is mahine` means the reference calendar month. The `pichhle` spelling is also supported. Bare `kal` is ambiguous and yields a warning with no date bounds.
+- English month names and three-letter abbreviations (also `sept`) use the reference year when no year is supplied, even for months after September. Bare `May` works by itself; within a sentence it needs a month cue such as `in May`, `May mein` or a day/year to avoid treating auxiliary `may` as a date.
+- Supported dates are ISO `YYYY-MM-DD`, `15 August 2026`, and `August 15, 2026`, with optional ordinals and optional year for named dates. Simple ranges include `2026-03-01 to 2026-03-10`, `between 1 June and 15 July 2026`, `1-15 August`, `August 1-15`, and `1 Aug se 15 Aug tak`. `through`, `until` and dash connectors are inclusive too. A single explicit year applies to both range endpoints; cross-year ranges require both years explicitly.
+- Compatible time expressions intersect. Conflicting intervals, invalid/reversed dates, or ambiguous numeric slash dates return null date bounds and warnings. Unsupported linguistic constructions (negation, event-relative dates, time of day, and fine-grained qualifiers such as `late April`) are not fully interpreted; a recognized month alone yields that whole month. This is a bounded rule grammar, not general language understanding. Consumers must review warnings before applying future filters.
+- Intent is `semantic`, `person_semantic`, `time_semantic` or `person_time_semantic`, based on resolved constraints. No intent or parsed constraint is currently consumed by retrieval.
+
+Actual CLI examples, all using reference date `2026-09-01` and timezone `Asia/Kolkata` (all warnings empty):
+
+| Raw query | Person | Inclusive start / end | Intent |
+| --- | --- | --- | --- |
+| What did Ishita say about the budget? | Ishita Patel | null / null | person_semantic |
+| Rohan ne last month trip ke baare mein kya bola? | Rohan Mehta | 2026-08-01 / 2026-08-31 | person_time_semantic |
+| Message from Aarav about coding yesterday | Aarav Sharma | 2026-08-31 / 2026-08-31 | person_time_semantic |
+| Sneha ne aaj kya bola? | Sneha Iyer | 2026-09-01 / 2026-09-01 | person_time_semantic |
+| What did we decide last week? | null | 2026-08-24 / 2026-08-30 | time_semantic |
+| Meera ke this month wale messages | Meera Nair | 2026-09-01 / 2026-09-30 | person_time_semantic |
+| Ananya ne August mein exams ke baare mein kya bola? | Ananya Verma | 2026-08-01 / 2026-08-31 | person_time_semantic |
+| Messages from Kabir between 1 June and 15 July 2026 | Kabir Khan | 2026-06-01 / 2026-07-15 | person_time_semantic |
+
+Parser-phase validation: **71 parser tests passed**, and the full suites passed with **138 backend tests plus 28 evaluation tests (166 total)**. Cases include English/Hinglish patterns, ambiguous aliases/dates, leap years, week/year boundaries, custom metadata and a wall-clock guard. Ten CLI examples ran successfully. Initial sandbox attempts to launch two Python commands could not access the installed runtime; authorized reruns passed. Retrieval code, frozen data/labels and benchmark artifacts are unchanged; no ranking evaluation or frontend checks were rerun for this parsing-only phase.
 
 ## Checks
 
