@@ -2,7 +2,7 @@
 
 A take-home assessment project for semantic search over a synthetic group chat of at least 4,000 messages from 8 participants across approximately 6 months. The planned React and FastAPI application will combine multilingual embeddings, lexical search, and person/time-aware ranking to return matching messages with conversation context, evaluated against 40 manually labelled queries.
 
-Implemented: the React/Vite and FastAPI scaffold, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. The search API/UI remain future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
+Implemented: the React/Vite scaffold, FastAPI health/search/stats endpoints, synthetic corpus, **40 frozen evaluation queries**, lexical/semantic/contextual baselines, a deterministic person/time parser, and hybrid retrieval with metadata constraints. The corpus contains **4,634 messages from exactly eight fictional Indian students**, covering March 1 through August 31, 2026. Hybrid Top-1 is **21/40 (52.5%)**, measured on the same queries used to select its weights. Search results include the original matching message and up to three chronological neighbors per side. The frontend search interface remains future work. See [AGENTS.md](AGENTS.md) for mandatory requirements and [PLAN.md](PLAN.md) for future work.
 
 ## Structure
 
@@ -39,6 +39,8 @@ py -3 -m venv .venv
 `requirements.txt` pins direct runtime and test dependencies. `requirements.lock.txt` records the full tested environment; use it for reproducible installation. On macOS/Linux create the environment with `python3 -m venv .venv` and replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`.
 
 Health: `GET http://127.0.0.1:8000/api/health` returns HTTP 200 and `{"status":"ok"}`. API docs: `http://127.0.0.1:8000/docs`.
+
+Search also requires the one-time local model preparation documented below. Startup loads the corpus and initializes one shared hybrid index per server process, using existing embedding caches or building missing caches once. Allow startup to finish before making requests. If model/index preparation fails, health and corpus stats remain available but search returns HTTP 503 with setup instructions; fix the startup error and restart. No model downloads or document embedding generation happen inside the search request handler.
 
 ## Start the frontend
 
@@ -336,6 +338,45 @@ for hit in searcher.search("What did Ananya share last month?", top_k=3):
 ```
 
 Hybrid-phase checks: **all 166 backend tests and 30 evaluation tests passed (196 total)**, including 28 new hybrid tests for sender/date intersections, no-match behavior, UTC/India date boundaries, event vs chat dates, score explanations, ID alignment, ties and original-target context. The final hybrid benchmark and four-method comparison completed. Corpus, labels, metadata, parser and baseline retrieval/artifacts are unchanged. No frontend/API code changed, so frontend checks were not rerun. The tokenizer emits its packaged 128-token warning while context lengths are counted; the encoder explicitly uses the previously documented 256-token limit, and inference/tests completed successfully.
+
+## Search and stats API
+
+`POST /api/search` accepts a nonblank string `query` (up to 2,000 characters) and an integer `top_k` (default 5, range 1-50). Blank/invalid bodies, unexpected fields and invalid K values return HTTP 422. GET on the search route returns 405. Empty metadata-filter intersections return HTTP 200 with `results: []` and the interpreted query still present.
+
+```powershell
+$requestBody = @{ query = 'When did we finally choose Manali?'; top_k = 5 } | ConvertTo-Json
+Invoke-RestMethod http://127.0.0.1:8000/api/search -Method Post -ContentType 'application/json' -Body $requestBody
+Invoke-RestMethod http://127.0.0.1:8000/api/stats
+```
+
+The response contains `query`, `interpreted_query`, `search_time_ms` and `results`. Each result has:
+
+- `matching_message`: the actual original `id`, `sender`, `timestamp` and `text`.
+- `previous_messages` and `next_messages`: up to three immediately adjacent messages on each side, each list in chronological order. The combined order is previous messages, matching message, next messages. Equal timestamps use message-ID ordering. The existing 30-minute maximum distance from the matching message prevents context from spanning unrelated long gaps; corpus boundaries and gaps produce shorter lists. Neighbors can have different authors/dates from the search filters.
+- `search_score` (hybrid score), `semantic_score` (original-only semantic), `contextual_score`, `lexical_score`, detected `query_metadata` and a one-based `rank`. Scores are not probabilities.
+
+`interpreted_query` and each hit's `query_metadata` contain the effective person/date constraints, sender mode (`none`, `bonus`, `filter`), intent, participant candidates, hour range, fixed reference date/timezone, parser warnings and explanations. Event dates ignored as chat-date filters are reflected in the effective fields. The raw query is preserved.
+
+Display context is assembled by `app/services/conversation.py` independently of the **unchanged two-neighbor embedding window**. The API never replaces an original hit with its neighbor or changes ranking to generate a better-looking response. `SearchService` belongs to the FastAPI lifespan, so model/corpus/index setup occurs once per process. Only one query embedding is computed per search request. A lock serializes shared encoder access; synchronous search runs in FastAPI's thread pool, while health/stats do not acquire that lock. Reloads or additional worker processes initialize their own instances. `search_time_ms` measures query work, lock waiting and response construction using a monotonic timer; it excludes startup and HTTP transport.
+
+`GET /api/stats` reads the already loaded corpus without inference. Its actual response is:
+
+```json
+{
+  "message_count": 4634,
+  "participant_count": 8,
+  "date_range": {
+    "start": "2026-03-01T07:05:00+05:30",
+    "end": "2026-08-31T23:50:00+05:30"
+  },
+  "reference_date": "2026-09-01",
+  "timezone": "Asia/Kolkata"
+}
+```
+
+Full JSON captured from a real local HTTP server is included in [search_response.json](examples/search_response.json), [search_filtered_response.json](examples/search_filtered_response.json) and [stats_response.json](examples/stats_response.json). The search examples use `top_k: 1` to keep the artifacts compact. The supplied Manali question actually retrieved `MSG_002538`, an unrelated movie-chat message, in 53.537 ms. That retrieval failure is preserved, not replaced with the intended trip decision. The person/time example about Ananya's August volunteer checklist correctly returns `MSG_003930` in 44.837 ms, with original text and three following messages. These are single observed timings, not performance guarantees.
+
+API-phase checks: **all 191 backend tests and 30 evaluation tests passed (221 total)**. The new API tests cover validation, rank/score parity with direct hybrid retrieval, original targets, display ordering/boundaries, date/person metadata, empty results, OpenAPI, POST CORS and missing-model HTTP 503 behavior. A counting encoder verifies that repeated requests reuse the same matrices and factory instance and encode only query strings. Real HTTP checks on a temporary localhost server verified both endpoints, health and empty results; Q024's API top-three IDs matched the saved direct hybrid benchmark. Document-cache file counts, modification times and SHA-256 values remained unchanged across requests. The temporary server was stopped. Retrieval code, model settings, corpus, frozen labels and benchmark artifacts are unchanged; no ranking benchmark or frontend checks were rerun for this API-only change.
 
 ## Checks
 

@@ -1,0 +1,68 @@
+{
+  "query": "When did we finally choose Manali?",
+  "interpreted_query": {
+    "raw_query": "When did we finally choose Manali?",
+    "person": null,
+    "person_mode": "none",
+    "person_candidates": [],
+    "start_date": null,
+    "end_date": null,
+    "hour_range": null,
+    "intent": "semantic",
+    "reference_date": "2026-09-01",
+    "timezone": "Asia/Kolkata",
+    "warnings": [],
+    "explanations": []
+  },
+  "search_time_ms": 53.537,
+  "results": [
+    {
+      "matching_message": {
+        "id": "MSG_002538",
+        "sender": "Rohan Mehta",
+        "timestamp": "2026-06-09T17:01:00+05:30",
+        "text": "finished Dangal. that ending??"
+      },
+      "previous_messages": [],
+      "next_messages": [
+        {
+          "id": "MSG_002539",
+          "sender": "Aditya Joshi",
+          "timestamp": "2026-06-09T17:02:42+05:30",
+          "text": "sPOILER mat likhna please"
+        },
+        {
+          "id": "MSG_002540",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-06-09T17:04:41+05:30",
+          "text": "okay okay, vague reaction only 😭"
+        },
+        {
+          "id": "MSG_002541",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-06-09T17:07:49+05:30",
+          "text": "music acha tha?"
+        }
+      ],
+      "search_score": 0.2555380176931869,
+      "semantic_score": 0.3921630382537842,
+      "contextual_score": 0.33390259742736816,
+      "lexical_score": 0.007075226023917923,
+      "query_metadata": {
+        "raw_query": "When did we finally choose Manali?",
+        "person": null,
+        "person_mode": "none",
+        "person_candidates": [],
+        "start_date": null,
+        "end_date": null,
+        "hour_range": null,
+        "intent": "semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": []
+      },
+      "rank": 1
+    }
+  ]
+}

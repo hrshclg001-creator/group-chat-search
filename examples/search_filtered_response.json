@@ -1,0 +1,78 @@
+{
+  "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+  "interpreted_query": {
+    "raw_query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+    "person": "Ananya Verma",
+    "person_mode": "filter",
+    "person_candidates": [
+      "Ananya Verma"
+    ],
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-31",
+    "hour_range": null,
+    "intent": "person_time_semantic",
+    "reference_date": "2026-09-01",
+    "timezone": "Asia/Kolkata",
+    "warnings": [],
+    "explanations": [
+      "Explicit sender language: require the current message author.",
+      "Resolved chat-date bounds: exclude current messages outside the interval."
+    ]
+  },
+  "search_time_ms": 44.837,
+  "results": [
+    {
+      "matching_message": {
+        "id": "MSG_003930",
+        "sender": "Ananya Verma",
+        "timestamp": "2026-08-03T08:03:00+05:30",
+        "text": "[PDF] draft volunteer orientation session checklist, still needs review"
+      },
+      "previous_messages": [],
+      "next_messages": [
+        {
+          "id": "MSG_003931",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-08-03T08:04:52+05:30",
+          "text": "extension board missing from list"
+        },
+        {
+          "id": "MSG_003932",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-03T08:07:28+05:30",
+          "text": "and drinking water, every time we forget"
+        },
+        {
+          "id": "MSG_003933",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-03T08:10:18+05:30",
+          "text": "is the bus stop accessible without stairs?"
+        }
+      ],
+      "search_score": 0.6877896044635272,
+      "semantic_score": 0.7673125267028809,
+      "contextual_score": 0.6511853337287903,
+      "lexical_score": 0.39851312537168293,
+      "query_metadata": {
+        "raw_query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+        "person": "Ananya Verma",
+        "person_mode": "filter",
+        "person_candidates": [
+          "Ananya Verma"
+        ],
+        "start_date": "2026-08-01",
+        "end_date": "2026-08-31",
+        "hour_range": null,
+        "intent": "person_time_semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": [
+          "Explicit sender language: require the current message author.",
+          "Resolved chat-date bounds: exclude current messages outside the interval."
+        ]
+      },
+      "rank": 1
+    }
+  ]
+}
