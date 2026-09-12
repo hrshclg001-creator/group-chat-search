@@ -1,6 +1,7 @@
 """Hybrid cosine/TF-IDF ranking with explicit author and chat-date constraints."""
 
 from dataclasses import asdict, dataclass
+from typing import Optional
 
 import numpy as np
 
@@ -42,6 +43,7 @@ class HybridResult:
     context_message_ids: tuple
     context_messages: tuple
     ranking: dict
+    reranker_score: Optional[float] = None
 
     def to_dict(self):
         return asdict(self)

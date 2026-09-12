@@ -42,8 +42,8 @@ class SearchService:
         parser = QueryParser(metadata)
         service = cls(messages, metadata)
         try:
-            from ..search.hybrid import HybridSearch
-            service.engine = HybridSearch(messages, parser=parser)
+            from ..search.reranked import RerankedSearch
+            service.engine = RerankedSearch(messages, parser=parser)
         except (OSError, ValueError):
             logger.exception('Local search index could not initialize; health and corpus stats remain available')
         return service
@@ -64,7 +64,8 @@ class SearchService:
         if self.engine is None:
             raise SearchUnavailable(
                 'Search index unavailable. Prepare the local model with '
-                '`cd backend; python -m scripts.prepare_model`, check server startup logs, and restart the backend.')
+                '`cd backend; python -m scripts.prepare_model` and `python -m scripts.prepare_reranker`, '
+                'check server startup logs, and restart the backend.')
         started = perf_counter()
         # Synchronous FastAPI routes run in a thread pool. Serialize access to
         # the shared encoder; statistics and health do not acquire this lock.
@@ -79,6 +80,7 @@ class SearchService:
                 matching_message=asdict(current), previous_messages=[asdict(row) for row in previous],
                 next_messages=[asdict(row) for row in following], search_score=hit.hybrid_score,
                 semantic_score=hit.semantic_score, contextual_score=hit.contextual_score,
-                lexical_score=hit.lexical_score, query_metadata=interpreted, rank=rank))
+                lexical_score=hit.lexical_score, reranker_score=hit.reranker_score,
+                query_metadata=interpreted, rank=rank))
         return SearchResponse(query=query, interpreted_query=interpreted,
                               search_time_ms=round((perf_counter() - started) * 1000, 3), results=results)

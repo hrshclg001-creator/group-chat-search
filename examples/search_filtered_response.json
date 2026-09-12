@@ -1,78 +1,217 @@
 {
-  "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+  "query": "Meera ko August 21 ko kaunsi reference book mili thi?",
   "interpreted_query": {
-    "raw_query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
-    "person": "Ananya Verma",
-    "person_mode": "filter",
+    "raw_query": "Meera ko August 21 ko kaunsi reference book mili thi?",
+    "person": "Meera Nair",
+    "person_mode": "bonus",
     "person_candidates": [
-      "Ananya Verma"
+      "Meera Nair"
     ],
-    "start_date": "2026-08-01",
-    "end_date": "2026-08-31",
+    "start_date": "2026-08-21",
+    "end_date": "2026-08-21",
     "hour_range": null,
     "intent": "person_time_semantic",
     "reference_date": "2026-09-01",
     "timezone": "Asia/Kolkata",
     "warnings": [],
     "explanations": [
-      "Explicit sender language: require the current message author.",
+      "Known person mention without a clear sender role: bonus only.",
       "Resolved chat-date bounds: exclude current messages outside the interval."
-    ]
+    ],
+    "message_type": null
   },
-  "search_time_ms": 44.837,
+  "search_time_ms": 515.251,
   "results": [
     {
       "matching_message": {
-        "id": "MSG_003930",
-        "sender": "Ananya Verma",
-        "timestamp": "2026-08-03T08:03:00+05:30",
-        "text": "[PDF] draft volunteer orientation session checklist, still needs review"
+        "id": "MSG_004346",
+        "sender": "Meera Nair",
+        "timestamp": "2026-08-21T12:10:00+05:30",
+        "text": "library mein Software Engineering reference book mil gayi finally yaar"
       },
       "previous_messages": [],
       "next_messages": [
         {
-          "id": "MSG_003931",
-          "sender": "Sneha Iyer",
-          "timestamp": "2026-08-03T08:04:52+05:30",
-          "text": "extension board missing from list"
+          "id": "MSG_004347",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-08-21T12:10:44+05:30",
+          "text": "can you keep it forever for our batch 😂"
         },
         {
-          "id": "MSG_003932",
+          "id": "MSG_004348",
           "sender": "Meera Nair",
-          "timestamp": "2026-08-03T08:07:28+05:30",
-          "text": "and drinking water, every time we forget"
+          "timestamp": "2026-08-21T12:11:25+05:30",
+          "text": "nope due 2026-08-24, others need it too"
         },
         {
-          "id": "MSG_003933",
-          "sender": "Kabir Khan",
-          "timestamp": "2026-08-03T08:10:18+05:30",
-          "text": "is the bus stop accessible without stairs?"
+          "id": "MSG_004349",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-21T12:13:10+05:30",
+          "text": "write edition number, examples changed in newer one"
         }
       ],
-      "search_score": 0.6877896044635272,
-      "semantic_score": 0.7673125267028809,
-      "contextual_score": 0.6511853337287903,
-      "lexical_score": 0.39851312537168293,
+      "search_score": 0.9248130321502686,
+      "semantic_score": 0.5307101011276245,
+      "contextual_score": 0.45172134041786194,
+      "lexical_score": 0.244258569656641,
+      "reranker_score": 0.9996738433837891,
       "query_metadata": {
-        "raw_query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
-        "person": "Ananya Verma",
-        "person_mode": "filter",
+        "raw_query": "Meera ko August 21 ko kaunsi reference book mili thi?",
+        "person": "Meera Nair",
+        "person_mode": "bonus",
         "person_candidates": [
-          "Ananya Verma"
+          "Meera Nair"
         ],
-        "start_date": "2026-08-01",
-        "end_date": "2026-08-31",
+        "start_date": "2026-08-21",
+        "end_date": "2026-08-21",
         "hour_range": null,
         "intent": "person_time_semantic",
         "reference_date": "2026-09-01",
         "timezone": "Asia/Kolkata",
         "warnings": [],
         "explanations": [
-          "Explicit sender language: require the current message author.",
+          "Known person mention without a clear sender role: bonus only.",
           "Resolved chat-date bounds: exclude current messages outside the interval."
-        ]
+        ],
+        "message_type": null
       },
       "rank": 1
+    },
+    {
+      "matching_message": {
+        "id": "MSG_004351",
+        "sender": "Meera Nair",
+        "timestamp": "2026-08-21T12:15:34+05:30",
+        "text": "index mein check karunga, no scanning whole book"
+      },
+      "previous_messages": [
+        {
+          "id": "MSG_004348",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-21T12:11:25+05:30",
+          "text": "nope due 2026-08-24, others need it too"
+        },
+        {
+          "id": "MSG_004349",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-21T12:13:10+05:30",
+          "text": "write edition number, examples changed in newer one"
+        },
+        {
+          "id": "MSG_004350",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-21T12:14:46+05:30",
+          "text": "i only need help finding chapter for requirements review"
+        }
+      ],
+      "next_messages": [
+        {
+          "id": "MSG_004352",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-08-21T12:19:00+05:30",
+          "text": "thanks"
+        },
+        {
+          "id": "MSG_004353",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-21T12:19:47+05:30",
+          "text": "return reminder laga dena, fine quietly grows"
+        }
+      ],
+      "search_score": 0.5419812798500061,
+      "semantic_score": 0.5735238194465637,
+      "contextual_score": 0.5270848870277405,
+      "lexical_score": 0.06544830292089242,
+      "reranker_score": 0.5488697290420532,
+      "query_metadata": {
+        "raw_query": "Meera ko August 21 ko kaunsi reference book mili thi?",
+        "person": "Meera Nair",
+        "person_mode": "bonus",
+        "person_candidates": [
+          "Meera Nair"
+        ],
+        "start_date": "2026-08-21",
+        "end_date": "2026-08-21",
+        "hour_range": null,
+        "intent": "person_time_semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": [
+          "Known person mention without a clear sender role: bonus only.",
+          "Resolved chat-date bounds: exclude current messages outside the interval."
+        ],
+        "message_type": null
+      },
+      "rank": 2
+    },
+    {
+      "matching_message": {
+        "id": "MSG_004348",
+        "sender": "Meera Nair",
+        "timestamp": "2026-08-21T12:11:25+05:30",
+        "text": "nope due 2026-08-24, others need it too"
+      },
+      "previous_messages": [
+        {
+          "id": "MSG_004346",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-21T12:10:00+05:30",
+          "text": "library mein Software Engineering reference book mil gayi finally yaar"
+        },
+        {
+          "id": "MSG_004347",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-08-21T12:10:44+05:30",
+          "text": "can you keep it forever for our batch 😂"
+        }
+      ],
+      "next_messages": [
+        {
+          "id": "MSG_004349",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-08-21T12:13:10+05:30",
+          "text": "write edition number, examples changed in newer one"
+        },
+        {
+          "id": "MSG_004350",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-08-21T12:14:46+05:30",
+          "text": "i only need help finding chapter for requirements review"
+        },
+        {
+          "id": "MSG_004351",
+          "sender": "Meera Nair",
+          "timestamp": "2026-08-21T12:15:34+05:30",
+          "text": "index mein check karunga, no scanning whole book"
+        }
+      ],
+      "search_score": 0.22631137073040009,
+      "semantic_score": 0.2594090700149536,
+      "contextual_score": 0.42887863516807556,
+      "lexical_score": 0.0,
+      "reranker_score": 0.20908035337924957,
+      "query_metadata": {
+        "raw_query": "Meera ko August 21 ko kaunsi reference book mili thi?",
+        "person": "Meera Nair",
+        "person_mode": "bonus",
+        "person_candidates": [
+          "Meera Nair"
+        ],
+        "start_date": "2026-08-21",
+        "end_date": "2026-08-21",
+        "hour_range": null,
+        "intent": "person_time_semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": [
+          "Known person mention without a clear sender role: bonus only.",
+          "Resolved chat-date bounds: exclude current messages outside the interval."
+        ],
+        "message_type": null
+      },
+      "rank": 3
     }
   ]
 }

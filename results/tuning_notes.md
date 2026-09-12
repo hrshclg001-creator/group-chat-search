@@ -1,5 +1,27 @@
 # General retrieval tuning
 
+## Follow-up: multilingual pairwise reranking (2026-09-12)
+
+The user authorized improving the project after the evaluator review. Before changing retrieval, 24 English/Hinglish queries (12 paired facts, with targets distinct from the original 40) and their rationale were frozen separately. This provides additional development evidence, not a held-out set or independent human annotation. Neither the original corpus nor any original expected ID changed.
+
+One model and candidate/score configuration were declared in `evaluation/BILINGUAL_REVIEW.md` before scoring: `cross-encoder/mmarco-mMiniLMv2-L12-H384-v1`, revision `1427fd652930e4ba29e8149678df786c240d8825`; top 128 eligible candidates per original/contextual/lexical/hybrid signal; 85% pairwise relevance plus 15% first-stage hybrid. The reranker receives original current text and sender/date metadata, never neighboring answers or authoring thread labels. Existing filters still apply before candidate selection. No weight sweep, translation dictionary, query-specific answer or category-specific rescue rule was added.
+
+| Change | Before Top-1 | After Top-1 | Recall@3 before → after | Hard Top-1 before → after | Decision |
+| --- | --- | --- | --- | --- | --- |
+| Add pinned local multilingual reranker over eligible original messages | 22/40 (55%) | 25/40 (62.5%) | 25/40 → 29/40 | 1/10 (10%) → 1/10 (10%) | Retained for aggregate and bilingual gains; time regression disclosed |
+
+Person moves 7/10 → 10/10; semantic 7/20 → 8/20; time 8/10 → 7/10. Q011, Q022, Q023 and Q027 become correct; Q036 becomes incorrect. The overall-minus-hard gap **widens from 45 to 52.5 percentage points**. This is not an improvement to the hard subset. All three baseline rankings remain unchanged.
+
+The supplemental set improves 8/24 → 17/24: English 5/12 → 10/12, Hinglish 3/12 → 7/12. It contains 12 facts rather than 24 independent facts, and some share known decision threads. No hard-subset claim is made for these new labels.
+
+Candidate recall is 39/40 on the original benchmark. Q005's accessibility target never reaches the reranker; the other 14 final failures are ranking/interpretation failures within the candidate set. The experimental run averaged 3,628 ms per query (range 62–6,539 ms), excluding startup. These timings are machine-specific and variable. Both local models add memory/startup costs; existing document embeddings remain cached. Score values are not calibrated accuracy.
+
+Reproduce the four-method comparison with `python evaluation/evaluate.py --all`; the standalone diagnostics with `python -m evaluation.evaluate_reranked`; and the paired comparison with `python -m evaluation.evaluate_bilingual`, using the repository virtual environment after both model-preparation commands in the README. Before reports are in [tuning/reranker_before](tuning/reranker_before/); candidate diagnostics in [reranker_experiment.json](reranker_experiment.json); bilingual measurements in [bilingual.json](bilingual.json). Current official metrics, rankings and chart are regenerated under `results/`.
+
+Checks after integration: **232 backend, 42 evaluation and 22 frontend tests passed**, plus the production build, dependency check and unchanged original freeze validation. Backend tests include local reranker inference without downloads. The initial frontend attempt failed because the sandbox denied Vite's temporary-file write; the authorized rerun passed without changing application code. Initial direct model download stalled; bounded range downloads completed and their assembled weights matched the pinned upstream SHA-256. No partial download files or weights are committed.
+
+Stop decision: retain the one measured general model addition. Do not selectively bypass reranking for known failures, change labels, enlarge the candidate pool around Q005, or select extra model/weight variants against these same results. Short replies, difficult paraphrases, event-stage ambiguity and independent evaluation remain open work. Historical tuning notes below describe the preceding implementation.
+
 Read AGENTS.md and inspected all 19 initial hybrid errors before changing code. The 40 labels, expected IDs, corpus, overlap convention and freeze manifest are unchanged. The hard subset is **10** queries. Detailed evidence and recommendations: [failure_analysis.md](failure_analysis.md).
 
 | Change | Before Top-1 | After Top-1 | Recall@3 before → after | Hard Top-1 before → after | Decision |

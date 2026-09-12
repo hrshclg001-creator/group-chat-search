@@ -1,7 +1,4 @@
 {
-  "method": "hybrid",
-  "schema_version": "1.1.0",
-  "measured_at_utc": "2026-09-12T14:25:00+00:00",
   "metrics": {
     "top1_accuracy": {
       "correct": 25,
@@ -43,6 +40,7 @@
     },
     "overall_minus_hard_percentage_points": 52.5
   },
+  "by_language": {},
   "configuration": {
     "ranking": {
       "name": "balanced",
@@ -252,7 +250,6 @@
         "tokenizer_config.json": "e7fbfbfa6347b4e414c1cee50d142e2c2f9a895dad68b068ae83a8b564c3837e"
       },
       "device": "cpu",
-      "cpu_threads": 4,
       "batch_size": 16,
       "max_length": 256,
       "activation": "sigmoid; relevance score is not calibrated accuracy",
@@ -269,72 +266,14 @@
       "selection": "One model and configuration declared before supplemental scoring; no weight sweep"
     }
   },
-  "evaluation_top_k": 3,
-  "corpus_message_count": 4634,
-  "query_count": 40,
-  "hard_query_count": 10,
-  "reference_date": "2026-09-01",
-  "freeze_verified": true,
-  "freeze_version": "1.0.0",
-  "input_sha256": {
-    "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
-    "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
-    "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb",
-    "evaluation/freeze_manifest.json": "74123a2581007828375db97cec872d4a1d83e1135055620f4734257081dda5e9"
-  },
-  "source_sha256": {
-    "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
-    "backend/app/search/constraints.py": "1eee8cd7b8b9d5fc40df487c5e64a96d5a98a2a960143957b87f44abc890a07e",
-    "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
-    "backend/app/search/corpus.py": "bf9dc7dfa83787eaafe5feaf4793916075dc952d25353cbc98821edb9f15190d",
-    "backend/app/search/embedding.py": "15f69d99cbfb838ea3253beaca95666bbca7f825af52e54df0890c32d12b2700",
-    "backend/app/search/hybrid.py": "b43a5786a1be39f29e32a462949b03392d6e3880ffc3d5b308c56074ae636c09",
-    "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
-    "backend/app/search/message_types.py": "018e6b9ac0d42eeae80832520b970bea5b5003358a5538f98025235469a48f70",
-    "backend/app/search/model_config.py": "1e1a7009f28c005dcccb3a261757a7bee61ea65e75881db34510b562a61a5cd8",
-    "backend/app/search/ranking_config.py": "1f9a0ac8c0694c426f1058b1ca32b2a2342ee343f28576765aaf22212d7cced3",
-    "backend/app/search/reranked.py": "c159ae913b396306e1f277e1354e2b4416463c4275c7dac867e05b836bdcd00c",
-    "backend/app/search/reranker_config.py": "f8c5bc05d4cf86a2d37a1bac1abe32a8d2739e75f8035b2d7fe75bc7a4ba4c69",
-    "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
-    "evaluation/evaluate.py": "144e345b49405bde94c1c9ce6a84ca3ff4d22e10d9799c7dd7be6d76fdd29895",
-    "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
-    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965",
-    "evaluation/reporting.py": "75736e342feafd911abaa7b910d143460d4fd1932e230604362a805e1f13d94e",
-    "evaluation/compare.py": "4daea433d762fb9c05e28ded0223a8d64cdd9dcb350e952fc8f95e3c3ed9cf10",
-    "backend/app/query_understanding/__init__.py": "84624ba84a30f409610071ac5712b69a10fbde71c55c504741276484f4733a4b",
-    "backend/app/query_understanding/__main__.py": "a8c2bd3a3560be4d5d863979d2e3eb050562b7a7114f4a1f8f1e1472b1bafc7a",
-    "backend/app/query_understanding/dates.py": "93467c5096a9fab3c8aaaed073b6f36b2fc6b56caf02b2910f3cc1e7a1b8de39",
-    "backend/app/query_understanding/parser.py": "067e5b565b9c89a90d799e903bee4292d958071e6c325d5c82f2bfa8fb77fb05"
-  },
-  "requirements_lock_sha256": "7c7ae6c0071433ab672672f647e8440d2d8a0cfe09486befd9ba3ef7cf7305b0",
-  "environment": {
-    "python": "3.9.10",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "dependencies": {
-      "scikit-learn": "1.6.1",
-      "numpy": "2.0.2",
-      "scipy": "1.13.1",
-      "joblib": "1.5.3",
-      "threadpoolctl": "3.6.0",
-      "sentence-transformers": "3.4.1",
-      "transformers": "4.48.3",
-      "torch": "2.6.0",
-      "huggingface-hub": "0.28.1"
-    }
-  },
-  "limitations": [
-    "Hybrid profile selection used these same 40 labels; this is not held-out generalization accuracy.",
-    "Rule-based sender/time interpretation can miss or misinterpret unsupported phrasing.",
-    "Only exact current target IDs receive credit, never answers found solely in neighboring context.",
-    "Local multilingual cross-encoder reranks eligible original messages; no external LLM or query-specific answer rules."
-  ],
   "queries": [
     {
       "id": "Q001",
       "query": "What made a seaside holiday unaffordable?",
+      "expected_message_id": "MSG_000600",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_000600",
+      "notes": "Ishita explicitly rejects Goa because its total exceeds the cap. Earlier estimates discuss possible savings; this is the decisive cost-based rejection, not the later Manali booking plan. Seaside holiday maps to Goa and unaffordable maps to exceeding the cap.",
       "retrieved_ids": [
         "MSG_000599",
         "MSG_000594",
@@ -342,6 +281,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5351.814,
       "retrieved_messages": [
         {
           "id": "MSG_000599",
@@ -441,8 +381,7 @@
             "first_stage_score": 0.1898900752178362,
             "candidate_count": 361,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.011290410533547401
+          }
         },
         {
           "id": "MSG_000594",
@@ -542,8 +481,7 @@
             "first_stage_score": 0.23692987859249115,
             "candidate_count": 361,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 8.34053207654506e-05
+          }
         },
         {
           "id": "MSG_000171",
@@ -634,17 +572,19 @@
             "first_stage_score": 0.23320654034614563,
             "candidate_count": 361,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0005776643520221114
+          }
         }
-      ]
+      ],
+      "candidate_count": 361,
+      "target_in_candidates": true
     },
     {
       "id": "Q002",
       "query": "Who worried about feeling nauseous during consecutive coach rides?",
+      "expected_message_id": "MSG_000291",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_000291",
+      "notes": "Ananya asks about back-to-back overnight buses and states that she gets motion sickness. The message itself supplies the symptom and transport concern; its sender answers who. This is a semantic question without a named-person filter.",
       "retrieved_ids": [
         "MSG_001086",
         "MSG_000871",
@@ -652,6 +592,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 4982.775,
       "retrieved_messages": [
         {
           "id": "MSG_001086",
@@ -733,8 +674,7 @@
             "first_stage_score": 0.1382669359445572,
             "candidate_count": 352,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.07407733798027039
+          }
         },
         {
           "id": "MSG_000871",
@@ -834,8 +774,7 @@
             "first_stage_score": 0.2590732292629552,
             "candidate_count": 352,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0072198426350951195
+          }
         },
         {
           "id": "MSG_004559",
@@ -935,17 +874,19 @@
             "first_stage_score": 0.2649884836174321,
             "candidate_count": 352,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.005930445622652769
+          }
         }
-      ]
+      ],
+      "candidate_count": 352,
+      "target_in_candidates": true
     },
     {
       "id": "Q003",
       "query": "What condition would force us to call off the Himalayan vacation?",
+      "expected_message_id": "MSG_000436",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_000436",
+      "notes": "Aditya explicitly says the plan will be cancelled if roads look unsafe. The preceding weather discussion explains the setting, but only this target states the cancellation condition. Call off maps to cancel, and Himalayan vacation identifies the mountain trip in context.",
       "retrieved_ids": [
         "MSG_000852",
         "MSG_000854",
@@ -953,6 +894,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5343.018,
       "retrieved_messages": [
         {
           "id": "MSG_000852",
@@ -1052,8 +994,7 @@
             "first_stage_score": 0.3549334573383266,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0004408427921589464
+          }
         },
         {
           "id": "MSG_000854",
@@ -1153,8 +1094,7 @@
             "first_stage_score": 0.2796105465524074,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00020474357006605715
+          }
         },
         {
           "id": "MSG_000599",
@@ -1254,17 +1194,19 @@
             "first_stage_score": 0.2785525747124449,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0003212395531591028
+          }
         }
-      ]
+      ],
+      "candidate_count": 373,
+      "target_in_candidates": true
     },
     {
       "id": "Q004",
       "query": "What extra software would the panel's computer need for the phone app?",
+      "expected_message_id": "MSG_001154",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_001154",
+      "notes": "Ishita says Flutter would require emulator setup on the judging laptop. This directly answers the software-setup question. The later rejection of Flutter does not name the emulator and is therefore less specific. Phone app and panel's computer paraphrase the proposed mobile client and judging laptop.",
       "retrieved_ids": [
         "MSG_001061",
         "MSG_004538",
@@ -1272,6 +1214,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5037.847,
       "retrieved_messages": [
         {
           "id": "MSG_001061",
@@ -1371,8 +1314,7 @@
             "first_stage_score": 0.26743152780315144,
             "candidate_count": 350,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0008526621386408806
+          }
         },
         {
           "id": "MSG_004538",
@@ -1454,8 +1396,7 @@
             "first_stage_score": 0.2513875995302237,
             "candidate_count": 350,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.003590885316953063
+          }
         },
         {
           "id": "MSG_001094",
@@ -1537,17 +1478,19 @@
             "first_stage_score": 0.26697033023092825,
             "candidate_count": 350,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0003678994544316083
+          }
         }
-      ]
+      ],
+      "candidate_count": 350,
+      "target_in_candidates": true
     },
     {
       "id": "Q005",
       "query": "What accessibility improvement was requested for the success indicator?",
+      "expected_message_id": "MSG_001602",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_001602",
+      "notes": "Meera asks that approval be communicated with text rather than relying only on green. The preceding image contains status-card labels but not this accessibility request. Success indicator maps to approved colour; the requested change is explicit in this target.",
       "retrieved_ids": [
         "MSG_003222",
         "MSG_003930",
@@ -1555,6 +1498,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5118.542,
       "retrieved_messages": [
         {
           "id": "MSG_003222",
@@ -1654,8 +1598,7 @@
             "first_stage_score": 0.292003331483695,
             "candidate_count": 381,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00018638190522324294
+          }
         },
         {
           "id": "MSG_003930",
@@ -1737,8 +1680,7 @@
             "first_stage_score": 0.2810971716059179,
             "candidate_count": 381,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00017619339632801712
+          }
         },
         {
           "id": "MSG_002986",
@@ -1820,17 +1762,19 @@
             "first_stage_score": 0.2767179232103881,
             "candidate_count": 381,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 8.080303814494982e-05
+          }
         }
-      ]
+      ],
+      "candidate_count": 381,
+      "target_in_candidates": false
     },
     {
       "id": "Q006",
       "query": "What restriction prevented the birthday gathering from using the dorm lounge?",
+      "expected_message_id": "MSG_003418",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_003418",
+      "notes": "Sneha reports that the hostel common room cannot admit outside students after 6 that day. This is the actual access restriction, unlike the later conclusion about avoiding a split group. Dorm lounge paraphrases hostel common room without using an artificial spelling change.",
       "retrieved_ids": [
         "MSG_003418",
         "MSG_003331",
@@ -1838,6 +1782,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 5500.639,
       "retrieved_messages": [
         {
           "id": "MSG_003418",
@@ -1919,8 +1864,7 @@
             "first_stage_score": 0.43273213144250255,
             "candidate_count": 345,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0016765615437179804
+          }
         },
         {
           "id": "MSG_003331",
@@ -2020,8 +1964,7 @@
             "first_stage_score": 0.31538883013122226,
             "candidate_count": 345,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.004762472119182348
+          }
         },
         {
           "id": "MSG_003326",
@@ -2103,17 +2046,19 @@
             "first_stage_score": 0.33596009874509586,
             "candidate_count": 345,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00034971704008057714
+          }
         }
-      ]
+      ],
+      "candidate_count": 345,
+      "target_in_candidates": true
     },
     {
       "id": "Q007",
       "query": "Why was the outdoor picnic abandoned?",
+      "expected_message_id": "MSG_003426",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_003426",
+      "notes": "Ananya drops the lawn because rain and permission are uncertain. An earlier message raises monsoon risk provisionally; this target gives both reasons and the explicit rejection. Outdoor picnic maps to lawn, and abandoned maps to dropping.",
       "retrieved_ids": [
         "MSG_003214",
         "MSG_001045",
@@ -2121,6 +2066,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 4673.246,
       "retrieved_messages": [
         {
           "id": "MSG_003214",
@@ -2220,8 +2166,7 @@
             "first_stage_score": 0.36697673592088453,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 7.154695776989684e-05
+          }
         },
         {
           "id": "MSG_001045",
@@ -2321,8 +2266,7 @@
             "first_stage_score": 0.28022687015573494,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 2.5716777599882334e-05
+          }
         },
         {
           "id": "MSG_003424",
@@ -2422,17 +2366,19 @@
             "first_stage_score": 0.27374041080474854,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 3.007508894370403e-05
+          }
         }
-      ]
+      ],
+      "candidate_count": 347,
+      "target_in_candidates": true
     },
     {
       "id": "Q008",
       "query": "Why did the birthday girl prefer chatting over a game at the alley?",
+      "expected_message_id": "MSG_003330",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_003330",
+      "notes": "Meera says to skip bowling because she wants time to talk. The surrounding discussion identifies her as the birthday celebrant. This asks for her social preference, not the separate calculation that bowling would exceed the available food budget.",
       "retrieved_ids": [
         "MSG_003619",
         "MSG_003210",
@@ -2440,6 +2386,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 6539.158,
       "retrieved_messages": [
         {
           "id": "MSG_003619",
@@ -2539,8 +2486,7 @@
             "first_stage_score": 0.2547181794882807,
             "candidate_count": 390,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 6.920540181454271e-05
+          }
         },
         {
           "id": "MSG_003210",
@@ -2622,8 +2568,7 @@
             "first_stage_score": 0.2513914108115272,
             "candidate_count": 390,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 6.482632306870073e-05
+          }
         },
         {
           "id": "MSG_003734",
@@ -2705,17 +2650,19 @@
             "first_stage_score": 0.23894947069880318,
             "candidate_count": 390,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00020742908236570656
+          }
         }
-      ]
+      ],
+      "candidate_count": 390,
+      "target_in_candidates": true
     },
     {
       "id": "Q009",
       "query": "How much of our holiday allowance was reserved for unforeseen expenses rather than souvenirs?",
+      "expected_message_id": "MSG_000700",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_000700",
+      "notes": "Ishita specifies a 700 emergency buffer within the 8700 ceiling and says it is not for shopping. This uniquely gives the reserve amount and exclusion. Unforeseen expenses and souvenirs paraphrase emergency buffer and shopping.",
       "retrieved_ids": [
         "MSG_003737",
         "MSG_003329",
@@ -2723,6 +2670,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5333.169,
       "retrieved_messages": [
         {
           "id": "MSG_003737",
@@ -2822,8 +2770,7 @@
             "first_stage_score": 0.2953053717370097,
             "candidate_count": 298,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.019142024219036102
+          }
         },
         {
           "id": "MSG_003329",
@@ -2923,8 +2870,7 @@
             "first_stage_score": 0.1708639889687172,
             "candidate_count": 298,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.03833978623151779
+          }
         },
         {
           "id": "MSG_000856",
@@ -3015,17 +2961,19 @@
             "first_stage_score": 0.3370918763161411,
             "candidate_count": 298,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00029428579728119075
+          }
         }
-      ]
+      ],
+      "candidate_count": 298,
+      "target_in_candidates": true
     },
     {
       "id": "Q010",
       "query": "Why was the cheap coastal vacation clip misleading for people departing from our city?",
+      "expected_message_id": "MSG_000289",
       "category": "semantic",
       "zero_word_overlap": true,
-      "expected_message_id": "MSG_000289",
+      "notes": "Meera points out that the reel starts from Mumbai whereas the group is in Indore. The immediately preceding message supplies the low advertised price, but the target explains why that price is misleading for this group's starting point.",
       "retrieved_ids": [
         "MSG_002970",
         "MSG_002778",
@@ -3033,6 +2981,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5792.594,
       "retrieved_messages": [
         {
           "id": "MSG_002970",
@@ -3114,8 +3063,7 @@
             "first_stage_score": 0.31511305528372235,
             "candidate_count": 318,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 6.4885760366451e-05
+          }
         },
         {
           "id": "MSG_002778",
@@ -3197,8 +3145,7 @@
             "first_stage_score": 0.31511305528372235,
             "candidate_count": 318,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 6.124306673882529e-05
+          }
         },
         {
           "id": "MSG_000857",
@@ -3280,17 +3227,19 @@
             "first_stage_score": 0.30177170474320786,
             "candidate_count": 318,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00023164866433944553
+          }
         }
-      ]
+      ],
+      "candidate_count": 318,
+      "target_in_candidates": true
     },
     {
       "id": "Q011",
       "query": "Where did we finally decide to go for the June trip, and what was the per-person limit?",
+      "expected_message_id": "MSG_000713",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000713",
+      "notes": "Ishita's final decision gives Manali, June 10-15 and the Rs 8,700 cap. Earlier estimates and Rohan's short acceptance do not contain the complete final destination-and-limit answer.",
       "retrieved_ids": [
         "MSG_000713",
         "MSG_000854",
@@ -3298,6 +3247,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 5207.663,
       "retrieved_messages": [
         {
           "id": "MSG_000713",
@@ -3399,8 +3349,7 @@
             "first_stage_score": 0.20696032742362475,
             "candidate_count": 332,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.061224501579999924
+          }
         },
         {
           "id": "MSG_000854",
@@ -3502,8 +3451,7 @@
             "first_stage_score": 0.31183057002224035,
             "candidate_count": 332,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0024346113204956055
+          }
         },
         {
           "id": "MSG_000595",
@@ -3605,17 +3553,19 @@
             "first_stage_score": 0.299701575868736,
             "candidate_count": 332,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0016650557518005371
+          }
         }
-      ]
+      ],
+      "candidate_count": 332,
+      "target_in_candidates": true
     },
     {
       "id": "Q012",
       "query": "What backend and database did we finally choose for LostLoop?",
+      "expected_message_id": "MSG_001482",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001482",
+      "notes": "Sneha's locked implementation note explicitly selects FastAPI on Python and SQLite. It supersedes MERN, Django/Postgres and Firebase proposals; an earlier mention of a Python service is not the final stack.",
       "retrieved_ids": [
         "MSG_001598",
         "MSG_001482",
@@ -3623,6 +3573,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": true,
+      "search_time_ms": 5622.585,
       "retrieved_messages": [
         {
           "id": "MSG_001598",
@@ -3704,8 +3655,7 @@
             "first_stage_score": 0.34786191972069813,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.1288655698299408
+          }
         },
         {
           "id": "MSG_001482",
@@ -3805,8 +3755,7 @@
             "first_stage_score": 0.2833897086054838,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.07682549953460693
+          }
         },
         {
           "id": "MSG_001600",
@@ -3906,17 +3855,19 @@
             "first_stage_score": 0.32033123261562135,
             "candidate_count": 373,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0030980913434177637
+          }
         }
-      ]
+      ],
+      "candidate_count": 373,
+      "target_in_candidates": true
     },
     {
       "id": "Q013",
       "query": "What was the final birthday venue and budget, including cake and everyone's share?",
+      "expected_message_id": "MSG_003616",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003616",
+      "notes": "Ishita consolidates Nukkad Cafe, July 25, Rs 2,900 and Rs 362.50 each. This is the agreed plan, not the later actual-expense message, which lacks the venue and arrangements.",
       "retrieved_ids": [
         "MSG_003616",
         "MSG_003618",
@@ -3924,6 +3875,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 4590.11,
       "retrieved_messages": [
         {
           "id": "MSG_003616",
@@ -4023,8 +3975,7 @@
             "first_stage_score": 0.5008311964051811,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.6551594734191895
+          }
         },
         {
           "id": "MSG_003618",
@@ -4124,8 +4075,7 @@
             "first_stage_score": 0.44385790749097226,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0006294318591244519
+          }
         },
         {
           "id": "MSG_003213",
@@ -4225,17 +4175,19 @@
             "first_stage_score": 0.4018961500236981,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.004069488495588303
+          }
         }
-      ]
+      ],
+      "candidate_count": 293,
+      "target_in_candidates": true
     },
     {
       "id": "Q014",
       "query": "Why did Aarav originally lean towards MERN?",
+      "expected_message_id": "MSG_001291",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001291",
+      "notes": "Aarav explicitly acknowledges that MERN was just familiarity and lacks a scope-based justification. His initial starter proposal offers context, but this later admission directly answers why. Primary category is semantic because the requested evidence is the rationale.",
       "retrieved_ids": [
         "MSG_001291",
         "MSG_001059",
@@ -4243,6 +4195,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3230.501,
       "retrieved_messages": [
         {
           "id": "MSG_001291",
@@ -4346,8 +4299,7 @@
             "first_stage_score": 0.3546086200141934,
             "candidate_count": 264,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.6420392394065857
+          }
         },
         {
           "id": "MSG_001059",
@@ -4442,8 +4394,7 @@
             "first_stage_score": 0.23072286372528134,
             "candidate_count": 264,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.01761830598115921
+          }
         },
         {
           "id": "MSG_002440",
@@ -4538,17 +4489,19 @@
             "first_stage_score": 0.2762081801891327,
             "candidate_count": 264,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0005887653096579015
+          }
         }
-      ]
+      ],
+      "candidate_count": 264,
+      "target_in_candidates": true
     },
     {
       "id": "Q015",
       "query": "Was outside cake allowed, and what decoration rule came with it?",
+      "expected_message_id": "MSG_003434",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003434",
+      "notes": "Rohan replies yes to Kabir's outside-cake question, conditional on cleaning up, and prohibits wall decoration. The target contains the answer; the preceding question is necessary context but is not an acceptable replacement hit.",
       "retrieved_ids": [
         "MSG_003433",
         "MSG_003618",
@@ -4556,6 +4509,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": true,
+      "search_time_ms": 4986.714,
       "retrieved_messages": [
         {
           "id": "MSG_003433",
@@ -4655,8 +4609,7 @@
             "first_stage_score": 0.4890812211905086,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.20797717571258545
+          }
         },
         {
           "id": "MSG_003618",
@@ -4756,8 +4709,7 @@
             "first_stage_score": 0.3649417391355912,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0003150612174067646
+          }
         },
         {
           "id": "MSG_003434",
@@ -4857,17 +4809,19 @@
             "first_stage_score": 0.34190145596606364,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.001100026536732912
+          }
         }
-      ]
+      ],
+      "candidate_count": 347,
+      "target_in_candidates": true
     },
     {
       "id": "Q016",
       "query": "What did the birthday actually cost once it was over, and was any buffer used?",
+      "expected_message_id": "MSG_003738",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003738",
+      "notes": "Ishita's post-event accounting states actual total 2900, equal shares 362.50 and no buffer spent. The earlier plan has the same projected total but cannot answer whether any reserve was actually used.",
       "retrieved_ids": [
         "MSG_003616",
         "MSG_003736",
@@ -4875,6 +4829,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 5768.214,
       "retrieved_messages": [
         {
           "id": "MSG_003616",
@@ -4974,8 +4929,7 @@
             "first_stage_score": 0.3942616904586975,
             "candidate_count": 339,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0013350440422073007
+          }
         },
         {
           "id": "MSG_003736",
@@ -5075,8 +5029,7 @@
             "first_stage_score": 0.38483827035380797,
             "candidate_count": 339,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0013670711778104305
+          }
         },
         {
           "id": "MSG_003326",
@@ -5158,17 +5111,19 @@
             "first_stage_score": 0.3829917383069541,
             "candidate_count": 339,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0012404491426423192
+          }
         }
-      ]
+      ],
+      "candidate_count": 339,
+      "target_in_candidates": true
     },
     {
       "id": "Q017",
       "query": "Find the unverified Software Engineering exam prediction from May that warned it was not an official paper.",
+      "expected_message_id": "MSG_002058",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_002058",
+      "notes": "Aditya forwards the sure-shot-topic claim with an explicit unverified/not-official disclaimer on May 23. This targets the warning-bearing forwarded message itself, not a later reply disagreeing with it. May disambiguates identical Software Engineering forwards on April 8 and April 23. The main request is the warning-bearing content, with month as a secondary constraint.",
       "retrieved_ids": [
         "MSG_002058",
         "MSG_002079",
@@ -5176,6 +5131,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 4920.335,
       "retrieved_messages": [
         {
           "id": "MSG_002058",
@@ -5259,8 +5215,7 @@
             "first_stage_score": 0.5664413222695995,
             "candidate_count": 294,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9988296627998352
+          }
         },
         {
           "id": "MSG_002079",
@@ -5362,8 +5317,7 @@
             "first_stage_score": 0.5172147416693,
             "candidate_count": 294,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.8774426579475403
+          }
         },
         {
           "id": "MSG_001775",
@@ -5465,17 +5419,19 @@
             "first_stage_score": 0.37362222171128523,
             "candidate_count": 294,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.03327082842588425
+          }
         }
-      ]
+      ],
+      "candidate_count": 294,
+      "target_in_candidates": true
     },
     {
       "id": "Q018",
       "query": "Find the voice note proposing QR stickers for lost items.",
+      "expected_message_id": "MSG_001155",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001155",
+      "notes": "Rohan's voice-message placeholder describes the QR-sticker idea. The corpus contains no actual audio; retrieval should return this real placeholder record, not Meera's subsequent suggestion to postpone QR support.",
       "retrieved_ids": [
         "MSG_001155",
         "MSG_000916",
@@ -5483,6 +5439,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 804.422,
       "retrieved_messages": [
         {
           "id": "MSG_001155",
@@ -5584,8 +5541,7 @@
             "first_stage_score": 0.5094734323984541,
             "candidate_count": 57,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9908439517021179
+          }
         },
         {
           "id": "MSG_000916",
@@ -5687,8 +5643,7 @@
             "first_stage_score": 0.36953703149362027,
             "candidate_count": 57,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0025704132858663797
+          }
         },
         {
           "id": "MSG_002852",
@@ -5790,17 +5745,19 @@
             "first_stage_score": 0.36953703149362027,
             "candidate_count": 57,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0024623428471386433
+          }
         }
-      ]
+      ],
+      "candidate_count": 57,
+      "target_in_candidates": true
     },
     {
       "id": "Q019",
       "query": "Did Nukkad Cafe charge separately for the room or just require a minimum spend?",
+      "expected_message_id": "MSG_003432",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003432",
+      "notes": "Rohan's first concrete cafe quote states minimum spend 2400 and no room fee. Later package messages list inclusions but do not explicitly resolve the separate room-fee question.",
       "retrieved_ids": [
         "MSG_003432",
         "MSG_003616",
@@ -5808,6 +5765,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 5950.206,
       "retrieved_messages": [
         {
           "id": "MSG_003432",
@@ -5907,8 +5865,7 @@
             "first_stage_score": 0.5348112224265041,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9998904466629028
+          }
         },
         {
           "id": "MSG_003616",
@@ -6008,8 +5965,7 @@
             "first_stage_score": 0.3281418506650305,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.10757552832365036
+          }
         },
         {
           "id": "MSG_003532",
@@ -6109,17 +6065,19 @@
             "first_stage_score": 0.36546536808678476,
             "candidate_count": 347,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.022213483229279518
+          }
         }
-      ]
+      ],
+      "candidate_count": 347,
+      "target_in_candidates": true
     },
     {
       "id": "Q020",
       "query": "When was the cake pickup, and who would bring the candles?",
+      "expected_message_id": "MSG_003618",
       "category": "semantic",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003618",
+      "notes": "Sneha states pickup at 6:15 and says she will bring Meera's candles. This asks about the event arrangement rather than filtering the chat by a date, so its primary category is semantic.",
       "retrieved_ids": [
         "MSG_003618",
         "MSG_003740",
@@ -6127,6 +6085,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 5150.258,
       "retrieved_messages": [
         {
           "id": "MSG_003618",
@@ -6226,8 +6185,7 @@
             "first_stage_score": 0.5233836169685246,
             "candidate_count": 331,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9958813190460205
+          }
         },
         {
           "id": "MSG_003740",
@@ -6327,8 +6285,7 @@
             "first_stage_score": 0.22751104926532134,
             "candidate_count": 331,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.06490005552768707
+          }
         },
         {
           "id": "MSG_004477",
@@ -6428,17 +6385,19 @@
             "first_stage_score": 0.16206272874955271,
             "candidate_count": 331,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.056668978184461594
+          }
         }
-      ]
+      ],
+      "candidate_count": 331,
+      "target_in_candidates": true
     },
     {
       "id": "Q021",
       "query": "What did Ananya ask for in Delhi to make the journey manageable?",
+      "expected_message_id": "MSG_000427",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000427",
+      "notes": "Ananya explicitly requests one rest stop in Delhi and rejects continuous travel. Her later route acceptance acknowledges that condition but is not the original request. Person match uses the actual sender Ananya Verma.",
       "retrieved_ids": [
         "MSG_000427",
         "MSG_000598",
@@ -6446,6 +6405,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 4115.15,
       "retrieved_messages": [
         {
           "id": "MSG_000427",
@@ -6549,8 +6509,7 @@
             "first_stage_score": 0.4247892449664299,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.2918999493122101
+          }
         },
         {
           "id": "MSG_000598",
@@ -6654,8 +6613,7 @@
             "first_stage_score": 0.4150601387160594,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.20465461909770966
+          }
         },
         {
           "id": "MSG_000404",
@@ -6759,17 +6717,19 @@
             "first_stage_score": 0.21270159475486927,
             "candidate_count": 293,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.04990280047059059
+          }
         }
-      ]
+      ],
+      "candidate_count": 293,
+      "target_in_candidates": true
     },
     {
       "id": "Q022",
       "query": "What was Ishita's absolute spending limit when the Goa estimate first came in?",
+      "expected_message_id": "MSG_000287",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000287",
+      "notes": "Ishita states her absolute limit is 9000 after Rohan's initial Goa estimate. This is her personal maximum at that point, distinct from the group's later Rs 8,700 agreed trip cap.",
       "retrieved_ids": [
         "MSG_000287",
         "MSG_000713",
@@ -6777,6 +6737,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 5974.447,
       "retrieved_messages": [
         {
           "id": "MSG_000287",
@@ -6871,8 +6832,7 @@
             "first_stage_score": 0.3955367141492468,
             "candidate_count": 364,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.4831635355949402
+          }
         },
         {
           "id": "MSG_000713",
@@ -6976,8 +6936,7 @@
             "first_stage_score": 0.3877543910921505,
             "candidate_count": 364,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.149861142039299
+          }
         },
         {
           "id": "MSG_000600",
@@ -7072,17 +7031,19 @@
             "first_stage_score": 0.3281748205955393,
             "candidate_count": 364,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.11830104887485504
+          }
         }
-      ]
+      ],
+      "candidate_count": 364,
+      "target_in_candidates": true
     },
     {
       "id": "Q023",
       "query": "How did Aarav say he would track everyone's trip contributions?",
+      "expected_message_id": "MSG_000715",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000715",
+      "notes": "Aarav commits to tracking the eight contributions in one sheet and keeping payments out of chat. The final decision assigns him collection responsibility, but only this message specifies his tracking method.",
       "retrieved_ids": [
         "MSG_000715",
         "MSG_001002",
@@ -7090,6 +7051,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3655.981,
       "retrieved_messages": [
         {
           "id": "MSG_000715",
@@ -7193,8 +7155,7 @@
             "first_stage_score": 0.3523623936145361,
             "candidate_count": 269,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.43829798698425293
+          }
         },
         {
           "id": "MSG_001002",
@@ -7280,8 +7241,7 @@
             "first_stage_score": 0.12322363852343851,
             "candidate_count": 269,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.20156531035900116
+          }
         },
         {
           "id": "MSG_001501",
@@ -7367,17 +7327,19 @@
             "first_stage_score": 0.20216120614640204,
             "candidate_count": 269,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0895494744181633
+          }
         }
-      ]
+      ],
+      "candidate_count": 269,
+      "target_in_candidates": true
     },
     {
       "id": "Q024",
       "query": "Find the volunteer orientation checklist PDF that Ananya shared in August.",
+      "expected_message_id": "MSG_003930",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003930",
+      "notes": "Ananya's August 3 message is the draft volunteer orientation checklist PDF. It is a placeholder attachment, not a completed checklist; sender, activity and month distinguish it from other event PDFs.",
       "retrieved_ids": [
         "MSG_003930",
         "MSG_004420",
@@ -7385,6 +7347,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 1166.343,
       "retrieved_messages": [
         {
           "id": "MSG_003930",
@@ -7471,8 +7434,7 @@
             "first_stage_score": 0.6877896044635272,
             "candidate_count": 88,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9997193217277527
+          }
         },
         {
           "id": "MSG_004420",
@@ -7577,8 +7539,7 @@
             "first_stage_score": 0.22973634898662568,
             "candidate_count": 88,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.12400096654891968
+          }
         },
         {
           "id": "MSG_004041",
@@ -7665,17 +7626,19 @@
             "first_stage_score": 0.16083246911945884,
             "candidate_count": 88,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.05347847566008568
+          }
         }
-      ]
+      ],
+      "candidate_count": 88,
+      "target_in_candidates": true
     },
     {
       "id": "Q025",
       "query": "What reason did Kabir give for rejecting Firebase?",
+      "expected_message_id": "MSG_001383",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001383",
+      "notes": "Kabir explicitly rejects Firebase because the demo must work offline. His earlier message proposing Firebase and Ananya's Wi-Fi concern are distractors with different speaker/decision roles.",
       "retrieved_ids": [
         "MSG_001383",
         "MSG_001152",
@@ -7683,6 +7646,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3767.121,
       "retrieved_messages": [
         {
           "id": "MSG_001383",
@@ -7777,8 +7741,7 @@
             "first_stage_score": 0.3464293655386123,
             "candidate_count": 268,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9999300241470337
+          }
         },
         {
           "id": "MSG_001152",
@@ -7882,8 +7845,7 @@
             "first_stage_score": 0.22160777886159028,
             "candidate_count": 268,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.12214571237564087
+          }
         },
         {
           "id": "MSG_001606",
@@ -7987,17 +7949,19 @@
             "first_stage_score": 0.2561097460218314,
             "candidate_count": 268,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.025163747370243073
+          }
         }
-      ]
+      ],
+      "candidate_count": 268,
+      "target_in_candidates": true
     },
     {
       "id": "Q026",
       "query": "Why did Sneha want to drop the bigger Python framework?",
+      "expected_message_id": "MSG_001385",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001385",
+      "notes": "Sneha says the large Python framework adds unused admin configuration and recommends dropping it. Context identifies the Django option. Her earlier note about custom screens is related, but this target states the explicit rejection and overhead.",
       "retrieved_ids": [
         "MSG_001385",
         "MSG_001280",
@@ -8005,6 +7969,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3898.213,
       "retrieved_messages": [
         {
           "id": "MSG_001385",
@@ -8108,8 +8073,7 @@
             "first_stage_score": 0.481358779702339,
             "candidate_count": 281,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9988983869552612
+          }
         },
         {
           "id": "MSG_001280",
@@ -8213,8 +8177,7 @@
             "first_stage_score": 0.30114010092097193,
             "candidate_count": 281,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.19347473978996277
+          }
         },
         {
           "id": "MSG_002298",
@@ -8300,17 +8263,19 @@
             "first_stage_score": 0.33120113099023796,
             "candidate_count": 281,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.005138233304023743
+          }
         }
-      ]
+      ],
+      "candidate_count": 281,
+      "target_in_candidates": true
     },
     {
       "id": "Q027",
       "query": "What name did Rohan suggest for our coding project?",
+      "expected_message_id": "MSG_001478",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001478",
+      "notes": "Rohan proposes LostLoop and jokes about his coding life. Later acceptance and final stack messages repeat the name, but this is the actual naming suggestion by the requested person.",
       "retrieved_ids": [
         "MSG_001478",
         "MSG_000775",
@@ -8318,6 +8283,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3738.492,
       "retrieved_messages": [
         {
           "id": "MSG_001478",
@@ -8421,8 +8387,7 @@
             "first_stage_score": 0.2470058392881092,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.20228643715381622
+          }
         },
         {
           "id": "MSG_000775",
@@ -8517,8 +8482,7 @@
             "first_stage_score": 0.18460777600550365,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.19288182258605957
+          }
         },
         {
           "id": "MSG_000387",
@@ -8613,17 +8577,19 @@
             "first_stage_score": 0.20308730949902248,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.182891383767128
+          }
         }
-      ]
+      ],
+      "candidate_count": 283,
+      "target_in_candidates": true
     },
     {
       "id": "Q028",
       "query": "Why did Meera insist we should not split the birthday group?",
+      "expected_message_id": "MSG_003431",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003431",
+      "notes": "Meera says all eight are only together sometimes and asks not to split. Ishita's preceding message rejects splitting too, but does not state Meera's own social reason.",
       "retrieved_ids": [
         "MSG_003431",
         "MSG_000593",
@@ -8631,6 +8597,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3713.981,
       "retrieved_messages": [
         {
           "id": "MSG_003431",
@@ -8734,8 +8701,7 @@
             "first_stage_score": 0.360929410981928,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.8160386681556702
+          }
         },
         {
           "id": "MSG_000593",
@@ -8839,8 +8805,7 @@
             "first_stage_score": 0.32957421470866705,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.6677891612052917
+          }
         },
         {
           "id": "MSG_000520",
@@ -8944,17 +8909,19 @@
             "first_stage_score": 0.27814938098827807,
             "candidate_count": 283,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.007110304199159145
+          }
         }
-      ]
+      ],
+      "candidate_count": 283,
+      "target_in_candidates": true
     },
     {
       "id": "Q029",
       "query": "Which bus was Aditya asking about on August 31?",
+      "expected_message_id": "MSG_004626",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_004626",
+      "notes": "Aditya asks who is taking the Bhawarkuan bus around 9:30 pm on August 31. The exact date disambiguates recurring bus conversations; his later location update does not name the route.",
       "retrieved_ids": [
         "MSG_004626",
         "MSG_004632",
@@ -8962,6 +8929,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 280.308,
       "retrieved_messages": [
         {
           "id": "MSG_004626",
@@ -9048,8 +9016,7 @@
             "first_stage_score": 0.47028564568829057,
             "candidate_count": 17,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9944844841957092
+          }
         },
         {
           "id": "MSG_004632",
@@ -9145,8 +9112,7 @@
             "first_stage_score": 0.26276111791891,
             "candidate_count": 17,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.5284760594367981
+          }
         },
         {
           "id": "MSG_004633",
@@ -9233,17 +9199,19 @@
             "first_stage_score": 0.35991339482489887,
             "candidate_count": 17,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.31399428844451904
+          }
         }
-      ]
+      ],
+      "candidate_count": 17,
+      "target_in_candidates": true
     },
     {
       "id": "Q030",
       "query": "What did Sneha say the cake cost, including any extra box charge?",
+      "expected_message_id": "MSG_003736",
       "category": "person",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003736",
+      "notes": "Sneha confirms the cake was 500 with no extra box charge after the party. Ishita's earlier cake quote and total accounting are different speakers and do not answer the packaging-charge question.",
       "retrieved_ids": [
         "MSG_003736",
         "MSG_003618",
@@ -9251,6 +9219,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3871.493,
       "retrieved_messages": [
         {
           "id": "MSG_003736",
@@ -9354,8 +9323,7 @@
             "first_stage_score": 0.5569287346050319,
             "candidate_count": 280,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9990787506103516
+          }
         },
         {
           "id": "MSG_003618",
@@ -9459,8 +9427,7 @@
             "first_stage_score": 0.4363836211388249,
             "candidate_count": 280,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.015440071001648903
+          }
         },
         {
           "id": "MSG_000888",
@@ -9555,17 +9522,19 @@
             "first_stage_score": 0.24809255655638718,
             "candidate_count": 280,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.03233031556010246
+          }
         }
-      ]
+      ],
+      "candidate_count": 280,
+      "target_in_candidates": true
     },
     {
       "id": "Q031",
       "query": "What decision did we make on March 28 about the trip destination and payments?",
+      "expected_message_id": "MSG_000713",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000713",
+      "notes": "Filter message timestamps to March 28, 2026 in Asia/Kolkata. Ishita's final Manali decision includes the contribution amount and April 2 deadline. The chat date is March 28 even though the trip takes place in June. This deliberately shares a target with Q011 while testing a date constraint.",
       "retrieved_ids": [
         "MSG_000699",
         "MSG_000710",
@@ -9573,6 +9542,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": true,
+      "search_time_ms": 547.524,
       "retrieved_messages": [
         {
           "id": "MSG_000699",
@@ -9665,8 +9635,7 @@
             "first_stage_score": 0.32810603380203246,
             "candidate_count": 28,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0002081603743135929
+          }
         },
         {
           "id": "MSG_000710",
@@ -9768,8 +9737,7 @@
             "first_stage_score": 0.28912332712156275,
             "candidate_count": 28,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.006566727999597788
+          }
         },
         {
           "id": "MSG_000713",
@@ -9871,17 +9839,19 @@
             "first_stage_score": 0.2753272128777865,
             "candidate_count": 28,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0026322384364902973
+          }
         }
-      ]
+      ],
+      "candidate_count": 28,
+      "target_in_candidates": true
     },
     {
       "id": "Q032",
       "query": "What stack did we settle on in late April for LostLoop?",
+      "expected_message_id": "MSG_001482",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001482",
+      "notes": "Late April means April 21-30, 2026. The April 27 locked stack is the final answer; April 24 rejected alternatives are nearby distractors. Same target as Q012, with an additional chat-time constraint.",
       "retrieved_ids": [
         "MSG_001479",
         "MSG_001482",
@@ -9889,6 +9859,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": true,
+      "search_time_ms": 3036.524,
       "retrieved_messages": [
         {
           "id": "MSG_001479",
@@ -9990,8 +9961,7 @@
             "first_stage_score": 0.3484534147878578,
             "candidate_count": 203,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.06183358281850815
+          }
         },
         {
           "id": "MSG_001482",
@@ -10093,8 +10063,7 @@
             "first_stage_score": 0.265421051318774,
             "candidate_count": 203,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.06923548132181168
+          }
         },
         {
           "id": "MSG_001526",
@@ -10178,17 +10147,19 @@
             "first_stage_score": 0.21977388205313997,
             "candidate_count": 203,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.06222369894385338
+          }
         }
-      ]
+      ],
+      "candidate_count": 203,
+      "target_in_candidates": true
     },
     {
       "id": "Q033",
       "query": "What was the final birthday arrangement we agreed in July?",
+      "expected_message_id": "MSG_003616",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003616",
+      "notes": "Within July 2026, the July 21 consolidated plan is the agreement on venue, time and spending. The July 25 expenses are post-event reporting, not the agreement itself. Same target as Q013 with a calendar constraint.",
       "retrieved_ids": [
         "MSG_003616",
         "MSG_003210",
@@ -10196,6 +10167,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 3685.968,
       "retrieved_messages": [
         {
           "id": "MSG_003616",
@@ -10297,8 +10269,7 @@
             "first_stage_score": 0.4549478606372539,
             "candidate_count": 274,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.7338820099830627
+          }
         },
         {
           "id": "MSG_003210",
@@ -10382,8 +10353,7 @@
             "first_stage_score": 0.4481635637413119,
             "candidate_count": 274,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0007892377907410264
+          }
         },
         {
           "id": "MSG_003610",
@@ -10467,23 +10437,26 @@
             "first_stage_score": 0.39452652043089886,
             "candidate_count": 274,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.003772138385102153
+          }
         }
-      ]
+      ],
+      "candidate_count": 274,
+      "target_in_candidates": true
     },
     {
       "id": "Q034",
       "query": "What update did Aarav give on April 2 about the trip deposits?",
+      "expected_message_id": "MSG_000846",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_000846",
+      "notes": "Aarav's April 2 update says all eight deposits were marked received. The target timestamp, sender and topic all match. The March 28 collection plan only sets a future deadline.",
       "retrieved_ids": [
         "MSG_000846",
         "MSG_000857"
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 61.563,
       "retrieved_messages": [
         {
           "id": "MSG_000846",
@@ -10570,8 +10543,7 @@
             "first_stage_score": 0.5507682185939289,
             "candidate_count": 2,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9992762207984924
+          }
         },
         {
           "id": "MSG_000857",
@@ -10658,17 +10630,19 @@
             "first_stage_score": 0.43190866878616907,
             "candidate_count": 2,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9012527465820312
+          }
         }
-      ]
+      ],
+      "candidate_count": 2,
+      "target_in_candidates": true
     },
     {
       "id": "Q035",
       "query": "At the start of May, had LostLoop been launched successfully from its README?",
+      "expected_message_id": "MSG_001598",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_001598",
+      "notes": "Start of May means May 1-7, 2026. Kabir's May 3 confirmation explicitly says LostLoop now launches from the README in a fresh folder; April's promises to write startup instructions are not completed verification.",
       "retrieved_ids": [
         "MSG_001598",
         "MSG_001599",
@@ -10676,6 +10650,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 2552.886,
       "retrieved_messages": [
         {
           "id": "MSG_001598",
@@ -10759,8 +10734,7 @@
             "first_stage_score": 0.5217377612870762,
             "candidate_count": 172,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9996508359909058
+          }
         },
         {
           "id": "MSG_001599",
@@ -10853,8 +10827,7 @@
             "first_stage_score": 0.2933356776733407,
             "candidate_count": 172,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.00031977714388631284
+          }
         },
         {
           "id": "MSG_001685",
@@ -10956,17 +10929,19 @@
             "first_stage_score": 0.2598893638621941,
             "candidate_count": 172,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0030651940032839775
+          }
         }
-      ]
+      ],
+      "candidate_count": 172,
+      "target_in_candidates": true
     },
     {
       "id": "Q036",
       "query": "Find the first forwarded notice last month saying the semester timetable could still change.",
+      "expected_message_id": "MSG_003892",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003892",
+      "notes": "Relative to 2026-09-01, last month is August 1-31. Ishita's August 1 provisional-timetable forward is the earliest forwarded notice matching this description. The preceding reply is not a forward; repeated later forwards must not replace the earliest one.",
       "retrieved_ids": [
         "MSG_004076",
         "MSG_004612",
@@ -10974,6 +10949,7 @@
       ],
       "top1_correct": false,
       "recalled_at_3": false,
+      "search_time_ms": 209.084,
       "retrieved_messages": [
         {
           "id": "MSG_004076",
@@ -11076,8 +11052,7 @@
             "first_stage_score": 0.5332711323109321,
             "candidate_count": 11,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.4797016978263855
+          }
         },
         {
           "id": "MSG_004612",
@@ -11180,8 +11155,7 @@
             "first_stage_score": 0.5372370167580299,
             "candidate_count": 11,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.4770565330982208
+          }
         },
         {
           "id": "MSG_004364",
@@ -11284,17 +11258,19 @@
             "first_stage_score": 0.5274553581085853,
             "candidate_count": 11,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.4753566384315491
+          }
         }
-      ]
+      ],
+      "candidate_count": 11,
+      "target_in_candidates": true
     },
     {
       "id": "Q037",
       "query": "Which room did the Software Engineering tutorial move to on August 2?",
+      "expected_message_id": "MSG_003922",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003922",
+      "notes": "Rohan's August 2 notice explicitly moves the Software Engineering tutorial to B-204 on that date. This is a tutorial notice, not a provisional semester timetable or an unrelated room change.",
       "retrieved_ids": [
         "MSG_003922",
         "MSG_003924",
@@ -11302,6 +11278,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 270.956,
       "retrieved_messages": [
         {
           "id": "MSG_003922",
@@ -11385,8 +11362,7 @@
             "first_stage_score": 0.6135355923524193,
             "candidate_count": 16,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9999675750732422
+          }
         },
         {
           "id": "MSG_003924",
@@ -11488,8 +11464,7 @@
             "first_stage_score": 0.3633543989431348,
             "candidate_count": 16,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.01813678629696369
+          }
         },
         {
           "id": "MSG_003923",
@@ -11582,23 +11557,26 @@
             "first_stage_score": 0.37879642265453733,
             "candidate_count": 16,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.007348368875682354
+          }
         }
-      ]
+      ],
+      "candidate_count": 16,
+      "target_in_candidates": true
     },
     {
       "id": "Q038",
       "query": "What network maintenance notice did Meera forward last month?",
+      "expected_message_id": "MSG_003999",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_003999",
+      "notes": "Last month resolves to August 2026. Meera forwards the dated August 6 network-maintenance warning. Her August 18 reminder mentions a notice but is not the forwarded warning itself; Rohan forwards the later notice.",
       "retrieved_ids": [
         "MSG_003999",
         "MSG_004154"
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 70.077,
       "retrieved_messages": [
         {
           "id": "MSG_003999",
@@ -11704,8 +11682,7 @@
             "first_stage_score": 0.5196901043295655,
             "candidate_count": 2,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9984210729598999
+          }
         },
         {
           "id": "MSG_004154",
@@ -11793,17 +11770,19 @@
             "first_stage_score": 0.2769369167426509,
             "candidate_count": 2,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.04488346725702286
+          }
         }
-      ]
+      ],
+      "candidate_count": 2,
+      "target_in_candidates": true
     },
     {
       "id": "Q039",
       "query": "Who said they had reached home on June 2, and what food were they happy about?",
+      "expected_message_id": "MSG_002346",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_002346",
+      "notes": "Kabir's June 2 evening arrival update celebrates veg rolls. Exact chat date distinguishes it from Ishita's later arrival-and-food messages. Sender metadata answers who and the message itself names the food.",
       "retrieved_ids": [
         "MSG_002346",
         "MSG_002322",
@@ -11811,6 +11790,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 462.852,
       "retrieved_messages": [
         {
           "id": "MSG_002346",
@@ -11894,8 +11874,7 @@
             "first_stage_score": 0.36062701303750383,
             "candidate_count": 32,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.010119806975126266
+          }
         },
         {
           "id": "MSG_002322",
@@ -11979,8 +11958,7 @@
             "first_stage_score": 0.27841337193389276,
             "candidate_count": 32,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0002508419274818152
+          }
         },
         {
           "id": "MSG_002338",
@@ -12064,17 +12042,19 @@
             "first_stage_score": 0.2760741050643603,
             "candidate_count": 32,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 7.047381950542331e-05
+          }
         }
-      ]
+      ],
+      "candidate_count": 32,
+      "target_in_candidates": true
     },
     {
       "id": "Q040",
       "query": "Yesterday morning, how many MB was Aditya's oversized submission file?",
+      "expected_message_id": "MSG_004620",
       "category": "time",
       "zero_word_overlap": false,
-      "expected_message_id": "MSG_004620",
+      "notes": "Yesterday relative to September 1 is August 31, 2026; morning is 00:00-11:59:59 local time. Aditya's 08:04 message states 42 MB and too many screenshots, answering the preceding file-size question. The upload complaint and later success are context, not the requested size-bearing hit.",
       "retrieved_ids": [
         "MSG_004620",
         "MSG_004619",
@@ -12082,6 +12062,7 @@
       ],
       "top1_correct": true,
       "recalled_at_3": true,
+      "search_time_ms": 155.952,
       "retrieved_messages": [
         {
           "id": "MSG_004620",
@@ -12189,8 +12170,7 @@
             "first_stage_score": 0.4170716359306045,
             "candidate_count": 8,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.9627482295036316
+          }
         },
         {
           "id": "MSG_004619",
@@ -12289,8 +12269,7 @@
             "first_stage_score": 0.37630445681740265,
             "candidate_count": 8,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0005383031093515456
+          }
         },
         {
           "id": "MSG_004618",
@@ -12380,10 +12359,88 @@
             "first_stage_score": 0.31764702332884587,
             "candidate_count": 8,
             "reranker_weight": 0.85
-          },
-          "reranker_score": 0.0036492778453975916
+          }
         }
-      ]
+      ],
+      "candidate_count": 8,
+      "target_in_candidates": true
     }
-  ]
+  ],
+  "measured_at_utc": "2026-09-12T14:09:47.305214+00:00",
+  "input_freeze": {
+    "version": "1.0.0",
+    "status": "frozen",
+    "frozen_on": "2026-09-12",
+    "reference_date": "2026-09-01",
+    "retrieval_scored": false,
+    "query_count": 40,
+    "category_counts": {
+      "person": 10,
+      "semantic": 20,
+      "time": 10
+    },
+    "hard_query_count": 10,
+    "hard_query_ids": [
+      "Q001",
+      "Q002",
+      "Q003",
+      "Q004",
+      "Q005",
+      "Q006",
+      "Q007",
+      "Q008",
+      "Q009",
+      "Q010"
+    ],
+    "distinct_target_count": 37,
+    "sha256": {
+      "backend/data/corpus_metadata.json": "faf3e0be5b901265ca72d37efd953b2d7725dbd47adf5ce7f3ec2cc9948d9485",
+      "backend/data/messages.jsonl": "d676b0a4872d627fa3a13b8d9ab7e8b87733b3e5dccff5efd914143a9a949371",
+      "evaluation/HARD_SUBSET_REVIEW.md": "60de4402b178b2c2ed5a4b0060f1ed4452086cfd4fc65f42d7b2b5f96537af59",
+      "evaluation/OVERLAP.md": "f3b05838be867b13a0f0e5831b220fb6bc9a0b45e65632c0541be973c866f5fd",
+      "evaluation/label_changes.md": "a3ed7243887149cbdf47959d928a7a0f2764a82c6c6627aa5ba825872985aa9a",
+      "evaluation/overlap.py": "8f23e59bce038c9f3835395601b9bb134447fbbe6cf360de92e822dce3edd848",
+      "evaluation/overlap_convention.json": "3ba89dc26e64b3f389b50d56f5d3dca2f647c40d04189a370a16e7a75eba85ca",
+      "evaluation/queries.json": "bb0967692a98bbd3bc0392398f29931b521517ba82667f0e4ad56128d9d3b8cb"
+    }
+  },
+  "source_sha256": {
+    "backend/app/__init__.py": "cc79626d485edd3e4d725db8525aaeaebc775d6f2368caa09538116e750e5f6f",
+    "backend/app/api/__init__.py": "2c8889530f73e61a975f322cd64c87358ed6b3b69b6f0a9666383ddf250d0111",
+    "backend/app/api/health.py": "f13f88fd4e99c1f3c06bdcd9f1bf4ee093c1ba2ca518eda779847b3afcd71a7f",
+    "backend/app/api/search.py": "a13ff9df264687322746c43349156ecee20f7eb525fdbfd7e96d1d24fe79de25",
+    "backend/app/config.py": "c19811d68290b1490f4d8e49ea99dd4c388bb9641f26494e4c147ba20579021d",
+    "backend/app/main.py": "211cc5221943370856fec42a84053c7f96847aa6465a4c2a329ac5ffff9b3cc8",
+    "backend/app/query_understanding/__init__.py": "84624ba84a30f409610071ac5712b69a10fbde71c55c504741276484f4733a4b",
+    "backend/app/query_understanding/__main__.py": "a8c2bd3a3560be4d5d863979d2e3eb050562b7a7114f4a1f8f1e1472b1bafc7a",
+    "backend/app/query_understanding/dates.py": "93467c5096a9fab3c8aaaed073b6f36b2fc6b56caf02b2910f3cc1e7a1b8de39",
+    "backend/app/query_understanding/parser.py": "067e5b565b9c89a90d799e903bee4292d958071e6c325d5c82f2bfa8fb77fb05",
+    "backend/app/schemas.py": "a43d88917e2f336282657853ce70bb4647a23f84f0fc741388c795e0db19e645",
+    "backend/app/search/__init__.py": "8cf0430bb4f3b648d62e7469080c809cb594733661c985da58266dcd720fd1bf",
+    "backend/app/search/constraints.py": "1eee8cd7b8b9d5fc40df487c5e64a96d5a98a2a960143957b87f44abc890a07e",
+    "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
+    "backend/app/search/corpus.py": "bf9dc7dfa83787eaafe5feaf4793916075dc952d25353cbc98821edb9f15190d",
+    "backend/app/search/embedding.py": "15f69d99cbfb838ea3253beaca95666bbca7f825af52e54df0890c32d12b2700",
+    "backend/app/search/hybrid.py": "c2cdc85f491bca22b022dfec119b19815db138c4e4f45ba91c632f627133cb33",
+    "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
+    "backend/app/search/message_types.py": "018e6b9ac0d42eeae80832520b970bea5b5003358a5538f98025235469a48f70",
+    "backend/app/search/model_config.py": "1e1a7009f28c005dcccb3a261757a7bee61ea65e75881db34510b562a61a5cd8",
+    "backend/app/search/ranking_config.py": "1f9a0ac8c0694c426f1058b1ca32b2a2342ee343f28576765aaf22212d7cced3",
+    "backend/app/search/reranked.py": "3cfa1de4cd9864694e6bf01ad8295dbc4a8e0b69fe1d4e2bcb2738b1562a5571",
+    "backend/app/search/reranker_config.py": "f8c5bc05d4cf86a2d37a1bac1abe32a8d2739e75f8035b2d7fe75bc7a4ba4c69",
+    "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
+    "backend/app/services/__init__.py": "94bd871831f329ceaeb50edaec9307000d381178e6cd0b3d0b65176923d8e051",
+    "backend/app/services/conversation.py": "f2c24b2e5e1363cee5395d6e068139e393d95daf0b18dbde41edc235c822d8de",
+    "backend/app/services/search.py": "97fbace314f9579fd7211e10b3217804bb6c78cbfd45db6cc640ec581727b7f4",
+    "evaluation/__init__.py": "0bdcf5d7d92d02247facde43e270e9b02a91cabeb02ef59ec545daeb38c436d0",
+    "evaluation/compare.py": "4daea433d762fb9c05e28ded0223a8d64cdd9dcb350e952fc8f95e3c3ed9cf10",
+    "evaluation/evaluate.py": "4ad9219c30d4bdee3e8b126c248c214071b8101f0f56023692e652f9b79a5067",
+    "evaluation/evaluate_bilingual.py": "4edf20f846947f2c8f0478ad6a17d4bafe5d165931d96b5403c07da0f9fc3a74",
+    "evaluation/evaluate_reranked.py": "d06135c2f790007a399c54e8ad1cbec72c0d638d43a31b2810139e69a5f5f6c5",
+    "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
+    "evaluation/overlap.py": "8f23e59bce038c9f3835395601b9bb134447fbbe6cf360de92e822dce3edd848",
+    "evaluation/reporting.py": "6168beced2727070d68f92715f6433bb86b2e391af4cb806a027fb58dee0b77a",
+    "evaluation/tune_hybrid.py": "1cd248c78eaaca3c5a8e3c3976e597e0a88418a246ed977d85bcbf54081d55a8",
+    "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965"
+  }
 }

@@ -13,7 +13,7 @@ from .validate_queries import sha256
 
 METHODS = ('lexical', 'semantic', 'contextual', 'hybrid')
 CATEGORIES = ('person', 'time', 'semantic')
-SCORE_FIELDS = ('hybrid_score', 'semantic_score', 'contextual_score', 'lexical_score', 'metadata_bonus')
+SCORE_FIELDS = ('hybrid_score', 'semantic_score', 'contextual_score', 'lexical_score', 'reranker_score', 'metadata_bonus')
 
 
 def display_rate(rate):
@@ -61,7 +61,7 @@ def failure_lines(report, messages):
         if not row['retrieved_messages']:
             lines.append('  Retrieved: no eligible result')
         for rank, hit in enumerate(row['retrieved_messages'], 1):
-            scores = ', '.join(f'{field}={hit[field]:.6f}' for field in SCORE_FIELDS if field in hit)
+            scores = ', '.join(f'{field}={hit[field]:.6f}' for field in SCORE_FIELDS if isinstance(hit.get(field), (int, float)))
             lines.append(f"  Retrieved {hit['id']} (rank {rank}) | {scores or 'scores unavailable'} | "
                          f"{hit['sender']} | {hit['timestamp']} | {hit['text']}")
         lines.append(f"  Top 3: {', '.join(row['retrieved_ids']) or '(empty)'}")

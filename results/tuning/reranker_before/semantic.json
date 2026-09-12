@@ -1,7 +1,7 @@
 {
   "method": "semantic",
   "schema_version": "1.1.0",
-  "measured_at_utc": "2026-09-12T14:22:32+00:00",
+  "measured_at_utc": "2026-09-12T13:39:05+00:00",
   "metrics": {
     "top1_accuracy": {
       "correct": 13,
@@ -112,18 +112,16 @@
     "backend/app/search/context.py": "d172d003f0d0a0292e75f061fc725eb59879921a082fa651b928d3ee4ab1051e",
     "backend/app/search/corpus.py": "bf9dc7dfa83787eaafe5feaf4793916075dc952d25353cbc98821edb9f15190d",
     "backend/app/search/embedding.py": "15f69d99cbfb838ea3253beaca95666bbca7f825af52e54df0890c32d12b2700",
-    "backend/app/search/hybrid.py": "b43a5786a1be39f29e32a462949b03392d6e3880ffc3d5b308c56074ae636c09",
+    "backend/app/search/hybrid.py": "c2cdc85f491bca22b022dfec119b19815db138c4e4f45ba91c632f627133cb33",
     "backend/app/search/lexical.py": "f47b9a5c1e7444efde54fc1d2a5ee615711beaa8071a9fbbc82b7471bdb21644",
     "backend/app/search/message_types.py": "018e6b9ac0d42eeae80832520b970bea5b5003358a5538f98025235469a48f70",
     "backend/app/search/model_config.py": "1e1a7009f28c005dcccb3a261757a7bee61ea65e75881db34510b562a61a5cd8",
     "backend/app/search/ranking_config.py": "1f9a0ac8c0694c426f1058b1ca32b2a2342ee343f28576765aaf22212d7cced3",
-    "backend/app/search/reranked.py": "c159ae913b396306e1f277e1354e2b4416463c4275c7dac867e05b836bdcd00c",
-    "backend/app/search/reranker_config.py": "f8c5bc05d4cf86a2d37a1bac1abe32a8d2739e75f8035b2d7fe75bc7a4ba4c69",
     "backend/app/search/semantic.py": "7facb7e86077856370b8292b7d73b27bfe7de1144454180569fdd76166cdc3c5",
-    "evaluation/evaluate.py": "144e345b49405bde94c1c9ce6a84ca3ff4d22e10d9799c7dd7be6d76fdd29895",
+    "evaluation/evaluate.py": "4ad9219c30d4bdee3e8b126c248c214071b8101f0f56023692e652f9b79a5067",
     "evaluation/metrics.py": "50caaeb85a65694094d116fa9f895e290e27e66d6f21d9344c9cdb2a2bba309b",
     "evaluation/validate_queries.py": "1e339ccd9bbea6724688fe8913cbc89b9b3a77c33d5b40ecd950509e570bf965",
-    "evaluation/reporting.py": "75736e342feafd911abaa7b910d143460d4fd1932e230604362a805e1f13d94e",
+    "evaluation/reporting.py": "6168beced2727070d68f92715f6433bb86b2e391af4cb806a027fb58dee0b77a",
     "evaluation/compare.py": "4daea433d762fb9c05e28ded0223a8d64cdd9dcb350e952fc8f95e3c3ed9cf10"
   },
   "requirements_lock_sha256": "7c7ae6c0071433ab672672f647e8440d2d8a0cfe09486befd9ba3ef7cf7305b0",

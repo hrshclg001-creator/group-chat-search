@@ -9,6 +9,7 @@ import numpy as np
 from .model_config import (
     BATCH_SIZE, CPU_THREADS, EMBEDDING_CACHE, MAX_SEQUENCE_LENGTH,
     MODEL_DIRECTORY, MODEL_FILES, MODEL_ID, MODEL_REVISION,
+    validate_model_manifest,
 )
 
 
@@ -28,8 +29,7 @@ class LocalEncoder:
         if not manifest_path.is_file() or not all((MODEL_DIRECTORY / file).is_file() for file in MODEL_FILES):
             raise FileNotFoundError('Prepare the model first: cd backend; python -m scripts.prepare_model')
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-        if manifest['model_id'] != MODEL_ID or manifest['revision'] != MODEL_REVISION:
-            raise ValueError('Local model manifest does not match the pinned revision')
+        validate_model_manifest(manifest)
         # Hash the actual local files once per encoder to avoid accepting altered weights.
         for name in MODEL_FILES:
             digest = hashlib.sha256()

@@ -52,6 +52,7 @@ class SearchResultResponse(BaseModel):
     semantic_score: float
     contextual_score: float
     lexical_score: float
+    reranker_score: Optional[float] = None
     query_metadata: InterpretedQuery
     rank: int = Field(ge=1)
 

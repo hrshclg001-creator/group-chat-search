@@ -131,16 +131,16 @@
     },
     "hybrid": {
       "top1_accuracy": {
+        "correct": 22,
+        "total": 40,
+        "value": 0.55,
+        "percent": 55.0
+      },
+      "recall_at_3": {
         "correct": 25,
         "total": 40,
         "value": 0.625,
         "percent": 62.5
-      },
-      "recall_at_3": {
-        "correct": 29,
-        "total": 40,
-        "value": 0.725,
-        "percent": 72.5
       },
       "zero_word_overlap_top1_accuracy": {
         "correct": 1,
@@ -150,68 +150,36 @@
       },
       "top1_accuracy_by_category": {
         "person": {
-          "correct": 10,
-          "total": 10,
-          "value": 1.0,
-          "percent": 100.0
-        },
-        "semantic": {
-          "correct": 8,
-          "total": 20,
-          "value": 0.4,
-          "percent": 40.0
-        },
-        "time": {
           "correct": 7,
           "total": 10,
           "value": 0.7,
           "percent": 70.0
+        },
+        "semantic": {
+          "correct": 7,
+          "total": 20,
+          "value": 0.35,
+          "percent": 35.0
+        },
+        "time": {
+          "correct": 8,
+          "total": 10,
+          "value": 0.8,
+          "percent": 80.0
         }
       },
-      "overall_minus_hard_percentage_points": 52.5
+      "overall_minus_hard_percentage_points": 45.0
     }
   },
   "hybrid_vs_baselines": {
     "lexical": {
       "baseline_method": "lexical",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 40.0,
-      "recall_at_3_delta_percentage_points": 32.5,
+      "top1_delta_percentage_points": 32.5,
+      "recall_at_3_delta_percentage_points": 22.5,
       "hard_top1_delta_percentage_points": 10.0,
       "category_changes": {
         "person": {
-          "baseline": {
-            "correct": 3,
-            "total": 10,
-            "value": 0.3,
-            "percent": 30.0
-          },
-          "candidate": {
-            "correct": 10,
-            "total": 10,
-            "value": 1.0,
-            "percent": 100.0
-          },
-          "delta_percentage_points": 70.0,
-          "direction": "improved"
-        },
-        "semantic": {
-          "baseline": {
-            "correct": 3,
-            "total": 20,
-            "value": 0.15,
-            "percent": 15.0
-          },
-          "candidate": {
-            "correct": 8,
-            "total": 20,
-            "value": 0.4,
-            "percent": 40.0
-          },
-          "delta_percentage_points": 25.0,
-          "direction": "improved"
-        },
-        "time": {
           "baseline": {
             "correct": 3,
             "total": 10,
@@ -226,33 +194,65 @@
           },
           "delta_percentage_points": 40.0,
           "direction": "improved"
+        },
+        "semantic": {
+          "baseline": {
+            "correct": 3,
+            "total": 20,
+            "value": 0.15,
+            "percent": 15.0
+          },
+          "candidate": {
+            "correct": 7,
+            "total": 20,
+            "value": 0.35,
+            "percent": 35.0
+          },
+          "delta_percentage_points": 20.0,
+          "direction": "improved"
+        },
+        "time": {
+          "baseline": {
+            "correct": 3,
+            "total": 10,
+            "value": 0.3,
+            "percent": 30.0
+          },
+          "candidate": {
+            "correct": 8,
+            "total": 10,
+            "value": 0.8,
+            "percent": 80.0
+          },
+          "delta_percentage_points": 50.0,
+          "direction": "improved"
         }
       },
       "newly_correct_queries": [
         "Q006",
-        "Q011",
         "Q013",
         "Q014",
         "Q017",
         "Q021",
-        "Q022",
         "Q024",
         "Q025",
-        "Q027",
         "Q028",
         "Q029",
         "Q033",
+        "Q036",
         "Q038",
         "Q039",
         "Q040"
       ],
-      "newly_incorrect_queries": []
+      "newly_incorrect_queries": [
+        "Q023"
+      ]
     },
     "semantic": {
       "baseline_method": "semantic",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 30.0,
-      "recall_at_3_delta_percentage_points": 32.5,
+      "top1_delta_percentage_points": 22.5,
+      "recall_at_3_delta_percentage_points": 22.5,
       "hard_top1_delta_percentage_points": 0.0,
       "category_changes": {
         "person": {
@@ -263,12 +263,12 @@
             "percent": 30.0
           },
           "candidate": {
-            "correct": 10,
+            "correct": 7,
             "total": 10,
-            "value": 1.0,
-            "percent": 100.0
+            "value": 0.7,
+            "percent": 70.0
           },
-          "delta_percentage_points": 70.0,
+          "delta_percentage_points": 40.0,
           "direction": "improved"
         },
         "semantic": {
@@ -279,12 +279,12 @@
             "percent": 30.0
           },
           "candidate": {
-            "correct": 8,
+            "correct": 7,
             "total": 20,
-            "value": 0.4,
-            "percent": 40.0
+            "value": 0.35,
+            "percent": 35.0
           },
-          "delta_percentage_points": 10.0,
+          "delta_percentage_points": 5.0,
           "direction": "improved"
         },
         "time": {
@@ -295,23 +295,19 @@
             "percent": 40.0
           },
           "candidate": {
-            "correct": 7,
+            "correct": 8,
             "total": 10,
-            "value": 0.7,
-            "percent": 70.0
+            "value": 0.8,
+            "percent": 80.0
           },
-          "delta_percentage_points": 30.0,
+          "delta_percentage_points": 40.0,
           "direction": "improved"
         }
       },
       "newly_correct_queries": [
-        "Q011",
         "Q017",
         "Q021",
-        "Q022",
-        "Q023",
         "Q024",
-        "Q027",
         "Q028",
         "Q029",
         "Q033",
@@ -319,15 +315,13 @@
         "Q039",
         "Q040"
       ],
-      "newly_incorrect_queries": [
-        "Q036"
-      ]
+      "newly_incorrect_queries": []
     },
     "contextual": {
       "baseline_method": "contextual",
       "candidate_method": "hybrid",
-      "top1_delta_percentage_points": 52.5,
-      "recall_at_3_delta_percentage_points": 42.5,
+      "top1_delta_percentage_points": 45.0,
+      "recall_at_3_delta_percentage_points": 32.5,
       "hard_top1_delta_percentage_points": 0.0,
       "category_changes": {
         "person": {
@@ -338,12 +332,12 @@
             "percent": 10.0
           },
           "candidate": {
-            "correct": 10,
+            "correct": 7,
             "total": 10,
-            "value": 1.0,
-            "percent": 100.0
+            "value": 0.7,
+            "percent": 70.0
           },
-          "delta_percentage_points": 90.0,
+          "delta_percentage_points": 60.0,
           "direction": "improved"
         },
         "semantic": {
@@ -354,12 +348,12 @@
             "percent": 5.0
           },
           "candidate": {
-            "correct": 8,
+            "correct": 7,
             "total": 20,
-            "value": 0.4,
-            "percent": 40.0
+            "value": 0.35,
+            "percent": 35.0
           },
-          "delta_percentage_points": 35.0,
+          "delta_percentage_points": 30.0,
           "direction": "improved"
         },
         "time": {
@@ -370,17 +364,16 @@
             "percent": 20.0
           },
           "candidate": {
-            "correct": 7,
+            "correct": 8,
             "total": 10,
-            "value": 0.7,
-            "percent": 70.0
+            "value": 0.8,
+            "percent": 80.0
           },
-          "delta_percentage_points": 50.0,
+          "delta_percentage_points": 60.0,
           "direction": "improved"
         }
       },
       "newly_correct_queries": [
-        "Q011",
         "Q013",
         "Q014",
         "Q017",
@@ -388,16 +381,14 @@
         "Q019",
         "Q020",
         "Q021",
-        "Q022",
-        "Q023",
         "Q025",
         "Q026",
-        "Q027",
         "Q028",
         "Q029",
         "Q030",
         "Q033",
         "Q034",
+        "Q036",
         "Q038",
         "Q039",
         "Q040"
@@ -406,18 +397,18 @@
     }
   },
   "limitations": "Hybrid weights were selected on these same frozen queries; baseline configurations were untuned. No held-out accuracy is claimed.",
-  "generated_at_utc": "2026-09-12T14:25:01+00:00",
+  "generated_at_utc": "2026-09-12T13:39:10+00:00",
   "report_sha256": {
-    "results/lexical.json": "1b7a310bfc14508e4d605387d5abd77fb7ac434a5ba69e1db057de991cf681e5",
-    "results/semantic.json": "a0a373162f4c73e0c961674a3d423c03fb9cc318f5988204383ef86414d4f01d",
-    "results/contextual.json": "f4fe9859a957e821143f6e44f0275b16de99faeb5f035fc4def7a8e20f1ce417",
-    "results/hybrid.json": "b94945355342c3c27ee166b69fab8cd2bd01d7ef1425ad23c71d38cd6bfeec31"
+    "results/lexical.json": "67df4e2830b330f66428a634804354c1cba1ab88cc412a9274bd1112bf51efcd",
+    "results/semantic.json": "18deaa0ccaedbd1e54b54f9fe5f89ef91cbfd514e849f36d0e30fc588c7e927d",
+    "results/contextual.json": "192ba746edd6afca5f42e14df4fbc0b0079b1392c0f5725136ddedc3d4dd2c7c",
+    "results/hybrid.json": "8ee9d92c7b635719a123f4718fd35100ec4b110c6fbd7c4c54a89acd79fac7cc"
   },
   "artifact_sha256": {
-    "results/comparison.csv": "d6fbac92d3d1077dd2591821b3ae4dd988696701736301d5ef52e9614bd87a9d",
-    "results/benchmark.png": "45da838ca1c5d82c86cd73d7966410194459831146a4992ad4cf7df06835c5e1",
-    "results/evaluation_summary.md": "2b1307ac48da2acb35d5e00ac331187804776f978b38926e6aa9c6ae47320f52",
-    "results/failed_queries.txt": "4cdb65389b25ef0d29f590c45cbe17e2f09a23f9616878a47aebf6ffc20b4da9"
+    "results/comparison.csv": "9b912f473362312f6b42bf556659a62e08fa69d05f4fb9dbdfc8798b5416592f",
+    "results/benchmark.png": "ab681888eb353c84d2484650e3d81fd57ed7738d71b06e9d1c9ac04aee7cab61",
+    "results/evaluation_summary.md": "27398f5e50c2c531e32c7891579f5f7e2dec5b76ebba9593f83c0a77448d6d87",
+    "results/failed_queries.txt": "bcef6104854792e18a311690f657aa54592847f0a7aa3d61450dba87131a0c65"
   },
   "reporting_environment": {
     "python": "3.9.10",

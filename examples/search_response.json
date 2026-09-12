@@ -1,7 +1,7 @@
 {
-  "query": "When did we finally choose Manali?",
+  "query": "When did we decide on Manali?",
   "interpreted_query": {
-    "raw_query": "When did we finally choose Manali?",
+    "raw_query": "When did we decide on Manali?",
     "person": null,
     "person_mode": "none",
     "person_candidates": [],
@@ -12,44 +12,65 @@
     "reference_date": "2026-09-01",
     "timezone": "Asia/Kolkata",
     "warnings": [],
-    "explanations": []
+    "explanations": [],
+    "message_type": null
   },
-  "search_time_ms": 53.537,
+  "search_time_ms": 4585.137,
   "results": [
     {
       "matching_message": {
-        "id": "MSG_002538",
-        "sender": "Rohan Mehta",
-        "timestamp": "2026-06-09T17:01:00+05:30",
-        "text": "finished Dangal. that ending??"
+        "id": "MSG_000713",
+        "sender": "Ishita Patel",
+        "timestamp": "2026-03-28T21:13:19+05:30",
+        "text": "Final decision: Manali, June 10-15, maximum Rs 8,700 each. Goa is dropped. Refundable rooms only; Aarav will collect Rs 2,000 each by April 2."
       },
-      "previous_messages": [],
-      "next_messages": [
+      "previous_messages": [
         {
-          "id": "MSG_002539",
+          "id": "MSG_000710",
           "sender": "Aditya Joshi",
-          "timestamp": "2026-06-09T17:02:42+05:30",
-          "text": "sPOILER mat likhna please"
+          "timestamp": "2026-03-28T21:09:37+05:30",
+          "text": "yes, bus charges separate terms; note added in itinerary"
         },
         {
-          "id": "MSG_002540",
+          "id": "MSG_000711",
           "sender": "Rohan Mehta",
-          "timestamp": "2026-06-09T17:04:41+05:30",
-          "text": "okay okay, vague reaction only 😭"
+          "timestamp": "2026-03-28T21:09:59+05:30",
+          "text": "send just the error text, no tokens or private files"
         },
         {
-          "id": "MSG_002541",
-          "sender": "Ishita Patel",
-          "timestamp": "2026-06-09T17:07:49+05:30",
-          "text": "music acha tha?"
+          "id": "MSG_000712",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-28T21:13:17+05:30",
+          "text": "it's only my toy repo. https://example.com/practice/daily_20260328_2"
         }
       ],
-      "search_score": 0.2555380176931869,
-      "semantic_score": 0.3921630382537842,
-      "contextual_score": 0.33390259742736816,
-      "lexical_score": 0.007075226023917923,
+      "next_messages": [
+        {
+          "id": "MSG_000714",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-03-28T21:16:00+05:30",
+          "text": "we can look after 9:30 pm"
+        },
+        {
+          "id": "MSG_000715",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-28T21:16:09+05:30",
+          "text": "I'll track the eight contributions in one sheet. No payments posted here."
+        },
+        {
+          "id": "MSG_000716",
+          "sender": "Aarav Sharma",
+          "timestamp": "2026-03-28T21:17:11+05:30",
+          "text": "thanks, panic thoda kam hua"
+        }
+      ],
+      "search_score": 0.8828227519989014,
+      "semantic_score": 0.3848295211791992,
+      "contextual_score": 0.30561408400535583,
+      "lexical_score": 0.1038314204495725,
+      "reranker_score": 0.992305338382721,
       "query_metadata": {
-        "raw_query": "When did we finally choose Manali?",
+        "raw_query": "When did we decide on Manali?",
         "person": null,
         "person_mode": "none",
         "person_candidates": [],
@@ -60,9 +81,117 @@
         "reference_date": "2026-09-01",
         "timezone": "Asia/Kolkata",
         "warnings": [],
-        "explanations": []
+        "explanations": [],
+        "message_type": null
       },
       "rank": 1
+    },
+    {
+      "matching_message": {
+        "id": "MSG_000418",
+        "sender": "Aditya Joshi",
+        "timestamp": "2026-03-17T21:05:00+05:30",
+        "text": "[PDF] Manali guesthouse quote, 3 rooms for our eight"
+      },
+      "previous_messages": [],
+      "next_messages": [
+        {
+          "id": "MSG_000419",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-17T21:07:00+05:30",
+          "text": "wifi down for anyone else or only my cursed laptop"
+        },
+        {
+          "id": "MSG_000420",
+          "sender": "Sneha Iyer",
+          "timestamp": "2026-03-17T21:09:46+05:30",
+          "text": "phone pe bhi nahi chal raha"
+        },
+        {
+          "id": "MSG_000421",
+          "sender": "Meera Nair",
+          "timestamp": "2026-03-17T21:09:57+05:30",
+          "text": "two triple rooms and one twin? who gets which baad mein"
+        }
+      ],
+      "search_score": 0.25853070616722107,
+      "semantic_score": 0.3211985230445862,
+      "contextual_score": 0.3017292618751526,
+      "lexical_score": 0.15532819886957194,
+      "reranker_score": 0.26019665598869324,
+      "query_metadata": {
+        "raw_query": "When did we decide on Manali?",
+        "person": null,
+        "person_mode": "none",
+        "person_candidates": [],
+        "start_date": null,
+        "end_date": null,
+        "hour_range": null,
+        "intent": "semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": [],
+        "message_type": null
+      },
+      "rank": 2
+    },
+    {
+      "matching_message": {
+        "id": "MSG_000296",
+        "sender": "Aditya Joshi",
+        "timestamp": "2026-03-12T19:55:50+05:30",
+        "text": "Manali stay mein hot water included hai, heater extra"
+      },
+      "previous_messages": [
+        {
+          "id": "MSG_000293",
+          "sender": "Kabir Khan",
+          "timestamp": "2026-03-12T19:44:48+05:30",
+          "text": "yeh food hai ya compiler warning 😂"
+        },
+        {
+          "id": "MSG_000294",
+          "sender": "Rohan Mehta",
+          "timestamp": "2026-03-12T19:47:13+05:30",
+          "text": "Goa train sleeper try karu toh 1200 bach sakta hai"
+        },
+        {
+          "id": "MSG_000295",
+          "sender": "Ishita Patel",
+          "timestamp": "2026-03-12T19:51:36+05:30",
+          "text": "try availability first. Imaginary cheap ticket doesn't count"
+        }
+      ],
+      "next_messages": [
+        {
+          "id": "MSG_000297",
+          "sender": "Ananya Verma",
+          "timestamp": "2026-03-12T19:58:43+05:30",
+          "text": "send cancellation terms bhi. abhi dono open hain"
+        }
+      ],
+      "search_score": 0.2226627618074417,
+      "semantic_score": 0.3741975724697113,
+      "contextual_score": 0.28942108154296875,
+      "lexical_score": 0.15319751329440368,
+      "reranker_score": 0.21556100249290466,
+      "query_metadata": {
+        "raw_query": "When did we decide on Manali?",
+        "person": null,
+        "person_mode": "none",
+        "person_candidates": [],
+        "start_date": null,
+        "end_date": null,
+        "hour_range": null,
+        "intent": "semantic",
+        "reference_date": "2026-09-01",
+        "timezone": "Asia/Kolkata",
+        "warnings": [],
+        "explanations": [],
+        "message_type": null
+      },
+      "rank": 3
     }
   ]
 }

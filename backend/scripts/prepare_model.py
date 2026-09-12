@@ -8,7 +8,7 @@ import json
 import urllib.request
 from pathlib import Path
 
-from app.search.model_config import MODEL_DIRECTORY, MODEL_FILES, MODEL_ID, MODEL_REVISION
+from app.search.model_config import MODEL_DIRECTORY, MODEL_FILES, MODEL_ID, MODEL_REVISION, validate_model_manifest
 
 
 def file_hash(path):
@@ -24,9 +24,7 @@ def prepare_model():
     manifest_path = MODEL_DIRECTORY / 'download_manifest.json'
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-        if (manifest['model_id'] != MODEL_ID or manifest['revision'] != MODEL_REVISION
-                or set(manifest['sha256']) != set(MODEL_FILES)):
-            raise ValueError('Model manifest does not match the pinned configuration')
+        validate_model_manifest(manifest)
         for name, digest in manifest['sha256'].items():
             if file_hash(MODEL_DIRECTORY / name) != digest:
                 raise ValueError(f'Model cache hash mismatch: {name}')

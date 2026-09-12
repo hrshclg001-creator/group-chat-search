@@ -1,5 +1,7 @@
 # Hybrid failure analysis
 
+Historical analysis of the first-stage hybrid follows. The subsequent multilingual reranker reaches 25/40 Top-1 (15 failures) with the same 1/10 hard accuracy. See [tuning_notes.md](tuning_notes.md) for the retained change, four gains and one regression, and [failed_queries.txt](failed_queries.txt) for current expected/retrieved messages and scores. The descriptions below retain the original experiment's evidence rather than substituting later rankings.
+
 Initial analysis was performed before modifying retrieval code, using the frozen 40-query report archived in `tuning/before/hybrid.json`. All 19 initial Top-1 failures are listed below. Live read-only diagnostics confirmed that **every expected target was eligible** after metadata filtering; listed target ranks are among all eligible messages, not just the saved top three.
 
 The initial result was **21/40 (52.5%) overall**, **1/10 (10%) hard**, gap **+42.5 percentage points**, and Recall@3 **25/40 (62.5%)**. After the retained general message-type change: **22/40 (55%) overall**, **1/10 (10%) hard**, gap **+45 pp**, Recall@3 **25/40 (62.5%)**. Q038 is fixed; all other initial failures remain. No previously correct Top-1 query was lost.

@@ -36,6 +36,7 @@ A hybrid ranker combines these signals and returns results ranked by relevance, 
 - **Participant-aware search** with deterministic name parsing for explicit sender queries (English and Hinglish)
 - **Temporal search** using a fixed reference date to resolve relative expressions (_"last month"_, _"yesterday"_) reproducibly
 - **Hybrid ranking** that combines semantic, lexical, and metadata signals with visible weights and constraints
+- **Local multilingual reranking** that checks query–message relevance after candidate retrieval
 - **Surrounding conversation context** preserved for interpretation; original message ID always returned
 - **Measured evaluation** on 40 frozen queries including 10 zero-word-overlap paraphrases
 - **No external LLM API** required; all inference runs locally on CPU
@@ -60,11 +61,15 @@ Semantic Retrieval          Lexical Retrieval
     +----- (All messages scored)---+
                  |
                  v
-         Hybrid Ranker
+         Hybrid Candidate Ranker
                  |
     +---- Combine semantic, lexical, person, time
     +---- Apply metadata constraints
     +---- Deterministic tie-breaking
+    |
+    v
+Local Multilingual Cross-Encoder
+    +---- Rerank eligible original messages
     |
     v
   Ranked Results
@@ -87,17 +92,17 @@ React UI Display
 
 | Component             | Technology                           | Version                           |
 | --------------------- | ------------------------------------ | --------------------------------- |
-| **Backend**           | Python 3.9+ / FastAPI                | FastAPI pinned in `backend/requirements.lock.txt` |
+| **Backend**           | Python / FastAPI                     | Python 3.9.10 verified; FastAPI pinned in `backend/requirements.lock.txt` |
 | **Web server**        | Uvicorn                              | 0.34.3                            |
 | **Embeddings**        | sentence-transformers                | 3.4.1                             |
 | **Semantic model**    | Hugging Face Transformers            | 4.48.3                            |
 | **Tensor backend**    | PyTorch                              | 2.6.0                             |
 | **Numerical compute** | NumPy/SciPy                          | 2.0.2 / 1.13.1                    |
 | **Lexical retrieval** | scikit-learn                         | 1.6.1                             |
-| **Frontend**          | React + Vite                         | Latest (package-lock.json pinned) |
+| **Frontend**          | React + Vite                         | 19.3.0 / 8.3.0 (`package-lock.json`) |
 | **Styling**           | Plain CSS (responsive, no framework) | —                                 |
 | **Evaluation**        | Matplotlib                           | 3.9.4                             |
-| **Testing**           | pytest / vitest                      | 8.4.2                             |
+| **Testing**           | pytest / Node built-in test runner   | pytest 8.4.2; Node 24.8.0 verified |
 
 ## Dataset
 
@@ -144,7 +149,7 @@ Each thread includes rejected alternatives, interruptions, calculations, and fol
 The deterministic parser extracts metadata from natural-language queries without calling an external LLM:
 
 - **Participant detection:** Matches full names, first+last, or unambiguous first names against corpus metadata. English requests (_"what did Ishita say"_) and Hinglish (_"Ishita ne"_) are both recognized. Uncertain matches receive a small relevance bonus; names mentioned as topics do not become filters.
-- **Temporal expression resolution:** Recognizes _today_, _yesterday_, _last week_, _last month_, _this month_, explicit month names, ISO dates, named dates, and simple ranges. **Uses the fixed reference date (2026-09-01), never the system clock.** Supported Hinglish forms include _"pichle month"_ (last month).
+- **Temporal expression resolution:** Recognizes _today_, _yesterday_, _last week_, _last month_, _this month_, explicit month names, ISO dates, named dates, and simple ranges. **Uses the fixed reference date (2026-09-01), never the system clock.** Supported Hinglish forms include _"pichle mahine"_ (last month).
 - **Message-type detection:** Explicit requests for forwarded items, PDFs, images, voice messages or URLs filter by stored message type.
 
 Example: _"What did Ishita send last month?"_ → participant: Ishita Patel, date range: August 2026, no type constraint.
@@ -155,7 +160,7 @@ Local inference using `sentence-transformers/paraphrase-multilingual-MiniLM-L12-
 
 - Encodes all 4,634 messages and incoming queries to 384-dimensional normalized vectors
 - Computes NumPy cosine similarity to rank candidates
-- Handles Hinglish and English transparently; no translation required
+- Accepts Hinglish and English without a translation step; retrieval quality remains limited and Hinglish query accuracy is not separately measured
 - Supports two representations:
   - **Original-only:** The message text as-is
   - **Contextual:** Message text plus up to 2 previous and 2 following messages (within 30 minutes), with role markers
@@ -181,9 +186,9 @@ Parsed constraints intersect:
 - **Type filter:** Explicit attachment/forwarded-item requests filter by message type
 - **Empty result handling:** If the intersection is empty, no results are returned; constraints are not silently relaxed
 
-### 5. Hybrid Ranking
+### 5. Hybrid Ranking and Reranking
 
-Combines normalized scores with manually tuned weights (visible in [ranking_config.py](backend/app/search/ranking_config.py)):
+The first stage combines normalized scores with manually tuned weights (visible in [ranking_config.py](backend/app/search/ranking_config.py)):
 
 | Signal                       | No constraint | With hard constraint |
 | ---------------------------- | ------------- | -------------------- |
@@ -193,9 +198,15 @@ Combines normalized scores with manually tuned weights (visible in [ranking_conf
 | Person bonus (if applicable) | 0.05          | 0.05                 |
 | Date bonus (if applicable)   | 0.05          | 0.05                 |
 
-When an author or date constraint applies, 0.10 weight shifts from contextual to original-message similarity (to prioritize direct message text).
+When an author, date or message-type hard constraint applies, 0.10 weight shifts from contextual to original-message similarity (to prioritize direct message text).
 
 Exact ties broken by ascending message ID (deterministic).
+
+The final stage uses [`cross-encoder/mmarco-mMiniLMv2-L12-H384-v1`](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1), pinned to revision `1427fd652930e4ba29e8149678df786c240d8825`. It scores each query together with an original candidate message, its sender and chat date. Neighboring answers and authoring thread labels are excluded from this stage.
+
+Candidates are the union of the top 128 eligible messages from each of original semantic, contextual semantic, lexical and first-stage hybrid retrieval: at most 512 for API requests. Person/time/type filters apply before selection. Final score is **0.85 × reranker sigmoid score + 0.15 × first-stage hybrid score**. Scores are relevance signals, not confidence percentages. The fixed configuration is in [reranker_config.py](backend/app/search/reranker_config.py); no query-specific rules or weight sweep were added.
+
+Both models load once per backend process. Document embeddings stay cached; reranking adds query-time pair inference and several seconds of latency on broad queries. The existing `HybridSearch` class remains available for first-stage-only comparisons; the API and `--method hybrid` use `RerankedSearch`.
 
 ### 6. Contextual Assembly
 
@@ -208,42 +219,36 @@ For each ranked result:
 
 ### 7. API Response
 
-FastAPI returns:
+`POST /api/search` accepts `query` and an optional integer `top_k` (default 5, range 1–50). The response contract is defined in [schemas.py](backend/app/schemas.py):
 
-```json
-{
-  "query": "...",
-  "query_metadata": { "detected_participant": "...", "detected_date_range": "...", ... },
-  "search_time_ms": 45,
-  "results": [
-    {
-      "rank": 1,
-      "matching_message": { "id": "MSG_XXX", "text": "...", "sender": "...", "timestamp": "..." },
-      "scores": { "hybrid": 0.85, "semantic": 0.90, "lexical": 0.75, "person_bonus": 0.05, ... },
-      "previous_messages": [ { "id": "...", "text": "...", ... }, ... ],
-      "next_messages": [ ... ]
-    }
-  ]
-}
-```
+| Location | Fields |
+| --- | --- |
+| Response | `query`, `interpreted_query`, `search_time_ms`, `results` |
+| Each result | `matching_message`, `previous_messages`, `next_messages`, `search_score`, `semantic_score`, `contextual_score`, `lexical_score`, `reranker_score`, `query_metadata`, `rank` |
+| Each message | `id`, `sender`, `timestamp`, `text` |
+| Parsed metadata | `raw_query`, `person`, `person_mode`, `person_candidates`, `start_date`, `end_date`, `hour_range`, `intent`, `reference_date`, `timezone`, `warnings`, `explanations`, `message_type` |
+
+See the [captured search response](examples/search_filtered_response.json) for real JSON. Its measured scores and latency describe that capture, not guaranteed future values. `GET /api/stats` supplies corpus counts and dates; `/docs` exposes the current OpenAPI schema.
 
 ## Why Context Matters
 
 Short replies are unintelligible in isolation. A message _"haan pakka"_ (okay, confirmed) provides no semantic signal about the topic—is it about travel, food, homework, or an event?
 
+The following is an illustrative example, not a corpus record or measured retrieval result.
+
 **Without context:**
 
 ```
 Query: "When did we confirm the trip?"
-Result: MSG_001200 "haan pakka"
-→ Useless; sender and topic unknown.
+Result: EXAMPLE_REPLY "haan pakka"
+→ The reply alone does not identify the topic; sender metadata is still available.
 ```
 
 **With context:**
 
 ```
 Query: "When did we confirm the trip?"
-Result: MSG_001200 "haan pakka"
+Result: EXAMPLE_REPLY "haan pakka"
   Previous: Rohan: "So June 10-15, Rs 8700 cap. Everyone okay?"
   Previous: Aditya: "Yes, Manali final."
 → Clear: Trip confirmed June 10-15 to Manali.
@@ -262,7 +267,7 @@ Contextual embeddings encode the surrounding messages, allowing the embedding sp
 | **Lexical**    |   22.5% (9/40)    |   40.0% (16/40)   |   0.0% (0/10)    |   30.0% (3/10)   |   30.0% (3/10)   |   15.0% (3/20)   |   +22.5   |
 | **Semantic**   |   32.5% (13/40)   |   40.0% (16/40)   |   10.0% (1/10)   |   30.0% (3/10)   |   40.0% (4/10)   |   30.0% (6/20)   |   +22.5   |
 | **Contextual** |   10.0% (4/40)    |   30.0% (12/40)   |   10.0% (1/10)   |   10.0% (1/10)   |   20.0% (2/10)   |   5.0% (1/20)    |    0.0    |
-| **Hybrid**     | **55.0% (22/40)** | **62.5% (25/40)** | **10.0% (1/10)** | **70.0% (7/10)** | **80.0% (8/10)** | **35.0% (7/20)** | **+45.0** |
+| **Hybrid**     | **62.5% (25/40)** | **72.5% (29/40)** | **10.0% (1/10)** | **100.0% (10/10)** | **70.0% (7/10)** | **40.0% (8/20)** | **+52.5** |
 
 - **Top-1:** Correct message ID ranked first
 - **Recall@3:** Correct message appears in top 3 results
@@ -270,18 +275,30 @@ Contextual embeddings encode the surrounding messages, allowing the embedding sp
 - **Category breakdown:** Person-based, time-based, and semantic queries (by primary label)
 - **Gap:** Overall Top-1 minus Hard-10 Top-1 (percentage points)
 
-Hybrid achieves **55% overall accuracy** but only **10% on hard paraphrases**, indicating that person/time metadata help more than semantic paraphrase understanding.
+Hybrid achieves **62.5% overall accuracy** but only **10% on hard paraphrases**, a **52.5-percentage-point gap**. The reranker improves overall accuracy from 22/40 to 25/40 and Recall@3 from 25/40 to 29/40. Person accuracy rises from 7/10 to 10/10, semantic from 7/20 to 8/20, and time falls from 8/10 to 7/10. Hard accuracy remains 1/10. The preceding results are preserved in [results/tuning/reranker_before](results/tuning/reranker_before/).
 
 Contextual embeddings alone perform _worse_ than original-only embeddings (10% vs 32.5%), showing that adding adjacent messages is not automatically beneficial.
 
 All three baselines (lexical, semantic, contextual) remain **unchanged** and are **always compared** using the same frozen inputs. No labels or ranking settings were modified during evaluation.
+
+### Separate English/Hinglish Evaluation
+
+The original 40 queries remain frozen. A supplemental set contains 24 queries forming 12 English/Hinglish pairs, each targeting a fact not used as an original benchmark target. Labels and rationale were frozen before reranker implementation/scoring; [BILINGUAL_REVIEW.md](evaluation/BILINGUAL_REVIEW.md) explains their scope.
+
+| Query language | First-stage hybrid Top-1 | Reranked hybrid Top-1 |
+| --- | --- | --- |
+| English | 5/12 (41.7%) | 10/12 (83.3%) |
+| Hinglish | 3/12 (25.0%) | 7/12 (58.3%) |
+| Combined | 8/24 (33.3%) | 17/24 (70.8%) |
+
+These are supplemental development results, not independent held-out accuracy: some queries share known threads, and paired queries cover only 12 facts. No zero-overlap claim is made for this set. Reproduce from the root with `.\backend\.venv\Scripts\python.exe -m evaluation.evaluate_bilingual` on Windows or `./backend/.venv/bin/python -m evaluation.evaluate_bilingual` on Linux/macOS.
 
 ### Benchmark Artifacts
 
 Run `python evaluation/evaluate.py --all` to regenerate:
 
 - `results/comparison.csv` — Numeric results
-- `results/comparison.json` — Detailed metrics and per-query results
+- `results/comparison.json` — Comparison metrics and query gains/losses; individual method JSON files contain retrieved rankings
 - `results/benchmark.png` — Overall and hard-subset accuracy chart
 - `results/failed_queries.txt` — Expected vs. retrieved messages for all failures
 - `results/evaluation_summary.md` — Auto-generated summary
@@ -297,7 +314,7 @@ Before labelling, a versioned tokenization and stopword list was fixed in [evalu
 1. **Text-only comparison:** Query text vs. message text; sender, timestamp, and metadata excluded.
 2. **Unicode NFKC normalization and casefolding** (case-insensitive)
 3. **Contraction expansion:** _"can't"_ → _"can not"_, _"won't"_ → _"will not"_
-4. **Tokenization:** Letters and digits only; punctuation, emojis, URLs are separators
+4. **Tokenization:** Letters and digits only; punctuation and emojis are separators. Words within URLs remain tokens.
 5. **Fixed stopword list:** Only explicit function words (English + Romanized Hindi) are removed; negation, quantities, time references, and content words are kept
 6. **No stemming, translation, or spelling correction**
 
@@ -315,7 +332,7 @@ Ishita Patel: "Goa rejected for this break because total exceeds our cap"
 
 Content tokens (after normalization):
 
-- Query: `{seaside, holiday, unaffordable}`
+- Query: `{made, seaside, holiday, unaffordable}`
 - Message: `{goa, rejected, break, total, exceeds, cap}`
 - Intersection: ∅ (empty)
 
@@ -341,17 +358,17 @@ Current performance: Hybrid retrieves only 1 of 10 hard queries correctly (10%),
 
 ### Prerequisites
 
-- **Python 3.9+** with `venv` support
-- **Node.js 20.19+** with npm
+- **Python 3.9.10** with `venv` support is the verified environment; newer Python versions are unverified
+- **Node.js 20.19+ or 22.12+** in the ranges supported by Vite (`^20.19.0 || >=22.12.0`), with npm; Node 24.8.0 was verified
 - **Internet access** (initial setup only, for model download)
-- **~1 GB** disk space for dependencies, model weights (~450 MiB) and embeddings
+- Reserve several GB of disk space for dependencies, both models (roughly 900 MiB of weights in total), install caches and embeddings; a minimum RAM requirement has not been established
 
 Tested on Windows (Python 3.9.10, Node 24.8.0, npm 11.6.0). Linux commands provided but not clean-install verified.
 
 ### Windows Setup (PowerShell)
 
 ```powershell
-# Create and activate Python virtual environment
+# Create Python virtual environment (commands use its interpreter directly)
 py -3.9 -m venv backend/.venv
 .\backend\.venv\Scripts\python.exe -m pip install -r backend/requirements.lock.txt
 .\backend\.venv\Scripts\python.exe -m pip check
@@ -365,7 +382,7 @@ cd ..
 ### Linux/macOS Setup (Bash)
 
 ```bash
-# Create and activate Python virtual environment
+# Create Python virtual environment (commands use its interpreter directly)
 python3.9 -m venv backend/.venv
 ./backend/.venv/bin/python -m pip install -r backend/requirements.lock.txt
 ./backend/.venv/bin/python -m pip check
@@ -404,13 +421,14 @@ Generation uses only the Python standard library. To output to a custom director
 
 ### Prepare Embeddings & Indexes
 
-Download the pinned sentence-transformers model and build both original and contextual embedding caches:
+Download the pinned embedding model and multilingual reranker, then build both original and contextual embedding caches:
 
 **Windows:**
 
 ```powershell
 cd backend
 .\.venv\Scripts\python.exe -m scripts.prepare_model
+.\.venv\Scripts\python.exe -m scripts.prepare_reranker
 .\.venv\Scripts\python.exe -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
 cd ..
 ```
@@ -420,11 +438,14 @@ cd ..
 ```bash
 cd backend
 ./.venv/bin/python -m scripts.prepare_model
+./.venv/bin/python -m scripts.prepare_reranker
 ./.venv/bin/python -c "from app.search.corpus import load_corpus; from app.search.hybrid import HybridSearch; engine = HybridSearch(load_corpus()); print('Indexed', len(engine.messages), 'messages')"
 cd ..
 ```
 
-Model files are cached in `.cache/models/` (ignored by `.gitignore`). Embeddings are cached in `.cache/embeddings/` keyed by corpus hash, model revision, and settings. Missing caches are rebuilt automatically at server startup or evaluation, so explicit indexing is optional.
+Model files are cached in `.cache/models/` (ignored by `.gitignore`). Embeddings are cached in `.cache/embeddings/` keyed by the exact encoded texts and encoder settings, including model revision, file hashes and relevant dependency versions. Missing embedding caches are rebuilt automatically at server startup or evaluation, so explicit indexing is optional. Both models must be prepared first for hybrid search. A malformed model manifest is rejected with setup instructions; restore a clean model cache and rerun preparation rather than editing its checksums. Reranker weights are also verified against their pinned upstream SHA-256.
+
+Run model-heavy checks sequentially on constrained machines. During review, running the benchmark alongside tests/build exhausted memory while loading the tokenizer; running the complete benchmark alone succeeded.
 
 ### Start Backend
 
@@ -516,7 +537,7 @@ This runs lexical, semantic, contextual, and hybrid retrieval against identical 
 | Artifact                        | Purpose                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------- |
 | `results/comparison.csv`        | Numeric results (Top-1, Recall@3, hard-subset, category breakdown, gap) |
-| `results/comparison.json`       | Detailed metrics and per-query rankings                                 |
+| `results/comparison.json`       | Comparison metrics and per-query gains/losses; rankings are in method JSON files |
 | `results/benchmark.png`         | Chart comparing overall vs. hard-subset accuracy                        |
 | `results/lexical.json`          | Lexical method results, config, environment                             |
 | `results/semantic.json`         | Original-only semantic results                                          |
@@ -581,9 +602,9 @@ npm run build
 cd ..
 ```
 
-**Verified in the latest audit:** 246 Python backend/evaluation tests pass, and the frontend production build completes successfully. Run `npm test` in `frontend/` to verify the current frontend test count on your machine.
+**Verified after reranker integration:** 232 backend tests, 42 evaluation tests and 22 frontend tests pass; the frontend production build and complete four-method benchmark also pass. The earlier clean-install audit in `FINAL_AUDIT.md` predates the new reranker and regression tests.
 
-Real-model tests (using the local sentence-transformers model) are run as part of the backend suite. Without the model prepared, they are skipped (not auto-downloaded).
+Real-model tests for the embedding model and reranker run as part of the backend suite. Tests requiring an unprepared model are skipped, never auto-downloaded.
 
 ## Repository Structure
 
@@ -625,6 +646,8 @@ group-chat-search/
 │   │   │   ├── message_types.py # Message type utilities
 │   │   │   ├── model_config.py  # Model pinning and inference settings
 │   │   │   ├── ranking_config.py # Visible weights and routing
+│   │   │   ├── reranked.py      # Bounded multilingual pairwise reranking
+│   │   │   ├── reranker_config.py # Pinned reranker and visible candidate/score settings
 │   │   │   └── __init__.py
 │   │   ├── services/
 │   │   │   ├── conversation.py  # Display context assembly
@@ -636,6 +659,7 @@ group-chat-search/
 │   │   ├── generate_data.py     # Synthetic corpus generation
 │   │   ├── validate_data.py     # Corpus validation
 │   │   ├── prepare_model.py     # Model download and setup
+│   │   ├── prepare_reranker.py  # Reranker download and integrity checks
 │   │   ├── chat_style.py        # Message generation templates
 │   │   ├── conversation_content.py
 │   │   ├── corpus_config.py
@@ -645,7 +669,7 @@ group-chat-search/
 │   │   ├── test_health.py
 │   │   ├── test_search_api.py
 │   │   ├── test_lexical.py
-│   │   ├── test_semantic.py
+│   │   ├── test_model_manifest.py
 │   │   ├── test_hybrid.py
 │   │   ├── test_contextual.py
 │   │   ├── test_query_parser.py
@@ -661,6 +685,9 @@ group-chat-search/
 │   └── pytest.ini
 ├── evaluation/
 │   ├── queries.json             # 40 frozen queries with labels and rationales
+│   ├── bilingual_queries.json   # 24 separately frozen English/Hinglish queries
+│   ├── evaluate_bilingual.py    # Compare first-stage and reranked bilingual retrieval
+│   ├── evaluate_reranked.py     # Candidate recall, latency and reranker experiment
 │   ├── freeze_manifest.json     # Corpus/query/convention hashes (before scoring)
 │   ├── overlap_convention.json  # Stopword list and tokenization rules
 │   ├── OVERLAP.md               # Overlap convention documentation
@@ -676,7 +703,7 @@ group-chat-search/
 │   └── tests/
 │       ├── test_evaluate.py
 │       ├── test_metrics.py
-│       ├── test_overlap.py
+│       ├── test_evaluation.py
 │       └── test_compare.py
 ├── results/
 │   ├── comparison.csv           # Current benchmark (numeric)
@@ -688,7 +715,7 @@ group-chat-search/
 │   ├── contextual.json          # Contextual method results
 │   ├── hybrid.json              # Hybrid method results
 │   ├── failed_queries.txt       # All failures with evidence
-│   ├── failure_analysis.md      # Analysis of all 18 hybrid failures
+│   ├── failure_analysis.md      # Historical first-stage failure analysis
 │   ├── tuning_notes.md          # Tuning decisions and trade-offs
 │   ├── audit_evidence.json      # Fresh-install audit evidence (FINAL_AUDIT.md)
 │   ├── hybrid_tuning.json       # Historical weight tuning trials
@@ -706,8 +733,7 @@ group-chat-search/
 ├── AGENTS.md                    # Assessment requirements
 ├── PLAN.md                      # Implementation phases and status
 ├── FINAL_AUDIT.md               # Clean-install verification audit
-├── README.md                    # This file
-└── package.json                 # Root package.json (if present)
+└── README.md                    # This file
 ```
 
 ## Design Decisions
@@ -717,7 +743,7 @@ group-chat-search/
 We use `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` because:
 
 - **No external LLM API** required; inference runs on CPU
-- **Multilingual support** handles Hinglish transparently
+- **Multilingual support** allows mixed-language inputs without translation; the separate bilingual supplement provides a small measured check of Hinglish-query accuracy
 - **Reproducibility:** the model revision is pinned so the embedding configuration is reproducible; small floating-point differences may still occur across platforms or library builds
 - **Speed:** 384-dimensional vectors enable fast NumPy cosine similarity search
 
@@ -725,7 +751,7 @@ We use `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` because:
 
 NumPy suffices for a 4,634-message corpus:
 
-- In-memory TF-IDF and embedding arrays fit in seconds of RAM
+- TF-IDF and embedding arrays are held in memory; the model and tokenizer also consume RAM
 - Brute-force cosine search is O(N × d) per query, where N is the number of messages and d is the embedding dimension
 - Deterministic tie-breaking via ascending message ID ensures reproducibility
 - No vector database (Pinecone, Weaviate, etc.) complexity
@@ -734,7 +760,7 @@ At million-message scale, approximate nearest-neighbor search (HNSW, IVF) or a v
 
 ### Hybrid Ranking
 
-Semantic embeddings alone miss 22 of 40 answers. Hybrid ranking improves performance by:
+Semantic embeddings alone miss 27 of 40 answers. Hybrid ranking improves performance by:
 
 - **Combining complementary signals:** Semantic scores capture meaning; lexical scores catch exact/near-exact matches; metadata constraints eliminate wrong speakers/dates
 - **Visible weights:** `ranking_config.py` documents all manually tuned ranking weights; no opaque learned ranker
@@ -743,7 +769,7 @@ Semantic embeddings alone miss 22 of 40 answers. Hybrid ranking improves perform
 ### Deterministic Data & Reference Dates
 
 - **Fixed seed (20260901):** Corpus regenerates identically byte-for-byte; enables reproducible research
-- **Fixed reference date (2026-09-01):** Temporal parsing never uses system clock; _"last week"_ always means Aug 25–31, regardless of when you search
+- **Fixed reference date (2026-09-01):** Temporal parsing never uses the system clock; _"last week"_ means the previous complete Monday–Sunday week, Aug 24–30, regardless of when you search
 - **Frozen corpus/queries/labels:** Evaluation captures development-set performance; enables honest reporting of trade-offs
 
 ### Synthetic Corpus
@@ -752,13 +778,14 @@ Synthetic data avoids privacy/licensing issues and enables evaluation reproducib
 
 ## Limitations
 
-- **18 hybrid failures remain:** Hybrid misses 18 of 40 targets and 9 of 10 hard (zero-word-overlap) queries. Semantic paraphrase understanding and reliable current-message anchoring remain difficult.
+- **15 hybrid failures remain:** Hybrid misses 15 of 40 targets and 9 of 10 hard (zero-word-overlap) queries. Pairwise reranking does not solve hard paraphrase understanding, short context-dependent answers or final-decision selection.
+- **Reranking trade-offs:** Time accuracy regresses from 8/10 to 7/10; broad requests take several seconds because a second local model scores candidates. Both models require memory. The earlier fresh-install audit predates the reranker; its new preparation and inference were verified in the existing Windows environment.
 - **Contextual embeddings underperform:** Adding adjacent messages (contextual baseline) actually _hurts_ performance vs. original-only embeddings (10% vs 32.5%), showing that unrelated neighbors outweigh interpretation benefits.
 - **Development-set results:** The 40 queries informed hybrid weight selection; reported metrics are development-set accuracy, not held-out generalization estimates.
-- **Limited Hinglish evaluation:** Code-mixed paraphrases like _"nausea/motion sickness"_ are tested, but reliable multilingual semantic understanding is not established.
+- **Limited Hinglish evaluation:** The original 40 benchmark queries are English. The new supplemental Hinglish result is 7/12; this small, paired development set does not establish broad language generalization.
 - **Template-based corpus:** Simplified message templates and patterns limit diversity; no claim is made about real-chat quality or scale.
 - **Repeated targets:** 37 distinct targets across 40 queries; the three decision conclusions appear multiple times to cover different question types.
-- **Parser limitations:** Metadata grammar is bounded; unknown names, ambiguous ownership, unsupported dates and some event/chat-date distinctions remain difficult. Empty metadata intersections silently return no results.
+- **Parser limitations:** Metadata grammar is bounded; unknown names, ambiguous ownership, unsupported dates and some event/chat-date distinctions remain difficult. Empty metadata intersections return no results, with the interpreted constraints still available in the response.
 - **No media analysis:** Attachment OCR, audio transcription and URL fetching are not implemented. `[Image]`, `[PDF]`, `[Voice message]` are placeholders.
 - **Windows verification only:** Clean-install audit verified only Python 3.9.10 on Windows. Linux and newer Python versions are untested; floating-point differences may occur.
 - **Browser verification incomplete:** Visual mobile/desktop layouts and interactive features (click, Enter, chip submission) could not be verified; render tests and source inspection provide partial evidence.
@@ -767,7 +794,7 @@ Synthetic data avoids privacy/licensing issues and enables evaluation reproducib
 
 These are ideas for future work, not implemented features:
 
-- **Answer-aware reranker:** Distinguish questions, proposals, decisions, and post-event updates with a learned ranker trained on independently labelled data.
+- **Conversation-specific reranker training:** The implemented mMARCO reranker is general-purpose. Train/evaluate on independent conversational labels to distinguish proposals, decisions and post-event updates more reliably.
 - **Topic-consistent context:** Select contextual neighbors based on coherence rather than just time windows; avoids unrelated interruptions.
 - **Stronger current-message emphasis:** Weight the central message more heavily within contextual embeddings.
 - **Better multilingual models:** Evaluate stronger mixed-language embeddings on diverse English/Hinglish paraphrases, negation and numerical questions.

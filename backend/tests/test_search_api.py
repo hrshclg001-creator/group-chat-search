@@ -184,13 +184,13 @@ def test_search_post_cors_preflight_and_response(setup, origin):
 def test_missing_model_keeps_stats_and_health_and_does_not_retry(fixture_data, monkeypatch):
     messages, metadata = fixture_data
     calls = []
-    from app.search import hybrid
+    from app.search import reranked
 
     def missing(*args, **kwargs):
         calls.append(True)
         raise FileNotFoundError('missing local model')
 
-    monkeypatch.setattr(hybrid, 'HybridSearch', missing)
+    monkeypatch.setattr(reranked, 'RerankedSearch', missing)
     # Exercise the production factory with real corpus/stats but no model.
     with TestClient(create_app()) as client:
         for _ in range(2):

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "B001",
+    "pair_id": "P01",
+    "language": "english",
+    "query": "Why did Ishita say we could not count on a cheaper train ticket?",
+    "expected_message_id": "MSG_000295",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ishita requires checking actual seat availability; hypothetical savings do not count."
+  },
+  {
+    "id": "B002",
+    "pair_id": "P01",
+    "language": "hinglish",
+    "query": "Ishita ne sasti train ticket ko abhi budget mein kyun nahi gina?",
+    "expected_message_id": "MSG_000295",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ishita requires checking actual seat availability; hypothetical savings do not count."
+  },
+  {
+    "id": "B003",
+    "pair_id": "P02",
+    "language": "english",
+    "query": "Does the Manali accommodation charge separately for room heating?",
+    "expected_message_id": "MSG_000296",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Hot water is included but the heater costs extra."
+  },
+  {
+    "id": "B004",
+    "pair_id": "P02",
+    "language": "hinglish",
+    "query": "Manali wale stay mein heater ka paisa alag lagega kya?",
+    "expected_message_id": "MSG_000296",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Hot water is included but the heater costs extra."
+  },
+  {
+    "id": "B005",
+    "pair_id": "P03",
+    "language": "english",
+    "query": "Which proposed framework would give us an administration interface quickly?",
+    "expected_message_id": "MSG_001060",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Sneha proposes Django and Postgres specifically for a quick admin interface."
+  },
+  {
+    "id": "B006",
+    "pair_id": "P03",
+    "language": "hinglish",
+    "query": "Admin panel jaldi banane ke liye kaunsa framework suggest hua tha?",
+    "expected_message_id": "MSG_001060",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Sneha proposes Django and Postgres specifically for a quick admin interface."
+  },
+  {
+    "id": "B007",
+    "pair_id": "P04",
+    "language": "english",
+    "query": "Why was Ananya worried about relying on a hosted service for the demonstration?",
+    "expected_message_id": "MSG_001153",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ananya cites campus Wi-Fi failing during the previous demo."
+  },
+  {
+    "id": "B008",
+    "pair_id": "P04",
+    "language": "hinglish",
+    "query": "Ananya ne hosted service pe bharosa karne mein kya dikkat batayi?",
+    "expected_message_id": "MSG_001153",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Ananya cites campus Wi-Fi failing during the previous demo."
+  },
+  {
+    "id": "B009",
+    "pair_id": "P05",
+    "language": "english",
+    "query": "How much did the cafe charge on July 25, excluding the other birthday expenses?",
+    "expected_message_id": "MSG_003737",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Rohan reports the actual cafe bill of 2400 and keeps the receipt."
+  },
+  {
+    "id": "B010",
+    "pair_id": "P05",
+    "language": "hinglish",
+    "query": "July 25 ko cafe ka bill kitna aaya, baaki birthday kharche chhod ke?",
+    "expected_message_id": "MSG_003737",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Rohan reports the actual cafe bill of 2400 and keeps the receipt."
+  },
+  {
+    "id": "B011",
+    "pair_id": "P06",
+    "language": "english",
+    "query": "Where did Meera plan to keep the birthday card?",
+    "expected_message_id": "MSG_003742",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Meera explicitly says the card is staying on her desk."
+  },
+  {
+    "id": "B012",
+    "pair_id": "P06",
+    "language": "hinglish",
+    "query": "Meera ne birthday card kahan rakhne ko bola?",
+    "expected_message_id": "MSG_003742",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Meera explicitly says the card is staying on her desk."
+  },
+  {
+    "id": "B013",
+    "pair_id": "P07",
+    "language": "english",
+    "query": "Where was the drama session announced on March 2 going to take place?",
+    "expected_message_id": "MSG_000042",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Meera's March 2 announcement specifies the library entrance; date distinguishes repeated announcements."
+  },
+  {
+    "id": "B014",
+    "pair_id": "P07",
+    "language": "hinglish",
+    "query": "March 2 ko drama session ke liye kaunsi jagah batayi thi?",
+    "expected_message_id": "MSG_000042",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Meera's March 2 announcement specifies the library entrance; date distinguishes repeated announcements."
+  },
+  {
+    "id": "B015",
+    "pair_id": "P08",
+    "language": "english",
+    "query": "Which reference book did Meera find on August 21?",
+    "expected_message_id": "MSG_004346",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Meera reports finding the Software Engineering reference book in the library."
+  },
+  {
+    "id": "B016",
+    "pair_id": "P08",
+    "language": "hinglish",
+    "query": "Meera ko August 21 ko kaunsi reference book mili thi?",
+    "expected_message_id": "MSG_004346",
+    "category": "person",
+    "zero_word_overlap": false,
+    "notes": "Meera reports finding the Software Engineering reference book in the library."
+  },
+  {
+    "id": "B017",
+    "pair_id": "P09",
+    "language": "english",
+    "query": "On April 26, which part of the code did someone suggest checking for the wrong input shape?",
+    "expected_message_id": "MSG_001421",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Ananya identifies the input-parser line in the April 26 debugging episode."
+  },
+  {
+    "id": "B018",
+    "pair_id": "P09",
+    "language": "hinglish",
+    "query": "April 26 ko input shape galat hone par code mein kahan check karne bola?",
+    "expected_message_id": "MSG_001421",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Ananya identifies the input-parser line in the April 26 debugging episode."
+  },
+  {
+    "id": "B019",
+    "pair_id": "P10",
+    "language": "english",
+    "query": "What input also reproduced the bug on April 26?",
+    "expected_message_id": "MSG_001422",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Sneha says empty input also reproduces that episode's bug."
+  },
+  {
+    "id": "B020",
+    "pair_id": "P10",
+    "language": "hinglish",
+    "query": "April 26 ko bug kis aur input se reproduce ho raha tha?",
+    "expected_message_id": "MSG_001422",
+    "category": "time",
+    "zero_word_overlap": false,
+    "notes": "Sneha says empty input also reproduces that episode's bug."
+  },
+  {
+    "id": "B021",
+    "pair_id": "P11",
+    "language": "english",
+    "query": "What clothing advice was given for the mountain journey?",
+    "expected_message_id": "MSG_000702",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Meera advises taking layers and promises a weather packing list later."
+  },
+  {
+    "id": "B022",
+    "pair_id": "P11",
+    "language": "hinglish",
+    "query": "Pahadon wale safar ke liye kapdon ke baare mein kya salah mili?",
+    "expected_message_id": "MSG_000702",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Meera advises taking layers and promises a weather packing list later."
+  },
+  {
+    "id": "B023",
+    "pair_id": "P12",
+    "language": "english",
+    "query": "What sort of room reservation was permitted before anyone sent money?",
+    "expected_message_id": "MSG_000437",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Ishita allows only a refundable room hold and tells everyone not to pay yet."
+  },
+  {
+    "id": "B024",
+    "pair_id": "P12",
+    "language": "hinglish",
+    "query": "Paise bhejne se pehle kis tarah ki room booking allow thi?",
+    "expected_message_id": "MSG_000437",
+    "category": "semantic",
+    "zero_word_overlap": false,
+    "notes": "Ishita allows only a refundable room hold and tells everyone not to pay yet."
+  }
+]

@@ -53,8 +53,8 @@ def run_method(method='lexical', encoder=None):
         from backend.app.search.semantic import SemanticSearch
         searcher = SemanticSearch(messages, contextual=method == 'contextual', encoder=encoder)
     elif method == 'hybrid':
-        from backend.app.search.hybrid import HybridSearch
-        searcher = HybridSearch(messages, encoder=encoder)
+        from backend.app.search.reranked import RerankedSearch
+        searcher = RerankedSearch(messages, encoder=encoder)
     else:
         raise ValueError(f'Unknown retrieval method: {method}')
     queries = json.loads(QUERY_PATH.read_text(encoding='utf-8'))
@@ -97,7 +97,7 @@ def run_method(method='lexical', encoder=None):
             'Hybrid profile selection used these same 40 labels; this is not held-out generalization accuracy.',
             'Rule-based sender/time interpretation can miss or misinterpret unsupported phrasing.',
             'Only exact current target IDs receive credit, never answers found solely in neighboring context.',
-            'No external LLM, cross-encoder, query-specific answer rules or evaluation labels enter retrieval.',
+            'Local multilingual cross-encoder reranks eligible original messages; no external LLM or query-specific answer rules.',
         ] if method == 'hybrid' else [
             'No explicit sender/time ranking; only original text or bounded chronological context supplies features.',
             'Context can match a neighboring fact; only the anchored current message ID receives credit.',
